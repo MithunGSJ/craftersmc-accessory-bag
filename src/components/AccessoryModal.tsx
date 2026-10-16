@@ -82,7 +82,11 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
               <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>• {definition.category}</span>
               <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
               <span className="mp-pill">
-                {effectiveMagicalPower > 0 ? `+${effectiveMagicalPower} Active MP` : `0 Active MP`}
+                {effectiveMagicalPower > 0
+                  ? `+${effectiveMagicalPower} Active MP`
+                  : status === 'OWNED' && definition.familyId === 'day_night_freezer'
+                  ? '0 Active MP (Shared)'
+                  : '0 Active MP'}
               </span>
             </div>
           </div>
@@ -123,8 +127,14 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
             <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: 'var(--accent-gold)', letterSpacing: '0.8px', fontWeight: 700 }}>
               CraftersMC Live Economy & Valuation
             </span>
-            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#4ade80' }}>
-              Est: ~{formatCoins(priceInfo.effectivePrice)}
+            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: priceInfo.primaryMethod === 'NPC_SHOP' ? '#38bdf8' : '#4ade80' }}>
+              {priceInfo.primaryMethod === 'NPC_SHOP'
+                ? (definition.npcCost ? `NPC: ${definition.npcCost}` : `NPC: ${formatCoins(priceInfo.effectivePrice)}`)
+                : priceInfo.primaryMethod === 'BAZAAR_CRAFT'
+                ? `Craft: ~${formatCoins(priceInfo.effectivePrice)}`
+                : priceInfo.primaryMethod === 'AUCTION'
+                ? `AH: ~${formatCoins(priceInfo.effectivePrice)}`
+                : priceInfo.displayLabel}
             </span>
           </div>
 
@@ -213,9 +223,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
             Item Description & Lore (CraftersMC Wiki)
           </span>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#D1D5DB', marginTop: '6px', lineHeight: 1.5 }}>
-            {definition.loreLines.map((line, idx) => (
-              <div key={idx}>{line}</div>
-            ))}
+            {definition.loreLines.map((line, idx) => (<div key={idx}>{line}</div>))}
           </div>
         </div>
 
@@ -274,12 +282,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
                       color: tierStyle?.color || '#FFFFFF'
                     }}
                   >
-                    <AccessoryIcon
-                      id={tierItem.id}
-                      name={tierItem.name}
-                      fallbackEmoji={tierItem.iconEmoji}
-                      size={18}
-                    />
+                    <AccessoryIcon id={tierItem.id} name={tierItem.name} fallbackEmoji={tierItem.iconEmoji} size={18} />
                     T{tierItem.tier}: {tierItem.name}
                   </span>
                 );

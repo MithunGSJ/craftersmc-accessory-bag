@@ -15,8 +15,6 @@ interface FilterBarProps {
   readonly onCategoryFilterChange: (cat: 'ALL' | AccessoryCategory) => void;
   readonly rarityFilter: 'ALL' | ItemRarity;
   readonly onRarityFilterChange: (rarity: 'ALL' | ItemRarity) => void;
-  readonly hideSuperseded: boolean;
-  readonly onToggleHideSuperseded: () => void;
 }
 
 export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
@@ -27,9 +25,7 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
   categoryFilter,
   onCategoryFilterChange,
   rarityFilter,
-  onRarityFilterChange,
-  hideSuperseded,
-  onToggleHideSuperseded
+  onRarityFilterChange
 }) => {
   return (
     <div className="controls-bar">
@@ -66,17 +62,6 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
               </span>
             </button>
           ))}
-
-          <button
-            className={`pill-btn ${hideSuperseded ? 'active' : ''}`}
-            onClick={() => {
-              playClickSound();
-              onToggleHideSuperseded();
-            }}
-            title="Hide lower tiers when higher tier is already owned"
-          >
-            <span>{hideSuperseded ? '👁️ Superseded Hidden' : '👁️ Show All Tiers'}</span>
-          </button>
         </div>
       </div>
 

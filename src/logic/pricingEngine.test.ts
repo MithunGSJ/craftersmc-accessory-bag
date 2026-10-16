@@ -114,4 +114,42 @@ describe('pricingEngine', () => {
     expect(formatCoins(1500000)).toBe('1.5M');
     expect(formatCoins(2000000000)).toBe('2.0B');
   });
+
+  it('correctly evaluates Dayfreezer and Nightfreezer as 945 Gems without parsing Bits/Gems as billions', () => {
+    const day = findAccessoryById('DAYFREEZER');
+    const night = findAccessoryById('NIGHTFREEZER');
+    expect(day).toBeDefined();
+    expect(night).toBeDefined();
+
+    const dayPrice = evaluateAccessoryPrice(day!);
+    const nightPrice = evaluateAccessoryPrice(night!);
+
+    expect(dayPrice.primaryMethod).toBe('NPC_SHOP');
+    expect(dayPrice.displayLabel).toBe('NPC: 945 Gems');
+    expect(dayPrice.displayLabel).not.toContain('945.0B');
+    expect(dayPrice.displayLabel).not.toContain('Est:');
+
+    expect(nightPrice.primaryMethod).toBe('NPC_SHOP');
+    expect(nightPrice.displayLabel).toBe('NPC: 945 Gems');
+    expect(nightPrice.displayLabel).not.toContain('945.0B');
+  });
+
+  it('displays exact NPC price without "Est:" or "~" for Sky\'s Badge (21.5M) and Cake Bag', () => {
+    const sky = findAccessoryById('SKYS_BADGE');
+    expect(sky).toBeDefined();
+    const skyPrice = evaluateAccessoryPrice(sky!);
+    expect(skyPrice.primaryMethod).toBe('NPC_SHOP');
+    expect(skyPrice.npcCost).toBe(21500000);
+    expect(skyPrice.displayLabel).toBe('NPC: 21.5M');
+    expect(skyPrice.displayLabel).not.toContain('Est');
+    expect(skyPrice.displayLabel).not.toContain('~');
+
+    const cake = findAccessoryById('NEW_YEARS_CAKE_BAG');
+    expect(cake).toBeDefined();
+    const cakePrice = evaluateAccessoryPrice(cake!);
+    expect(cakePrice.primaryMethod).toBe('NPC_SHOP');
+    expect(cakePrice.npcCost).toBe(250000);
+    expect(cakePrice.displayLabel).toBe('NPC: 250.0K');
+    expect(cakePrice.displayLabel).not.toContain('Est');
+  });
 });

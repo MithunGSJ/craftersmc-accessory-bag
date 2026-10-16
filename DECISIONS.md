@@ -16,4 +16,6 @@
 | DEC-012 | Set Golden Feather Boots as Tier 4 upgrade of Feather Artifact in feather family | Aligns with user specification; computes upgrade MP difference and combines Feather Artifact cost with 64x Enchanted Feathers. |
 | DEC-013 | Integrate live CraftersMC Bazaar material prices & active Auction House endpoints | Computes live craft costs from Bazaar weekly average prices multiplied by material counts, alongside direct active auction min/max/avg ranges. |
 | DEC-014 | Prioritize active BIN listings with outlier trimming & dual-tier material comparison | Prevents unbid troll normal auctions from skewing averages, and audits exact in-game recipe grids (e.g. 9x Enchanted Lapis Blocks vs 1,440x Enchanted Lapis Lazuli). |
-
+| DEC-015 | Strictly hide superseded lower-tier accessories when a higher tier in that family is owned | Eliminates obsolete zero-MP cards (e.g. Personal Deletor 4000/5000/6000 when 7000 is owned) to keep the catalog clean. |
+| DEC-016 | Place Dayfreezer and Nightfreezer into shared day_night_freezer family with non-stacking MP | Enforces that only one of Dayfreezer or Nightfreezer grants active +16 MP in the bag, matching game mechanics. |
+| DEC-017 | Format exact NPC shop prices without 'Est:' or '~' prefixes and preserve Gems currency | Ensures NPC items display exact vendor price (e.g. Sky's Badge: 21.5M, Zoe: 945 Gems) and prevents unit regex matching Gems as Billions. |

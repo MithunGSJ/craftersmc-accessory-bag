@@ -30,6 +30,7 @@ export function evaluatePlayerAccessories(
   }
 
   const result: EvaluatedAccessory[] = [];
+  const awardedFamilyMp = new Set<string>();
 
   for (const def of ALL_ACCESSORIES) {
     const ownedItem = ownedMap.get(def.id.toUpperCase());
@@ -37,11 +38,11 @@ export function evaluatePlayerAccessories(
     const isOwned = Boolean(ownedItem);
 
     let status: AccessoryStatus;
-    if (isOwned) {
-      status = 'OWNED';
-    } else if (familyMaxTier > def.tier) {
-      // Player already owns a strictly higher tier in this family
+    if (familyMaxTier > def.tier) {
+      // Player already owns a strictly higher tier in this family; lower tier is superseded
       status = 'UPGRADED_PREVIOUS';
+    } else if (isOwned) {
+      status = 'OWNED';
     } else if (familyMaxTier > 0 && def.tier === familyMaxTier + 1) {
       // Next tier upgrade directly available
       status = 'UPGRADABLE_NEXT';
@@ -56,8 +57,14 @@ export function evaluatePlayerAccessories(
     // Effective MP calculation
     const rarity = ownedItem ? ownedItem.rarity : def.baseRarity;
     const baseMp = THEME_CONFIG.rarityMap[rarity]?.magicalPower || 0;
-    // Only the highest owned tier in a family contributes active MP
-    const effectiveMagicalPower = isOwned && def.tier === familyMaxTier ? baseMp : 0;
+    // Only the highest owned tier in a family contributes active MP, and only ONE item per family can grant MP
+    let effectiveMagicalPower = 0;
+    if (isOwned && def.tier === familyMaxTier) {
+      if (!awardedFamilyMp.has(def.familyId)) {
+        effectiveMagicalPower = baseMp;
+        awardedFamilyMp.add(def.familyId);
+      }
+    }
 
     // Upgrade recommendation
     let upgradeRecommendation: EvaluatedAccessory['upgradeRecommendation'];

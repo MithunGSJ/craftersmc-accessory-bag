@@ -147,7 +147,9 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
                   {priceInfo.primaryMethod === 'BAZAAR_CRAFT' && '🌾 '}
                   {priceInfo.primaryMethod === 'AUCTION' && '🏛️ '}
                   {priceInfo.primaryMethod === 'NPC_SHOP' && '🪙 '}
-                  ~{formatCoins(priceInfo.effectivePrice)}
+                  {priceInfo.primaryMethod === 'NPC_SHOP'
+                    ? (item.definition.npcCost || formatCoins(priceInfo.effectivePrice))
+                    : `~${formatCoins(priceInfo.effectivePrice)}`}
                 </span>
 
                 {costPerMp > 0 && (

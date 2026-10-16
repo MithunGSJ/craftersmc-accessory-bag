@@ -57,7 +57,8 @@ export function getAccessoryAuctionPrice(accessoryId: string): AuctionPriceSnaps
 
 export function parseNpcCost(costStr?: string): number | undefined {
   if (!costStr) return undefined;
-  const match = costStr.match(/([\d,.]+)\s*([KkMmBb])?/);
+  if (/gems|bits/i.test(costStr)) return undefined;
+  const match = costStr.match(/([\d,.]+)\s*([KkMmBb])?(?:\s*coins|\b|$)/i);
   if (!match) return undefined;
   const num = parseFloat(match[1].replace(/,/g, ''));
   const unit = match[2]?.toUpperCase();
@@ -164,15 +165,25 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
     }
   }
 
-  // 2. If it is sold by an NPC (e.g. Julia, Zoe, North, Sky)
-  if (npcNum && npcNum > 0) {
-    return {
-      effectivePrice: npcNum,
-      primaryMethod: 'NPC_SHOP',
-      npcCost: npcNum,
-      auction,
-      displayLabel: `NPC: ${formatCoins(npcNum)}`
-    };
+  // 2. If it is sold by an NPC (e.g. Julia, Zoe, North, Sky, Baker)
+  if (acc.npcCost) {
+    if (/gems/i.test(acc.npcCost)) {
+      return {
+        effectivePrice: 0,
+        primaryMethod: 'NPC_SHOP',
+        auction,
+        displayLabel: `NPC: ${acc.npcCost}`
+      };
+    }
+    if (npcNum && npcNum > 0) {
+      return {
+        effectivePrice: npcNum,
+        primaryMethod: 'NPC_SHOP',
+        npcCost: npcNum,
+        auction,
+        displayLabel: `NPC: ${formatCoins(npcNum)}`
+      };
+    }
   }
 
   // 3. If it has live auction data
@@ -198,7 +209,7 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
   return {
     effectivePrice: fallback,
     primaryMethod: fallback > 0 ? 'AUCTION' : 'UNOBTAINABLE',
-    displayLabel: fallback > 0 ? `Est: ~${formatCoins(fallback)}` : 'Unobtainable'
+    displayLabel: fallback > 0 ? `${formatCoins(fallback)}` : 'Unobtainable'
   };
 }
 

@@ -28,7 +28,6 @@ export const App: React.FC = () => {
   const [statusFilter, setStatusFilter] = React.useState<StatusFilter>('ALL');
   const [categoryFilter, setCategoryFilter] = React.useState<'ALL' | AccessoryCategory>('ALL');
   const [rarityFilter, setRarityFilter] = React.useState<'ALL' | ItemRarity>('ALL');
-  const [hideSuperseded, setHideSuperseded] = React.useState(true);
 
   const [selectedAccessory, setSelectedAccessory] = React.useState<EvaluatedAccessory | null>(null);
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
@@ -37,8 +36,8 @@ export const App: React.FC = () => {
 
   // Evaluate accessories
   const evaluatedAll = React.useMemo(() => {
-    return evaluatePlayerAccessories(profileData.items, { hideSupersededTiers: hideSuperseded });
-  }, [profileData.items, hideSuperseded]);
+    return evaluatePlayerAccessories(profileData.items, { hideSupersededTiers: false });
+  }, [profileData.items]);
 
   // Compute statistics
   const bagStats = React.useMemo(() => {
@@ -71,6 +70,11 @@ export const App: React.FC = () => {
         if (!nameMatch && !descMatch && !sourceMatch && !reforgeMatch && !enrichMatch) {
           return false;
         }
+      }
+
+      // If player owns a higher tier in this family, never show the lower tier ones
+      if (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned) {
+        return false;
       }
 
       return true;
@@ -137,8 +141,6 @@ export const App: React.FC = () => {
         onCategoryFilterChange={setCategoryFilter}
         rarityFilter={rarityFilter}
         onRarityFilterChange={setRarityFilter}
-        hideSuperseded={hideSuperseded}
-        onToggleHideSuperseded={() => setHideSuperseded(!hideSuperseded)}
       />
 
       {visibleAccessories.length > 0 ? (
