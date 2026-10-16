@@ -1,16 +1,16 @@
 # Project Progress: CraftersMC SkyBlock Accessory Bag Web App
 
 ## Current Phase
-Phase 2: Core Domain Logic & Data Modeling (FEAT-006)
+Phase 3: Visual Interface & Interactive Components (FEAT-007, FEAT-008, FEAT-009)
 
 ## What Changed Last
-- Passed FEAT-005: Built `statsCalculator.ts` for computing total Magical Power, max potential MP, owned/missing counts, rarity distributions, and enrichments/reforges.
+- Passed FEAT-006: Built `profileLoader.ts` supporting bundled sample profiles (Endgame, Midgame, Earlygame, Fresh), custom Base64 NBT input, and compliant cached API fetching from CraftersMC.
 - Passed Vitest unit tests and verified evidence file.
 
 ## Known Problems
-- FEAT-006 through FEAT-012 pending.
+- FEAT-007 through FEAT-012 pending.
 
 ## Next Three Steps
-1. Build player profile and data loader with preloaded sample profiles and API client (`FEAT-006`).
-2. Build Hero Header and statistics overview components (`FEAT-007`).
-3. Build Accessory Grid with instant multi-filtering and search (`FEAT-008`).
+1. Build Hero Header and statistics overview components (`FEAT-007`).
+2. Build Accessory Grid with multi-filtering and real-time search (`FEAT-008`).
+3. Build Accessory Card and interactive Minecraft-style detail modal (`FEAT-009`).

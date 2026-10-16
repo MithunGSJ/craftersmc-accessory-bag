@@ -32,7 +32,7 @@
   {
     "id": "FEAT-006",
     "description": "Profile & Player Data Loader: Support for loading player data via username/UUID/Pixel ID with policy caching, pre-bundled realistic profiles (Endgame, Midgame, Earlygame), and raw Base64 NBT input.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-006-profile-loader.txt"
   },
   {
