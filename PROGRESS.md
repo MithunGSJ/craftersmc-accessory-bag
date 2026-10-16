@@ -2,24 +2,22 @@
 
 ## Current Phase
 
-Completed (Comprehensive Senior Code Cleanup, Simplification & Optimization Pass)
+Completed (FEAT-013 Upgradable Dual Tags in Missing Tab & FEAT-014 Authentic Minecraft Inventory GUI)
 
 ## What Changed Last
 
-- **Branch Created**: Cleaned and optimized code organized on git branch `cleanup/simplify-and-organize`.
-- **Boilerplate Reduction in `accessoryRecipes.ts`**: Replaced 291 lines of repetitive dictionary object boilerplate with a typed helper `r(id, ingredients, upgradesFrom)`, reducing file size by 182 lines (down to 109 lines) while maintaining 100% exact typing, autocomplete, and output.
-- **Precomputed Bag Statistics in `statsCalculator.ts`**: Precomputed `TOTAL_FAMILIES` and `MAX_POSSIBLE_MAGICAL_POWER` once at module load rather than iterating over `ACCESSORIES_BY_FAMILY` repeatedly on every call to `calculateBagStats`.
-- **Pricing Engine Memoization in `pricingEngine.ts`**: Implemented an in-memory evaluation cache (`priceDetailsCache`) in `evaluateAccessoryPrice`, avoiding redundant recursive craft-tree evaluations during UI interactions and re-renders; added cache invalidation on price data refresh.
-- **Documentation & Scripts Architecture**: Added a comprehensive repository architecture diagram and folder structure to `README.md`; created `scripts/README.md` categorizing active quality scripts vs. one-time data scrapers (flagged for human review).
-- **Quality & Rule Compliance Verified**: All 39 source files confirmed strictly under the 300-line limit; zero TODO/FIXME markers; TypeScript strict mode (0 errors); Vitest 10/10 test suites (38/38 tests) passing; production Vite bundle built in 4.97s (bundle JS reduced from 305.27 kB to 304.16 kB).
+- **Upgradable in Missing Tab (FEAT-013)**: Refactored `filterAccessories` in `accessoryMatcher.ts` so `statusFilter === 'MISSING'` includes both base missing accessories and unowned higher tiers (`UPGRADABLE_NEXT`), while continuing to hide superseded lower tiers.
+- **Dual Missing & Upgradable Tags**: Upgradable accessories now prominently display both `Missing` and `Upgradable` tags across the Minecraft inventory tooltip, slot corner badges, detail modal, and card grid badges.
+- **Authentic Minecraft Double-Chest Inventory GUI (FEAT-014)**: Built `MinecraftInventoryView.tsx` faithfully reproducing the in-game Accessory Bag GUI (`Accessory Bag [11]`), featuring 9x5 beveled slots, pixel-art sprites, pagination controls, and empty slot fills.
+- **Hover Description Tooltips & Click Modal Inspection**: Hovering over any slot displays an authentic Minecraft floating tooltip with item lore, MP, craft/AH/NPC cost, and rarity; clicking opens the full recipe breakdown modal.
+- **Quality & Rule Compliance Verified**: All 40 source files strictly under 300 lines; 39/39 Vitest unit tests passing; TypeScript strict mode (0 errors); visual evidence screenshots captured and verified.
 
 ## Known Problems
 
-- None. All quality gates, build targets, unit tests, and runtime behaviors are 100% operational.
+- None. Both new requirements are fully implemented, verified with automated unit tests and visual screenshots.
 
 ## Next Three Steps
 
-1. Present final cleanup report to the user.
-2. Solicit human review on archive/retention of one-off scrapers in `scripts/`.
-3. Ready for merge to main branch upon user review.
-
+1. Present implementation and visual evidence to user.
+2. Ensure hot-reloaded dev server running smoothly on `http://localhost:5173`.
+3. Stand by for user feedback.

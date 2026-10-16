@@ -395,3 +395,257 @@ a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Minecraft Double-Chest Inventory GUI
+   ========================================================================== */
+.mc-gui-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 12px 0 28px 0;
+  width: 100%;
+}
+
+.mc-gui-container {
+  background-color: #C6C6C6;
+  border-top: 4px solid #FFFFFF;
+  border-left: 4px solid #FFFFFF;
+  border-right: 4px solid #555555;
+  border-bottom: 4px solid #555555;
+  border-radius: 4px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+  padding: 8px 12px 12px 12px;
+  color: #3F3F3F;
+  font-family: 'Silkscreen', 'VT323', monospace;
+  position: relative;
+  user-select: none;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.mc-gui-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.mc-gui-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #3F3F3F;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+}
+
+.mc-gui-close {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #555555;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.mc-gui-close:hover {
+  color: #111111;
+}
+
+.mc-gui-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  grid-gap: 4px;
+  background-color: #8B8B8B;
+  padding: 4px;
+  border-top: 2px solid #373737;
+  border-left: 2px solid #373737;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+}
+
+.mc-slot {
+  width: 44px;
+  height: 44px;
+  background-color: #8B8B8B;
+  border-top: 2px solid #373737;
+  border-left: 2px solid #373737;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.mc-slot:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mc-slot.empty {
+  cursor: default;
+}
+
+.mc-slot.empty:hover {
+  background-color: #8B8B8B;
+}
+
+.mc-slot.slot-missing {
+  opacity: 0.82;
+}
+
+.mc-slot-badge-container {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.mc-slot-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.mc-slot-dot.dot-missing {
+  background-color: #EF4444;
+  box-shadow: 0 0 4px #EF4444;
+}
+
+.mc-slot-dot.dot-upgradable {
+  background-color: #F59E0B;
+  box-shadow: 0 0 4px #F59E0B;
+}
+
+.mc-gui-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 2px 2px 0 2px;
+}
+
+.mc-gui-btn {
+  background: #555555;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  color: #FFFFFF;
+  font-family: 'Silkscreen', monospace;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.15s ease;
+}
+
+.mc-gui-btn:hover:not(:disabled) {
+  background: #777777;
+}
+
+.mc-gui-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.mc-gui-page-info {
+  font-size: 0.82rem;
+  color: #3F3F3F;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6);
+}
+
+/* Floating Minecraft Tooltip */
+.mc-tooltip {
+  position: fixed;
+  z-index: 9999;
+  background: rgba(16, 0, 16, 0.96);
+  border: 2px solid #28007F;
+  outline: 1px solid #000000;
+  border-radius: 4px;
+  padding: 10px 14px;
+  pointer-events: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  max-width: 320px;
+  font-family: 'VT323', 'Silkscreen', monospace;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 0px #000000;
+}
+
+.mc-tooltip-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.mc-tooltip-desc {
+  color: #AAAAAA;
+  font-size: 0.95rem;
+  margin: 6px 0;
+  word-break: break-word;
+}
+
+.mc-tooltip-footer {
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}
+
+/* View Mode Selector Tabs */
+.view-mode-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.view-tab-btn {
+  background: rgba(22, 28, 44, 0.7);
+  border: 1px solid var(--border-card);
+  color: var(--text-secondary);
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-tab-btn:hover {
+  background: rgba(30, 38, 58, 0.9);
+  color: #FFFFFF;
+}
+
+.view-tab-btn.active {
+  background: var(--accent-gold);
+  color: #0B0D14;
+  border-color: var(--accent-gold);
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(255, 184, 0, 0.35);
+}
+
+@media (max-width: 520px) {
+  .mc-gui-grid {
+    grid-template-columns: repeat(9, 34px);
+    grid-gap: 2px;
+    padding: 2px;
+  }
+
+  .mc-slot {
+    width: 34px;
+    height: 34px;
+  }
+}

@@ -1,9 +1,66 @@
 import { ALL_ACCESSORIES, ACCESSORIES_BY_FAMILY, findAccessoryById } from '../data/accessoryRegistry.ts';
-import { PlayerAccessoryItem, EvaluatedAccessory, AccessoryStatus } from '../data/accessoryTypes.ts';
-import { THEME_CONFIG } from '../config/themeConfig.ts';
+import {
+  PlayerAccessoryItem,
+  EvaluatedAccessory,
+  AccessoryStatus,
+  AccessoryCategory
+} from '../data/accessoryTypes.ts';
+import { THEME_CONFIG, ItemRarity } from '../config/themeConfig.ts';
 
 export interface MatcherOptions {
   readonly hideSupersededTiers?: boolean;
+}
+
+export type StatusFilter = 'ALL' | 'OWNED' | 'MISSING' | 'UPGRADABLE';
+
+export interface AccessoryFilterOptions {
+  readonly statusFilter: StatusFilter;
+  readonly categoryFilter: 'ALL' | AccessoryCategory;
+  readonly rarityFilter: 'ALL' | ItemRarity;
+  readonly searchQuery?: string;
+}
+
+export function filterAccessories(
+  evaluatedAll: readonly EvaluatedAccessory[],
+  filters: AccessoryFilterOptions
+): EvaluatedAccessory[] {
+  const { statusFilter, categoryFilter, rarityFilter, searchQuery = '' } = filters;
+  const q = searchQuery.toLowerCase().trim();
+
+  return evaluatedAll.filter(item => {
+    // Status filter: MISSING includes pure MISSING and UPGRADABLE_NEXT (unowned higher tier)
+    if (statusFilter === 'OWNED' && item.status !== 'OWNED') return false;
+    if (statusFilter === 'MISSING' && item.status !== 'MISSING' && item.status !== 'UPGRADABLE_NEXT') {
+      return false;
+    }
+    if (statusFilter === 'UPGRADABLE' && item.status !== 'UPGRADABLE_NEXT') return false;
+
+    // Category filter
+    if (categoryFilter !== 'ALL' && item.definition.category !== categoryFilter) return false;
+
+    // Rarity filter
+    const itemRarity = item.ownedItem ? item.ownedItem.rarity : item.definition.baseRarity;
+    if (rarityFilter !== 'ALL' && itemRarity !== rarityFilter) return false;
+
+    // Search query
+    if (q !== '') {
+      const nameMatch = item.definition.name.toLowerCase().includes(q);
+      const descMatch = item.definition.description.toLowerCase().includes(q);
+      const sourceMatch = item.definition.source.toLowerCase().includes(q);
+      const reforgeMatch = item.ownedItem?.reforge?.toLowerCase().includes(q) || false;
+      const enrichMatch = item.ownedItem?.enrichment?.toLowerCase().includes(q) || false;
+      if (!nameMatch && !descMatch && !sourceMatch && !reforgeMatch && !enrichMatch) {
+        return false;
+      }
+    }
+
+    // If player owns a higher tier in this family, never show the lower tier ones
+    if (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned) {
+      return false;
+    }
+
+    return true;
+  });
 }
 
 export function evaluatePlayerAccessories(
@@ -96,3 +153,4 @@ export function evaluatePlayerAccessories(
 
   return result;
 }
+

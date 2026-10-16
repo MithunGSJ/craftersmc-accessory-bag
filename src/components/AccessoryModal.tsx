@@ -80,7 +80,14 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
               <span style={{ color: style.color, fontWeight: 700, fontSize: '0.85rem' }}>{style.label}</span>
               <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>• {definition.category}</span>
-              <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
+              {status === 'UPGRADABLE_NEXT' ? (
+                <>
+                  <span style={{ color: 'var(--status-missing)', fontWeight: 700, fontSize: '0.85rem' }}>• MISSING</span>
+                  <span style={{ color: 'var(--status-upgradable)', fontWeight: 700, fontSize: '0.85rem' }}>• UPGRADABLE</span>
+                </>
+              ) : (
+                <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
+              )}
               <span className="mp-pill">
                 {effectiveMagicalPower > 0
                   ? `+${effectiveMagicalPower} Active MP`
@@ -94,29 +101,11 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
 
         {/* Upgrade alert */}
         {upgradeRecommendation && (
-          <div
-            style={{
-              background: 'rgba(245, 158, 11, 0.12)',
-              border: '1px solid rgba(245, 158, 11, 0.3)',
-              borderRadius: '10px',
-              padding: '10px 14px',
-              marginBottom: '16px',
-              fontSize: '0.85rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px'
-            }}
-          >
-            <AccessoryIcon
-              id={upgradeRecommendation.nextTierId}
-              name={upgradeRecommendation.nextTierName}
-              fallbackEmoji="⚡"
-              size={24}
-            />
+          <div style={{ background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '10px', padding: '10px 14px', marginBottom: '16px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <AccessoryIcon id={upgradeRecommendation.nextTierId} name={upgradeRecommendation.nextTierName} fallbackEmoji="⚡" size={24} />
             <div>
               <strong style={{ color: 'var(--status-upgradable)' }}>⚡ Direct Upgrade Available:</strong> Upgrades to{' '}
-              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{upgradeRecommendation.nextTierName}</span> for +
-              {upgradeRecommendation.additionalMp} MP (via {upgradeRecommendation.nextSource}).
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{upgradeRecommendation.nextTierName}</span> for +{upgradeRecommendation.additionalMp} MP (via {upgradeRecommendation.nextSource}).
             </div>
           </div>
         )}

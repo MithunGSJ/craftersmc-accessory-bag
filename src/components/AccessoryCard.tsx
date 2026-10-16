@@ -177,18 +177,49 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
       )}
 
       <div className="card-badge-row">
-        <span
-          style={{
-            fontWeight: 700,
-            color: statusColor,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}
-        >
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: statusColor }} />
-          {statusLabel}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          {isUpgradable ? (
+            <>
+              <span
+                style={{
+                  fontWeight: 700,
+                  color: 'var(--status-missing)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--status-missing)' }} />
+                Missing
+              </span>
+              <span
+                style={{
+                  fontWeight: 700,
+                  color: 'var(--status-upgradable)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--status-upgradable)' }} />
+                Upgradable
+              </span>
+            </>
+          ) : (
+            <span
+              style={{
+                fontWeight: 700,
+                color: statusColor,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: statusColor }} />
+              {statusLabel}
+            </span>
+          )}
+        </div>
 
         <span className="mp-pill">
           {effectiveMagicalPower > 0 ? `+${effectiveMagicalPower} MP` : `0 MP`}

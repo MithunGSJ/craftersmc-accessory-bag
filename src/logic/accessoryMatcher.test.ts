@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { evaluatePlayerAccessories } from './accessoryMatcher.ts';
+import { evaluatePlayerAccessories, filterAccessories } from './accessoryMatcher.ts';
 import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 
 describe('accessoryMatcher', () => {
@@ -144,5 +144,42 @@ describe('accessoryMatcher', () => {
 
     expect(p6000?.status).toBe('UPGRADED_PREVIOUS');
     expect(p6000?.effectiveMagicalPower).toBe(0);
+  });
+
+  it('includes UPGRADABLE_NEXT accessories in MISSING tab alongside pure MISSING accessories', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      {
+        id: 'ZOMBIE_RING_0',
+        internalId: 'ZOMBIE_RING',
+        displayName: 'Zombie Ring',
+        rarity: 'UNCOMMON',
+        slot: 0,
+        lore: []
+      }
+    ];
+
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const missingFiltered = filterAccessories(evaluated, {
+      statusFilter: 'MISSING',
+      categoryFilter: 'ALL',
+      rarityFilter: 'ALL'
+    });
+
+    const zombieArtifact = missingFiltered.find(e => e.definition.id === 'ZOMBIE_ARTIFACT');
+    expect(zombieArtifact).toBeDefined();
+    expect(zombieArtifact?.status).toBe('UPGRADABLE_NEXT');
+
+    // Also contains regular missing items like Skeleton Talisman
+    const skeletonTalisman = missingFiltered.find(e => e.definition.id === 'SKELETON_TALISMAN');
+    expect(skeletonTalisman).toBeDefined();
+    expect(skeletonTalisman?.status).toBe('MISSING');
+
+    // Should NOT contain owned items
+    const zombieRing = missingFiltered.find(e => e.definition.id === 'ZOMBIE_RING');
+    expect(zombieRing).toBeUndefined();
+
+    // Should NOT contain superseded lower tiers
+    const zombieTalisman = missingFiltered.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
+    expect(zombieTalisman).toBeUndefined();
   });
 });

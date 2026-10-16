@@ -21,4 +21,6 @@
 | DEC-017 | Format exact NPC shop prices without 'Est:' or '~' prefixes and preserve Gems currency | Ensures NPC items display exact vendor price (e.g. Sky's Badge: 21.5M, Zoe: 945 Gems) and prevents unit regex matching Gems as Billions. |
 | DEC-018 | Create typed helper factory `r()` for `accessoryRecipes.ts` | Eliminates 182 lines of repetitive object keys while preserving TypeScript type safety and structure. |
 | DEC-019 | Memoize pricing engine evaluation and precompute bag statistics | Prevents redundant craft-tree recursive re-evaluations during UI re-renders and eliminates repeated family map iterations. |
+| DEC-020 | Include UPGRADABLE_NEXT accessories in Missing tab with dual tags | Enables players to view all unowned higher-tier accessories in the Missing tab while clearly labeling upgrade availability. |
+| DEC-021 | Implement authentic Minecraft double-chest inventory interface with hover tooltips | Recreates the authentic in-game Accessory Bag GUI with 9x5 beveled slots, pixel-art sprites, floating item tooltips, and click modal inspection. |
 

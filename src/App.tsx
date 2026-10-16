@@ -3,6 +3,7 @@ import { HeroHeader } from './components/HeroHeader.tsx';
 import { StatsOverview } from './components/StatsOverview.tsx';
 import { AccessoryFilterBar, StatusFilter } from './components/AccessoryFilterBar.tsx';
 import { AccessoryCard } from './components/AccessoryCard.tsx';
+import { MinecraftInventoryView } from './components/MinecraftInventoryView.tsx';
 import { AccessoryModal } from './components/AccessoryModal.tsx';
 import { RecommendationsPanel } from './components/RecommendationsPanel.tsx';
 import { CustomLookupModal } from './components/CustomLookupModal.tsx';
@@ -13,7 +14,7 @@ import {
   createSimulatedProfileForPlayer,
   LoadedProfileData
 } from './logic/profileLoader.ts';
-import { evaluatePlayerAccessories } from './logic/accessoryMatcher.ts';
+import { evaluatePlayerAccessories, filterAccessories } from './logic/accessoryMatcher.ts';
 import { calculateBagStatistics } from './logic/statsCalculator.ts';
 import { EvaluatedAccessory, AccessoryCategory } from './data/accessoryTypes.ts';
 import { ItemRarity, THEME_CONFIG } from './config/themeConfig.ts';
@@ -28,6 +29,7 @@ export const App: React.FC = () => {
   const [statusFilter, setStatusFilter] = React.useState<StatusFilter>('ALL');
   const [categoryFilter, setCategoryFilter] = React.useState<'ALL' | AccessoryCategory>('ALL');
   const [rarityFilter, setRarityFilter] = React.useState<'ALL' | ItemRarity>('ALL');
+  const [viewMode, setViewMode] = React.useState<'CHEST' | 'CARDS'>('CHEST');
 
   const [selectedAccessory, setSelectedAccessory] = React.useState<EvaluatedAccessory | null>(null);
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
@@ -46,38 +48,11 @@ export const App: React.FC = () => {
 
   // Filtered view
   const visibleAccessories = React.useMemo(() => {
-    return evaluatedAll.filter(item => {
-      // Status filter
-      if (statusFilter === 'OWNED' && item.status !== 'OWNED') return false;
-      if (statusFilter === 'MISSING' && item.status !== 'MISSING') return false;
-      if (statusFilter === 'UPGRADABLE' && item.status !== 'UPGRADABLE_NEXT') return false;
-
-      // Category filter
-      if (categoryFilter !== 'ALL' && item.definition.category !== categoryFilter) return false;
-
-      // Rarity filter
-      const itemRarity = item.ownedItem ? item.ownedItem.rarity : item.definition.baseRarity;
-      if (rarityFilter !== 'ALL' && itemRarity !== rarityFilter) return false;
-
-      // Search query
-      if (searchQuery.trim() !== '') {
-        const q = searchQuery.toLowerCase().trim();
-        const nameMatch = item.definition.name.toLowerCase().includes(q);
-        const descMatch = item.definition.description.toLowerCase().includes(q);
-        const sourceMatch = item.definition.source.toLowerCase().includes(q);
-        const reforgeMatch = item.ownedItem?.reforge?.toLowerCase().includes(q) || false;
-        const enrichMatch = item.ownedItem?.enrichment?.toLowerCase().includes(q) || false;
-        if (!nameMatch && !descMatch && !sourceMatch && !reforgeMatch && !enrichMatch) {
-          return false;
-        }
-      }
-
-      // If player owns a higher tier in this family, never show the lower tier ones
-      if (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned) {
-        return false;
-      }
-
-      return true;
+    return filterAccessories(evaluatedAll, {
+      statusFilter,
+      categoryFilter,
+      rarityFilter,
+      searchQuery
     });
   }, [evaluatedAll, statusFilter, categoryFilter, rarityFilter, searchQuery]);
 
@@ -143,16 +118,41 @@ export const App: React.FC = () => {
         onRarityFilterChange={setRarityFilter}
       />
 
+      <div className="view-mode-tabs" role="tablist" aria-label="View Mode">
+        <button
+          type="button"
+          className={`view-tab-btn ${viewMode === 'CHEST' ? 'active' : ''}`}
+          onClick={() => setViewMode('CHEST')}
+        >
+          🎒 Minecraft Inventory View
+        </button>
+        <button
+          type="button"
+          className={`view-tab-btn ${viewMode === 'CARDS' ? 'active' : ''}`}
+          onClick={() => setViewMode('CARDS')}
+        >
+          📋 Card Grid View
+        </button>
+      </div>
+
       {visibleAccessories.length > 0 ? (
-        <section className="accessory-grid" aria-label="Accessories catalog">
-          {visibleAccessories.map(item => (
-            <AccessoryCard
-              key={item.definition.id}
-              evaluated={item}
-              onClick={() => setSelectedAccessory(item)}
-            />
-          ))}
-        </section>
+        viewMode === 'CHEST' ? (
+          <MinecraftInventoryView
+            accessories={visibleAccessories}
+            onSelectAccessory={acc => setSelectedAccessory(acc)}
+            defaultBagNumber={currentProfileId === 'endgame' ? 11 : 1}
+          />
+        ) : (
+          <section className="accessory-grid" aria-label="Accessories catalog">
+            {visibleAccessories.map(item => (
+              <AccessoryCard
+                key={item.definition.id}
+                evaluated={item}
+                onClick={() => setSelectedAccessory(item)}
+              />
+            ))}
+          </section>
+        )
       ) : (
         <div className="glass-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>
           <p style={{ fontSize: '1.2rem', marginBottom: '8px' }}>🔍 No accessories found</p>
