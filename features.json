@@ -68,7 +68,7 @@
   {
     "id": "FEAT-012",
     "description": "Policy Compliance & Code Quality Gates: Full CraftersMC policy compliance, zero ESLint/TypeScript warnings, 100% Vitest unit test pass for pure logic, and modular source files under 300 lines.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-012-quality-compliance.txt"
   }
 ]
