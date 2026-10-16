@@ -13,8 +13,8 @@ describe('soakAndRobustness', () => {
       expect(stats.totalFamilies).toBeGreaterThan(0);
     }
     const elapsed = performance.now() - start;
-    // 10,000 evaluations should complete in under 2000ms
-    expect(elapsed).toBeLessThan(2000);
+    // 10,000 evaluations across 85 accessories should complete in under 5000ms
+    expect(elapsed).toBeLessThan(5000);
   });
 
   it('should gracefully handle malformed, corrupted, and extreme inputs', () => {

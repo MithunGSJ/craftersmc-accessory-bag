@@ -1,6 +1,7 @@
 import { AccessoryDefinition } from './accessoryTypes.ts';
 
 export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
+  // Farming Family
   {
     id: 'FARMING_TALISMAN',
     name: 'Farming Talisman',
@@ -12,7 +13,20 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     source: 'Wheat Collection IV (Crafting)',
     estimatedCoins: 2500,
     iconEmoji: '🌾',
-    loreLines: ['Increases Speed by +10% while', 'in the Farm, Barn, or Desert.']
+    loreLines: ['Increases Speed by +10% while in the Farm or Barn.']
+  },
+  {
+    id: 'FARMER_ORB',
+    name: 'Farmer Orb',
+    baseRarity: 'UNCOMMON',
+    category: 'Farming',
+    familyId: 'farmer_orb',
+    tier: 1,
+    description: 'Increases the growth rate of crops near you.',
+    source: 'Pumpkin Collection VI (Crafting)',
+    estimatedCoins: 35000,
+    iconEmoji: '🎃',
+    loreLines: ['Increases crop growth rate nearby.']
   },
   {
     id: 'VACCINE_TALISMAN',
@@ -28,17 +42,152 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     loreLines: ['Grants complete immunity to Poison.']
   },
   {
+    id: 'POTATO_TALISMAN',
+    name: 'Potato Talisman',
+    baseRarity: 'COMMON',
+    category: 'Farming',
+    familyId: 'potato',
+    tier: 1,
+    description: 'Increases Potato drop chance by +5%.',
+    source: 'Shiny Orb Drop',
+    estimatedCoins: 75000,
+    iconEmoji: '🥔',
+    loreLines: ['Shiny Orb reward.']
+  },
+  // Bamboo Family
+  {
+    id: 'BAMBOO_TALISMAN',
+    name: 'Bamboo Talisman',
+    baseRarity: 'COMMON',
+    category: 'Farming',
+    familyId: 'bamboo',
+    tier: 1,
+    description: 'Grants +10 Farming Fortune when harvesting Bamboo.',
+    source: 'Bamboo Collection II (Crafting)',
+    estimatedCoins: 5000,
+    iconEmoji: '🎍',
+    loreLines: ['+10 Farming Fortune for Bamboo.']
+  },
+  {
+    id: 'BAMBOO_RING',
+    name: 'Bamboo Ring',
+    baseRarity: 'UNCOMMON',
+    category: 'Farming',
+    familyId: 'bamboo',
+    tier: 2,
+    description: 'Grants +25 Farming Fortune when harvesting Bamboo.',
+    source: 'Bamboo Collection VII (Crafting)',
+    estimatedCoins: 45000,
+    iconEmoji: '🎍',
+    loreLines: ['+25 Farming Fortune for Bamboo.']
+  },
+  // Farmionaire Family
+  {
+    id: 'FARMIONAIRE_TALISMAN',
+    name: 'Farmionaire Talisman',
+    baseRarity: 'COMMON',
+    category: 'Farming',
+    familyId: 'farmionaire',
+    tier: 1,
+    description: 'Grants bonus Farming Fortune based on farming milestones.',
+    source: 'Farm-o-Matic Event',
+    estimatedCoins: 50000,
+    iconEmoji: '🚜',
+    loreLines: ['Farming Fortune milestone accessory.']
+  },
+  {
+    id: 'FARMIONAIRE_RING',
+    name: 'Farmionaire Ring',
+    baseRarity: 'UNCOMMON',
+    category: 'Farming',
+    familyId: 'farmionaire',
+    tier: 2,
+    description: 'Grants increased Farming Fortune from Farm-o-Matic.',
+    source: 'Farm-o-Matic Event',
+    estimatedCoins: 250000,
+    iconEmoji: '🚜',
+    loreLines: ['Tier 2 Farmionaire Accessory.']
+  },
+  {
+    id: 'FARMIONAIRE_ARTIFACT',
+    name: 'Farmionaire Artifact',
+    baseRarity: 'RARE',
+    category: 'Farming',
+    familyId: 'farmionaire',
+    tier: 3,
+    description: 'Max tier Farmionaire accessory granting substantial Farming Fortune.',
+    source: 'Farm-o-Matic Event',
+    estimatedCoins: 1200000,
+    iconEmoji: '🚜',
+    loreLines: ['Tier 3 Farmionaire Accessory.']
+  },
+  // Cropie / Squash / Fermento Family
+  {
+    id: 'CROPIE_TALISMAN',
+    name: 'Cropie Talisman',
+    baseRarity: 'COMMON',
+    category: 'Farming',
+    familyId: 'cropie_line',
+    tier: 1,
+    description: 'Grants +10 Farming Fortune.',
+    source: 'Crafting with Cropies',
+    estimatedCoins: 45000,
+    iconEmoji: '🌱',
+    loreLines: ['Grants +10 Farming Fortune.']
+  },
+  {
+    id: 'SQUASH_RING',
+    name: 'Squash Ring',
+    baseRarity: 'UNCOMMON',
+    category: 'Farming',
+    familyId: 'cropie_line',
+    tier: 2,
+    description: 'Grants +20 Farming Fortune.',
+    source: 'Crafting: Cropie Talisman + Squashes',
+    estimatedCoins: 350000,
+    iconEmoji: '🎃',
+    loreLines: ['Grants +20 Farming Fortune.']
+  },
+  {
+    id: 'FERMENTO_ARTIFACT',
+    name: 'Fermento Artifact',
+    baseRarity: 'RARE',
+    category: 'Farming',
+    familyId: 'cropie_line',
+    tier: 3,
+    description: 'Grants +30 Farming Fortune.',
+    source: 'Crafting: Squash Ring + Fermentos',
+    estimatedCoins: 2500000,
+    iconEmoji: '🍄',
+    loreLines: ['Grants +30 Farming Fortune.']
+  },
+  // Foraging
+  {
+    id: 'WOOD_AFFINITY_TALISMAN',
+    name: 'Wood Affinity Talisman',
+    baseRarity: 'UNCOMMON',
+    category: 'Foraging',
+    familyId: 'wood_affinity',
+    tier: 1,
+    description: 'Increases Speed by +10% while in any forest area.',
+    source: 'Oak Log Collection VIII (Crafting)',
+    estimatedCoins: 15000,
+    iconEmoji: '🪵',
+    loreLines: ['Increases Speed by +10% while in any forest.']
+  },
+  // Mining Family
+  {
     id: 'MINE_AFFINITY_TALISMAN',
     name: 'Mine Affinity Talisman',
     baseRarity: 'COMMON',
     category: 'Mining',
     familyId: 'mine_affinity',
     tier: 1,
-    description: 'Increases Speed by +10% while in the Gold Mine or Deep Caverns.',
-    source: 'Adventurer NPC (Hub) - 10,000 Coins',
-    estimatedCoins: 10000,
+    description: 'Increases Speed by +10% while in Coal, Gold, or Deep Caverns.',
+    source: 'Julia NPC (Hub) - 2,500 Coins',
+    estimatedCoins: 2500,
     iconEmoji: '⛏️',
-    loreLines: ['Increases Speed by +10% while', 'in Coal Mine, Gold Mine, or Deep Caverns.']
+    loreLines: ['Increases Speed by +10% while mining.']
   },
   {
     id: 'MAGNETIC_TALISMAN',
@@ -51,7 +200,7 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     source: 'Emerald Collection III (Crafting)',
     estimatedCoins: 12000,
     iconEmoji: '🧲',
-    loreLines: ['Increases the distance at which you', 'automatically pick up dropped items.']
+    loreLines: ['Increases pickup radius by 3x.']
   },
   {
     id: 'GRAVITY_TALISMAN',
@@ -60,75 +209,63 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'gravity',
     tier: 1,
-    description: 'Grants +1 to +10 Strength and Defense depending on proximity to island center.',
+    description: 'Grants +1 to +10 Strength and Defense near island center.',
     source: 'Obsidian Collection III (Crafting)',
     estimatedCoins: 18000,
     iconEmoji: '🪐',
-    loreLines: ['Grants bonus Strength & Defense', 'near the center of an island.']
+    loreLines: ['Grants bonus stats near island center.']
   },
   {
-    id: 'MINERAL_TALISMAN',
-    name: 'Mineral Talisman',
-    baseRarity: 'RARE',
-    category: 'Mining',
-    familyId: 'mineral',
-    tier: 1,
-    description: 'Grants +3 Mining Fortune.',
-    source: 'Crafting: 9 Refined Minerals',
-    estimatedCoins: 950000,
-    iconEmoji: '💎',
-    loreLines: ['Grants +3 Mining Fortune.', 'Obtained during Spooky/Mining Fiesta']
-  },
-  {
-    id: 'WOOD_AFFINITY_TALISMAN',
-    name: 'Wood Affinity Talisman',
-    baseRarity: 'UNCOMMON',
-    category: 'Foraging',
-    familyId: 'wood_affinity',
-    tier: 1,
-    description: 'Increases Speed by +10% while in the Forest, Graveyard, or Wilderness.',
-    source: 'Oak Wood Collection VIII (Crafting)',
-    estimatedCoins: 15000,
-    iconEmoji: '🪵',
-    loreLines: ['Increases Speed by +10% while', 'in any forest area.']
-  },
-  {
-    id: 'SEA_CREATURE_TALISMAN',
-    name: 'Sea Creature Talisman',
+    id: 'COINS_TALISMAN',
+    name: 'Coins Talisman',
     baseRarity: 'COMMON',
-    category: 'Fishing',
-    familyId: 'sea_creature',
+    category: 'Mining',
+    familyId: 'coins',
     tier: 1,
-    description: 'Reduce damage taken from Sea Creatures by 5%.',
-    source: 'Sponge Collection IV (Crafting)',
-    estimatedCoins: 15000,
-    iconEmoji: '🐟',
-    loreLines: ['Reduce damage taken from', 'Sea Creatures by 5%.']
+    description: 'Causes monsters to drop coins upon death.',
+    source: 'Emerald Collection II (Crafting)',
+    estimatedCoins: 3000,
+    iconEmoji: '🪙',
+    loreLines: ['Monsters drop bonus coins.']
   },
   {
-    id: 'SEA_CREATURE_RING',
-    name: 'Sea Creature Ring',
+    id: 'EMERALD_RING',
+    name: 'Emerald Ring',
+    baseRarity: 'UNCOMMON',
+    category: 'Mining',
+    familyId: 'emerald_ring',
+    tier: 1,
+    description: 'Grants +1 Coin every minute while in hub.',
+    source: 'Emerald Collection V (Crafting)',
+    estimatedCoins: 25000,
+    iconEmoji: '🟢',
+    loreLines: ['Grants +1 Coin per minute.']
+  },
+  // Fishing (Seal of the Seas Family)
+  {
+    id: 'SEAL_OF_THE_SEAS',
+    name: 'Seal of the Seas',
     baseRarity: 'UNCOMMON',
     category: 'Fishing',
-    familyId: 'sea_creature',
-    tier: 2,
+    familyId: 'sea_seal',
+    tier: 1,
     description: 'Reduce damage taken from Sea Creatures by 10%.',
-    source: 'Sponge Collection VI (Crafting)',
+    source: 'Fishing Quest Reward',
     estimatedCoins: 85000,
-    iconEmoji: '🐟',
-    loreLines: ['Reduce damage taken from', 'Sea Creatures by 10%.']
+    iconEmoji: '🌊',
+    loreLines: ['Reduce damage taken from Sea Creatures by 10%.']
   },
   {
-    id: 'SEA_CREATURE_ARTIFACT',
-    name: 'Sea Creature Artifact',
+    id: 'SEAL_OF_THE_OCEANS',
+    name: 'Seal of the Oceans',
     baseRarity: 'RARE',
     category: 'Fishing',
-    familyId: 'sea_creature',
-    tier: 3,
-    description: 'Reduce damage taken from Sea Creatures by 15%.',
-    source: 'Sponge Collection VIII (Crafting)',
-    estimatedCoins: 950000,
-    iconEmoji: '🐟',
-    loreLines: ['Reduce damage taken from', 'Sea Creatures by 15%.']
+    familyId: 'sea_seal',
+    tier: 2,
+    description: 'Reduce damage taken from Sea Creatures by 20%.',
+    source: '"Lost Treasures" Quest Reward',
+    estimatedCoins: 750000,
+    iconEmoji: '🌊',
+    loreLines: ['Reduce damage taken from Sea Creatures by 20%.']
   }
 ];

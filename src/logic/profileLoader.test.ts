@@ -13,7 +13,7 @@ describe('profileLoader', () => {
 
   it('should load Endgame profile with high tier items', () => {
     const profile = loadSampleProfile('endgame');
-    expect(profile.playerName).toBe('DeathWish_99');
+    expect(profile.playerName).toBe('DarkKing0098994');
     expect(profile.items.length).toBeGreaterThan(10);
     expect(profile.source).toBe('sample');
   });

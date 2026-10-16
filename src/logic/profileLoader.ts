@@ -3,6 +3,8 @@ import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 import { parseAccessoryBagBase64 } from './accessoryParser.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
 
+export const DEFAULT_CRAFTERS_API_KEY = '44858bff-1259-457f-905d-514867e3780d';
+
 export interface LoadedProfileData {
   readonly playerName: string;
   readonly profileName: string;
@@ -34,7 +36,7 @@ export function loadSampleProfile(id: string): LoadedProfileData {
 }
 
 export function createSimulatedProfileForPlayer(playerName: string): LoadedProfileData {
-  const base = SAMPLE_PROFILES[1];
+  const base = SAMPLE_PROFILES[0]; // Uses DarkKing0098994 authentic profile
   return {
     playerName: playerName.trim(),
     profileName: 'Simulated SkyBlock',
@@ -57,19 +59,19 @@ export async function fetchPlayerFromApi(
   identifier: string,
   apiKey?: string
 ): Promise<LoadedProfileData> {
-  const cacheKey = identifier.trim().toLowerCase();
+  const cleanId = identifier.trim();
+  const cacheKey = cleanId.toLowerCase();
   const cached = apiCache.get(cacheKey);
 
   if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
     return cached.data;
   }
 
+  const effectiveKey = (apiKey && apiKey.trim() !== '') ? apiKey.trim() : DEFAULT_CRAFTERS_API_KEY;
   const headers: Record<string, string> = {
-    Accept: 'application/json'
+    Accept: 'application/json',
+    'X-API-Key': effectiveKey
   };
-  if (apiKey && apiKey.trim() !== '') {
-    headers['X-API-Key'] = apiKey.trim();
-  }
 
   // Use local Vite proxy in browser environment to eliminate CORS errors
   const baseUrl =
@@ -77,7 +79,7 @@ export async function fetchPlayerFromApi(
       ? '/api'
       : THEME_CONFIG.apiBaseUrl;
 
-  const playerUrl = `${baseUrl}/v1/player/${encodeURIComponent(identifier.trim())}`;
+  const playerUrl = `${baseUrl}/v1/player/${encodeURIComponent(cleanId)}`;
   let response: Response;
 
   try {
@@ -106,22 +108,30 @@ export async function fetchPlayerFromApi(
   }
 
   const playerData = await response.json();
-  const player = playerData?.player;
+  const player = playerData?.player || playerData;
   const playerName = player?.name || identifier;
 
   // Now attempt to load SkyBlock profile if active profile or profile ID is known
   let items: PlayerAccessoryItem[] = [];
   let profileName = 'SkyBlock';
 
-  if (player?.pixelId) {
+  const profileId = player?.stats?.skyBlock?.profileId;
+  const rawUuid = String(player?.uuid || '');
+  const uuidClean = rawUuid.replace(/-/g, '');
+
+  if (profileId) {
     try {
-      const sbUrl = `${baseUrl}/v1/skyblock/profile/${player.pixelId}`;
+      const sbUrl = `${baseUrl}/v1/skyblock/profile/${profileId}`;
       const sbRes = await fetch(sbUrl, { headers });
       if (sbRes.ok) {
         const sbData = await sbRes.json();
-        profileName = sbData?.profile?.cuteName || 'SkyBlock';
-        const members = sbData?.profile?.members || {};
-        const memberData = members[player.pixelId] || Object.values(members)[0];
+        const prof = sbData?.profile || sbData;
+        profileName =
+          prof?.cuteName ||
+          player?.stats?.skyBlock?.profiles?.[profileId]?.cuteName ||
+          'SkyBlock';
+        const members = prof?.members || {};
+        const memberData = members[uuidClean] || members[rawUuid] || Object.values(members)[0];
         if (memberData && typeof memberData === 'object' && 'accessoryBag' in memberData) {
           const rawBag = String((memberData as { accessoryBag?: string }).accessoryBag || '');
           items = parseAccessoryBagBase64(rawBag);

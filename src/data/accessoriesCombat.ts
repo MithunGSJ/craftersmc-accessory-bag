@@ -1,6 +1,7 @@
 import { AccessoryDefinition } from './accessoryTypes.ts';
 
 export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
+  // Zombie Family
   {
     id: 'ZOMBIE_TALISMAN',
     name: 'Zombie Talisman',
@@ -9,10 +10,10 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'zombie',
     tier: 1,
     description: 'Reduce damage taken from Zombies by 5%.',
-    source: 'Adventurer NPC (Hub) - 10,000 Coins',
-    estimatedCoins: 10000,
+    source: 'Julia NPC (Hub) - 500 Coins',
+    estimatedCoins: 500,
     iconEmoji: '🧟',
-    loreLines: ['Reduce damage taken from', 'Zombies by 5%.', 'Requires: Combat I']
+    loreLines: ['Reduce damage taken from Zombies by 5%.']
   },
   {
     id: 'ZOMBIE_RING',
@@ -22,10 +23,10 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'zombie',
     tier: 2,
     description: 'Reduce damage taken from Zombies by 10%.',
-    source: 'Crafting: Zombie Talisman + 64 Revenant Flesh',
-    estimatedCoins: 35000,
+    source: 'Zombie Slayer Level 2 (Crafting)',
+    estimatedCoins: 25000,
     iconEmoji: '🧟',
-    loreLines: ['Reduce damage taken from', 'Zombies by 10%.', 'Upgrade of Zombie Talisman']
+    loreLines: ['Reduce damage taken from Zombies by 10%.']
   },
   {
     id: 'ZOMBIE_ARTIFACT',
@@ -35,11 +36,12 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'zombie',
     tier: 3,
     description: 'Reduce damage taken from Zombies by 15%.',
-    source: 'Crafting: Zombie Ring + 48 Revenant Viscera',
+    source: 'Zombie Slayer Level 7 (Crafting)',
     estimatedCoins: 850000,
     iconEmoji: '🧟',
-    loreLines: ['Reduce damage taken from', 'Zombies by 15%.', 'Zombie Slayer Level 7']
+    loreLines: ['Reduce damage taken from Zombies by 15%.']
   },
+  // Skeleton Family
   {
     id: 'SKELETON_TALISMAN',
     name: 'Skeleton Talisman',
@@ -48,113 +50,183 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'skeleton',
     tier: 1,
     description: 'Reduce damage taken from Skeletons by 5%.',
-    source: 'Adventurer NPC (Hub) - 10,000 Coins',
-    estimatedCoins: 10000,
+    source: 'Julia NPC (Hub) - 500 Coins',
+    estimatedCoins: 500,
     iconEmoji: '💀',
-    loreLines: ['Reduce damage taken from', 'Skeletons by 5%.', 'Requires: Combat I']
+    loreLines: ['Reduce damage taken from Skeletons by 5%.']
+  },
+  // Wolf Family
+  {
+    id: 'WOLF_TALISMAN',
+    name: 'Wolf Talisman',
+    baseRarity: 'COMMON',
+    category: 'Combat',
+    familyId: 'wolf_talisman_line',
+    tier: 1,
+    description: 'Reduce damage taken from Wolves by 5%.',
+    source: 'Old Wolf Rare Drop (0.01%)',
+    estimatedCoins: 150000,
+    iconEmoji: '🐺',
+    loreLines: ['Reduce damage taken from Wolves by 5%.']
   },
   {
-    id: 'SPIDER_TALISMAN',
-    name: 'Spider Talisman',
+    id: 'WOLF_RING',
+    name: 'Wolf Ring',
     baseRarity: 'UNCOMMON',
     category: 'Combat',
-    familyId: 'spider',
+    familyId: 'wolf_talisman_line',
+    tier: 2,
+    description: 'Reduce damage taken from Wolves by 10%.',
+    source: 'Wolf Collection (Crafting)',
+    estimatedCoins: 450000,
+    iconEmoji: '🐺',
+    loreLines: ['Reduce damage taken from Wolves by 10%.']
+  },
+  // Blood God Crest
+  {
+    id: 'BLOOD_GOD_CREST',
+    name: 'Blood God Crest',
+    baseRarity: 'COMMON',
+    category: 'Combat',
+    familyId: 'blood_god',
     tier: 1,
-    description: 'Reduce damage taken from Spiders and Silverfish by 5%.',
-    source: 'Spider Mound Chest or Crafting',
-    estimatedCoins: 25000,
-    iconEmoji: '🕷️',
-    loreLines: ['Reduce damage taken from', 'Spiders and Silverfish by 5%.']
+    description: 'Honors the Blood God. Tracks mob kills.',
+    source: 'Pig Shop / Technoblade Memorial',
+    estimatedCoins: 200000,
+    iconEmoji: '👑',
+    loreLines: ['Blood God Memorial Accessory.']
+  },
+  // Draconic Family
+  {
+    id: 'DRACONIC_TALISMAN',
+    name: 'Draconic Talisman',
+    baseRarity: 'UNCOMMON',
+    category: 'Combat',
+    familyId: 'draconic',
+    tier: 1,
+    description: 'Grants +2% damage against Dragons.',
+    source: 'Dragon Crafting',
+    estimatedCoins: 250000,
+    iconEmoji: '🐉',
+    loreLines: ['Grants +2% damage against Dragons.']
   },
   {
-    id: 'SPIDER_RING',
-    name: 'Spider Ring',
+    id: 'DRACONIC_RING',
+    name: 'Draconic Ring',
     baseRarity: 'RARE',
     category: 'Combat',
-    familyId: 'spider',
+    familyId: 'draconic',
     tier: 2,
-    description: 'Reduce damage taken from Spiders and Silverfish by 10%.',
-    source: 'Crafting: Spider Talisman + 64 Tarantula Web',
-    estimatedCoins: 350000,
-    iconEmoji: '🕷️',
-    loreLines: ['Reduce damage taken from', 'Spiders and Silverfish by 10%.']
+    description: 'Grants +5% damage against Dragons.',
+    source: 'Dragon Crafting',
+    estimatedCoins: 1200000,
+    iconEmoji: '🐉',
+    loreLines: ['Grants +5% damage against Dragons.']
   },
   {
-    id: 'SPIDER_ARTIFACT',
-    name: 'Spider Artifact',
+    id: 'DRACONIC_ARTIFACT',
+    name: 'Draconic Artifact',
     baseRarity: 'EPIC',
     category: 'Combat',
-    familyId: 'spider',
+    familyId: 'draconic',
     tier: 3,
-    description: 'Reduce damage taken from Spiders and Silverfish by 15%.',
-    source: 'Crafting: Spider Ring + 32 Tarantula Silk',
-    estimatedCoins: 3500000,
-    iconEmoji: '🕷️',
-    loreLines: ['Reduce damage taken from', 'Spiders and Silverfish by 15%.']
+    description: 'Grants +10% damage against Dragons.',
+    source: 'Dragon Crafting',
+    estimatedCoins: 6500000,
+    iconEmoji: '🐉',
+    loreLines: ['Grants +10% damage against Dragons.']
   },
+  // Intimidation Family
   {
-    id: 'RED_CLAW_TALISMAN',
-    name: 'Red Claw Talisman',
-    baseRarity: 'UNCOMMON',
-    category: 'Slayer',
-    familyId: 'red_claw',
+    id: 'INTIMIDATION_TALISMAN',
+    name: 'Intimidation Talisman',
+    baseRarity: 'COMMON',
+    category: 'Combat',
+    familyId: 'intimidation',
     tier: 1,
-    description: 'Grants +1% Critical Damage.',
-    source: 'Wolf Slayer Level 1 (Crafting)',
-    estimatedCoins: 80000,
-    iconEmoji: '🐺',
-    loreLines: ['Grants +1% Critical Damage.', 'Wolf Slayer Level 1']
+    description: 'Monsters at or below Level 1 will not target you.',
+    source: 'Julia NPC (Hub) - 10,000 Coins',
+    estimatedCoins: 10000,
+    iconEmoji: '👿',
+    loreLines: ['Level 1 monsters will not target you.']
   },
   {
-    id: 'RED_CLAW_RING',
-    name: 'Red Claw Ring',
-    baseRarity: 'RARE',
-    category: 'Slayer',
-    familyId: 'red_claw',
+    id: 'INTIMIDATION_RING',
+    name: 'Intimidation Ring',
+    baseRarity: 'UNCOMMON',
+    category: 'Combat',
+    familyId: 'intimidation',
     tier: 2,
-    description: 'Grants +3% Critical Damage.',
-    source: 'Wolf Slayer Level 5 (Crafting)',
+    description: 'Monsters at or below Level 5 will not target you.',
+    source: 'Crafting Upgrade',
+    estimatedCoins: 100000,
+    iconEmoji: '👿',
+    loreLines: ['Level 5 monsters will not target you.']
+  },
+  {
+    id: 'INTIMIDATION_ARTIFACT',
+    name: 'Intimidation Artifact',
+    baseRarity: 'RARE',
+    category: 'Combat',
+    familyId: 'intimidation',
+    tier: 3,
+    description: 'Monsters at or below Level 25 will not target you.',
+    source: 'Crafting Upgrade',
+    estimatedCoins: 850000,
+    iconEmoji: '👿',
+    loreLines: ['Level 25 monsters will not target you.']
+  },
+  // Fire Family & Lava
+  {
+    id: 'FIRE_TALISMAN',
+    name: 'Fire Talisman',
+    baseRarity: 'COMMON',
+    category: 'Combat',
+    familyId: 'fire',
+    tier: 1,
+    description: 'Grants immunity to Fire damage.',
+    source: 'Blaze Rod Collection V (Crafting)',
+    estimatedCoins: 15000,
+    iconEmoji: '🔥',
+    loreLines: ['Grants complete immunity to Fire.']
+  },
+  {
+    id: 'FIRE_EXTINGUISHER',
+    name: 'Fire Extinguisher',
+    baseRarity: 'RARE',
+    category: 'Combat',
+    familyId: 'fire',
+    tier: 2,
+    description: 'Immunity to Fire and reduces Nether mob damage by 10%.',
+    source: 'Nether Crafting',
     estimatedCoins: 650000,
-    iconEmoji: '🐺',
-    loreLines: ['Grants +3% Critical Damage.', 'Wolf Slayer Level 5']
+    iconEmoji: '🧯',
+    loreLines: ['Immunity to Fire and Nether protection.']
   },
   {
-    id: 'RED_CLAW_ARTIFACT',
-    name: 'Red Claw Artifact',
-    baseRarity: 'EPIC',
-    category: 'Slayer',
-    familyId: 'red_claw',
-    tier: 3,
-    description: 'Grants +5% Critical Damage.',
-    source: 'Wolf Slayer Level 5 (Crafting with Golden Tooth)',
-    estimatedCoins: 4800000,
-    iconEmoji: '🐺',
-    loreLines: ['Grants +5% Critical Damage.', 'Wolf Slayer Level 5']
-  },
-  {
-    id: 'TARANTULA_TALISMAN',
-    name: 'Tarantula Talisman',
-    baseRarity: 'EPIC',
-    category: 'Slayer',
-    familyId: 'tarantula',
-    tier: 1,
-    description: 'Every 10th attack deals +10% damage.',
-    source: 'Spider Slayer Level 6 (Tarantula Broodfather Drop)',
-    estimatedCoins: 4500000,
-    iconEmoji: '🕷️',
-    loreLines: ['Every 10th attack deals +10% damage.', 'Requires Spider Slayer Level 6']
-  },
-  {
-    id: 'ENDER_ARTIFACT',
-    name: 'Ender Artifact',
+    id: 'FIRE_DEVOURER',
+    name: 'Fire Devourer',
     baseRarity: 'EPIC',
     category: 'Combat',
-    familyId: 'ender',
+    familyId: 'fire',
+    tier: 3,
+    description: 'Absorbs Fire damage into temporary Strength.',
+    source: 'Nether High-Tier Crafting',
+    estimatedCoins: 4500000,
+    iconEmoji: '🔥',
+    loreLines: ['Absorbs Fire damage into temporary Strength.']
+  },
+  {
+    id: 'LAVA_TALISMAN',
+    name: 'Lava Talisman',
+    baseRarity: 'UNCOMMON',
+    category: 'Combat',
+    familyId: 'lava',
     tier: 1,
-    description: 'Reduce damage taken from Endermen by 20%.',
-    source: 'Dark Auction purchase',
-    estimatedCoins: 12000000,
-    iconEmoji: '🔮',
-    loreLines: ['Reduce damage taken from', 'Endermen, Endermites, and Dragons by 20%.']
+    description: 'Grants complete immunity to Lava damage.',
+    source: 'Magma Cream Collection VII (Crafting)',
+    estimatedCoins: 45000,
+    iconEmoji: '🌋',
+    loreLines: ['Grants complete immunity to Lava.']
   }
 ];

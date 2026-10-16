@@ -2,10 +2,32 @@ import pako from 'pako';
 import { NbtReader, NbtCompound } from './nbtReader.ts';
 import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 import { ItemRarity } from '../config/themeConfig.ts';
-import { findAccessoryById } from '../data/accessoryRegistry.ts';
+import { findAccessoryById, findAccessoryByName } from '../data/accessoryRegistry.ts';
+
+const REFORGES: readonly string[] = [
+  'Pleasant', 'Shaded', 'Silky', 'Sweet', 'Bloody', 'Bountiful', 'Gentle',
+  'Odd', 'Fast', 'Fair', 'Epic', 'Sharp', 'Heroic', 'Spicy', 'Legendary',
+  'Deadly', 'Fine', 'Grand', 'Hasty', 'Neat', 'Rapid', 'Unreal', 'Awkward',
+  'Rich', 'Clean', 'Fierce', 'Heavy', 'Light', 'Mythic', 'Pure', 'Smart',
+  'Titanic', 'Wise', 'Bizarre', 'Itchy', 'Ominous', 'Pretty', 'Shiny',
+  'Simple', 'Strange', 'Vivid', 'Godly', 'Demonic', 'Forceful', 'Hurtful',
+  'Keen', 'Strong', 'Superior', 'Unpleasant', 'Zealous'
+];
 
 export function stripMinecraftCodes(str: string): string {
   return str.replace(/§[0-9a-fk-or]/gi, '').trim();
+}
+
+export function extractRarityFromColorCode(rawName: string): ItemRarity | undefined {
+  if (rawName.includes('§f')) return 'COMMON';
+  if (rawName.includes('§a')) return 'UNCOMMON';
+  if (rawName.includes('§9') || rawName.includes('§n')) return 'RARE';
+  if (rawName.includes('§5')) return 'EPIC';
+  if (rawName.includes('§6')) return 'LEGENDARY';
+  if (rawName.includes('§d')) return 'MYTHIC';
+  if (rawName.includes('§c')) return 'SPECIAL';
+  if (rawName.includes('§b')) return 'VERY_SPECIAL';
+  return undefined;
 }
 
 export function extractRarityFromLore(lore: readonly string[]): ItemRarity | undefined {
@@ -41,55 +63,90 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
 
     const reader = new NbtReader(decompressed);
     const root = reader.readRoot();
-    const itemsList = root['i'] as NbtCompound[] | undefined;
-    if (!Array.isArray(itemsList)) return [];
-
     const result: PlayerAccessoryItem[] = [];
 
-    itemsList.forEach((item, slot) => {
-      if (!item || typeof item !== 'object') return;
-      const tag = item['tag'] as NbtCompound | undefined;
-      if (!tag) return;
+    // Format 1: CraftersMC native format (root.items array)
+    const craftersItems = root['items'] as Array<Record<string, unknown>> | undefined;
+    if (Array.isArray(craftersItems) && craftersItems.length > 0) {
+      craftersItems.forEach((item, index) => {
+        if (!item || typeof item !== 'object') return;
+        const rawName = String(item['name'] || '');
+        const cleanAll = stripMinecraftCodes(rawName);
+        if (!cleanAll) return;
 
-      const extraAttrs = tag['ExtraAttributes'] as NbtCompound | undefined;
-      const display = tag['display'] as NbtCompound | undefined;
+        let reforge: string | undefined;
+        let cleanBaseName = cleanAll;
 
-      const rawId = (extraAttrs?.['id'] as string) || '';
-      const rawName = (display?.['Name'] as string) || '';
-      const rawLore = (display?.['Lore'] as string[]) || [];
+        for (const ref of REFORGES) {
+          if (cleanAll.startsWith(`${ref} `)) {
+            reforge = ref;
+            cleanBaseName = cleanAll.slice(ref.length + 1).trim();
+            break;
+          }
+        }
 
-      const cleanName = stripMinecraftCodes(rawName);
-      const cleanLore = Array.isArray(rawLore)
-        ? rawLore.map(line => stripMinecraftCodes(String(line)))
-        : [];
+        const catalogEntry = findAccessoryByName(cleanBaseName) || findAccessoryByName(cleanAll);
+        const internalId = catalogEntry?.id || cleanBaseName.toUpperCase().replace(/[^A-Z0-9]/g, '_');
+        const displayName = catalogEntry?.name || cleanBaseName;
+        const slot = typeof item['slot'] === 'number' ? item['slot'] : index;
+        const rarity = extractRarityFromColorCode(rawName) || catalogEntry?.baseRarity || 'COMMON';
 
-      // Determine internal ID
-      const internalId = rawId.toUpperCase();
-      const catalogEntry = findAccessoryById(internalId);
-      const displayName = cleanName || catalogEntry?.name || rawId || 'Unknown Accessory';
-
-      // Determine rarity
-      const loreRarity = extractRarityFromLore(cleanLore);
-      const rarity: ItemRarity =
-        loreRarity || catalogEntry?.baseRarity || 'COMMON';
-
-      // Reforge & enrichment
-      const modifier = extraAttrs?.['modifier'] as string | undefined;
-      const enrichment = extraAttrs?.['accessory_enrichment'] as string | undefined;
-
-      if (catalogEntry || rawId) {
         result.push({
           id: `${internalId}_${slot}`,
-          internalId: internalId || cleanName.toUpperCase().replace(/\s+/g, '_'),
+          internalId,
           displayName,
           rarity,
-          reforge: modifier ? modifier.charAt(0).toUpperCase() + modifier.slice(1) : undefined,
-          enrichment: enrichment ? enrichment.replace(/_/g, ' ') : undefined,
+          reforge,
           slot,
-          lore: cleanLore
+          lore: catalogEntry?.loreLines || [displayName]
         });
-      }
-    });
+      });
+      return result;
+    }
+
+    // Format 2: Hypixel / Standard NBT format (root.i list of items)
+    const itemsList = root['i'] as NbtCompound[] | undefined;
+    if (Array.isArray(itemsList)) {
+      itemsList.forEach((item, slot) => {
+        if (!item || typeof item !== 'object') return;
+        const tag = item['tag'] as NbtCompound | undefined;
+        if (!tag) return;
+
+        const extraAttrs = tag['ExtraAttributes'] as NbtCompound | undefined;
+        const display = tag['display'] as NbtCompound | undefined;
+
+        const rawId = (extraAttrs?.['id'] as string) || '';
+        const rawName = (display?.['Name'] as string) || '';
+        const rawLore = (display?.['Lore'] as string[]) || [];
+
+        const cleanName = stripMinecraftCodes(rawName);
+        const cleanLore = Array.isArray(rawLore)
+          ? rawLore.map(line => stripMinecraftCodes(String(line)))
+          : [];
+
+        const internalId = rawId.toUpperCase();
+        const catalogEntry = findAccessoryById(internalId) || findAccessoryByName(cleanName);
+        const displayName = catalogEntry?.name || cleanName || rawId || 'Unknown Accessory';
+        const loreRarity = extractRarityFromLore(cleanLore);
+        const rarity: ItemRarity = loreRarity || catalogEntry?.baseRarity || 'COMMON';
+
+        const modifier = extraAttrs?.['modifier'] as string | undefined;
+        const enrichment = extraAttrs?.['accessory_enrichment'] as string | undefined;
+
+        if (catalogEntry || rawId) {
+          result.push({
+            id: `${internalId}_${slot}`,
+            internalId: internalId || cleanName.toUpperCase().replace(/\s+/g, '_'),
+            displayName,
+            rarity,
+            reforge: modifier ? modifier.charAt(0).toUpperCase() + modifier.slice(1) : undefined,
+            enrichment: enrichment ? enrichment.replace(/_/g, ' ') : undefined,
+            slot,
+            lore: cleanLore
+          });
+        }
+      });
+    }
 
     return result;
   } catch (err) {

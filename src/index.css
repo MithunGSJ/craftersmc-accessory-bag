@@ -25,7 +25,7 @@
 
 body {
   background-color: var(--bg-dark);
-  background-image: 
+  background-image:
     radial-gradient(circle at 15% 15%, rgba(255, 85, 255, 0.05) 0%, transparent 40%),
     radial-gradient(circle at 85% 25%, rgba(0, 229, 255, 0.05) 0%, transparent 40%),
     radial-gradient(circle at 50% 80%, rgba(255, 184, 0, 0.04) 0%, transparent 50%),
@@ -41,6 +41,7 @@ a {
   color: var(--accent-cyan);
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -342,6 +343,7 @@ a:hover {
     opacity: 0;
     transform: scale(0.96) translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -381,9 +383,11 @@ a:hover {
   .app-container {
     padding: 16px 12px 40px 12px;
   }
+
   .stats-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .accessory-grid {
     grid-template-columns: 1fr;
   }

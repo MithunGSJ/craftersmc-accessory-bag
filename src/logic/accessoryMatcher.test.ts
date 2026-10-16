@@ -38,10 +38,10 @@ describe('accessoryMatcher', () => {
   it('should mark next tier as UPGRADABLE_NEXT when an intermediate tier is owned', () => {
     const playerItems: PlayerAccessoryItem[] = [
       {
-        id: 'SPIDER_RING_0',
-        internalId: 'SPIDER_RING',
-        displayName: 'Spider Ring',
-        rarity: 'RARE',
+        id: 'ZOMBIE_RING_0',
+        internalId: 'ZOMBIE_RING',
+        displayName: 'Zombie Ring',
+        rarity: 'UNCOMMON',
         slot: 0,
         lore: []
       }
@@ -49,15 +49,15 @@ describe('accessoryMatcher', () => {
 
     const evaluated = evaluatePlayerAccessories(playerItems);
 
-    const ring = evaluated.find(e => e.definition.id === 'SPIDER_RING');
-    const talisman = evaluated.find(e => e.definition.id === 'SPIDER_TALISMAN');
-    const artifact = evaluated.find(e => e.definition.id === 'SPIDER_ARTIFACT');
+    const ring = evaluated.find(e => e.definition.id === 'ZOMBIE_RING');
+    const talisman = evaluated.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
+    const artifact = evaluated.find(e => e.definition.id === 'ZOMBIE_ARTIFACT');
 
     expect(ring?.status).toBe('OWNED');
     expect(talisman?.status).toBe('UPGRADED_PREVIOUS');
     expect(artifact?.status).toBe('UPGRADABLE_NEXT');
     expect(ring?.upgradeRecommendation).toBeDefined();
-    expect(ring?.upgradeRecommendation?.nextTierId).toBe('SPIDER_ARTIFACT');
+    expect(ring?.upgradeRecommendation?.nextTierId).toBe('ZOMBIE_ARTIFACT');
   });
 
   it('should respect hideSupersededTiers option', () => {

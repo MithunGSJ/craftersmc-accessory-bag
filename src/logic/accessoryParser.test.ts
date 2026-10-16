@@ -72,4 +72,33 @@ describe('accessoryParser', () => {
     expect(parsed[0].displayName).toBe('Zombie Ring');
     expect(parsed[0].rarity).toBe('UNCOMMON');
   });
+
+  it('should parse CraftersMC native items format with reforge extraction', () => {
+    // Construct NBT with root compound -> "items" list of compounds with "name" = "§r§6Pleasant Personal Compactor 7000"
+    const buf: number[] = [];
+    buf.push(10, 0, 0); // root compound ""
+    buf.push(9, 0, 5, ...'items'.split('').map(c => c.charCodeAt(0))); // list "items"
+    buf.push(10, 0, 0, 0, 1); // 1 compound
+    // item 0: TAG_String "name" = "§r§6Pleasant Personal Compactor 7000"
+    const itemName = '§r§6Pleasant Personal Compactor 7000';
+    const nameBytes = new TextEncoder().encode(itemName);
+    buf.push(8, 0, 4, ...'name'.split('').map(c => c.charCodeAt(0)));
+    buf.push(0, nameBytes.length, ...nameBytes);
+    buf.push(0); // end item 0
+    buf.push(0); // end root
+
+    const compressed = pako.gzip(new Uint8Array(buf));
+    let binary = '';
+    for (let i = 0; i < compressed.length; i++) {
+      binary += String.fromCharCode(compressed[i]);
+    }
+    const b64 = btoa(binary);
+
+    const parsed = parseAccessoryBagBase64(b64);
+    expect(parsed.length).toBe(1);
+    expect(parsed[0].displayName).toBe('Personal Compactor 7000');
+    expect(parsed[0].reforge).toBe('Pleasant');
+    expect(parsed[0].rarity).toBe('LEGENDARY');
+  });
 });
+

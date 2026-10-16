@@ -37,12 +37,13 @@ describe('recommendationsEngine', () => {
       expect(candidates[i].costPerMp).toBeLessThanOrEqual(candidates[i + 1].costPerMp);
     }
 
-    // Affordable early items (like Farming / Vaccine / Magnetic) should be top
-    const topIds = candidates.slice(0, 3).map(c => c.id);
-    expect(topIds.some(id => id.includes('FARMING') || id.includes('VACCINE') || id.includes('MAGNETIC'))).toBe(true);
+    // Affordable early missing items (like Skeleton / Mine Affinity / Village / Coins) should be in top candidates
+    const topIds = candidates.slice(0, 5).map(c => c.id);
+    expect(topIds.some(id => id.includes('SKELETON') || id.includes('MINE_AFFINITY') || id.includes('VILLAGE_AFFINITY') || id.includes('COINS'))).toBe(true);
 
-    // Multi-million coin items (like Ender Artifact or Bat Artifact) should not be in the top 3
-    expect(topIds).not.toContain('ENDER_ARTIFACT');
-    expect(topIds).not.toContain('BAT_ARTIFACT');
+    // Multi-million coin items (like Sky's Badge or Candy Relic or Frostclaw) should not be in the top 3
+    expect(topIds.slice(0, 3)).not.toContain('SKYS_BADGE');
+    expect(topIds.slice(0, 3)).not.toContain('CANDY_RELIC');
+    expect(topIds.slice(0, 3)).not.toContain('FROSTCLAW_RELIC');
   });
 });

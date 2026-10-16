@@ -22,7 +22,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
 }) => {
   const [tab, setTab] = React.useState<'api' | 'nbt'>('api');
   const [username, setUsername] = React.useState('DarkKing0098994');
-  const [apiKey, setApiKey] = React.useState('');
+  const [apiKey, setApiKey] = React.useState('44858bff-1259-457f-905d-514867e3780d');
   const [rawBase64, setRawBase64] = React.useState('');
   const [customName, setCustomName] = React.useState('');
 
