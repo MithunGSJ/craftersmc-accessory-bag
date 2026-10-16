@@ -34,6 +34,7 @@ export interface AccessoryPriceDetails {
 // In-memory live cache
 const liveBazaarCache = new Map<string, number>();
 const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
+const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
 
 export function getBazaarMaterialPrice(itemId: string): number {
   const normalized = itemId.toLowerCase().trim();
@@ -145,15 +146,19 @@ export function calculateCraftCost(
 }
 
 export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPriceDetails {
+  const cached = priceDetailsCache.get(acc.id);
+  if (cached) return cached;
+
   const auction = getAccessoryAuctionPrice(acc.id);
   const npcNum = parseNpcCost(acc.npcCost);
   const recipe = ACCESSORY_RECIPES[acc.id];
+  let result: AccessoryPriceDetails;
 
   // 1. If it has a crafting recipe, calculate craft cost from Bazaar materials
   if (recipe) {
     const { totalCost, breakdown } = calculateCraftCost(recipe);
     if (totalCost > 0) {
-      return {
+      result = {
         effectivePrice: totalCost,
         primaryMethod: 'BAZAAR_CRAFT',
         craftCost: totalCost,
@@ -162,55 +167,67 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
         npcCost: npcNum,
         displayLabel: `Craft: ~${formatCoins(totalCost)}`
       };
+      priceDetailsCache.set(acc.id, result);
+      return result;
     }
   }
 
   // 2. If it is sold by an NPC (e.g. Julia, Zoe, North, Sky, Baker)
   if (acc.npcCost) {
     if (/gems/i.test(acc.npcCost)) {
-      return {
+      result = {
         effectivePrice: 0,
         primaryMethod: 'NPC_SHOP',
         auction,
         displayLabel: `NPC: ${acc.npcCost}`
       };
+      priceDetailsCache.set(acc.id, result);
+      return result;
     }
     if (npcNum && npcNum > 0) {
-      return {
+      result = {
         effectivePrice: npcNum,
         primaryMethod: 'NPC_SHOP',
         npcCost: npcNum,
         auction,
         displayLabel: `NPC: ${formatCoins(npcNum)}`
       };
+      priceDetailsCache.set(acc.id, result);
+      return result;
     }
   }
 
   // 3. If it has live auction data
   if (auction && auction.avgPrice > 0) {
-    return {
+    result = {
       effectivePrice: auction.avgPrice,
       primaryMethod: 'AUCTION',
       auction,
       displayLabel: `AH: ~${formatCoins(auction.avgPrice)}`
     };
+    priceDetailsCache.set(acc.id, result);
+    return result;
   }
 
   // 4. Fallback for quest / special items
   if (acc.stage === 'Quest') {
-    return {
+    result = {
       effectivePrice: 0,
       primaryMethod: 'FREE_QUEST',
       displayLabel: 'Quest Reward'
     };
+    priceDetailsCache.set(acc.id, result);
+    return result;
   }
 
   const fallback = acc.estimatedCoins || 0;
-  return {
+  result = {
     effectivePrice: fallback,
     primaryMethod: fallback > 0 ? 'AUCTION' : 'UNOBTAINABLE',
     displayLabel: fallback > 0 ? `${formatCoins(fallback)}` : 'Unobtainable'
   };
+  priceDetailsCache.set(acc.id, result);
+  return result;
 }
 
 export function formatCoins(amount: number): string {
@@ -231,6 +248,7 @@ export async function refreshLiveBazaarPrice(itemId: string): Promise<number | n
       const avg = json.weeklyAveragePrice || json.sellTopEntries?.[0]?.price || json.buyTopEntries?.[0]?.price || 0;
       if (avg > 0) {
         liveBazaarCache.set(itemId.toLowerCase(), avg);
+        priceDetailsCache.clear();
         return avg;
       }
     }

@@ -15,6 +15,14 @@ export interface BagStatistics {
   readonly reforgeCount: number;
 }
 
+// Pre-compute static family metrics once at module load
+const FAMILY_LIST = Object.values(ACCESSORIES_BY_FAMILY);
+export const TOTAL_FAMILIES = FAMILY_LIST.length;
+export const MAX_POSSIBLE_MAGICAL_POWER = FAMILY_LIST.reduce((sum, family) => {
+  const highest = family[family.length - 1];
+  return sum + (highest ? THEME_CONFIG.rarityMap[highest.baseRarity]?.magicalPower || 0 : 0);
+}, 0);
+
 export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[]): BagStatistics {
   let totalMagicalPower = 0;
   let ownedCount = 0;
@@ -53,26 +61,16 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     }
   }
 
-  // Calculate maximum achievable MP from the highest tier of every family
-  let maxPossibleMagicalPower = 0;
-  const familyList = Object.values(ACCESSORIES_BY_FAMILY);
-  for (const family of familyList) {
-    const highest = family[family.length - 1];
-    if (highest) {
-      maxPossibleMagicalPower += THEME_CONFIG.rarityMap[highest.baseRarity]?.magicalPower || 0;
-    }
-  }
-
-  const totalFamilies = familyList.length;
-  const completionPercentage = totalFamilies > 0 ? Math.min(100, Math.round((ownedCount / totalFamilies) * 100)) : 0;
+  const completionPercentage =
+    TOTAL_FAMILIES > 0 ? Math.min(100, Math.round((ownedCount / TOTAL_FAMILIES) * 100)) : 0;
 
   return {
     totalMagicalPower,
-    maxPossibleMagicalPower,
+    maxPossibleMagicalPower: MAX_POSSIBLE_MAGICAL_POWER,
     ownedCount,
     missingCount,
     upgradableCount,
-    totalFamilies,
+    totalFamilies: TOTAL_FAMILIES,
     completionPercentage,
     rarityCounts,
     enrichmentCount,
