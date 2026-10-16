@@ -2,24 +2,24 @@
 
 ## Current Phase
 
-Completed (Accessory Tier Deduplication, Dayfreezer/Nightfreezer Shared MP, NPC Price Precision & Sprite Fixes)
+Completed (Comprehensive Senior Code Cleanup, Simplification & Optimization Pass)
 
 ## What Changed Last
 
-- **Superseded Lower Tiers Automatically Hidden**: When a player owns a higher-tier accessory (e.g. Personal Deletor 7000, Campfire God Badge, Bat Artifact), all lower tiers (4000/5000/6000) are cleanly omitted from the grid view, eliminating obsolete zero-MP clutter.
-- **Dayfreezer & Nightfreezer Shared Family & Non-Stacking MP**: Linked Dayfreezer and Nightfreezer under the shared `day_night_freezer` family. If both are owned in a bag, exactly ONE grants +16 MP; the other yields 0 MP (and is clearly marked as shared in the modal).
-- **Dayfreezer & Nightfreezer Gems Currency Fixed**: Fixed `parseNpcCost` regex so special currencies (Gems/Bits) are never parsed as billions (`945.0B`), displaying the authentic `NPC: 945 Gems` from Zoe.
-- **Exact NPC Shop Prices (No "Est:" or "~")**: For all NPC items, display the exact vendor purchase cost directly without approximation prefixes (e.g. `Sky's Badge: NPC: 21.5M`, `New Year's Cake Bag: NPC: 250.0K`, `Mine Affinity Talisman: NPC: 2.5K`).
-- **Sky's Badge & New Year's Cake Bag Pixel Art Sprites**: Ensured official high-resolution wiki sprites load cleanly via multi-candidate fallback paths in `AccessoryIcon.tsx`.
-- **Unit Tests Expanded**: 38/38 tests passing across 10 Vitest suites (added specific tests for non-stacking Dayfreezer/Nightfreezer, Personal Deletor tier deduplication, and exact NPC currency formatting).
-- **Playwright Visual Verification Captured**: `FIX-001-personal-deletor-no-lower-tiers.png`, `FIX-002-dayfreezer-nightfreezer-gems.png`, `FIX-003-skys-badge-icon-and-price.png`, and `FIX-004-cake-bag-icon-and-price.png`.
+- **Branch Created**: Cleaned and optimized code organized on git branch `cleanup/simplify-and-organize`.
+- **Boilerplate Reduction in `accessoryRecipes.ts`**: Replaced 291 lines of repetitive dictionary object boilerplate with a typed helper `r(id, ingredients, upgradesFrom)`, reducing file size by 182 lines (down to 109 lines) while maintaining 100% exact typing, autocomplete, and output.
+- **Precomputed Bag Statistics in `statsCalculator.ts`**: Precomputed `TOTAL_FAMILIES` and `MAX_POSSIBLE_MAGICAL_POWER` once at module load rather than iterating over `ACCESSORIES_BY_FAMILY` repeatedly on every call to `calculateBagStats`.
+- **Pricing Engine Memoization in `pricingEngine.ts`**: Implemented an in-memory evaluation cache (`priceDetailsCache`) in `evaluateAccessoryPrice`, avoiding redundant recursive craft-tree evaluations during UI interactions and re-renders; added cache invalidation on price data refresh.
+- **Documentation & Scripts Architecture**: Added a comprehensive repository architecture diagram and folder structure to `README.md`; created `scripts/README.md` categorizing active quality scripts vs. one-time data scrapers (flagged for human review).
+- **Quality & Rule Compliance Verified**: All 39 source files confirmed strictly under the 300-line limit; zero TODO/FIXME markers; TypeScript strict mode (0 errors); Vitest 10/10 test suites (38/38 tests) passing; production Vite bundle built in 4.97s (bundle JS reduced from 305.27 kB to 304.16 kB).
 
 ## Known Problems
 
-- None. All requested bug fixes, visual icons, pricing labels, and MP stacking rules are fully verified.
+- None. All quality gates, build targets, unit tests, and runtime behaviors are 100% operational.
 
 ## Next Three Steps
 
-1. Application is active and hot-reloaded on `http://localhost:5173`.
-2. Review evidence screenshots in `evidence/FIX-001` through `FIX-004`.
-3. Ready for user presentation and final feedback.
+1. Present final cleanup report to the user.
+2. Solicit human review on archive/retention of one-off scrapers in `scripts/`.
+3. Ready for merge to main branch upon user review.
+

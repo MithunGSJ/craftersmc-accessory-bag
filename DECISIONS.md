@@ -19,3 +19,6 @@
 | DEC-015 | Strictly hide superseded lower-tier accessories when a higher tier in that family is owned | Eliminates obsolete zero-MP cards (e.g. Personal Deletor 4000/5000/6000 when 7000 is owned) to keep the catalog clean. |
 | DEC-016 | Place Dayfreezer and Nightfreezer into shared day_night_freezer family with non-stacking MP | Enforces that only one of Dayfreezer or Nightfreezer grants active +16 MP in the bag, matching game mechanics. |
 | DEC-017 | Format exact NPC shop prices without 'Est:' or '~' prefixes and preserve Gems currency | Ensures NPC items display exact vendor price (e.g. Sky's Badge: 21.5M, Zoe: 945 Gems) and prevents unit regex matching Gems as Billions. |
+| DEC-018 | Create typed helper factory `r()` for `accessoryRecipes.ts` | Eliminates 182 lines of repetitive object keys while preserving TypeScript type safety and structure. |
+| DEC-019 | Memoize pricing engine evaluation and precompute bag statistics | Prevents redundant craft-tree recursive re-evaluations during UI re-renders and eliminates repeated family map iterations. |
+
