@@ -62,7 +62,7 @@
   {
     "id": "FEAT-011",
     "description": "Audio Feedback & Responsive Design: Synthesized Web Audio API sound effects for inventory interactions (clicks, chimes, bag opens) and fully responsive layout across desktop, tablet, and mobile.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-011-audio-responsive.txt"
   },
   {
