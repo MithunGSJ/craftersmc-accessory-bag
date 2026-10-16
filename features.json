@@ -8,7 +8,7 @@
   {
     "id": "FEAT-002",
     "description": "Accessory Database & Registry: Comprehensive master catalog of SkyBlock accessories with base rarities, Magical Power values, categories, sources, and upgrade family hierarchies.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-002-accessory-db.txt"
   },
   {
