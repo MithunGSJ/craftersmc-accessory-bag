@@ -2,7 +2,7 @@
   {
     "id": "FEAT-001",
     "description": "Core Setup & Architecture: Modern web app initialized with TypeScript strict mode, vanilla CSS design tokens, Vitest unit testing, and Playwright verification script.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-001-setup.txt"
   },
   {
