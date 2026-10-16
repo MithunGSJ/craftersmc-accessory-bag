@@ -28,6 +28,7 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
 
     const list = [
       `/icons/accessories/${cleanId}.png`,
+      `/icons/accessories/${cleanId.replace(/s_/g, '_')}.png`,
       `/icons/accessories/${withoutS}.png`,
       `/icons/accessories/${normalizedName}.png`
     ];

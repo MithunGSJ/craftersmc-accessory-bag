@@ -179,13 +179,13 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     iconEmoji: '👿',
     loreLines: ['Monsters under Level 25 will not target you.']
   },
-  // Fire Family & Lava
+  // Fire Talisman (Standalone Common Fire Immunity)
   {
     id: 'FIRE_TALISMAN',
     name: 'Fire Talisman',
     baseRarity: 'COMMON',
     category: 'Combat',
-    familyId: 'fire',
+    familyId: 'fire_talisman',
     tier: 1,
     description: 'Provides immunity to Fire.',
     source: 'Crafting (Blaze Rod 5)',
@@ -193,13 +193,14 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     iconEmoji: '🔥',
     loreLines: ['Provides immunity to Fire.']
   },
+  // Fire Extinguisher / Fire Devourer Family (Damage reduction from Fire mobs)
   {
     id: 'FIRE_EXTINGUISHER',
     name: 'Fire Extinguisher',
     baseRarity: 'RARE',
     category: 'Combat',
-    familyId: 'fire',
-    tier: 2,
+    familyId: 'fire_extinguisher',
+    tier: 1,
     description: 'Reduces damage you get from Fire mobs by 10%. (Eye of the Cliff, Fire Envoy and Heartigniter)',
     source: 'Crafting',
     stage: 'Mid Collection',
@@ -211,8 +212,8 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     name: 'Fire Devourer',
     baseRarity: 'EPIC',
     category: 'Combat',
-    familyId: 'fire',
-    tier: 3,
+    familyId: 'fire_extinguisher',
+    tier: 2,
     description: 'Reduces damage you get from Fire mobs by 20%. (Eye of the Cliff, Fire Envoy and Heartigniter)',
     source: 'Crafting',
     stage: 'High Collection',

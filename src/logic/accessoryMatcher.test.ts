@@ -182,4 +182,60 @@ describe('accessoryMatcher', () => {
     const zombieTalisman = missingFiltered.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
     expect(zombieTalisman).toBeUndefined();
   });
+
+  it('validates hierarchy separation: Fire Talisman is standalone, Fire Devourer upgrades Fire Extinguisher', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      {
+        id: 'FE_0',
+        internalId: 'FIRE_EXTINGUISHER',
+        displayName: 'Fire Extinguisher',
+        rarity: 'RARE',
+        slot: 0,
+        lore: []
+      }
+    ];
+
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const fireExtinguisher = evaluated.find(e => e.definition.id === 'FIRE_EXTINGUISHER');
+    const fireDevourer = evaluated.find(e => e.definition.id === 'FIRE_DEVOURER');
+    const fireTalisman = evaluated.find(e => e.definition.id === 'FIRE_TALISMAN');
+
+    expect(fireExtinguisher?.status).toBe('OWNED');
+    expect(fireDevourer?.status).toBe('UPGRADABLE_NEXT');
+    // Fire Talisman is NOT part of fire_extinguisher family, so it is pure MISSING (not UPGRADED_PREVIOUS)
+    expect(fireTalisman?.status).toBe('MISSING');
+  });
+
+  it('validates Frostclaw Relic upgrades Red Claw Artifact, and Reaper Orb is standalone', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      {
+        id: 'RCA_0',
+        internalId: 'RED_CLAW_ARTIFACT',
+        displayName: 'Red Claw Artifact',
+        rarity: 'EPIC',
+        slot: 0,
+        lore: []
+      },
+      {
+        id: 'ZA_0',
+        internalId: 'ZOMBIE_ARTIFACT',
+        displayName: 'Zombie Artifact',
+        rarity: 'RARE',
+        slot: 1,
+        lore: []
+      }
+    ];
+
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const frostclaw = evaluated.find(e => e.definition.id === 'FROSTCLAW_RELIC');
+    const hunterRing = evaluated.find(e => e.definition.id === 'HUNTER_RING');
+    const reaperOrb = evaluated.find(e => e.definition.id === 'REAPER_ORB');
+
+    expect(frostclaw?.status).toBe('UPGRADABLE_NEXT');
+    // Hunter Ring is independent wolf slayer line, so it remains MISSING
+    expect(hunterRing?.status).toBe('MISSING');
+    // Reaper Orb is independent zombie slayer item, so it remains MISSING (not UPGRADABLE_NEXT from Zombie Artifact)
+    expect(reaperOrb?.status).toBe('MISSING');
+  });
 });
+

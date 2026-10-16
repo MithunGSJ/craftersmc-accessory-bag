@@ -23,4 +23,7 @@
 | DEC-019 | Memoize pricing engine evaluation and precompute bag statistics | Prevents redundant craft-tree recursive re-evaluations during UI re-renders and eliminates repeated family map iterations. |
 | DEC-020 | Include UPGRADABLE_NEXT accessories in Missing tab with dual tags | Enables players to view all unowned higher-tier accessories in the Missing tab while clearly labeling upgrade availability. |
 | DEC-021 | Implement authentic Minecraft double-chest inventory interface with hover tooltips | Recreates the authentic in-game Accessory Bag GUI with 9x5 beveled slots, pixel-art sprites, floating item tooltips, and click modal inspection. |
+| DEC-022 | Correct accessory hierarchy (Fire Talisman standalone, Fire Extinguisher -> Fire Devourer, Frostclaw Relic -> Red Claw Artifact, Reaper Orb standalone) and verify crafting recipes | Aligns accessory families and recipes strictly with official CraftersMC Wiki (craftersmc.wiki.gg). |
+| DEC-023 | Update Special rarity Magical Power to 5 MP | Accurately matches official CraftersMC Thaumaturgy Magical Power table (https://craftersmc.wiki.gg/wiki/Thaumaturgy#Magical_Power). |
+| DEC-024 | Display owned bag accessories strictly in NBT slot order in chest GUI, and render Missing & Upgradable accessories in Card Grid at bottom | Respects in-game line-up order in chest view while keeping missing/upgradable progression accessible in full card layout below. |
 

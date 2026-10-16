@@ -159,6 +159,90 @@
     "enchanted_lapis_block": {
       "avgPrice": 25624.16,
       "weeklyAveragePrice": 25624.16
+    },
+    "envoys_horn": {
+      "avgPrice": 28175,
+      "weeklyAveragePrice": 28175
+    },
+    "fire_fragment": {
+      "avgPrice": 70400,
+      "weeklyAveragePrice": 70400
+    },
+    "glacial_fang": {
+      "avgPrice": 550000,
+      "weeklyAveragePrice": 550000
+    },
+    "enchanted_packed_ice": {
+      "avgPrice": 625000,
+      "weeklyAveragePrice": 625000
+    },
+    "grizzly_bait": {
+      "avgPrice": 1933000,
+      "weeklyAveragePrice": 1933000
+    },
+    "scythe_blade": {
+      "avgPrice": 41000000,
+      "weeklyAveragePrice": 41000000
+    },
+    "enchanted_diamond": {
+      "avgPrice": 1280,
+      "weeklyAveragePrice": 1280
+    },
+    "revenant_flesh": {
+      "avgPrice": 15,
+      "weeklyAveragePrice": 15
+    },
+    "wolf_tooth": {
+      "avgPrice": 45,
+      "weeklyAveragePrice": 45
+    },
+    "enchanted_leather": {
+      "avgPrice": 450,
+      "weeklyAveragePrice": 450
+    },
+    "red_claw_egg": {
+      "avgPrice": 8500000,
+      "weeklyAveragePrice": 8500000
+    },
+    "weak_wolf_catalyst": {
+      "avgPrice": 1250000,
+      "weeklyAveragePrice": 1250000
+    },
+    "condensed_fermento": {
+      "avgPrice": 385000,
+      "weeklyAveragePrice": 385000
+    },
+    "fused_remnants": {
+      "avgPrice": 145000,
+      "weeklyAveragePrice": 145000
+    },
+    "mite_gel": {
+      "avgPrice": 1850,
+      "weeklyAveragePrice": 1850
+    },
+    "absolute_ender_pearl": {
+      "avgPrice": 22000,
+      "weeklyAveragePrice": 22000
+    },
+    "tessellated_ender_pearl": {
+      "avgPrice": 285000,
+      "weeklyAveragePrice": 285000
+    },
+    "oak_leaves": {
+      "avgPrice": 12,
+      "weeklyAveragePrice": 12
+    },
+    "enchanted_blaze_powder": {
+      "avgPrice": 1280,
+      "weeklyAveragePrice": 1280
+    },
+    "enchanted_red_mushroom": {
+      "avgPrice": 350,
+      "weeklyAveragePrice": 350
+    },
+    "enchanted_brown_mushroom": {
+      "avgPrice": 350,
+      "weeklyAveragePrice": 350
     }
   },
   "auctions": {

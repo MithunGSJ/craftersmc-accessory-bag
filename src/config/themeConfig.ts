@@ -109,7 +109,7 @@ export const THEME_CONFIG: AppThemeConfig = {
       glow: 'rgba(255, 85, 85, 0.6)',
       bgGradient: 'linear-gradient(135deg, rgba(255, 85, 85, 0.15) 0%, rgba(38, 14, 16, 0.95) 100%)',
       border: 'rgba(255, 85, 85, 0.45)',
-      magicalPower: 3
+      magicalPower: 5
     },
     VERY_SPECIAL: {
       label: 'Very Special',

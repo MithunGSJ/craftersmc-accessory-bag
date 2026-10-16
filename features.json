@@ -82,6 +82,12 @@
     "description": "Minecraft Inventory Chest GUI: Authentic 9-column Minecraft double-chest accessory bag interface with beveled slots, hover description tooltips, and click modal inspection.",
     "status": "passing",
     "evidence": "evidence/FEAT-014-minecraft-inventory-gui.png"
+  },
+  {
+    "id": "FEAT-015",
+    "description": "Accessory Hierarchy, Wiki Recipes, Thaumaturgy MP, Pig's Foot Icon, and Minecraft Inventory NBT Slot Order Layout: Corrected families (Fire Talisman standalone, Fire Extinguisher -> Fire Devourer, Frostclaw Relic -> Red Claw Artifact, standalone Reaper Orb), verified CraftersMC wiki crafting recipes, Special rarity 5 MP, Pig's Foot sprite loading, and Minecraft inventory bag slot order with bottom Missing/Upgradable card grid.",
+    "status": "passing",
+    "evidence": "evidence/FEAT-015-verified-recipes-and-layout.txt"
   }
 ]
 

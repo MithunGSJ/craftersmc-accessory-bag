@@ -45,12 +45,15 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   FARMING_TALISMAN: r('FARMING_TALISMAN', [{ itemId: 'wheat', name: 'Wheat', count: 576 }]),
   FARMER_ORB: r('FARMER_ORB', [{ itemId: 'enchanted_pumpkin', name: 'Enchanted Pumpkin', count: 64 }]),
   VACCINE_TALISMAN: r('VACCINE_TALISMAN', [{ itemId: 'enchanted_potato', name: 'Enchanted Potato', count: 144 }]),
-  WOOD_AFFINITY_TALISMAN: r('WOOD_AFFINITY_TALISMAN', [{ itemId: 'oak_log', name: 'Oak Wood', count: 512 }]),
+  WOOD_AFFINITY_TALISMAN: r('WOOD_AFFINITY_TALISMAN', [
+    { itemId: 'oak_leaves', name: 'Oak Leaves', count: 8 },
+    { itemId: 'enchanted_oak_log', name: 'Enchanted Oak Log', count: 1 }
+  ]),
 
   // Cropie / Squash / Fermento
   CROPIE_TALISMAN: r('CROPIE_TALISMAN', [{ itemId: 'cropie', name: 'Cropie', count: 256 }]),
   SQUASH_RING: r('SQUASH_RING', [{ itemId: 'squash', name: 'Squash', count: 128 }], 'CROPIE_TALISMAN'),
-  FERMENTO_ARTIFACT: r('FERMENTO_ARTIFACT', [{ itemId: 'fermento', name: 'Fermento', count: 64 }], 'SQUASH_RING'),
+  FERMENTO_ARTIFACT: r('FERMENTO_ARTIFACT', [{ itemId: 'condensed_fermento', name: 'Condensed Fermento', count: 8 }], 'SQUASH_RING'),
 
   // Mining & Utility
   COINS_TALISMAN: r('COINS_TALISMAN', [{ itemId: 'emerald', name: 'Emerald', count: 128 }]),
@@ -64,15 +67,34 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
     subMaterial: { itemId: 'enchanted_lapis_lazuli', name: 'Enchanted Lapis Lazuli', count: 1440 }
   }]),
 
-  // Combat / Mob items
-  FIRE_TALISMAN: r('FIRE_TALISMAN', [{ itemId: 'enchanted_blaze_rod', name: 'Enchanted Blaze Rod', count: 128 }]),
-  FIRE_EXTINGUISHER: r('FIRE_EXTINGUISHER', [
-    { itemId: 'enchanted_blaze_rod', name: 'Enchanted Blaze Rod', count: 128 },
-    { itemId: 'enchanted_iron_ingot', name: 'Enchanted Iron Ingot', count: 64 }
+  // Draconic Family
+  DRACONIC_TALISMAN: r('DRACONIC_TALISMAN', [
+    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 2 },
+    { itemId: 'mite_gel', name: 'Mite Gel', count: 96 },
+    { itemId: 'absolute_ender_pearl', name: 'Absolute Ender Pearl', count: 32 }
   ]),
-  FIRE_DEVOURER: r('FIRE_DEVOURER', [{ itemId: 'enchanted_blaze_rod', name: 'Enchanted Blaze Rod', count: 256 }], 'FIRE_EXTINGUISHER'),
-  LAVA_TALISMAN: r('LAVA_TALISMAN', [{ itemId: 'enchanted_magma_cream', name: 'Enchanted Magma Cream', count: 128 }]),
-  NIGHT_VISION_CHARM: r('NIGHT_VISION_CHARM', [{ itemId: 'enchanted_red_mushroom_block', name: 'Enchanted Mushroom', count: 128 }]),
+  DRACONIC_RING: r('DRACONIC_RING', [
+    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 4 },
+    { itemId: 'mite_gel', name: 'Mite Gel', count: 96 },
+    { itemId: 'tessellated_ender_pearl', name: 'Tessellated Ender Pearl', count: 1 }
+  ], 'DRACONIC_TALISMAN'),
+  DRACONIC_ARTIFACT: r('DRACONIC_ARTIFACT', [
+    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 12 },
+    { itemId: 'mite_gel', name: 'Mite Gel', count: 128 },
+    { itemId: 'tessellated_ender_pearl', name: 'Tessellated Ender Pearl', count: 2 }
+  ], 'DRACONIC_RING'),
+
+  // Combat / Mob items
+  FIRE_TALISMAN: r('FIRE_TALISMAN', [{ itemId: 'enchanted_blaze_powder', name: 'Enchanted Blaze Powder', count: 9 }]),
+  FIRE_EXTINGUISHER: r('FIRE_EXTINGUISHER', [
+    { itemId: 'envoys_horn', name: "Envoy's Horn", count: 8 }
+  ]),
+  FIRE_DEVOURER: r('FIRE_DEVOURER', [{ itemId: 'fire_fragment', name: 'Fire Fragment', count: 4 }], 'FIRE_EXTINGUISHER'),
+  LAVA_TALISMAN: r('LAVA_TALISMAN', [{ itemId: 'enchanted_magma_cream', name: 'Enchanted Magma Cream', count: 9 }]),
+  NIGHT_VISION_CHARM: r('NIGHT_VISION_CHARM', [
+    { itemId: 'enchanted_red_mushroom', name: 'Enchanted Red Mushroom', count: 4 },
+    { itemId: 'enchanted_brown_mushroom', name: 'Enchanted Brown Mushroom', count: 4 }
+  ]),
 
   // Personal Compactors
   PERSONAL_COMPACTOR_4000: r('PERSONAL_COMPACTOR_4000', [{ itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 112 }]),
@@ -86,16 +108,45 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   PERSONAL_DELETOR_6000: r('PERSONAL_DELETOR_6000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 448 }], 'PERSONAL_DELETOR_5000'),
   PERSONAL_DELETOR_7000: r('PERSONAL_DELETOR_7000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 896 }], 'PERSONAL_DELETOR_6000'),
 
-  // Slayer Recipes
-  RED_CLAW_TALISMAN: r('RED_CLAW_TALISMAN', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 64 }]),
-  RED_CLAW_RING: r('RED_CLAW_RING', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 256 }], 'RED_CLAW_TALISMAN'),
-  RED_CLAW_ARTIFACT: r('RED_CLAW_ARTIFACT', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 512 }], 'RED_CLAW_RING'),
-  HUNTER_TALISMAN: r('HUNTER_TALISMAN', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 64 }]),
-  HUNTER_RING: r('HUNTER_RING', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 256 }], 'HUNTER_TALISMAN'),
-  FROSTCLAW_RELIC: r('FROSTCLAW_RELIC', [{ itemId: 'golden_tooth', name: 'Golden Tooth', count: 512 }], 'HUNTER_RING'),
-  ZOMBIE_RING: r('ZOMBIE_RING', [{ itemId: 'enchanted_rotten_flesh', name: 'Enchanted Rotten Flesh', count: 512 }], 'ZOMBIE_TALISMAN'),
-  ZOMBIE_ARTIFACT: r('ZOMBIE_ARTIFACT', [{ itemId: 'revenant_viscera', name: 'Revenant Viscera', count: 128 }], 'ZOMBIE_RING'),
-  REAPER_ORB: r('REAPER_ORB', [{ itemId: 'revenant_viscera', name: 'Revenant Viscera', count: 256 }], 'ZOMBIE_ARTIFACT'),
+  // Slayer Recipes (Wolf & Zombie Slayer lines)
+  RED_CLAW_TALISMAN: r('RED_CLAW_TALISMAN', [
+    { itemId: 'wolf_tooth', name: 'Wolf Tooth', count: 8 },
+    { itemId: 'enchanted_bone', name: 'Enchanted Bone', count: 1 }
+  ]),
+  RED_CLAW_RING: r('RED_CLAW_RING', [
+    { itemId: 'golden_tooth', name: 'Golden Tooth', count: 8 },
+    { itemId: 'enchanted_leather', name: 'Enchanted Leather', count: 32 }
+  ], 'RED_CLAW_TALISMAN'),
+  RED_CLAW_ARTIFACT: r('RED_CLAW_ARTIFACT', [
+    { itemId: 'red_claw_egg', name: 'Red Claw Egg', count: 1 },
+    { itemId: 'golden_tooth', name: 'Golden Tooth', count: 54 },
+    { itemId: 'enchanted_leather', name: 'Enchanted Leather', count: 128 }
+  ], 'RED_CLAW_RING'),
+  FROSTCLAW_RELIC: r('FROSTCLAW_RELIC', [
+    { itemId: 'glacial_fang', name: 'Glacial Fang', count: 64 },
+    { itemId: 'enchanted_packed_ice', name: 'Enchanted Packed Ice', count: 128 }
+  ], 'RED_CLAW_ARTIFACT'),
+
+  HUNTER_TALISMAN: r('HUNTER_TALISMAN', [
+    { itemId: 'golden_tooth', name: 'Golden Tooth', count: 64 },
+    { itemId: 'enchanted_rotten_flesh', name: 'Enchanted Rotten Flesh', count: 32 }
+  ]),
+  HUNTER_RING: r('HUNTER_RING', [
+    { itemId: 'grizzly_bait', name: 'Grizzly Bait', count: 1 },
+    { itemId: 'golden_tooth', name: 'Golden Tooth', count: 224 }
+  ], 'HUNTER_TALISMAN'),
+
+  ZOMBIE_RING: r('ZOMBIE_RING', [
+    { itemId: 'revenant_flesh', name: 'Revenant Flesh', count: 64 }
+  ], 'ZOMBIE_TALISMAN'),
+  ZOMBIE_ARTIFACT: r('ZOMBIE_ARTIFACT', [
+    { itemId: 'revenant_viscera', name: 'Revenant Viscera', count: 48 },
+    { itemId: 'enchanted_iron_ingot', name: 'Enchanted Iron Ingot', count: 32 },
+    { itemId: 'enchanted_diamond', name: 'Enchanted Diamond', count: 16 }
+  ], 'ZOMBIE_RING'),
+  REAPER_ORB: r('REAPER_ORB', [
+    { itemId: 'scythe_blade', name: 'Scythe Blade', count: 8 }
+  ]),
 
   // Spooky / Bat line
   CANDY_TALISMAN: r('CANDY_TALISMAN', [{ itemId: 'green_candy', name: 'Green Candy', count: 16 }]),
@@ -106,5 +157,8 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   BAT_ARTIFACT: r('BAT_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 64 }], 'BAT_RING'),
   BAT_PERSON_RING: r('BAT_PERSON_RING', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 128 }], 'BAT_PERSON_TALISMAN'),
   BAT_PERSON_ARTIFACT: r('BAT_PERSON_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 256 }], 'BAT_PERSON_RING'),
-  WOLF_RING: r('WOLF_RING', [{ itemId: 'enchanted_bone', name: 'Enchanted Bone', count: 128 }], 'WOLF_TALISMAN')
+  WOLF_RING: r('WOLF_RING', [
+    { itemId: 'weak_wolf_catalyst', name: 'Weak Wolf Catalyst', count: 1 },
+    { itemId: 'enchanted_bone', name: 'Enchanted Bone', count: 14 }
+  ], 'WOLF_TALISMAN')
 };

@@ -152,4 +152,39 @@ describe('pricingEngine', () => {
     expect(cakePrice.displayLabel).toBe('NPC: 250.0K');
     expect(cakePrice.displayLabel).not.toContain('Est');
   });
+
+  it('validates verified CraftersMC wiki recipes for Fire Extinguisher, Fire Devourer, Frostclaw Relic, and Reaper Orb', () => {
+    // Fire Extinguisher: 8x envoys_horn
+    const feRecipe = ACCESSORY_RECIPES['FIRE_EXTINGUISHER'];
+    expect(feRecipe).toBeDefined();
+    expect(feRecipe.ingredients).toEqual([
+      { itemId: 'envoys_horn', name: "Envoy's Horn", count: 8 }
+    ]);
+
+    // Fire Devourer: 1x FIRE_EXTINGUISHER + 4x fire_fragment
+    const fdRecipe = ACCESSORY_RECIPES['FIRE_DEVOURER'];
+    expect(fdRecipe).toBeDefined();
+    expect(fdRecipe.upgradesFrom).toBe('FIRE_EXTINGUISHER');
+    expect(fdRecipe.ingredients).toEqual([
+      { itemId: 'fire_fragment', name: 'Fire Fragment', count: 4 }
+    ]);
+
+    // Frostclaw Relic: 1x RED_CLAW_ARTIFACT + 64x glacial_fang + 128x enchanted_packed_ice
+    const fcRecipe = ACCESSORY_RECIPES['FROSTCLAW_RELIC'];
+    expect(fcRecipe).toBeDefined();
+    expect(fcRecipe.upgradesFrom).toBe('RED_CLAW_ARTIFACT');
+    expect(fcRecipe.ingredients).toEqual([
+      { itemId: 'glacial_fang', name: 'Glacial Fang', count: 64 },
+      { itemId: 'enchanted_packed_ice', name: 'Enchanted Packed Ice', count: 128 }
+    ]);
+
+    // Reaper Orb: 8x scythe_blade (standalone, no upgradesFrom)
+    const roRecipe = ACCESSORY_RECIPES['REAPER_ORB'];
+    expect(roRecipe).toBeDefined();
+    expect(roRecipe.upgradesFrom).toBeUndefined();
+    expect(roRecipe.ingredients).toEqual([
+      { itemId: 'scythe_blade', name: 'Scythe Blade', count: 8 }
+    ]);
+  });
 });
+
