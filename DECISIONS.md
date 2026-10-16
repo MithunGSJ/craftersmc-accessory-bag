@@ -9,3 +9,4 @@
 | DEC-005 | Synthesize audio using Web Audio API | Zero external audio asset dependencies, instantaneous playback, zero latency, toggleable for user convenience. |
 | DEC-006 | Group accessories into Upgrade Families | Prevents false positives where possessing a higher tier (e.g., Zombie Artifact) would flag lower tiers (Zombie Ring) as missing. |
 | DEC-007 | Embed mandatory CraftersMC and Minecraft trademark disclaimers | Ensures full compliance with section 1 of the CraftersMC API Usage Policy. |
+| DEC-008 | Scope accessory catalog strictly to active CraftersMC SkyBlock items | Strips non-existent Hypixel Dungeons / Catacombs / Enderman Slayer items (Wither Relic/Artifact, Auto-Recombobulator, Hegemony) to mirror true CraftersMC game state. |

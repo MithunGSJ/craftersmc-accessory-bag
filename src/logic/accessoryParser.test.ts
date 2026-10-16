@@ -15,7 +15,7 @@ describe('accessoryParser', () => {
   it('should extract correct rarity from lore lines', () => {
     const lore = [
       '§7Reduce damage taken from',
-      '§7Withers by 25%.',
+      '§7Zombies by 15%.',
       '§r',
       '§6§lLEGENDARY ACCESSORY'
     ];

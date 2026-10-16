@@ -32,7 +32,6 @@ Object.values(ACCESSORIES_BY_FAMILY).forEach(familyList => {
 export const CATEGORIES: readonly AccessoryCategory[] = [
   'Combat',
   'Slayer',
-  'Dungeon',
   'Mining',
   'Farming',
   'Foraging',

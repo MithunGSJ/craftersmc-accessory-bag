@@ -7,14 +7,18 @@ async function main() {
     fs.mkdirSync('evidence', { recursive: true });
   }
 
-  console.log('Starting Vite preview server...');
-  const server = spawn('npx', ['vite', 'preview', '--port', '5173'], {
-    stdio: 'pipe',
-    shell: true
-  });
-
-  // Wait for server to be ready
-  await new Promise(resolve => setTimeout(resolve, 2500));
+  let server = null;
+  try {
+    const res = await fetch('http://localhost:5173');
+    if (res.ok) console.log('Using already running dev server on http://localhost:5173');
+  } catch {
+    console.log('Starting Vite preview server...');
+    server = spawn('npx', ['vite', 'preview', '--port', '5173'], {
+      stdio: 'pipe',
+      shell: true
+    });
+    await new Promise(resolve => setTimeout(resolve, 2500));
+  }
 
   console.log('Launching Playwright Chromium...');
   const browser = await chromium.launch({ headless: true });
@@ -58,7 +62,7 @@ async function main() {
     console.log('Screenshots captured successfully!');
   } finally {
     await browser.close();
-    server.kill();
+    if (server) server.kill();
   }
 }
 

@@ -7,7 +7,6 @@ export type AccessoryCategory =
   | 'Foraging'
   | 'Fishing'
   | 'Slayer'
-  | 'Dungeon'
   | 'Event'
   | 'Misc';
 

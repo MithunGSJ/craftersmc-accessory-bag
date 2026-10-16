@@ -12,40 +12,40 @@ export interface SampleProfile {
 export const SAMPLE_PROFILES: readonly SampleProfile[] = [
   {
     id: 'endgame',
-    name: 'Endgame Hypermaxed',
-    description: 'Late-game SkyBlock player with high-tier relics, Hegemony Artifact, and enrichments.',
+    name: 'Endgame Maxed',
+    description: 'Late-game CraftersMC player with high-tier slayers, End artifacts, and enrichments.',
     gamertag: 'DeathWish_99',
     profileName: 'Watermelon',
     items: [
       {
-        id: 'HEGEMONY_ARTIFACT_0',
-        internalId: 'HEGEMONY_ARTIFACT',
-        displayName: 'Hegemony Artifact',
-        rarity: 'MYTHIC',
+        id: 'TARANTULA_TALISMAN_0',
+        internalId: 'TARANTULA_TALISMAN',
+        displayName: 'Tarantula Talisman',
+        rarity: 'EPIC',
         reforge: 'Shaded',
         enrichment: 'Crit Chance',
         slot: 0,
-        lore: ['Sirius Darker Auction artifact.', 'Grants massive Magical Power boost.']
+        lore: ['Every 10th attack deals +10% damage.']
       },
       {
-        id: 'WITHER_RELIC_1',
-        internalId: 'WITHER_RELIC',
-        displayName: 'Wither Relic',
-        rarity: 'LEGENDARY',
-        reforge: 'Shaded',
+        id: 'ENDER_ARTIFACT_1',
+        internalId: 'ENDER_ARTIFACT',
+        displayName: 'Ender Artifact',
+        rarity: 'EPIC',
+        reforge: 'Hurtful',
         enrichment: 'Attack Speed',
         slot: 1,
-        lore: ['Reduce damage taken from', 'Withers by 25%.']
+        lore: ['Reduce damage taken from End mobs by 20%.']
       },
       {
-        id: 'ENDER_RELIC_2',
-        internalId: 'ENDER_RELIC',
-        displayName: 'Ender Relic',
-        rarity: 'LEGENDARY',
-        reforge: 'Hurtful',
+        id: 'POTION_AFFINITY_ARTIFACT_2',
+        internalId: 'POTION_AFFINITY_ARTIFACT',
+        displayName: 'Potion Affinity Artifact',
+        rarity: 'RARE',
+        reforge: 'Shaded',
         enrichment: 'Strength',
         slot: 2,
-        lore: ['Reduce damage taken from', 'End mobs by 25%.']
+        lore: ['Increases the duration of consumed potions by 50%.']
       },
       {
         id: 'BAT_ARTIFACT_3',
@@ -57,13 +57,13 @@ export const SAMPLE_PROFILES: readonly SampleProfile[] = [
         lore: ['Gives +5 Speed and +5 Health.']
       },
       {
-        id: 'AUTO_RECOMBOBULATOR_4',
-        internalId: 'AUTO_RECOMBOBULATOR',
-        displayName: 'Auto Recombobulator',
-        rarity: 'LEGENDARY',
-        reforge: 'Shaded',
+        id: 'NIGHT_VISION_CHARM_4',
+        internalId: 'NIGHT_VISION_CHARM',
+        displayName: 'Night Vision Charm',
+        rarity: 'COMMON',
+        reforge: 'Sweet',
         slot: 4,
-        lore: ['1% chance to automatically recombobulate items.']
+        lore: ['Grants permanent Night Vision while in your accessory bag.']
       },
       {
         id: 'SPIDER_ARTIFACT_5',

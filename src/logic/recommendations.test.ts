@@ -41,8 +41,8 @@ describe('recommendationsEngine', () => {
     const topIds = candidates.slice(0, 3).map(c => c.id);
     expect(topIds.some(id => id.includes('FARMING') || id.includes('VACCINE') || id.includes('MAGNETIC'))).toBe(true);
 
-    // Multi-million coin items (like Hegemony Artifact or Ender Relic) should not be in the top 3
-    expect(topIds).not.toContain('HEGEMONY_ARTIFACT');
-    expect(topIds).not.toContain('ENDER_RELIC');
+    // Multi-million coin items (like Ender Artifact or Bat Artifact) should not be in the top 3
+    expect(topIds).not.toContain('ENDER_ARTIFACT');
+    expect(topIds).not.toContain('BAT_ARTIFACT');
   });
 });

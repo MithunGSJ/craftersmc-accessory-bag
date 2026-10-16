@@ -27,9 +27,9 @@ describe('statsCalculator', () => {
         lore: []
       },
       {
-        id: 'ENDER_RELIC_1',
-        internalId: 'ENDER_RELIC',
-        displayName: 'Ender Relic',
+        id: 'BAT_ARTIFACT_1',
+        internalId: 'BAT_ARTIFACT',
+        displayName: 'Bat Artifact',
         rarity: 'LEGENDARY',
         reforge: 'Hurtful',
         enrichment: 'Crit Chance',

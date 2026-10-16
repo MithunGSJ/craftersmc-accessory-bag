@@ -132,30 +132,17 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     loreLines: ['Grants +5% Critical Damage.', 'Wolf Slayer Level 5']
   },
   {
-    id: 'WITHER_ARTIFACT',
-    name: 'Wither Artifact',
+    id: 'TARANTULA_TALISMAN',
+    name: 'Tarantula Talisman',
     baseRarity: 'EPIC',
-    category: 'Dungeon',
-    familyId: 'wither',
+    category: 'Slayer',
+    familyId: 'tarantula',
     tier: 1,
-    description: 'Reduce damage taken from Withers by 20%.',
-    source: 'Dark Auction purchase',
-    estimatedCoins: 8500000,
-    iconEmoji: '🖤',
-    loreLines: ['Reduce damage taken from', 'Withers and Wither Skeletons by 20%.']
-  },
-  {
-    id: 'WITHER_RELIC',
-    name: 'Wither Relic',
-    baseRarity: 'LEGENDARY',
-    category: 'Dungeon',
-    familyId: 'wither',
-    tier: 2,
-    description: 'Reduce damage taken from Withers by 25%.',
-    source: 'Crafting: Wither Artifact + 8 Wither Shields',
-    estimatedCoins: 35000000,
-    iconEmoji: '🖤',
-    loreLines: ['Reduce damage taken from', 'Withers by 25%.']
+    description: 'Every 10th attack deals +10% damage.',
+    source: 'Spider Slayer Level 6 (Tarantula Broodfather Drop)',
+    estimatedCoins: 4500000,
+    iconEmoji: '🕷️',
+    loreLines: ['Every 10th attack deals +10% damage.', 'Requires Spider Slayer Level 6']
   },
   {
     id: 'ENDER_ARTIFACT',
@@ -169,18 +156,5 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     estimatedCoins: 12000000,
     iconEmoji: '🔮',
     loreLines: ['Reduce damage taken from', 'Endermen, Endermites, and Dragons by 20%.']
-  },
-  {
-    id: 'ENDER_RELIC',
-    name: 'Ender Relic',
-    baseRarity: 'LEGENDARY',
-    category: 'Combat',
-    familyId: 'ender',
-    tier: 2,
-    description: 'Reduce damage taken from End monsters by 25%.',
-    source: 'Crafting: Ender Artifact + 8 Exceedingly Rare Ender Artifact Upgrades',
-    estimatedCoins: 55000000,
-    iconEmoji: '🔮',
-    loreLines: ['Reduce damage taken from', 'End mobs by 25%.']
   }
 ];
