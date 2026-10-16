@@ -14,7 +14,7 @@
   {
     "id": "FEAT-003",
     "description": "NBT Decoder & Accessory Bag Parser: Robust parser decoding base64-gzipped NBT data into structured accessory items (ID, name, rarity, reforge, enrichment, lore).",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-003-nbt-parser.txt"
   },
   {
