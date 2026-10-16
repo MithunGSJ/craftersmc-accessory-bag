@@ -1,0 +1,2170 @@
+{
+  "MINECRAFT:WOODEN_PICKAXE": {
+    "name": "minecraft:wooden_pickaxe",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 10,
+    "maxPrice": 10,
+    "avgPrice": 10
+  },
+  "TRPIXEL:PROTECTOR_DRAGON_BOOTS": {
+    "name": "trpixel:protector_dragon_boots",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 400000,
+    "maxPrice": 600000,
+    "avgPrice": 500000
+  },
+  "TRPIXEL:PROTECTOR_DRAGON_CHESTPLATE": {
+    "name": "trpixel:protector_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 650000,
+    "maxPrice": 850000,
+    "avgPrice": 750000
+  },
+  "TRPIXEL:PROTECTOR_DRAGON_HELMET": {
+    "name": "trpixel:protector_dragon_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 550000,
+    "maxPrice": 700000,
+    "avgPrice": 625000
+  },
+  "TRPIXEL:FARMIONAIRE_TALISMAN": {
+    "name": "trpixel:farmionaire_talisman",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 1599900,
+    "maxPrice": 1600000,
+    "avgPrice": 1599950
+  },
+  "TRPIXEL:ENDERMAN_PET": {
+    "name": "trpixel:enderman_pet",
+    "category": "PETS",
+    "count": 23,
+    "minPrice": 1000,
+    "maxPrice": 110000000,
+    "avgPrice": 10216610
+  },
+  "TRPIXEL:MELON_LEGGINGS": {
+    "name": "trpixel:melon_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 889000,
+    "maxPrice": 1275999,
+    "avgPrice": 1082500
+  },
+  "TRPIXEL:BAT_THE_FISH": {
+    "name": "trpixel:bat_the_fish",
+    "category": "MISCELLANEOUS",
+    "count": 7,
+    "minPrice": 5,
+    "maxPrice": 1000000,
+    "avgPrice": 358255
+  },
+  "TRPIXEL:ENDER_BOW": {
+    "name": "trpixel:ender_bow",
+    "category": "WEAPONS",
+    "count": 23,
+    "minPrice": 2000,
+    "maxPrice": 100000,
+    "avgPrice": 48304
+  },
+  "TRPIXEL:PERSONAL_COMPACTOR_4000": {
+    "name": "trpixel:personal_compactor_4000",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 1650000,
+    "maxPrice": 1999999,
+    "avgPrice": 1816666
+  },
+  "TRPIXEL:PET_AUGMENT_FORAGING_EXP_BOOST_50": {
+    "name": "trpixel:pet_augment_foraging_exp_boost_50",
+    "category": "PETS",
+    "count": 6,
+    "minPrice": 2500000,
+    "maxPrice": 3500000,
+    "avgPrice": 3000000
+  },
+  "TRPIXEL:ASPECT_OF_THE_END": {
+    "name": "trpixel:aspect_of_the_end",
+    "category": "WEAPONS",
+    "count": 7,
+    "minPrice": 986767,
+    "maxPrice": 10000000,
+    "avgPrice": 2455252
+  },
+  "TRPIXEL:BAT_TALISMAN": {
+    "name": "trpixel:bat_talisman",
+    "category": "ACCESSORIES",
+    "count": 6,
+    "minPrice": 223,
+    "maxPrice": 3000000,
+    "avgPrice": 917499
+  },
+  "TRPIXEL:REVENANT_BOOTS": {
+    "name": "trpixel:revenant_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 250000,
+    "maxPrice": 1100000,
+    "avgPrice": 675000
+  },
+  "TRPIXEL:ARMOR_OF_MAGMA_CHESTPLATE": {
+    "name": "trpixel:armor_of_magma_chestplate",
+    "category": "ARMORS",
+    "count": 10,
+    "minPrice": 100000,
+    "maxPrice": 600000,
+    "avgPrice": 340000
+  },
+  "TRPIXEL:ARMOR_OF_MAGMA_HELMET": {
+    "name": "trpixel:armor_of_magma_helmet",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 260000,
+    "maxPrice": 600000,
+    "avgPrice": 386666
+  },
+  "TRPIXEL:JUNGLE_AXE": {
+    "name": "trpixel:jungle_axe",
+    "category": "TOOLS",
+    "count": 11,
+    "minPrice": 10000,
+    "maxPrice": 30000,
+    "avgPrice": 20727
+  },
+  "TRPIXEL:SPEEDSTER_LEGGINGS": {
+    "name": "trpixel:speedster_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 600000,
+    "maxPrice": 600000,
+    "avgPrice": 600000
+  },
+  "TRPIXEL:SPEEDSTER_CHESTPLATE": {
+    "name": "trpixel:speedster_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 700000,
+    "maxPrice": 700000,
+    "avgPrice": 700000
+  },
+  "TRPIXEL:SPEEDSTER_HELMET": {
+    "name": "trpixel:speedster_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 500000,
+    "maxPrice": 500000,
+    "avgPrice": 500000
+  },
+  "TRPIXEL:MELON_DICER": {
+    "name": "trpixel:melon_dicer",
+    "category": "TOOLS",
+    "count": 5,
+    "minPrice": 1300000,
+    "maxPrice": 2600000,
+    "avgPrice": 1800000
+  },
+  "TRPIXEL:FEATHER_ARTIFACT": {
+    "name": "trpixel:feather_artifact",
+    "category": "ACCESSORIES",
+    "count": 8,
+    "minPrice": 190000,
+    "maxPrice": 400000,
+    "avgPrice": 246750
+  },
+  "TRPIXEL:OVERFLUX_CAPACITOR": {
+    "name": "trpixel:overflux_capacitor",
+    "category": "MISCELLANEOUS",
+    "count": 4,
+    "minPrice": 7000000,
+    "maxPrice": 29999000,
+    "avgPrice": 12749750
+  },
+  "TRPIXEL:FIRE_EXTINGUISHER": {
+    "name": "trpixel:fire_extinguisher",
+    "category": "ACCESSORIES",
+    "count": 13,
+    "minPrice": 100000,
+    "maxPrice": 149999,
+    "avgPrice": 114692
+  },
+  "TRPIXEL:REVENANT_FALCHION": {
+    "name": "trpixel:revenant_falchion",
+    "category": "WEAPONS",
+    "count": 4,
+    "minPrice": 750000,
+    "maxPrice": 848000,
+    "avgPrice": 799500
+  },
+  "TRPIXEL:BLAZE_CHESTPLATE": {
+    "name": "trpixel:blaze_chestplate",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 1500000,
+    "maxPrice": 1800000,
+    "avgPrice": 1637250
+  },
+  "TRPIXEL:BLAZE_LEGGINGS": {
+    "name": "trpixel:blaze_leggings",
+    "category": "ARMORS",
+    "count": 5,
+    "minPrice": 1199000,
+    "maxPrice": 1500000,
+    "avgPrice": 1352200
+  },
+  "TRPIXEL:MAGMA_BOW": {
+    "name": "trpixel:magma_bow",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 500000,
+    "maxPrice": 520000,
+    "avgPrice": 510000
+  },
+  "TRPIXEL:ZOMBIE_HEART": {
+    "name": "trpixel:zombie_heart",
+    "category": "ARMORS",
+    "count": 40,
+    "minPrice": 2,
+    "maxPrice": 250000,
+    "avgPrice": 179750
+  },
+  "TRPIXEL:CROPIE_HELMET": {
+    "name": "trpixel:cropie_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2999000,
+    "maxPrice": 5000000,
+    "avgPrice": 3999500
+  },
+  "TRPIXEL:INTIMIDATION_RING": {
+    "name": "trpixel:intimidation_ring",
+    "category": "ACCESSORIES",
+    "count": 4,
+    "minPrice": 999000,
+    "maxPrice": 1399000,
+    "avgPrice": 1192000
+  },
+  "TRPIXEL:TIGER_PET": {
+    "name": "trpixel:tiger_pet",
+    "category": "PETS",
+    "count": 16,
+    "minPrice": 1,
+    "maxPrice": 85000000,
+    "avgPrice": 25456250
+  },
+  "TRPIXEL:HARDENED_DIAMOND_CHESTPLATE": {
+    "name": "trpixel:hardened_diamond_chestplate",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 10001,
+    "maxPrice": 25000,
+    "avgPrice": 17501
+  },
+  "TRPIXEL:CANDY_THE_FISH": {
+    "name": "trpixel:candy_the_fish",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 1500000,
+    "maxPrice": 1500000,
+    "avgPrice": 1500000
+  },
+  "TRPIXEL:ZOMBIE_PET": {
+    "name": "trpixel:zombie_pet",
+    "category": "PETS",
+    "count": 24,
+    "minPrice": 1,
+    "maxPrice": 10000000,
+    "avgPrice": 1818371
+  },
+  "TRPIXEL:INFINIDIRT_WAND": {
+    "name": "trpixel:infinidirt_wand",
+    "category": "TOOLS",
+    "count": 7,
+    "minPrice": 100,
+    "maxPrice": 200000,
+    "avgPrice": 135014
+  },
+  "TRPIXEL:BAT_PERSON_TALISMAN": {
+    "name": "trpixel:bat_person_talisman",
+    "category": "ACCESSORIES",
+    "count": 12,
+    "minPrice": 103,
+    "maxPrice": 2000000,
+    "avgPrice": 757443
+  },
+  "TRPIXEL:GOLEM_SWORD": {
+    "name": "trpixel:golem_sword",
+    "category": "WEAPONS",
+    "count": 10,
+    "minPrice": 200000,
+    "maxPrice": 499999,
+    "avgPrice": 257000
+  },
+  "TRPIXEL:OCELOT_PET": {
+    "name": "trpixel:ocelot_pet",
+    "category": "PETS",
+    "count": 3,
+    "minPrice": 51250,
+    "maxPrice": 4499999,
+    "avgPrice": 1673749
+  },
+  "TRPIXEL:SHINY_SHARD": {
+    "name": "trpixel:shiny_shard",
+    "category": "MISCELLANEOUS",
+    "count": 3,
+    "minPrice": 1398888,
+    "maxPrice": 2000000,
+    "avgPrice": 1599629
+  },
+  "TRPIXEL:BAT_PET": {
+    "name": "trpixel:bat_pet",
+    "category": "PETS",
+    "count": 6,
+    "minPrice": 100000,
+    "maxPrice": 2250000,
+    "avgPrice": 1824833
+  },
+  "TRPIXEL:EXPERIENCE_ARTIFACT": {
+    "name": "trpixel:experience_artifact",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 385000,
+    "maxPrice": 5000000,
+    "avgPrice": 1923667
+  },
+  "TRPIXEL:LEAPING_SWORD": {
+    "name": "trpixel:leaping_sword",
+    "category": "WEAPONS",
+    "count": 11,
+    "minPrice": 999999,
+    "maxPrice": 2000000,
+    "avgPrice": 1295909
+  },
+  "TRPIXEL:BUILDERS_WAND": {
+    "name": "trpixel:builders_wand",
+    "category": "TOOLS",
+    "count": 3,
+    "minPrice": 83700000,
+    "maxPrice": 92000000,
+    "avgPrice": 88566667
+  },
+  "TRPIXEL:BLOCK_ZAPPER": {
+    "name": "trpixel:block_zapper",
+    "category": "TOOLS",
+    "count": 2,
+    "minPrice": 15000000,
+    "maxPrice": 15900000,
+    "avgPrice": 15450000
+  },
+  "TRPIXEL:CRYSTAL_CHESTPLATE": {
+    "name": "trpixel:crystal_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 12000,
+    "maxPrice": 12000,
+    "avgPrice": 12000
+  },
+  "TRPIXEL:CRYSTAL_BOOTS": {
+    "name": "trpixel:crystal_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 49999,
+    "maxPrice": 49999,
+    "avgPrice": 49999
+  },
+  "TRPIXEL:CRYSTAL_LEGGINGS": {
+    "name": "trpixel:crystal_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 12000,
+    "maxPrice": 12000,
+    "avgPrice": 12000
+  },
+  "TRPIXEL:CRYSTAL_HELMET": {
+    "name": "trpixel:crystal_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 59999,
+    "maxPrice": 59999,
+    "avgPrice": 59999
+  },
+  "TRPIXEL:CRYSTALLIZED_HEART": {
+    "name": "trpixel:crystallized_heart",
+    "category": "ARMORS",
+    "count": 15,
+    "minPrice": 510000,
+    "maxPrice": 650000,
+    "avgPrice": 597342
+  },
+  "TRPIXEL:GHOUL_PET": {
+    "name": "trpixel:ghoul_pet",
+    "category": "PETS",
+    "count": 8,
+    "minPrice": 399000,
+    "maxPrice": 5500000,
+    "avgPrice": 1874875
+  },
+  "TRPIXEL:HOE_OF_GREATEST_TILLING": {
+    "name": "trpixel:hoe_of_greatest_tilling",
+    "category": "TOOLS",
+    "count": 4,
+    "minPrice": 1899999,
+    "maxPrice": 2000000,
+    "avgPrice": 1970000
+  },
+  "TRPIXEL:FIRE_TALISMAN": {
+    "name": "trpixel:fire_talisman",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 125000,
+    "maxPrice": 150000,
+    "avgPrice": 141667
+  },
+  "TRPIXEL:TUBER_STAFF": {
+    "name": "trpixel:tuber_staff",
+    "category": "WEAPONS",
+    "count": 19,
+    "minPrice": 850000,
+    "maxPrice": 1200000,
+    "avgPrice": 1068052
+  },
+  "TRPIXEL:ZOMBIE_BOOTS": {
+    "name": "trpixel:zombie_boots",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 400000,
+    "maxPrice": 450000,
+    "avgPrice": 422500
+  },
+  "MINECRAFT:IRON_SHOVEL": {
+    "name": "minecraft:iron_shovel",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 100,
+    "maxPrice": 100,
+    "avgPrice": 100
+  },
+  "TRPIXEL:ASPECT_OF_THE_DRAGONS": {
+    "name": "trpixel:aspect_of_the_dragons",
+    "category": "WEAPONS",
+    "count": 27,
+    "minPrice": 5000000,
+    "maxPrice": 8000000,
+    "avgPrice": 5430185
+  },
+  "TRPIXEL:RUNAAN_BOW": {
+    "name": "trpixel:runaan_bow",
+    "category": "WEAPONS",
+    "count": 13,
+    "minPrice": 969000,
+    "maxPrice": 1850000,
+    "avgPrice": 1350461
+  },
+  "TRPIXEL:GRAPPLING_HOOK": {
+    "name": "trpixel:grappling_hook",
+    "category": "MISCELLANEOUS",
+    "count": 16,
+    "minPrice": 39000,
+    "maxPrice": 42000,
+    "avgPrice": 40813
+  },
+  "TRPIXEL:RABBIT_PET": {
+    "name": "trpixel:rabbit_pet",
+    "category": "PETS",
+    "count": 11,
+    "minPrice": 900000,
+    "maxPrice": 15000000,
+    "avgPrice": 6618182
+  },
+  "TRPIXEL:REVIVED_HEART": {
+    "name": "trpixel:revived_heart",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 2000000,
+    "maxPrice": 2000000,
+    "avgPrice": 2000000
+  },
+  "TRPIXEL:SPOOKY_BOOTS": {
+    "name": "trpixel:spooky_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2650000,
+    "maxPrice": 3000000,
+    "avgPrice": 2825000
+  },
+  "TRPIXEL:SPOOKY_CHESTPLATE": {
+    "name": "trpixel:spooky_chestplate",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 2000000,
+    "maxPrice": 3000000,
+    "avgPrice": 2550000
+  },
+  "TRPIXEL:SPOOKY_HELMET": {
+    "name": "trpixel:spooky_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2650000,
+    "maxPrice": 3000000,
+    "avgPrice": 2825000
+  },
+  "TRPIXEL:SPOOKY_LEGGINGS": {
+    "name": "trpixel:spooky_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2650000,
+    "maxPrice": 3000000,
+    "avgPrice": 2825000
+  },
+  "TRPIXEL:WITCH_HAT": {
+    "name": "trpixel:witch_hat",
+    "category": "ARMORS",
+    "count": 9,
+    "minPrice": 308,
+    "maxPrice": 1000000,
+    "avgPrice": 710040
+  },
+  "TRPIXEL:YOUNG_DRAGON_HELMET": {
+    "name": "trpixel:young_dragon_helmet",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 899000,
+    "maxPrice": 980000,
+    "avgPrice": 943000
+  },
+  "TRPIXEL:END_STONE_SWORD": {
+    "name": "trpixel:end_stone_sword",
+    "category": "WEAPONS",
+    "count": 4,
+    "minPrice": 199999,
+    "maxPrice": 300000,
+    "avgPrice": 248749
+  },
+  "TRPIXEL:OLD_DRAGON_CHESTPLATE": {
+    "name": "trpixel:old_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 500000,
+    "maxPrice": 1250000,
+    "avgPrice": 875000
+  },
+  "TRPIXEL:YOUNG_DRAGON_CHESTPLATE": {
+    "name": "trpixel:young_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 999000,
+    "maxPrice": 1099999,
+    "avgPrice": 1033000
+  },
+  "TRPIXEL:YOUNG_DRAGON_LEGGINGS": {
+    "name": "trpixel:young_dragon_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 989999,
+    "maxPrice": 989999,
+    "avgPrice": 989999
+  },
+  "TRPIXEL:YOUNG_DRAGON_BOOTS": {
+    "name": "trpixel:young_dragon_boots",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 790000,
+    "maxPrice": 850000,
+    "avgPrice": 813000
+  },
+  "TRPIXEL:FLAMERANG": {
+    "name": "trpixel:flamerang",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 3500000,
+    "maxPrice": 3500000,
+    "avgPrice": 3500000
+  },
+  "TRPIXEL:PERSONAL_COMPACTOR_6000": {
+    "name": "trpixel:personal_compactor_6000",
+    "category": "ACCESSORIES",
+    "count": 8,
+    "minPrice": 2350000,
+    "maxPrice": 2500000,
+    "avgPrice": 2468750
+  },
+  "TRPIXEL:REAPER_FALCHION": {
+    "name": "trpixel:reaper_falchion",
+    "category": "WEAPONS",
+    "count": 10,
+    "minPrice": 2500000,
+    "maxPrice": 18000000,
+    "avgPrice": 5948900
+  },
+  "MINECRAFT:DIAMOND_CHESTPLATE": {
+    "name": "minecraft:diamond_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 50,
+    "maxPrice": 50,
+    "avgPrice": 50
+  },
+  "TRPIXEL:ELEPHANT_PET": {
+    "name": "trpixel:elephant_pet",
+    "category": "PETS",
+    "count": 28,
+    "minPrice": 350000,
+    "maxPrice": 33999999,
+    "avgPrice": 8441036
+  },
+  "TRPIXEL:LION_PET": {
+    "name": "trpixel:lion_pet",
+    "category": "PETS",
+    "count": 6,
+    "minPrice": 700000,
+    "maxPrice": 19999000,
+    "avgPrice": 7224833
+  },
+  "TRPIXEL:SHINY_ROD": {
+    "name": "trpixel:shiny_rod",
+    "category": "TOOLS",
+    "count": 2,
+    "minPrice": 4100,
+    "maxPrice": 4499999,
+    "avgPrice": 2252050
+  },
+  "MINECRAFT:ENCHANTED_BOOK": {
+    "name": "minecraft:enchanted_book",
+    "category": "CONSUMABLES",
+    "count": 3,
+    "minPrice": 1545,
+    "maxPrice": 100000,
+    "avgPrice": 38515
+  },
+  "TRPIXEL:UNSTABLE_DRAGON_BOOTS": {
+    "name": "trpixel:unstable_dragon_boots",
+    "category": "ARMORS",
+    "count": 5,
+    "minPrice": 599000,
+    "maxPrice": 1000000,
+    "avgPrice": 729600
+  },
+  "TRPIXEL:SILVERFISH_PET": {
+    "name": "trpixel:silverfish_pet",
+    "category": "PETS",
+    "count": 6,
+    "minPrice": 200000,
+    "maxPrice": 3000000,
+    "avgPrice": 897833
+  },
+  "TRPIXEL:BEHEADED_HORROR": {
+    "name": "trpixel:beheaded_horror",
+    "category": "MISCELLANEOUS",
+    "count": 4,
+    "minPrice": 699000,
+    "maxPrice": 3999000,
+    "avgPrice": 1524000
+  },
+  "TRPIXEL:MANA_FLUX_POWER_ORB": {
+    "name": "trpixel:mana_flux_power_orb",
+    "category": "MISCELLANEOUS",
+    "count": 4,
+    "minPrice": 10999000,
+    "maxPrice": 19999000,
+    "avgPrice": 13374500
+  },
+  "TRPIXEL:BLAZE_HELMET": {
+    "name": "trpixel:blaze_helmet",
+    "category": "ARMORS",
+    "count": 5,
+    "minPrice": 1000000,
+    "maxPrice": 1404000,
+    "avgPrice": 1100600
+  },
+  "TRPIXEL:REVENANT_LEGGINGS": {
+    "name": "trpixel:revenant_leggings",
+    "category": "ARMORS",
+    "count": 9,
+    "minPrice": 15000,
+    "maxPrice": 1100000,
+    "avgPrice": 674889
+  },
+  "MINECRAFT:GOLDEN_AXE": {
+    "name": "minecraft:golden_axe",
+    "category": "TOOLS",
+    "count": 13,
+    "minPrice": 25000,
+    "maxPrice": 25000,
+    "avgPrice": 25000
+  },
+  "TRPIXEL:PERSONAL_COMPACTOR_7000": {
+    "name": "trpixel:personal_compactor_7000",
+    "category": "ACCESSORIES",
+    "count": 5,
+    "minPrice": 3500000,
+    "maxPrice": 3849999,
+    "avgPrice": 3760600
+  },
+  "TRPIXEL:DRAGONFADE_CLOAK": {
+    "name": "trpixel:dragonfade_cloak",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 21999000,
+    "maxPrice": 21999000,
+    "avgPrice": 21999000
+  },
+  "TRPIXEL:CANDY_CORN": {
+    "name": "trpixel:candy_corn",
+    "category": "MISCELLANEOUS",
+    "count": 23,
+    "minPrice": 300000,
+    "maxPrice": 800000,
+    "avgPrice": 488478
+  },
+  "TRPIXEL:BLAZE_BOOTS": {
+    "name": "trpixel:blaze_boots",
+    "category": "ARMORS",
+    "count": 5,
+    "minPrice": 899000,
+    "maxPrice": 1100000,
+    "avgPrice": 979800
+  },
+  "TRPIXEL:NEW_YEAR_CAKE": {
+    "name": "trpixel:new_year_cake",
+    "category": "MISCELLANEOUS",
+    "count": 4,
+    "minPrice": 100000,
+    "maxPrice": 19999000,
+    "avgPrice": 6024750
+  },
+  "TRPIXEL:SPEED_ARTIFACT": {
+    "name": "trpixel:speed_artifact",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 4600000,
+    "maxPrice": 4600000,
+    "avgPrice": 4600000
+  },
+  "TRPIXEL:ARMOR_OF_MAGMA_LEGGINGS": {
+    "name": "trpixel:armor_of_magma_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 295000,
+    "maxPrice": 500000,
+    "avgPrice": 397500
+  },
+  "TRPIXEL:ARMOR_OF_MAGMA_BOOTS": {
+    "name": "trpixel:armor_of_magma_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 260000,
+    "maxPrice": 450000,
+    "avgPrice": 355000
+  },
+  "TRPIXEL:PERSONAL_DELETOR_4000": {
+    "name": "trpixel:personal_deletor_4000",
+    "category": "ACCESSORIES",
+    "count": 4,
+    "minPrice": 1099000,
+    "maxPrice": 1100000,
+    "avgPrice": 1099500
+  },
+  "TRPIXEL:END_STONE_BOW": {
+    "name": "trpixel:end_stone_bow",
+    "category": "WEAPONS",
+    "count": 6,
+    "minPrice": 170000,
+    "maxPrice": 350000,
+    "avgPrice": 225000
+  },
+  "TRPIXEL:FUNGI_CUTTER_RED": {
+    "name": "trpixel:fungi_cutter_red",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 1200000,
+    "maxPrice": 1200000,
+    "avgPrice": 1200000
+  },
+  "TRPIXEL:CANDY_TALISMAN": {
+    "name": "trpixel:candy_talisman",
+    "category": "ACCESSORIES",
+    "count": 8,
+    "minPrice": 190000,
+    "maxPrice": 275000,
+    "avgPrice": 226500
+  },
+  "MINECRAFT:WOODEN_SWORD": {
+    "name": "minecraft:wooden_sword",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 1000000,
+    "maxPrice": 1000000,
+    "avgPrice": 1000000
+  },
+  "TRPIXEL:SKELETON_HORSE_PET": {
+    "name": "trpixel:skeleton_horse_pet",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 2101250,
+    "maxPrice": 2101250,
+    "avgPrice": 2101250
+  },
+  "TRPIXEL:CANDY_ARTIFACT": {
+    "name": "trpixel:candy_artifact",
+    "category": "ACCESSORIES",
+    "count": 10,
+    "minPrice": 2850000,
+    "maxPrice": 3000000,
+    "avgPrice": 2920000
+  },
+  "TRPIXEL:BAT_PERSON_HELMET": {
+    "name": "trpixel:bat_person_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4950000,
+    "maxPrice": 4950000,
+    "avgPrice": 4950000
+  },
+  "TRPIXEL:BAT_PERSON_LEGGINGS": {
+    "name": "trpixel:bat_person_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4950000,
+    "maxPrice": 4950000,
+    "avgPrice": 4950000
+  },
+  "TRPIXEL:BAT_PERSON_BOOTS": {
+    "name": "trpixel:bat_person_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4950000,
+    "maxPrice": 4950000,
+    "avgPrice": 4950000
+  },
+  "TRPIXEL:BASKET_OF_SEEDS": {
+    "name": "trpixel:basket_of_seeds",
+    "category": "TOOLS",
+    "count": 5,
+    "minPrice": 1629999,
+    "maxPrice": 1725999,
+    "avgPrice": 1679199
+  },
+  "TRPIXEL:MELON_BOOTS": {
+    "name": "trpixel:melon_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 600000,
+    "maxPrice": 1289000,
+    "avgPrice": 944500
+  },
+  "TRPIXEL:PERSONAL_COMPACTOR_5000": {
+    "name": "trpixel:personal_compactor_5000",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 1800000,
+    "maxPrice": 1990000,
+    "avgPrice": 1896667
+  },
+  "TRPIXEL:PET_AUGMENT_SPOOKY_CUPCAKE": {
+    "name": "trpixel:pet_augment_spooky_cupcake",
+    "category": "PETS",
+    "count": 4,
+    "minPrice": 980000,
+    "maxPrice": 2500000,
+    "avgPrice": 1620000
+  },
+  "TRPIXEL:MAGNETIC_TALISMAN": {
+    "name": "trpixel:magnetic_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 285000,
+    "maxPrice": 285000,
+    "avgPrice": 285000
+  },
+  "TRPIXEL:EMERALD_RING": {
+    "name": "trpixel:emerald_ring",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 149998,
+    "maxPrice": 175000,
+    "avgPrice": 162499
+  },
+  "TRPIXEL:SPOOKY_DISC": {
+    "name": "trpixel:spooky_disc",
+    "category": "MISCELLANEOUS",
+    "count": 4,
+    "minPrice": 299000,
+    "maxPrice": 499999,
+    "avgPrice": 447247
+  },
+  "TRPIXEL:PET_AUGMENT_MINING_EXP_BOOST_40": {
+    "name": "trpixel:pet_augment_mining_exp_boost_40",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 875000,
+    "maxPrice": 875000,
+    "avgPrice": 875000
+  },
+  "TRPIXEL:WISE_DRAGON_BOOTS": {
+    "name": "trpixel:wise_dragon_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 1250000,
+    "maxPrice": 1250000,
+    "avgPrice": 1250000
+  },
+  "TRPIXEL:BAT_PERSON_RING": {
+    "name": "trpixel:bat_person_ring",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 8499999,
+    "maxPrice": 9000000,
+    "avgPrice": 8816666
+  },
+  "TRPIXEL:CARROT_HARVESTER_2": {
+    "name": "trpixel:carrot_harvester_2",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 20000000,
+    "maxPrice": 20000000,
+    "avgPrice": 20000000
+  },
+  "TRPIXEL:BLACK_CAT_PET": {
+    "name": "trpixel:black_cat_pet",
+    "category": "PETS",
+    "count": 4,
+    "minPrice": 59500000,
+    "maxPrice": 73000000,
+    "avgPrice": 65625000
+  },
+  "TRPIXEL:HOLOGRAM_TEXT": {
+    "name": "trpixel:hologram_text",
+    "category": "COSMETICS",
+    "count": 2,
+    "minPrice": 16000000,
+    "maxPrice": 16999999,
+    "avgPrice": 16500000
+  },
+  "TRPIXEL:HARVESTER_BLUEPRINT": {
+    "name": "trpixel:harvester_blueprint",
+    "category": "MISCELLANEOUS",
+    "count": 8,
+    "minPrice": 2299900,
+    "maxPrice": 2490000,
+    "avgPrice": 2367987
+  },
+  "TRPIXEL:FROZEN_BLAZE_HELMET": {
+    "name": "trpixel:frozen_blaze_helmet",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 4198999,
+    "maxPrice": 4499999,
+    "avgPrice": 4274500
+  },
+  "TRPIXEL:FIRE_DEVOURER": {
+    "name": "trpixel:fire_devourer",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 24999000,
+    "maxPrice": 24999000,
+    "avgPrice": 24999000
+  },
+  "TRPIXEL:WOLF_TALISMAN": {
+    "name": "trpixel:wolf_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 7500000,
+    "maxPrice": 7500000,
+    "avgPrice": 7500000
+  },
+  "MINECRAFT:POISONOUS_POTATO": {
+    "name": "minecraft:poisonous_potato",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 1,
+    "maxPrice": 1,
+    "avgPrice": 1
+  },
+  "TRPIXEL:GOLEM_ARMOR_CHESTPLATE": {
+    "name": "trpixel:golem_armor_chestplate",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 4,
+    "maxPrice": 575000,
+    "avgPrice": 293751
+  },
+  "TRPIXEL:PIGGY_BANK": {
+    "name": "trpixel:piggy_bank",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 470000,
+    "maxPrice": 475000,
+    "avgPrice": 472500
+  },
+  "TRPIXEL:REVENANT_CHESTPLATE": {
+    "name": "trpixel:revenant_chestplate",
+    "category": "ARMORS",
+    "count": 5,
+    "minPrice": 1449000,
+    "maxPrice": 1530000,
+    "avgPrice": 1487800
+  },
+  "TRPIXEL:MELON_DICER_2": {
+    "name": "trpixel:melon_dicer_2",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 3999999,
+    "maxPrice": 3999999,
+    "avgPrice": 3999999
+  },
+  "TRPIXEL:BAMBOO_BLOWPIPE": {
+    "name": "trpixel:bamboo_blowpipe",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 106,
+    "maxPrice": 106,
+    "avgPrice": 106
+  },
+  "TRPIXEL:SUPERIOR_DRAGON_HELMET": {
+    "name": "trpixel:superior_dragon_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 20000000,
+    "maxPrice": 20000000,
+    "avgPrice": 20000000
+  },
+  "TRPIXEL:SUPERIOR_DRAGON_BOOTS": {
+    "name": "trpixel:superior_dragon_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 15000000,
+    "maxPrice": 20000000,
+    "avgPrice": 17500000
+  },
+  "TRPIXEL:STRONG_DRAGON_HELMET": {
+    "name": "trpixel:strong_dragon_helmet",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 700000,
+    "maxPrice": 1100000,
+    "avgPrice": 866333
+  },
+  "TRPIXEL:RED_CLAW_RING": {
+    "name": "trpixel:red_claw_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 4400000,
+    "maxPrice": 4400000,
+    "avgPrice": 4400000
+  },
+  "TRPIXEL:STRONG_DRAGON_LEGGINGS": {
+    "name": "trpixel:strong_dragon_leggings",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 980000,
+    "maxPrice": 1500000,
+    "avgPrice": 1144750
+  },
+  "TRPIXEL:REAPER_MASK": {
+    "name": "trpixel:reaper_mask",
+    "category": "ARMORS",
+    "count": 6,
+    "minPrice": 17000000,
+    "maxPrice": 18000000,
+    "avgPrice": 17625000
+  },
+  "TRPIXEL:REAPER_CHESTPLATE": {
+    "name": "trpixel:reaper_chestplate",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 16999999,
+    "maxPrice": 19000000,
+    "avgPrice": 17833333
+  },
+  "TRPIXEL:REAPER_BOOTS": {
+    "name": "trpixel:reaper_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 15499999,
+    "maxPrice": 18000000,
+    "avgPrice": 16750000
+  },
+  "TRPIXEL:PET_AUGMENT_EXP_SHARE": {
+    "name": "trpixel:pet_augment_exp_share",
+    "category": "PETS",
+    "count": 4,
+    "minPrice": 750000,
+    "maxPrice": 1250000,
+    "avgPrice": 999750
+  },
+  "TRPIXEL:PERMAFROST_HELMET": {
+    "name": "trpixel:permafrost_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 33000000,
+    "maxPrice": 33000000,
+    "avgPrice": 33000000
+  },
+  "TRPIXEL:GRIZZLY_BAIT": {
+    "name": "trpixel:grizzly_bait",
+    "category": "MISCELLANEOUS",
+    "count": 3,
+    "minPrice": 1899000,
+    "maxPrice": 2000000,
+    "avgPrice": 1933000
+  },
+  "TRPIXEL:ZOMBIE_LEGGINGS": {
+    "name": "trpixel:zombie_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 600000,
+    "maxPrice": 700000,
+    "avgPrice": 650000
+  },
+  "TRPIXEL:TALISMAN_OF_COINS": {
+    "name": "trpixel:talisman_of_coins",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 135000,
+    "maxPrice": 135000,
+    "avgPrice": 135000
+  },
+  "TRPIXEL:BAMBOORANG": {
+    "name": "trpixel:bamboorang",
+    "category": "TOOLS",
+    "count": 15,
+    "minPrice": 385000,
+    "maxPrice": 400000,
+    "avgPrice": 399000
+  },
+  "TRPIXEL:MASTIFF_BOOTS": {
+    "name": "trpixel:mastiff_boots",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 1500000,
+    "maxPrice": 2999999,
+    "avgPrice": 2000000
+  },
+  "TRPIXEL:MASTIFF_CHESTPLATE": {
+    "name": "trpixel:mastiff_chestplate",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 1500000,
+    "maxPrice": 2200000,
+    "avgPrice": 1900000
+  },
+  "TRPIXEL:MASTIFF_LEGGINGS": {
+    "name": "trpixel:mastiff_leggings",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 1500000,
+    "maxPrice": 2000000,
+    "avgPrice": 1800000
+  },
+  "TRPIXEL:OLD_DRAGON_BOOTS": {
+    "name": "trpixel:old_dragon_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 300000,
+    "maxPrice": 1150000,
+    "avgPrice": 725000
+  },
+  "TRPIXEL:RANCHER_BOOTS": {
+    "name": "trpixel:rancher_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4900000,
+    "maxPrice": 4900000,
+    "avgPrice": 4900000
+  },
+  "TRPIXEL:RED_PANDA_PET_SKIN": {
+    "name": "trpixel:red_panda_pet_skin",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 11999000,
+    "maxPrice": 11999000,
+    "avgPrice": 11999000
+  },
+  "TRPIXEL:PANDA_PET": {
+    "name": "trpixel:panda_pet",
+    "category": "PETS",
+    "count": 4,
+    "minPrice": 1000000,
+    "maxPrice": 3000000,
+    "avgPrice": 1750000
+  },
+  "TRPIXEL:TELEPORT_PAD": {
+    "name": "trpixel:teleport_pad",
+    "category": "COSMETICS",
+    "count": 2,
+    "minPrice": 12499000,
+    "maxPrice": 12500000,
+    "avgPrice": 12499500
+  },
+  "TRPIXEL:SPIDER_PET": {
+    "name": "trpixel:spider_pet",
+    "category": "PETS",
+    "count": 9,
+    "minPrice": 1399999,
+    "maxPrice": 3000000,
+    "avgPrice": 1577777
+  },
+  "TRPIXEL:SHINY_ORB": {
+    "name": "trpixel:shiny_orb",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 103,
+    "maxPrice": 103,
+    "avgPrice": 103
+  },
+  "TRPIXEL:BAMBOO_RING": {
+    "name": "trpixel:bamboo_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 145000,
+    "maxPrice": 145000,
+    "avgPrice": 145000
+  },
+  "TRPIXEL:LAVA_TALISMAN": {
+    "name": "trpixel:lava_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 145000,
+    "maxPrice": 145000,
+    "avgPrice": 145000
+  },
+  "TRPIXEL:NIGHT_VISION_CHARM": {
+    "name": "trpixel:night_vision_charm",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 79999,
+    "maxPrice": 79999,
+    "avgPrice": 79999
+  },
+  "TRPIXEL:PERSONAL_DELETOR_7000": {
+    "name": "trpixel:personal_deletor_7000",
+    "category": "ACCESSORIES",
+    "count": 5,
+    "minPrice": 3399999,
+    "maxPrice": 3845000,
+    "avgPrice": 3529000
+  },
+  "TRPIXEL:SUGAR_CANE_HARVESTER_2": {
+    "name": "trpixel:sugar_cane_harvester_2",
+    "category": "TOOLS",
+    "count": 2,
+    "minPrice": 6500000,
+    "maxPrice": 7000000,
+    "avgPrice": 6750000
+  },
+  "TRPIXEL:WISE_DRAGON_CHESTPLATE": {
+    "name": "trpixel:wise_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 998000,
+    "maxPrice": 1000000,
+    "avgPrice": 998750
+  },
+  "TRPIXEL:EASTER_BUNNY_RABBIT_PET_SKIN": {
+    "name": "trpixel:easter_bunny_rabbit_pet_skin",
+    "category": "COSMETICS",
+    "count": 2,
+    "minPrice": 26000000,
+    "maxPrice": 28000000,
+    "avgPrice": 27000000
+  },
+  "TRPIXEL:DAYFREEZER": {
+    "name": "trpixel:dayfreezer",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 15000000,
+    "maxPrice": 16666000,
+    "avgPrice": 15833000
+  },
+  "TRPIXEL:PIGMAN_PET": {
+    "name": "trpixel:pigman_pet",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 4899000,
+    "maxPrice": 4899000,
+    "avgPrice": 4899000
+  },
+  "TRPIXEL:OLD_DRAGON_HELMET": {
+    "name": "trpixel:old_dragon_helmet",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 500000,
+    "maxPrice": 1200000,
+    "avgPrice": 766333
+  },
+  "TRPIXEL:GOLDEN_FEATHER_BOOTS": {
+    "name": "trpixel:golden_feather_boots",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 9100000,
+    "maxPrice": 9234000,
+    "avgPrice": 9167000
+  },
+  "TRPIXEL:TREECAPITATOR": {
+    "name": "trpixel:treecapitator",
+    "category": "TOOLS",
+    "count": 4,
+    "minPrice": 1580000,
+    "maxPrice": 3000000,
+    "avgPrice": 1994500
+  },
+  "MINECRAFT:IRON_SWORD": {
+    "name": "minecraft:iron_sword",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 2600,
+    "maxPrice": 2600,
+    "avgPrice": 2600
+  },
+  "TRPIXEL:FROZEN_SCYTHE": {
+    "name": "trpixel:frozen_scythe",
+    "category": "WEAPONS",
+    "count": 3,
+    "minPrice": 3399000,
+    "maxPrice": 4000000,
+    "avgPrice": 3799666
+  },
+  "TRPIXEL:MASTIFF_CROWN": {
+    "name": "trpixel:mastiff_crown",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 1500000,
+    "maxPrice": 1798000,
+    "avgPrice": 1649000
+  },
+  "TRPIXEL:GROWTH_LEGGINGS": {
+    "name": "trpixel:growth_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 450000,
+    "maxPrice": 450000,
+    "avgPrice": 450000
+  },
+  "TRPIXEL:CANDY_RELIC": {
+    "name": "trpixel:candy_relic",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 40000000,
+    "maxPrice": 40000000,
+    "avgPrice": 40000000
+  },
+  "TRPIXEL:PET_AUGMENT_FARMING_EXP_BOOST_40": {
+    "name": "trpixel:pet_augment_farming_exp_boost_40",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 875000,
+    "maxPrice": 875000,
+    "avgPrice": 875000
+  },
+  "TRPIXEL:ORNATE_ZOMBIE_SWORD": {
+    "name": "trpixel:ornate_zombie_sword",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 500000,
+    "maxPrice": 750000,
+    "avgPrice": 625000
+  },
+  "TRPIXEL:MINE_AFFINITY_TALISMAN": {
+    "name": "trpixel:mine_affinity_talisman",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 99999,
+    "maxPrice": 349000,
+    "avgPrice": 224500
+  },
+  "TRPIXEL:EXPLOSIVE_BOW": {
+    "name": "trpixel:explosive_bow",
+    "category": "WEAPONS",
+    "count": 4,
+    "minPrice": 1000000,
+    "maxPrice": 1000000,
+    "avgPrice": 1000000
+  },
+  "TRPIXEL:WAND_OF_RESTORATION": {
+    "name": "trpixel:wand_of_restoration",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 2999999,
+    "maxPrice": 3999999,
+    "avgPrice": 3499999
+  },
+  "TRPIXEL:SHAMAN_SWORD": {
+    "name": "trpixel:shaman_sword",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 1200000,
+    "maxPrice": 2000000,
+    "avgPrice": 1600000
+  },
+  "TRPIXEL:REAPER_LEGGINGS": {
+    "name": "trpixel:reaper_leggings",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 16200000,
+    "maxPrice": 25550000,
+    "avgPrice": 19416666
+  },
+  "TRPIXEL:SCYTHE_BLADE": {
+    "name": "trpixel:scythe_blade",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 41000000,
+    "maxPrice": 41000000,
+    "avgPrice": 41000000
+  },
+  "TRPIXEL:GIRAFFE_PET": {
+    "name": "trpixel:giraffe_pet",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 13999000,
+    "maxPrice": 13999000,
+    "avgPrice": 13999000
+  },
+  "TRPIXEL:INTIMIDATION_ARTIFACT": {
+    "name": "trpixel:intimidation_artifact",
+    "category": "ACCESSORIES",
+    "count": 4,
+    "minPrice": 7950000,
+    "maxPrice": 8499000,
+    "avgPrice": 8099750
+  },
+  "TRPIXEL:BAT_ARTIFACT": {
+    "name": "trpixel:bat_artifact",
+    "category": "ACCESSORIES",
+    "count": 4,
+    "minPrice": 5999000,
+    "maxPrice": 6399000,
+    "avgPrice": 6136750
+  },
+  "TRPIXEL:BAT_PERSON_ARTIFACT": {
+    "name": "trpixel:bat_person_artifact",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 39999000,
+    "maxPrice": 39999000,
+    "avgPrice": 39999000
+  },
+  "TRPIXEL:NEW_YEAR_CAKE_BAG": {
+    "name": "trpixel:new_year_cake_bag",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 485000,
+    "maxPrice": 500000,
+    "avgPrice": 494667
+  },
+  "TRPIXEL:PROMISING_AXE": {
+    "name": "trpixel:promising_axe",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 18000,
+    "maxPrice": 18000,
+    "avgPrice": 18000
+  },
+  "TRPIXEL:FANCY_TUXEDO_BOOTS": {
+    "name": "trpixel:fancy_tuxedo_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 3999999,
+    "maxPrice": 3999999,
+    "avgPrice": 3999999
+  },
+  "TRPIXEL:FARMIONAIRE_RING": {
+    "name": "trpixel:farmionaire_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 3699999,
+    "maxPrice": 3699999,
+    "avgPrice": 3699999
+  },
+  "TRPIXEL:OBSIDIAN_CHESTPLATE": {
+    "name": "trpixel:obsidian_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 190000,
+    "maxPrice": 190000,
+    "avgPrice": 190000
+  },
+  "TRPIXEL:CHEAP_TUXEDO_CHESTPLATE": {
+    "name": "trpixel:cheap_tuxedo_chestplate",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 750000,
+    "maxPrice": 5300000,
+    "avgPrice": 3025000
+  },
+  "TRPIXEL:BLOOD_GOD_CREST": {
+    "name": "trpixel:blood_god_crest",
+    "category": "ACCESSORIES",
+    "count": 8,
+    "minPrice": 1025000,
+    "maxPrice": 4000000,
+    "avgPrice": 2027750
+  },
+  "TRPIXEL:SKYCANVAS_ITEM": {
+    "name": "trpixel:skycanvas_item",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 99000000,
+    "maxPrice": 99000000,
+    "avgPrice": 99000000
+  },
+  "TRPIXEL:TIER_BOOST_CORE": {
+    "name": "trpixel:tier_boost_core",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 115000000,
+    "maxPrice": 115000000,
+    "avgPrice": 115000000
+  },
+  "TRPIXEL:MELON_DICER_3": {
+    "name": "trpixel:melon_dicer_3",
+    "category": "TOOLS",
+    "count": 3,
+    "minPrice": 8999999,
+    "maxPrice": 15000000,
+    "avgPrice": 11666666
+  },
+  "TRPIXEL:HYDRO_BURST": {
+    "name": "trpixel:hydro_burst",
+    "category": "TOOLS",
+    "count": 3,
+    "minPrice": 400000,
+    "maxPrice": 425000,
+    "avgPrice": 416667
+  },
+  "TRPIXEL:EMERALD_BLADE": {
+    "name": "trpixel:emerald_blade",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 1200000,
+    "maxPrice": 1200000,
+    "avgPrice": 1200000
+  },
+  "TRPIXEL:MELON_CHESTPLATE": {
+    "name": "trpixel:melon_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 1399999,
+    "maxPrice": 1399999,
+    "avgPrice": 1399999
+  },
+  "TRPIXEL:MELON_HELMET": {
+    "name": "trpixel:melon_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 775000,
+    "maxPrice": 775000,
+    "avgPrice": 775000
+  },
+  "TRPIXEL:BEETROOT_HARVESTER_3": {
+    "name": "trpixel:beetroot_harvester_3",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 40000000,
+    "maxPrice": 40000000,
+    "avgPrice": 40000000
+  },
+  "TRPIXEL:PET_AUGMENT_COMBAT_EXP_BOOST_40": {
+    "name": "trpixel:pet_augment_combat_exp_boost_40",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 6000000,
+    "maxPrice": 6000000,
+    "avgPrice": 6000000
+  },
+  "TRPIXEL:CROPIE_TALISMAN": {
+    "name": "trpixel:cropie_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 8999000,
+    "maxPrice": 8999000,
+    "avgPrice": 8999000
+  },
+  "TRPIXEL:FROZEN_BLAZE_LEGGINGS": {
+    "name": "trpixel:frozen_blaze_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 5500000,
+    "maxPrice": 5500000,
+    "avgPrice": 5500000
+  },
+  "TRPIXEL:FROZEN_BLAZE_CHESTPLATE": {
+    "name": "trpixel:frozen_blaze_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 6000000,
+    "maxPrice": 6000000,
+    "avgPrice": 6000000
+  },
+  "TRPIXEL:PET_AUGMENT_COMBAT_EXP_BOOST_50": {
+    "name": "trpixel:pet_augment_combat_exp_boost_50",
+    "category": "PETS",
+    "count": 2,
+    "minPrice": 15000000,
+    "maxPrice": 16000000,
+    "avgPrice": 15500000
+  },
+  "TRPIXEL:FROZEN_BLAZE_BOOTS": {
+    "name": "trpixel:frozen_blaze_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4300000,
+    "maxPrice": 4300000,
+    "avgPrice": 4300000
+  },
+  "TRPIXEL:SQUASH_CHESTPLATE": {
+    "name": "trpixel:squash_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 7500000,
+    "maxPrice": 7500000,
+    "avgPrice": 7500000
+  },
+  "TRPIXEL:SQUASH_BOOTS": {
+    "name": "trpixel:squash_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 7500000,
+    "maxPrice": 7500000,
+    "avgPrice": 7500000
+  },
+  "TRPIXEL:SQUASH_HELMET": {
+    "name": "trpixel:squash_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 7500000,
+    "maxPrice": 7500000,
+    "avgPrice": 7500000
+  },
+  "TRPIXEL:SQUASH_LEGGINGS": {
+    "name": "trpixel:squash_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 7500000,
+    "maxPrice": 7500000,
+    "avgPrice": 7500000
+  },
+  "TRPIXEL:SUGAR_CANE_HARVESTER_3": {
+    "name": "trpixel:sugar_cane_harvester_3",
+    "category": "TOOLS",
+    "count": 3,
+    "minPrice": 25000000,
+    "maxPrice": 29000000,
+    "avgPrice": 27333333
+  },
+  "TRPIXEL:EDIBLE_MACE": {
+    "name": "trpixel:edible_mace",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 4000000,
+    "maxPrice": 4000000,
+    "avgPrice": 4000000
+  },
+  "TRPIXEL:BAT_RING": {
+    "name": "trpixel:bat_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 2500000,
+    "maxPrice": 2500000,
+    "avgPrice": 2500000
+  },
+  "TRPIXEL:GOLEM_ARMOR_LEGGINGS": {
+    "name": "trpixel:golem_armor_leggings",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2050,
+    "maxPrice": 350000,
+    "avgPrice": 176025
+  },
+  "TRPIXEL:GOLEM_ARMOR_BOOTS": {
+    "name": "trpixel:golem_armor_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 300000,
+    "maxPrice": 300000,
+    "avgPrice": 300000
+  },
+  "TRPIXEL:GOLEM_ARMOR_HELMET": {
+    "name": "trpixel:golem_armor_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 2000,
+    "maxPrice": 300000,
+    "avgPrice": 151000
+  },
+  "TRPIXEL:PUMPKIN_DICER_3": {
+    "name": "trpixel:pumpkin_dicer_3",
+    "category": "TOOLS",
+    "count": 2,
+    "minPrice": 13500000,
+    "maxPrice": 13999999,
+    "avgPrice": 13750000
+  },
+  "TRPIXEL:FARMER_BOOTS": {
+    "name": "trpixel:farmer_boots",
+    "category": "ARMORS",
+    "count": 9,
+    "minPrice": 500000,
+    "maxPrice": 550000,
+    "avgPrice": 511111
+  },
+  "TRPIXEL:PIGMAN_SWORD": {
+    "name": "trpixel:pigman_sword",
+    "category": "WEAPONS",
+    "count": 7,
+    "minPrice": 6000000,
+    "maxPrice": 8999999,
+    "avgPrice": 8399857
+  },
+  "TRPIXEL:SUPERIOR_DRAGON_CHESTPLATE": {
+    "name": "trpixel:superior_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 26000000,
+    "maxPrice": 26000000,
+    "avgPrice": 26000000
+  },
+  "TRPIXEL:SUPERIOR_DRAGON_LEGGINGS": {
+    "name": "trpixel:superior_dragon_leggings",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 14000000,
+    "maxPrice": 23000000,
+    "avgPrice": 18999667
+  },
+  "TRPIXEL:CHEAP_TUXEDO_BOOTS": {
+    "name": "trpixel:cheap_tuxedo_boots",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 650000,
+    "maxPrice": 2300000,
+    "avgPrice": 1475000
+  },
+  "TRPIXEL:CHEAP_TUXEDO_LEGGINGS": {
+    "name": "trpixel:cheap_tuxedo_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 4300000,
+    "maxPrice": 4300000,
+    "avgPrice": 4300000
+  },
+  "TRPIXEL:VOID_SWORD": {
+    "name": "trpixel:void_sword",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 12000,
+    "maxPrice": 700000,
+    "avgPrice": 356000
+  },
+  "TRPIXEL:WOLF_PET": {
+    "name": "trpixel:wolf_pet",
+    "category": "PETS",
+    "count": 3,
+    "minPrice": 3990000,
+    "maxPrice": 6100000,
+    "avgPrice": 4696333
+  },
+  "TRPIXEL:WISE_DRAGON_HELMET": {
+    "name": "trpixel:wise_dragon_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 1000000,
+    "maxPrice": 1200000,
+    "avgPrice": 1100000
+  },
+  "TRPIXEL:FARM_ARMOR_HELMET": {
+    "name": "trpixel:farm_armor_helmet",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 199999,
+    "maxPrice": 200000,
+    "avgPrice": 200000
+  },
+  "TRPIXEL:SKELETON_TALISMAN": {
+    "name": "trpixel:skeleton_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 100000,
+    "maxPrice": 100000,
+    "avgPrice": 100000
+  },
+  "TRPIXEL:HARDENED_DIAMOND_LEGGINGS": {
+    "name": "trpixel:hardened_diamond_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 9999,
+    "maxPrice": 9999,
+    "avgPrice": 9999
+  },
+  "TRPIXEL:WOLF_RING": {
+    "name": "trpixel:wolf_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 8500000,
+    "maxPrice": 8500000,
+    "avgPrice": 8500000
+  },
+  "TRPIXEL:SKELETON_PET": {
+    "name": "trpixel:skeleton_pet",
+    "category": "PETS",
+    "count": 2,
+    "minPrice": 2700000,
+    "maxPrice": 4667000,
+    "avgPrice": 3683500
+  },
+  "TRPIXEL:SPEED_TALISMAN": {
+    "name": "trpixel:speed_talisman",
+    "category": "ACCESSORIES",
+    "count": 5,
+    "minPrice": 85000,
+    "maxPrice": 85000,
+    "avgPrice": 85000
+  },
+  "TRPIXEL:UNSTABLE_DRAGON_HELMET": {
+    "name": "trpixel:unstable_dragon_helmet",
+    "category": "ARMORS",
+    "count": 3,
+    "minPrice": 700000,
+    "maxPrice": 1000000,
+    "avgPrice": 899667
+  },
+  "TRPIXEL:UNSTABLE_DRAGON_LEGGINGS": {
+    "name": "trpixel:unstable_dragon_leggings",
+    "category": "ARMORS",
+    "count": 4,
+    "minPrice": 798000,
+    "maxPrice": 1000000,
+    "avgPrice": 874250
+  },
+  "TRPIXEL:PET_AUGMENT_TIER_BOOST": {
+    "name": "trpixel:pet_augment_tier_boost",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 99000000,
+    "maxPrice": 99000000,
+    "avgPrice": 99000000
+  },
+  "TRPIXEL:CLEAVER": {
+    "name": "trpixel:cleaver",
+    "category": "WEAPONS",
+    "count": 19,
+    "minPrice": 10000,
+    "maxPrice": 50000,
+    "avgPrice": 12105
+  },
+  "TRPIXEL:SHOWCASE_BLOCK_ITEM": {
+    "name": "trpixel:showcase_block_item",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 7670000,
+    "maxPrice": 7670000,
+    "avgPrice": 7670000
+  },
+  "TRPIXEL:UNSTABLE_DRAGON_CHESTPLATE": {
+    "name": "trpixel:unstable_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 2,
+    "minPrice": 999000,
+    "maxPrice": 1000000,
+    "avgPrice": 999500
+  },
+  "TRPIXEL:STRONG_DRAGON_CHESTPLATE": {
+    "name": "trpixel:strong_dragon_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 999000,
+    "maxPrice": 999000,
+    "avgPrice": 999000
+  },
+  "TRPIXEL:STRONG_DRAGON_BOOTS": {
+    "name": "trpixel:strong_dragon_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 999000,
+    "maxPrice": 999000,
+    "avgPrice": 999000
+  },
+  "TRPIXEL:MINION_BACKPACK_UPGRADE_KIT": {
+    "name": "trpixel:minion_backpack_upgrade_kit",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 5999000,
+    "maxPrice": 5999000,
+    "avgPrice": 5999000
+  },
+  "TRPIXEL:GRAVITY_TALISMAN": {
+    "name": "trpixel:gravity_talisman",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 99999,
+    "maxPrice": 100000,
+    "avgPrice": 100000
+  },
+  "TRPIXEL:ZOMBIE_TALISMAN": {
+    "name": "trpixel:zombie_talisman",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 99998,
+    "maxPrice": 99999,
+    "avgPrice": 99999
+  },
+  "TRPIXEL:VILLAGE_AFFINITY_TALISMAN": {
+    "name": "trpixel:village_affinity_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 99999,
+    "maxPrice": 99999,
+    "avgPrice": 99999
+  },
+  "TRPIXEL:INTIMIDATION_TALISMAN": {
+    "name": "trpixel:intimidation_talisman",
+    "category": "ACCESSORIES",
+    "count": 3,
+    "minPrice": 60000,
+    "maxPrice": 199999,
+    "avgPrice": 153333
+  },
+  "TRPIXEL:WHEAT_HARVESTER": {
+    "name": "trpixel:wheat_harvester",
+    "category": "TOOLS",
+    "count": 2,
+    "minPrice": 100000,
+    "maxPrice": 8599999,
+    "avgPrice": 4350000
+  },
+  "TRPIXEL:GOLEM_PET": {
+    "name": "trpixel:golem_pet",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 19500000,
+    "maxPrice": 19500000,
+    "avgPrice": 19500000
+  },
+  "TRPIXEL:ZOMBIE_CHESTPLATE": {
+    "name": "trpixel:zombie_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 900000,
+    "maxPrice": 900000,
+    "avgPrice": 900000
+  },
+  "TRPIXEL:WITHER_SKELETON_PET": {
+    "name": "trpixel:wither_skeleton_pet",
+    "category": "PETS",
+    "count": 2,
+    "minPrice": 700000,
+    "maxPrice": 4500000,
+    "avgPrice": 2600000
+  },
+  "TRPIXEL:GROWTH_HELMET": {
+    "name": "trpixel:growth_helmet",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 400000,
+    "maxPrice": 400000,
+    "avgPrice": 400000
+  },
+  "TRPIXEL:GROWTH_CHESTPLATE": {
+    "name": "trpixel:growth_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 450000,
+    "maxPrice": 450000,
+    "avgPrice": 450000
+  },
+  "TRPIXEL:GROWTH_BOOTS": {
+    "name": "trpixel:growth_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 400000,
+    "maxPrice": 400000,
+    "avgPrice": 400000
+  },
+  "TRPIXEL:HOE_OF_GREAT_TILLING": {
+    "name": "trpixel:hoe_of_great_tilling",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 1000000,
+    "maxPrice": 1000000,
+    "avgPrice": 1000000
+  },
+  "TRPIXEL:LARGE_BLUE_EASTER_EGG": {
+    "name": "trpixel:large_blue_easter_egg",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 5000000,
+    "maxPrice": 5000000,
+    "avgPrice": 5000000
+  },
+  "TRPIXEL:LARGE_GREEN_EASTER_EGG": {
+    "name": "trpixel:large_green_easter_egg",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 5000000,
+    "maxPrice": 5000000,
+    "avgPrice": 5000000
+  },
+  "TRPIXEL:LARGE_YELLOW_EASTER_EGG": {
+    "name": "trpixel:large_yellow_easter_egg",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 5000000,
+    "maxPrice": 5000000,
+    "avgPrice": 5000000
+  },
+  "TRPIXEL:PUMPKIN_DICER": {
+    "name": "trpixel:pumpkin_dicer",
+    "category": "TOOLS",
+    "count": 3,
+    "minPrice": 1500000,
+    "maxPrice": 1500000,
+    "avgPrice": 1500000
+  },
+  "TRPIXEL:RED_CLAW_TALISMAN": {
+    "name": "trpixel:red_claw_talisman",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 1000000,
+    "maxPrice": 1000000,
+    "avgPrice": 1000000
+  },
+  "TRPIXEL:POOCH_SWORD": {
+    "name": "trpixel:pooch_sword",
+    "category": "WEAPONS",
+    "count": 1,
+    "minPrice": 42420000,
+    "maxPrice": 42420000,
+    "avgPrice": 42420000
+  },
+  "TRPIXEL:FARM_ARMOR_CHESTPLATE": {
+    "name": "trpixel:farm_armor_chestplate",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 200000,
+    "maxPrice": 200000,
+    "avgPrice": 200000
+  },
+  "TRPIXEL:FARM_ARMOR_LEGGINGS": {
+    "name": "trpixel:farm_armor_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 200000,
+    "maxPrice": 200000,
+    "avgPrice": 200000
+  },
+  "TRPIXEL:FARM_ARMOR_BOOTS": {
+    "name": "trpixel:farm_armor_boots",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 200000,
+    "maxPrice": 200000,
+    "avgPrice": 200000
+  },
+  "TRPIXEL:ETHEREAL_SCYTHE": {
+    "name": "trpixel:ethereal_scythe",
+    "category": "WEAPONS",
+    "count": 2,
+    "minPrice": 49000000,
+    "maxPrice": 50000000,
+    "avgPrice": 49500000
+  },
+  "TRPIXEL:STONK_PICKAXE": {
+    "name": "trpixel:stonk_pickaxe",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 1325000,
+    "maxPrice": 1325000,
+    "avgPrice": 1325000
+  },
+  "TRPIXEL:FEATHER_RING": {
+    "name": "trpixel:feather_ring",
+    "category": "ACCESSORIES",
+    "count": 2,
+    "minPrice": 60000,
+    "maxPrice": 60000,
+    "avgPrice": 60000
+  },
+  "TRPIXEL:PERSONAL_DELETOR_6000": {
+    "name": "trpixel:personal_deletor_6000",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 2500000,
+    "maxPrice": 2500000,
+    "avgPrice": 2500000
+  },
+  "TRPIXEL:SPEED_RING": {
+    "name": "trpixel:speed_ring",
+    "category": "ACCESSORIES",
+    "count": 1,
+    "minPrice": 250000,
+    "maxPrice": 250000,
+    "avgPrice": 250000
+  },
+  "TRPIXEL:SLIME_HAT": {
+    "name": "trpixel:slime_hat",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 1,
+    "maxPrice": 1,
+    "avgPrice": 1
+  },
+  "TRPIXEL:CHERRY_BLOSSOM_PANDA_PET_SKIN": {
+    "name": "trpixel:cherry_blossom_panda_pet_skin",
+    "category": "COSMETICS",
+    "count": 1,
+    "minPrice": 25000000,
+    "maxPrice": 25000000,
+    "avgPrice": 25000000
+  },
+  "TRPIXEL:PROTECTOR_DRAGON_LEGGINGS": {
+    "name": "trpixel:protector_dragon_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 700000,
+    "maxPrice": 700000,
+    "avgPrice": 700000
+  },
+  "TRPIXEL:CROPIE_LEGGINGS": {
+    "name": "trpixel:cropie_leggings",
+    "category": "ARMORS",
+    "count": 1,
+    "minPrice": 3000000,
+    "maxPrice": 3000000,
+    "avgPrice": 3000000
+  },
+  "TRPIXEL:HOE_OF_GREATER_TILLING": {
+    "name": "trpixel:hoe_of_greater_tilling",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 850000,
+    "maxPrice": 850000,
+    "avgPrice": 850000
+  },
+  "TRPIXEL:PUMPKIN_DICER_2": {
+    "name": "trpixel:pumpkin_dicer_2",
+    "category": "TOOLS",
+    "count": 1,
+    "minPrice": 4999999,
+    "maxPrice": 4999999,
+    "avgPrice": 4999999
+  },
+  "TRPIXEL:OVERFLUX_POWER_ORB": {
+    "name": "trpixel:overflux_power_orb",
+    "category": "MISCELLANEOUS",
+    "count": 1,
+    "minPrice": 38000000,
+    "maxPrice": 38000000,
+    "avgPrice": 38000000
+  },
+  "TRPIXEL:ENDERMITE_PET": {
+    "name": "trpixel:endermite_pet",
+    "category": "PETS",
+    "count": 1,
+    "minPrice": 3000000,
+    "maxPrice": 3000000,
+    "avgPrice": 3000000
+  }
+}

@@ -1,5 +1,4 @@
 import { chromium } from 'playwright';
-import { spawn } from 'child_process';
 import fs from 'fs';
 
 async function main() {
@@ -7,62 +6,63 @@ async function main() {
     fs.mkdirSync('evidence', { recursive: true });
   }
 
-  let server = null;
-  try {
-    const res = await fetch('http://localhost:5173');
-    if (res.ok) console.log('Using already running dev server on http://localhost:5173');
-  } catch {
-    console.log('Starting Vite preview server...');
-    server = spawn('npx', ['vite', 'preview', '--port', '5173'], {
-      stdio: 'pipe',
-      shell: true
-    });
-    await new Promise(resolve => setTimeout(resolve, 2500));
-  }
-
-  console.log('Launching Playwright Chromium...');
   const browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 950 } });
 
   try {
-    console.log('Navigating to http://localhost:5173...');
     await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
 
-    // FEAT-007: Visual Hero & Stats Overview
-    console.log('Capturing FEAT-007-visual-hero.png...');
+    // 1. Hero & Stats Overview
     await page.screenshot({
       path: 'evidence/FEAT-007-visual-hero.png',
       fullPage: false
     });
 
-    // FEAT-008: Grid & Filter System - Click "Missing" filter pill
-    console.log('Clicking Missing filter pill...');
-    const missingBtn = page.locator('button:has-text("❌ Missing")');
-    await missingBtn.click();
+    // 2. Scroll to Grid to see accessories, icons, and pricing badges
+    await page.evaluate(() => window.scrollTo(0, 480));
     await page.waitForTimeout(500);
 
-    console.log('Capturing FEAT-008-grid-filter.png...');
     await page.screenshot({
       path: 'evidence/FEAT-008-grid-filter.png',
       fullPage: false
     });
 
-    // FEAT-009: Accessory Card & Interactive Detail Modal - Click first visible card
-    console.log('Clicking accessory card to open modal...');
-    const firstCard = page.locator('.accessory-card').first();
-    await firstCard.click();
-    await page.waitForTimeout(600);
+    // 3. Search for Feather
+    const searchInput = page.locator('input[placeholder*="Search"]');
+    await searchInput.fill('Feather');
+    await page.waitForTimeout(500);
 
-    console.log('Capturing FEAT-009-modal-details.png...');
-    await page.screenshot({
-      path: 'evidence/FEAT-009-modal-details.png',
-      fullPage: false
-    });
+    // Click on Golden Feather Boots
+    const bootsCard = page.locator('.accessory-card:has-text("Golden Feather Boots")');
+    if (await bootsCard.count() > 0) {
+      await bootsCard.first().click();
+      await page.waitForTimeout(600);
 
-    console.log('Screenshots captured successfully!');
+      await page.screenshot({
+        path: 'evidence/FEAT-010-feather-boots-pricing.png',
+        fullPage: false
+      });
+
+      const closeBtn = page.locator('.modal-close-btn');
+      await closeBtn.click();
+      await page.waitForTimeout(400);
+    }
+
+    // 4. Click Feather Artifact
+    const artifactCard = page.locator('.accessory-card:has-text("Feather Artifact")');
+    if (await artifactCard.count() > 0) {
+      await artifactCard.first().click();
+      await page.waitForTimeout(600);
+
+      await page.screenshot({
+        path: 'evidence/FEAT-009-modal-details.png',
+        fullPage: false
+      });
+    }
+
+    console.log('Done capturing grid screenshot!');
   } finally {
     await browser.close();
-    if (server) server.kill();
   }
 }
 

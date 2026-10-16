@@ -11,4 +11,8 @@
 | DEC-007 | Embed mandatory CraftersMC and Minecraft trademark disclaimers | Ensures full compliance with section 1 of the CraftersMC API Usage Policy. |
 | DEC-008 | Scope accessory catalog strictly to active CraftersMC SkyBlock items | Strips non-existent Hypixel Dungeons / Catacombs / Enderman Slayer items (Wither Relic/Artifact, Auto-Recombobulator, Hegemony) to mirror true CraftersMC game state. |
 | DEC-009 | Sync with official CraftersMC Wiki table and incorporate live API key | Added all 85 authentic obtainable accessories across 46 upgrade families, verified live API key for DarkKing0098994, and supported native CraftersMC NBT inventory format. |
-| DEC-010 | Replace legacy Hypixel coin estimations with authentic CraftersMC Wiki obtaining requirements & progression milestones | CraftersMC has no Bazaar/AH coin estimates; accessories are governed strictly by Collections, Quests, Slayers, Drops, and fixed NPC Shop prices (Julia, North, Sky, Zoe). |
+| DEC-010 | Replace legacy Hypixel coin estimations with authentic CraftersMC Wiki obtaining requirements & progression milestones | CraftersMC accessories are governed by Collections, Quests, Slayers, Drops, and NPC Shop prices. |
+| DEC-011 | Download and bundle authentic CraftersMC Wiki pixel-art sprites for all accessories | Replaced generic emojis with official high-resolution wiki item sprites rendered crisply with `image-rendering: pixelated;` and emoji fallback. |
+| DEC-012 | Set Golden Feather Boots as Tier 4 upgrade of Feather Artifact in feather family | Aligns with user specification; computes upgrade MP difference and combines Feather Artifact cost with 64x Enchanted Feathers. |
+| DEC-013 | Integrate live CraftersMC Bazaar material prices & active Auction House endpoints | Computes live craft costs from Bazaar weekly average prices multiplied by material counts, alongside direct active auction min/max/avg ranges. |
+

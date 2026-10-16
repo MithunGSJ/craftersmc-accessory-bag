@@ -1,0 +1,226 @@
+{
+  "feather": {
+    "itemId": "feather",
+    "weeklyAveragePrice": 9.644105263157895,
+    "topBuyPrice": 1.8,
+    "topSellPrice": 30,
+    "avgPrice": 9.64
+  },
+  "enchanted_feather": {
+    "itemId": "enchanted_feather",
+    "weeklyAveragePrice": 402.10603030303196,
+    "topBuyPrice": 349.5000000000033,
+    "topSellPrice": 455.9999999999991,
+    "avgPrice": 402.11
+  },
+  "sugar_cane": {
+    "itemId": "sugar_cane",
+    "weeklyAveragePrice": 45.19559731543625,
+    "topBuyPrice": 7.399999999999995,
+    "topSellPrice": 181.00000000000003,
+    "avgPrice": 45.2
+  },
+  "enchanted_sugar": {
+    "itemId": "enchanted_sugar",
+    "weeklyAveragePrice": 574.4624566929132,
+    "topBuyPrice": 269.9,
+    "topSellPrice": 648.6999999999999,
+    "avgPrice": 574.46
+  },
+  "enchanted_sugar_cane": {
+    "itemId": "enchanted_sugar_cane",
+    "weeklyAveragePrice": 70207.17886614172,
+    "topBuyPrice": 60000.49999999999,
+    "topSellPrice": 70000,
+    "avgPrice": 70207.18
+  },
+  "bamboo": {
+    "itemId": "bamboo",
+    "weeklyAveragePrice": 81.3674920634921,
+    "topBuyPrice": 1,
+    "topSellPrice": 199.50000000000003,
+    "avgPrice": 81.37
+  },
+  "enchanted_bamboo": {
+    "itemId": "enchanted_bamboo",
+    "weeklyAveragePrice": 339.75185815602805,
+    "topBuyPrice": 82.39999999999986,
+    "topSellPrice": 475.79999999999905,
+    "avgPrice": 339.75
+  },
+  "wheat": {
+    "itemId": "wheat",
+    "weeklyAveragePrice": 1.28559375,
+    "topBuyPrice": 1.1,
+    "topSellPrice": 0,
+    "avgPrice": 1.29
+  },
+  "enchanted_bread": {
+    "itemId": "enchanted_bread",
+    "weeklyAveragePrice": 20.300000000000004,
+    "topBuyPrice": 20.300000000000004,
+    "topSellPrice": 49,
+    "avgPrice": 20.3
+  },
+  "pumpkin": {
+    "itemId": "pumpkin",
+    "weeklyAveragePrice": 3.3325357142857146,
+    "topBuyPrice": 2.5000000000000004,
+    "topSellPrice": 15.8,
+    "avgPrice": 3.33
+  },
+  "enchanted_pumpkin": {
+    "itemId": "enchanted_pumpkin",
+    "weeklyAveragePrice": 1617.8083791102483,
+    "topBuyPrice": 1524.499999999996,
+    "topSellPrice": 1698.300000000001,
+    "avgPrice": 1617.81
+  },
+  "potato": {
+    "itemId": "potato",
+    "weeklyAveragePrice": 9.070158730158726,
+    "topBuyPrice": 1.1,
+    "topSellPrice": 297.49999999999943,
+    "avgPrice": 9.07
+  },
+  "enchanted_potato": {
+    "itemId": "enchanted_potato",
+    "weeklyAveragePrice": 296.65356249999985,
+    "topBuyPrice": 201.8999999999999,
+    "topSellPrice": 494.9,
+    "avgPrice": 296.65
+  },
+  "cropie": {
+    "itemId": "cropie",
+    "weeklyAveragePrice": 32001.038871794866,
+    "topBuyPrice": 30000,
+    "topSellPrice": 40292.20000000001,
+    "avgPrice": 32001.04
+  },
+  "squash": {
+    "itemId": "squash",
+    "weeklyAveragePrice": 75692.5370810811,
+    "topBuyPrice": 72029.20000000013,
+    "topSellPrice": 77999.39999999997,
+    "avgPrice": 75692.54
+  },
+  "fermento": {
+    "itemId": "fermento",
+    "weeklyAveragePrice": 420537.13408219174,
+    "topBuyPrice": 350000.29999999993,
+    "topSellPrice": 399999.70000000007,
+    "avgPrice": 420537.13
+  },
+  "oak_log": {
+    "itemId": "oak_log",
+    "weeklyAveragePrice": 4.177500000000002,
+    "topBuyPrice": 3.9000000000000017,
+    "topSellPrice": 10,
+    "avgPrice": 4.18
+  },
+  "enchanted_oak_log": {
+    "itemId": "enchanted_oak_log",
+    "weeklyAveragePrice": 570.8479820627801,
+    "topBuyPrice": 355.50000000000057,
+    "topSellPrice": 640.5999999999997,
+    "avgPrice": 570.85
+  },
+  "emerald": {
+    "itemId": "emerald",
+    "weeklyAveragePrice": 119.22850574712645,
+    "topBuyPrice": 15.999999999999996,
+    "topSellPrice": 199.70000000000002,
+    "avgPrice": 119.23
+  },
+  "enchanted_emerald": {
+    "itemId": "enchanted_emerald",
+    "weeklyAveragePrice": 1204.4107514450877,
+    "topBuyPrice": 1000.7000000000002,
+    "topSellPrice": 1397.700000000002,
+    "avgPrice": 1204.41
+  },
+  "enchanted_emerald_block": {
+    "itemId": "enchanted_emerald_block",
+    "weeklyAveragePrice": 152962.22235897428,
+    "topBuyPrice": 145004.60000000027,
+    "topSellPrice": 159987.59999999934,
+    "avgPrice": 152962.22
+  },
+  "obsidian": {
+    "itemId": "obsidian",
+    "weeklyAveragePrice": 32.61472195121952,
+    "topBuyPrice": 2.1,
+    "topSellPrice": 245.40000000000015,
+    "avgPrice": 32.61
+  },
+  "enchanted_obsidian": {
+    "itemId": "enchanted_obsidian",
+    "weeklyAveragePrice": 1627.1708526522582,
+    "topBuyPrice": 1380.1999999999998,
+    "topSellPrice": 2200,
+    "avgPrice": 1627.17
+  },
+  "lapis_lazuli": {
+    "itemId": "lapis_lazuli",
+    "weeklyAveragePrice": 38.73647457627123,
+    "topBuyPrice": 1.0999999999999999,
+    "topSellPrice": 97.90000000000012,
+    "avgPrice": 38.74
+  },
+  "enchanted_lapis_lazuli": {
+    "itemId": "enchanted_lapis_lazuli",
+    "weeklyAveragePrice": 485.5786912442397,
+    "topBuyPrice": 359.70000000000005,
+    "topSellPrice": 679.2999999999998,
+    "avgPrice": 485.58
+  },
+  "redstone": {
+    "itemId": "redstone",
+    "weeklyAveragePrice": 5.787838926174497,
+    "topBuyPrice": 4.1,
+    "topSellPrice": 15,
+    "avgPrice": 5.79
+  },
+  "enchanted_redstone_block": {
+    "itemId": "enchanted_redstone_block",
+    "weeklyAveragePrice": 27874.115679083083,
+    "topBuyPrice": 25608.799999999886,
+    "topSellPrice": 27996.300000000054,
+    "avgPrice": 27874.12
+  },
+  "iron_ingot": {
+    "itemId": "iron_ingot",
+    "weeklyAveragePrice": 63.67412345679013,
+    "topBuyPrice": 5,
+    "topSellPrice": 98,
+    "avgPrice": 63.67
+  },
+  "golden_tooth": {
+    "itemId": "golden_tooth",
+    "weeklyAveragePrice": 218590.0502556391,
+    "topBuyPrice": 170003.6000000002,
+    "topSellPrice": 229997.59999999998,
+    "avgPrice": 218590.05
+  },
+  "green_candy": {
+    "itemId": "green_candy",
+    "weeklyAveragePrice": 3774.354373983738,
+    "topBuyPrice": 3026.299999999999,
+    "topSellPrice": 4994.799999999999,
+    "avgPrice": 3774.35
+  },
+  "purple_candy": {
+    "itemId": "purple_candy",
+    "weeklyAveragePrice": 28605.111247386758,
+    "topBuyPrice": 20002.499999999964,
+    "topSellPrice": 28996.500000000007,
+    "avgPrice": 28605.11
+  },
+  "enchanted_iron_ingot": {
+    "itemId": "enchanted_iron_ingot",
+    "weeklyAveragePrice": 1321.8769029702976,
+    "topBuyPrice": 1006.6000000000008,
+    "topSellPrice": 1589.3000000000006,
+    "avgPrice": 1321.88
+  }
+}

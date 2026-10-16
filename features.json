@@ -55,9 +55,9 @@
   },
   {
     "id": "FEAT-010",
-    "description": "Smart MP Optimization & Upgrade Recommendations: Intelligent recommendation panel displaying the easiest and highest value missing accessories to upgrade for maximum MP gain.",
+    "description": "Smart MP Optimization & Upgrade Recommendations: Intelligent recommendation panel displaying the easiest and highest value missing accessories to upgrade for maximum MP gain, with live Bazaar craft cost and Auction pricing.",
     "status": "passing",
-    "evidence": "evidence/FEAT-010-recommendations.txt"
+    "evidence": "evidence/FEAT-010-feather-boots-pricing.png"
   },
   {
     "id": "FEAT-011",
