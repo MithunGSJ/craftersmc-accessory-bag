@@ -97,6 +97,7 @@ a:hover {
   letter-spacing: 0.5px;
   background: linear-gradient(135deg, #FFFFFF 20%, #FFAA00 70%, #FF55FF 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 12px;
 }
