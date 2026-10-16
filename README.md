@@ -7,22 +7,27 @@ A web application designed for CraftersMC players to audit their SkyBlock access
 ## One-Command Run Instructions
 
 ### 1. Install Dependencies & Start Dev Server
+
 ```bash
 npm install && npm run dev
 ```
+
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### 2. Build & Preview Production Bundle
+
 ```bash
 npm run build && npm run preview
 ```
 
 ### 3. Run Automated Test Suite
+
 ```bash
 npm run test
 ```
 
 ### 4. Run End-to-End Verification Script
+
 ```bash
 npm run verify
 ```
@@ -100,6 +105,7 @@ graph TD
 ## Policy Compliance Summary
 
 This application complies with the **CraftersMC Public API Usage Policy**:
+
 - **Mandatory Disclaimer:** Displayed across headers and footers stating non-affiliation with CraftersMC, TEON CREATIVE, Minecraft, Mojang, Microsoft, or Xbox.
 - **Zero OAuth:** No OAuth login flows (Discord/Xbox) required or used.
 - **No Background Tracking:** Lookups are on-demand only; no continuous polling or session tracking.
@@ -154,4 +160,3 @@ craftersmc-accessory-bag/
 ├── verify.js              # One-command verification runner
 └── package.json           # Project manifest and scripts
 ```
-

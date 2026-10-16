@@ -17,6 +17,7 @@ This directory contains automated verification scripts, test runners, and one-ti
 ## One-Time Scraper & Data Generation Tools
 
 The `.cjs` scripts in this folder were used during initial project bootstrap to extract and cross-reference accessory statistics, crafting recipes, and sprite assets from the official CraftersMC Wiki and Public API endpoints:
+
 - `downloadAllWikiIcons.cjs` / `downloadIconsViaPlaywright.cjs`: Extracted official sprite PNGs into `public/icons/accessories/`.
 - `scanAccessoryAuctions.cjs` / `recalculateAuctionStats.cjs`: Pulled active CraftersMC Auction House listings with BIN outlier filtering into `src/data/pricingSnapshot.json`.
 - `testBazaarDetails.cjs`: Validated CraftersMC Bazaar API material costs.
