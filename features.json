@@ -56,7 +56,7 @@
   {
     "id": "FEAT-010",
     "description": "Smart MP Optimization & Upgrade Recommendations: Intelligent recommendation panel displaying the easiest and highest value missing accessories to upgrade for maximum MP gain.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-010-recommendations.txt"
   },
   {
