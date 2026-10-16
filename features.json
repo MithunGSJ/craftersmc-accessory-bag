@@ -1,0 +1,74 @@
+[
+  {
+    "id": "FEAT-001",
+    "description": "Core Setup & Architecture: Modern web app initialized with TypeScript strict mode, vanilla CSS design tokens, Vitest unit testing, and Playwright verification script.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-001-setup.txt"
+  },
+  {
+    "id": "FEAT-002",
+    "description": "Accessory Database & Registry: Comprehensive master catalog of SkyBlock accessories with base rarities, Magical Power values, categories, sources, and upgrade family hierarchies.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-002-accessory-db.txt"
+  },
+  {
+    "id": "FEAT-003",
+    "description": "NBT Decoder & Accessory Bag Parser: Robust parser decoding base64-gzipped NBT data into structured accessory items (ID, name, rarity, reforge, enrichment, lore).",
+    "status": "failing",
+    "evidence": "evidence/FEAT-003-nbt-parser.txt"
+  },
+  {
+    "id": "FEAT-004",
+    "description": "Owned vs Missing Accessories Engine: Accurate comparison engine matching player inventory against master catalog, resolving upgrade tiers so higher tiers fulfill lower tiers.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-004-owned-vs-missing.txt"
+  },
+  {
+    "id": "FEAT-005",
+    "description": "Magical Power & Bag Statistics: Accurate computation of total Magical Power (MP), completion rate, rarity breakdown, and enrichment count.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-005-mp-stats.txt"
+  },
+  {
+    "id": "FEAT-006",
+    "description": "Profile & Player Data Loader: Support for loading player data via username/UUID/Pixel ID with policy caching, pre-bundled realistic profiles (Endgame, Midgame, Earlygame), and raw Base64 NBT input.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-006-profile-loader.txt"
+  },
+  {
+    "id": "FEAT-007",
+    "description": "Visual Design & Hero Header: Premium dark-mode Minecraft aesthetic with glassmorphism, dynamic glowing rarity badges, policy disclaimer banner, and interactive stats overview.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-007-visual-hero.png"
+  },
+  {
+    "id": "FEAT-008",
+    "description": "Accessory Grid & Multi-Filter System: High-performance interactive grid with status filtering (All, Owned, Missing, Upgradable), rarity filters, category tabs, and real-time search.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-008-grid-filter.png"
+  },
+  {
+    "id": "FEAT-009",
+    "description": "Accessory Card & Interactive Detail Modal: Minecraft-styled visual tooltips and detail modal showing rarity coloring, lore, stat bonuses, reforges, enrichments, and acquisition guides for missing items.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-009-modal-details.png"
+  },
+  {
+    "id": "FEAT-010",
+    "description": "Smart MP Optimization & Upgrade Recommendations: Intelligent recommendation panel displaying the easiest and highest value missing accessories to upgrade for maximum MP gain.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-010-recommendations.txt"
+  },
+  {
+    "id": "FEAT-011",
+    "description": "Audio Feedback & Responsive Design: Synthesized Web Audio API sound effects for inventory interactions (clicks, chimes, bag opens) and fully responsive layout across desktop, tablet, and mobile.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-011-audio-responsive.txt"
+  },
+  {
+    "id": "FEAT-012",
+    "description": "Policy Compliance & Code Quality Gates: Full CraftersMC policy compliance, zero ESLint/TypeScript warnings, 100% Vitest unit test pass for pure logic, and modular source files under 300 lines.",
+    "status": "failing",
+    "evidence": "evidence/FEAT-012-quality-compliance.txt"
+  }
+]
