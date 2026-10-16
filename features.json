@@ -38,19 +38,19 @@
   {
     "id": "FEAT-007",
     "description": "Visual Design & Hero Header: Premium dark-mode Minecraft aesthetic with glassmorphism, dynamic glowing rarity badges, policy disclaimer banner, and interactive stats overview.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-007-visual-hero.png"
   },
   {
     "id": "FEAT-008",
     "description": "Accessory Grid & Multi-Filter System: High-performance interactive grid with status filtering (All, Owned, Missing, Upgradable), rarity filters, category tabs, and real-time search.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-008-grid-filter.png"
   },
   {
     "id": "FEAT-009",
     "description": "Accessory Card & Interactive Detail Modal: Minecraft-styled visual tooltips and detail modal showing rarity coloring, lore, stat bonuses, reforges, enrichments, and acquisition guides for missing items.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-009-modal-details.png"
   },
   {
