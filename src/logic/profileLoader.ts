@@ -33,6 +33,16 @@ export function loadSampleProfile(id: string): LoadedProfileData {
   };
 }
 
+export function createSimulatedProfileForPlayer(playerName: string): LoadedProfileData {
+  const base = SAMPLE_PROFILES[1];
+  return {
+    playerName: playerName.trim(),
+    profileName: 'Simulated SkyBlock',
+    items: base.items,
+    source: 'sample'
+  };
+}
+
 export function loadFromBase64Nbt(base64: string, playerName = 'Custom Player'): LoadedProfileData {
   const items = parseAccessoryBagBase64(base64);
   return {
@@ -58,18 +68,39 @@ export async function fetchPlayerFromApi(
     Accept: 'application/json'
   };
   if (apiKey && apiKey.trim() !== '') {
-    headers['Authorization'] = `Bearer ${apiKey.trim()}`;
+    headers['X-API-Key'] = apiKey.trim();
   }
 
-  const playerUrl = `${THEME_CONFIG.apiBaseUrl}/v1/player/${encodeURIComponent(identifier.trim())}`;
-  const response = await fetch(playerUrl, { headers });
+  // Use local Vite proxy in browser environment to eliminate CORS errors
+  const baseUrl =
+    typeof window !== 'undefined' && window.location?.origin
+      ? '/api'
+      : THEME_CONFIG.apiBaseUrl;
+
+  const playerUrl = `${baseUrl}/v1/player/${encodeURIComponent(identifier.trim())}`;
+  let response: Response;
+
+  try {
+    response = await fetch(playerUrl, { headers });
+  } catch (netErr) {
+    throw new Error(
+      'Unable to connect to CraftersMC API. Please check your internet connection or supply an API key.'
+    );
+  }
 
   if (!response.ok) {
+    if (response.status === 401) {
+      const errBody = (await response.json().catch(() => ({}))) as { message?: string };
+      throw new Error(
+        errBody.message ||
+          'CraftersMC API requires an API key (X-API-Key). Obtain one in-game using "/api new" and enter it below.'
+      );
+    }
     if (response.status === 404) {
-      throw new Error(`Player "${identifier}" not found on CraftersMC.`);
+      throw new Error(`Player "${identifier}" not found on CraftersMC. Check the spelling or gamertag.`);
     }
     if (response.status === 429) {
-      throw new Error('Rate limit exceeded. Please wait a moment before trying again.');
+      throw new Error('Rate limit exceeded (40 req/min). Please wait a moment before trying again.');
     }
     throw new Error(`API error (${response.status}): ${response.statusText}`);
   }
@@ -84,7 +115,7 @@ export async function fetchPlayerFromApi(
 
   if (player?.pixelId) {
     try {
-      const sbUrl = `${THEME_CONFIG.apiBaseUrl}/v1/skyblock/profile/${player.pixelId}`;
+      const sbUrl = `${baseUrl}/v1/skyblock/profile/${player.pixelId}`;
       const sbRes = await fetch(sbUrl, { headers });
       if (sbRes.ok) {
         const sbData = await sbRes.json();

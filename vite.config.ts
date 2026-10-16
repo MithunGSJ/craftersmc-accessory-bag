@@ -5,6 +5,26 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    host: true
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'https://api.craftersmc.net',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  },
+  preview: {
+    port: 5173,
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'https://api.craftersmc.net',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 });

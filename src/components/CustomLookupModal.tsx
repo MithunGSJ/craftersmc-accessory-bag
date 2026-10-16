@@ -6,6 +6,7 @@ interface CustomLookupModalProps {
   readonly onClose: () => void;
   readonly onLookupApi: (username: string, apiKey: string) => Promise<void>;
   readonly onImportBase64: (base64: string, name: string) => void;
+  readonly onLoadSimulated: (name: string) => void;
   readonly isLoading: boolean;
   readonly errorMessage: string | null;
 }
@@ -15,11 +16,12 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   onClose,
   onLookupApi,
   onImportBase64,
+  onLoadSimulated,
   isLoading,
   errorMessage
 }) => {
   const [tab, setTab] = React.useState<'api' | 'nbt'>('api');
-  const [username, setUsername] = React.useState('');
+  const [username, setUsername] = React.useState('DarkKing0098994');
   const [apiKey, setApiKey] = React.useState('');
   const [rawBase64, setRawBase64] = React.useState('');
   const [customName, setCustomName] = React.useState('');
@@ -39,6 +41,12 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
     onClose();
   };
 
+  const handleQuickSimulate = () => {
+    const targetName = username.trim() || 'DarkKing0098994';
+    onLoadSimulated(targetName);
+    onClose();
+  };
+
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div
@@ -54,7 +62,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
           Player Lookup & Data Import
         </h2>
         <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '18px' }}>
-          Query live CraftersMC Public API or paste raw Base64 NBT accessory bag string.
+          Query live CraftersMC Public API or test with your player gamertag.
         </p>
 
         <div className="filter-pills" style={{ marginBottom: '18px' }}>
@@ -84,13 +92,30 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
               background: 'rgba(239, 68, 68, 0.15)',
               border: '1px solid rgba(239, 68, 68, 0.4)',
               color: '#FCA5A5',
-              padding: '10px 14px',
+              padding: '12px 14px',
               borderRadius: '8px',
               fontSize: '0.82rem',
-              marginBottom: '16px'
+              marginBottom: '16px',
+              lineHeight: 1.5
             }}
           >
-            ⚠️ {errorMessage}
+            <div style={{ fontWeight: 700, marginBottom: '4px' }}>⚠️ Lookup Note:</div>
+            <div>{errorMessage}</div>
+            <button
+              type="button"
+              className="pill-btn"
+              style={{
+                marginTop: '10px',
+                background: 'var(--accent-gold)',
+                color: '#0B0D14',
+                borderColor: 'var(--accent-gold)',
+                fontSize: '0.8rem',
+                fontWeight: 700
+              }}
+              onClick={handleQuickSimulate}
+            >
+              ⚡ Test as &quot;{username.trim() || 'DarkKing0098994'}&quot; (Offline Bag)
+            </button>
           </div>
         )}
 
@@ -104,7 +129,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
                 type="text"
                 className="search-input"
                 style={{ paddingLeft: '14px' }}
-                placeholder="e.g. DeathWish_99 or 069a79f4-44e9..."
+                placeholder="e.g. DarkKing0098994"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 required
@@ -113,26 +138,40 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
 
             <div>
               <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-                CRAFTERSMC API KEY (OPTIONAL)
+                CRAFTERSMC API KEY (REQUIRED BY SERVER)
               </label>
               <input
                 type="password"
                 className="search-input"
                 style={{ paddingLeft: '14px' }}
-                placeholder="Leave blank for public endpoints or enter developer key"
+                placeholder="Enter key (obtained in Minecraft chat via /api new)"
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
               />
+              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                💡 CraftersMC requires an API key for player stats. Run <code>/api new</code> on the server to get one.
+              </span>
             </div>
 
-            <button
-              type="submit"
-              className="pill-btn active"
-              style={{ justifyContent: 'center', padding: '12px', marginTop: '6px' }}
-              disabled={isLoading}
-            >
-              {isLoading ? '⏳ Fetching Profile...' : '🔍 Fetch Accessory Bag'}
-            </button>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+              <button
+                type="submit"
+                className="pill-btn active"
+                style={{ flex: 1, justifyContent: 'center', padding: '12px' }}
+                disabled={isLoading}
+              >
+                {isLoading ? '⏳ Fetching Profile...' : '🔍 Live API Fetch'}
+              </button>
+
+              <button
+                type="button"
+                className="pill-btn"
+                style={{ justifyContent: 'center', padding: '12px', borderColor: 'var(--accent-gold)' }}
+                onClick={handleQuickSimulate}
+              >
+                ⚡ Test Player
+              </button>
+            </div>
           </form>
         ) : (
           <form onSubmit={handleNbtSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>

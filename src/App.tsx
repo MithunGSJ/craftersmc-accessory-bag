@@ -10,6 +10,7 @@ import {
   loadSampleProfile,
   loadFromBase64Nbt,
   fetchPlayerFromApi,
+  createSimulatedProfileForPlayer,
   LoadedProfileData
 } from './logic/profileLoader.ts';
 import { evaluatePlayerAccessories } from './logic/accessoryMatcher.ts';
@@ -102,6 +103,12 @@ export const App: React.FC = () => {
     setCurrentProfileId('custom');
   };
 
+  const handleLoadSimulated = (name: string) => {
+    setProfileData(createSimulatedProfileForPlayer(name));
+    setCurrentProfileId('custom');
+    setIsLookupOpen(false);
+  };
+
   return (
     <div className="app-container">
       <HeroHeader
@@ -168,6 +175,7 @@ export const App: React.FC = () => {
         onClose={() => setIsLookupOpen(false)}
         onLookupApi={handleApiLookup}
         onImportBase64={handleImportBase64}
+        onLoadSimulated={handleLoadSimulated}
         isLoading={isFetchingApi}
         errorMessage={apiError}
       />
