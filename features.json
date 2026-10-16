@@ -20,7 +20,7 @@
   {
     "id": "FEAT-004",
     "description": "Owned vs Missing Accessories Engine: Accurate comparison engine matching player inventory against master catalog, resolving upgrade tiers so higher tiers fulfill lower tiers.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-004-owned-vs-missing.txt"
   },
   {
