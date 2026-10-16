@@ -8,6 +8,17 @@ interface RecommendationsPanelProps {
   readonly onSelectAccessory: (acc: EvaluatedAccessory) => void;
 }
 
+const STAGE_ORDER: Record<string, number> = {
+  'NPC Shop': 1,
+  'Early Collection': 2,
+  'Quest': 3,
+  'Mid Collection': 4,
+  'High Collection': 5,
+  'Event': 6,
+  'Slayer': 7,
+  'Rare Drop': 8
+};
+
 export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
   evaluated,
   onSelectAccessory
@@ -23,18 +34,24 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
         e.status === 'UPGRADABLE_NEXT' && e.upgradeRecommendation
           ? e.upgradeRecommendation.additionalMp
           : THEME_CONFIG.rarityMap[rarity]?.magicalPower || 3;
-      const cost = e.definition.estimatedCoins || 5000;
-      const costPerMp = mpGain > 0 ? cost / mpGain : Infinity;
+
+      const stage = e.definition.stage || 'Mid Collection';
+      const stageWeight = STAGE_ORDER[stage] || 5;
 
       return {
         evaluated: e,
         mpGain,
-        cost,
-        costPerMp
+        stage,
+        stageWeight
       };
     })
-    .filter(c => c.costPerMp > 0 && c.costPerMp < Infinity)
-    .sort((a, b) => a.costPerMp - b.costPerMp)
+    .sort((a, b) => {
+      // Prioritize earlier acquisition stages first, then higher MP gain
+      if (a.stageWeight !== b.stageWeight) {
+        return a.stageWeight - b.stageWeight;
+      }
+      return b.mpGain - a.mpGain;
+    })
     .slice(0, 4);
 
   if (candidates.length === 0) return null;
@@ -44,16 +61,16 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
         <div>
           <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span>💡</span> Cheapest Missing Magical Power (MP) Upgrades
+            <span>💡</span> Recommended Next Accessory Upgrades (CraftersMC Progression)
           </h2>
           <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-            Optimal talisman targets sorted by lowest coin cost per Magical Power point gained.
+            Priority talisman targets ordered by official CraftersMC Wiki obtaining milestones &amp; MP gain.
           </p>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px' }}>
-        {candidates.map(({ evaluated: item, mpGain, cost, costPerMp }) => {
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
+        {candidates.map(({ evaluated: item, mpGain, stage }) => {
           const style = THEME_CONFIG.rarityMap[item.definition.baseRarity];
           return (
             <div
@@ -85,13 +102,41 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
                 </span>
                 <span className="mp-pill" style={{ fontSize: '0.75rem' }}>+{mpGain} MP</span>
               </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+                <span style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                  background: 'rgba(56, 189, 248, 0.15)',
+                  color: 'var(--accent-cyan)'
+                }}>
+                  {stage}
+                </span>
+                {item.definition.npcCost && (
+                  <span style={{
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    background: 'rgba(250, 204, 21, 0.15)',
+                    color: 'var(--accent-gold)'
+                  }}>
+                    💰 {item.definition.npcCost}
+                  </span>
+                )}
+              </div>
+
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '8px' }}>
                 📍 {item.definition.source}
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', fontSize: '0.78rem' }}>
-                <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>💰 {cost.toLocaleString()} Coins</span>
-                <span style={{ color: 'var(--accent-cyan)' }}>{Math.round(costPerMp).toLocaleString()} coins/MP</span>
-              </div>
+
+              {item.status === 'UPGRADABLE_NEXT' && (
+                <div style={{ fontSize: '0.75rem', color: 'var(--status-upgradable)', marginTop: '4px', fontWeight: 600 }}>
+                  ⚡ Upgrades from current tier
+                </div>
+              )}
             </div>
           );
         })}

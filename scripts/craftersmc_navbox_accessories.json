@@ -1,0 +1,378 @@
+[
+  {
+    "title": "Acacia Stop",
+    "slug": "Acacia_Stop"
+  },
+  {
+    "title": "Bamboo Ring",
+    "slug": "Bamboo_Ring"
+  },
+  {
+    "title": "Bamboo Talisman",
+    "slug": "Bamboo_Talisman"
+  },
+  {
+    "title": "Bat Person Artifact",
+    "slug": "Bat_Person_Artifact"
+  },
+  {
+    "title": "Bat Person Ring",
+    "slug": "Bat_Person_Ring"
+  },
+  {
+    "title": "Bat Person Talisman",
+    "slug": "Bat_Person_Talisman"
+  },
+  {
+    "title": "Bat Artifact",
+    "slug": "Bat_Artifact"
+  },
+  {
+    "title": "Bat Ring",
+    "slug": "Bat_Ring"
+  },
+  {
+    "title": "Bat Talisman",
+    "slug": "Bat_Talisman"
+  },
+  {
+    "title": "Beta Fish",
+    "slug": "Beta_Fish"
+  },
+  {
+    "title": "Blood God Crest",
+    "slug": "Blood_God_Crest"
+  },
+  {
+    "title": "Cake Slice",
+    "slug": "Cake_Slice"
+  },
+  {
+    "title": "Campfire Adept Badge",
+    "slug": "Campfire_Adept_Badge"
+  },
+  {
+    "title": "Campfire Cultist Badge",
+    "slug": "Campfire_Cultist_Badge"
+  },
+  {
+    "title": "Campfire God Badge",
+    "slug": "Campfire_God_Badge"
+  },
+  {
+    "title": "Campfire Initiate Badge",
+    "slug": "Campfire_Initiate_Badge"
+  },
+  {
+    "title": "Campfire Scion Badge",
+    "slug": "Campfire_Scion_Badge"
+  },
+  {
+    "title": "Candy Artifact",
+    "slug": "Candy_Artifact"
+  },
+  {
+    "title": "Candy Relic",
+    "slug": "Candy_Relic"
+  },
+  {
+    "title": "Candy Ring",
+    "slug": "Candy_Ring"
+  },
+  {
+    "title": "Candy Talisman",
+    "slug": "Candy_Talisman"
+  },
+  {
+    "title": "Coins Talisman",
+    "slug": "Coins_Talisman"
+  },
+  {
+    "title": "Creative Mind",
+    "slug": "Creative_Mind"
+  },
+  {
+    "title": "Cropie Talisman",
+    "slug": "Cropie_Talisman"
+  },
+  {
+    "title": "Dayfreezer",
+    "slug": "Dayfreezer"
+  },
+  {
+    "title": "Draconic Artifact",
+    "slug": "Draconic_Artifact"
+  },
+  {
+    "title": "Draconic Ring",
+    "slug": "Draconic_Ring"
+  },
+  {
+    "title": "Draconic Talisman",
+    "slug": "Draconic_Talisman"
+  },
+  {
+    "title": "Emerald Ring",
+    "slug": "Emerald_Ring"
+  },
+  {
+    "title": "Experience Artifact",
+    "slug": "Experience_Artifact"
+  },
+  {
+    "title": "Farmer Orb",
+    "slug": "Farmer_Orb"
+  },
+  {
+    "title": "Farming Talisman",
+    "slug": "Farming_Talisman"
+  },
+  {
+    "title": "Farmionaire Artifact",
+    "slug": "Farmionaire_Artifact"
+  },
+  {
+    "title": "Farmionaire Ring",
+    "slug": "Farmionaire_Ring"
+  },
+  {
+    "title": "Farmionaire Talisman",
+    "slug": "Farmionaire_Talisman"
+  },
+  {
+    "title": "Feather Artifact",
+    "slug": "Feather_Artifact"
+  },
+  {
+    "title": "Feather Ring",
+    "slug": "Feather_Ring"
+  },
+  {
+    "title": "Feather Talisman",
+    "slug": "Feather_Talisman"
+  },
+  {
+    "title": "Fermento Artifact",
+    "slug": "Fermento_Artifact"
+  },
+  {
+    "title": "Filthy Rich Talisman",
+    "slug": "Filthy_Rich_Talisman"
+  },
+  {
+    "title": "Fire Devourer",
+    "slug": "Fire_Devourer"
+  },
+  {
+    "title": "Fire Extinguisher",
+    "slug": "Fire_Extinguisher"
+  },
+  {
+    "title": "Fire Talisman",
+    "slug": "Fire_Talisman"
+  },
+  {
+    "title": "Frostclaw Relic",
+    "slug": "Frostclaw_Relic"
+  },
+  {
+    "title": "Game Breaker",
+    "slug": "Game_Breaker"
+  },
+  {
+    "title": "Golden Feather Boots",
+    "slug": "Golden_Feather_Boots"
+  },
+  {
+    "title": "Gravity Talisman",
+    "slug": "Gravity_Talisman"
+  },
+  {
+    "title": "Hunter Ring",
+    "slug": "Hunter_Ring"
+  },
+  {
+    "title": "Hunter Talisman",
+    "slug": "Hunter_Talisman"
+  },
+  {
+    "title": "Intimidation Artifact",
+    "slug": "Intimidation_Artifact"
+  },
+  {
+    "title": "Intimidation Ring",
+    "slug": "Intimidation_Ring"
+  },
+  {
+    "title": "Intimidation Talisman",
+    "slug": "Intimidation_Talisman"
+  },
+  {
+    "title": "Lava Talisman",
+    "slug": "Lava_Talisman"
+  },
+  {
+    "title": "Magical Encyclopedia",
+    "slug": "Magical_Encyclopedia"
+  },
+  {
+    "title": "Magnetic Talisman",
+    "slug": "Magnetic_Talisman"
+  },
+  {
+    "title": "Mine Affinity Talisman",
+    "slug": "Mine_Affinity_Talisman"
+  },
+  {
+    "title": "Mini Fairy",
+    "slug": "Mini_Fairy"
+  },
+  {
+    "title": "New Year&#39;s Cake Bag",
+    "slug": "New_Year%27s_Cake_Bag"
+  },
+  {
+    "title": "Night Vision Charm",
+    "slug": "Night_Vision_Charm"
+  },
+  {
+    "title": "Nightfreezer",
+    "slug": "Nightfreezer"
+  },
+  {
+    "title": "Personal Compactor 4000",
+    "slug": "Personal_Compactor_4000"
+  },
+  {
+    "title": "Personal Compactor 5000",
+    "slug": "Personal_Compactor_5000"
+  },
+  {
+    "title": "Personal Compactor 6000",
+    "slug": "Personal_Compactor_6000"
+  },
+  {
+    "title": "Personal Compactor 7000",
+    "slug": "Personal_Compactor_7000"
+  },
+  {
+    "title": "Personal Deletor 4000",
+    "slug": "Personal_Deletor_4000"
+  },
+  {
+    "title": "Personal Deletor 5000",
+    "slug": "Personal_Deletor_5000"
+  },
+  {
+    "title": "Personal Deletor 6000",
+    "slug": "Personal_Deletor_6000"
+  },
+  {
+    "title": "Personal Deletor 7000",
+    "slug": "Personal_Deletor_7000"
+  },
+  {
+    "title": "Piggy Bank",
+    "slug": "Piggy_Bank"
+  },
+  {
+    "title": "Broken Piggy Bank",
+    "slug": "Broken_Piggy_Bank"
+  },
+  {
+    "title": "Cracked Piggy Bank",
+    "slug": "Cracked_Piggy_Bank"
+  },
+  {
+    "title": "Pig&#39;s Foot",
+    "slug": "Pig%27s_Foot"
+  },
+  {
+    "title": "Potato Talisman",
+    "slug": "Potato_Talisman"
+  },
+  {
+    "title": "Reaper Orb",
+    "slug": "Reaper_Orb"
+  },
+  {
+    "title": "Red Claw Artifact",
+    "slug": "Red_Claw_Artifact"
+  },
+  {
+    "title": "Red Claw Ring",
+    "slug": "Red_Claw_Ring"
+  },
+  {
+    "title": "Red Claw Talisman",
+    "slug": "Red_Claw_Talisman"
+  },
+  {
+    "title": "Scavenger Talisman",
+    "slug": "Scavenger_Talisman"
+  },
+  {
+    "title": "Seal of the Oceans",
+    "slug": "Seal_of_the_Oceans"
+  },
+  {
+    "title": "Seal of the Seas",
+    "slug": "Seal_of_the_Seas"
+  },
+  {
+    "title": "Skeleton Talisman",
+    "slug": "Skeleton_Talisman"
+  },
+  {
+    "title": "Sky&#39;s Badge",
+    "slug": "Sky%27s_Badge"
+  },
+  {
+    "title": "Speed Artifact",
+    "slug": "Speed_Artifact"
+  },
+  {
+    "title": "Speed Ring",
+    "slug": "Speed_Ring"
+  },
+  {
+    "title": "Speed Talisman",
+    "slug": "Speed_Talisman"
+  },
+  {
+    "title": "Squash Ring",
+    "slug": "Squash_Ring"
+  },
+  {
+    "title": "Vaccine Talisman",
+    "slug": "Vaccine_Talisman"
+  },
+  {
+    "title": "Village Affinity Talisman",
+    "slug": "Village_Affinity_Talisman"
+  },
+  {
+    "title": "Wolf Ring",
+    "slug": "Wolf_Ring"
+  },
+  {
+    "title": "Wolf Talisman",
+    "slug": "Wolf_Talisman"
+  },
+  {
+    "title": "Wood Affinity Talisman",
+    "slug": "Wood_Affinity_Talisman"
+  },
+  {
+    "title": "Zombie Artifact",
+    "slug": "Zombie_Artifact"
+  },
+  {
+    "title": "Zombie Ring",
+    "slug": "Zombie_Ring"
+  },
+  {
+    "title": "Zombie Talisman",
+    "slug": "Zombie_Talisman"
+  }
+]

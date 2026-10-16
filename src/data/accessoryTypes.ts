@@ -19,9 +19,11 @@ export interface AccessoryDefinition {
   readonly tier: number;
   readonly description: string;
   readonly source: string;
-  readonly estimatedCoins: number;
   readonly iconEmoji: string;
   readonly loreLines: readonly string[];
+  readonly npcCost?: string;
+  readonly stage?: 'NPC Shop' | 'Early Collection' | 'Mid Collection' | 'Quest' | 'High Collection' | 'Slayer' | 'Event' | 'Rare Drop';
+  readonly estimatedCoins?: number;
 }
 
 export interface PlayerAccessoryItem {
@@ -48,7 +50,8 @@ export interface EvaluatedAccessory {
   readonly upgradeRecommendation?: {
     readonly nextTierId: string;
     readonly nextTierName: string;
-    readonly costCoins: number;
+    readonly nextSource: string;
     readonly additionalMp: number;
+    readonly costCoins?: number;
   };
 }

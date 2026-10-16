@@ -11,3 +11,4 @@
 | DEC-007 | Embed mandatory CraftersMC and Minecraft trademark disclaimers | Ensures full compliance with section 1 of the CraftersMC API Usage Policy. |
 | DEC-008 | Scope accessory catalog strictly to active CraftersMC SkyBlock items | Strips non-existent Hypixel Dungeons / Catacombs / Enderman Slayer items (Wither Relic/Artifact, Auto-Recombobulator, Hegemony) to mirror true CraftersMC game state. |
 | DEC-009 | Sync with official CraftersMC Wiki table and incorporate live API key | Added all 85 authentic obtainable accessories across 46 upgrade families, verified live API key for DarkKing0098994, and supported native CraftersMC NBT inventory format. |
+| DEC-010 | Replace legacy Hypixel coin estimations with authentic CraftersMC Wiki obtaining requirements & progression milestones | CraftersMC has no Bazaar/AH coin estimates; accessories are governed strictly by Collections, Quests, Slayers, Drops, and fixed NPC Shop prices (Julia, North, Sky, Zoe). |

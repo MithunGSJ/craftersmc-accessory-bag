@@ -84,13 +84,13 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
           >
             <strong style={{ color: 'var(--status-upgradable)' }}>⚡ Direct Upgrade Available:</strong> Upgrades to{' '}
             <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{upgradeRecommendation.nextTierName}</span> for +
-            {upgradeRecommendation.additionalMp} MP (~{upgradeRecommendation.costCoins.toLocaleString()} coins).
+            {upgradeRecommendation.additionalMp} MP (via {upgradeRecommendation.nextSource}).
           </div>
         )}
 
         <div style={{ background: 'rgba(0,0,0,0.4)', borderRadius: '12px', padding: '16px', border: '1px solid rgba(255,255,255,0.06)', marginBottom: '18px' }}>
           <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
-            Item Description & Lore
+            Item Description & Lore (CraftersMC Wiki)
           </span>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', color: '#D1D5DB', marginTop: '8px', lineHeight: 1.6 }}>
             {definition.loreLines.map((line, idx) => (
@@ -114,14 +114,21 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
 
         <div style={{ marginBottom: '16px' }}>
           <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
-            Acquisition Source & Cost
+            CraftersMC Obtaining Requirement
           </span>
-          <div style={{ fontSize: '0.92rem', color: 'var(--text-primary)', marginTop: '4px' }}>
+          <div style={{ fontSize: '0.95rem', color: 'var(--text-primary)', marginTop: '4px', fontWeight: 600 }}>
             📍 {definition.source}
           </div>
-          <div style={{ fontSize: '0.85rem', color: 'var(--accent-gold)', marginTop: '2px', fontWeight: 600 }}>
-            💰 Approx. Value: {definition.estimatedCoins > 0 ? `${definition.estimatedCoins.toLocaleString()} Coins` : 'Quest / Non-tradable'}
-          </div>
+          {definition.npcCost && (
+            <div style={{ fontSize: '0.88rem', color: 'var(--accent-gold)', marginTop: '4px', fontWeight: 600 }}>
+              💰 NPC Price: {definition.npcCost}
+            </div>
+          )}
+          {definition.stage && (
+            <div style={{ fontSize: '0.82rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>
+              🏷️ Progression Milestone: {definition.stage}
+            </div>
+          )}
         </div>
 
         {familyChain.length > 1 && (

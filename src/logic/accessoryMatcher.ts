@@ -70,8 +70,9 @@ export function evaluatePlayerAccessories(
       upgradeRecommendation = {
         nextTierId: nextMember.id,
         nextTierName: nextMember.name,
-        costCoins: nextMember.estimatedCoins,
-        additionalMp: mpGain
+        nextSource: nextMember.source,
+        additionalMp: mpGain,
+        costCoins: nextMember.estimatedCoins
       };
     }
 

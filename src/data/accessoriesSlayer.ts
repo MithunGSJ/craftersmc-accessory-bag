@@ -9,11 +9,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'hunter',
     tier: 1,
-    description: 'Grants +2 Combat Wisdom.',
-    source: 'Wolf Slayer Level 6 (Crafting)',
-    estimatedCoins: 350000,
+    description: 'Combat Wisdom: +2 Requires Wolf Slayer 6.',
+    source: 'Crafting (Wolf Slayer 6)',
+    stage: 'Slayer',
     iconEmoji: '🎯',
-    loreLines: ['Grants +2 Combat Wisdom.']
+    loreLines: ['Combat Wisdom: +2', 'Requires Wolf Slayer 6.']
   },
   {
     id: 'HUNTER_RING',
@@ -22,11 +22,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'hunter',
     tier: 2,
-    description: 'Grants +4 Combat Wisdom.',
-    source: 'Wolf Slayer Level 7 (Crafting)',
-    estimatedCoins: 1500000,
+    description: 'Combat Wisdom: +5 Requires Wolf Slayer 7.',
+    source: 'Crafting (Wolf Slayer 7)',
+    stage: 'Slayer',
     iconEmoji: '🎯',
-    loreLines: ['Grants +4 Combat Wisdom.']
+    loreLines: ['Combat Wisdom: +5', 'Requires Wolf Slayer 7.']
   },
   // Slayer Red Claw Family (Wolf Slayer)
   {
@@ -36,11 +36,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'red_claw',
     tier: 1,
-    description: 'Grants +1% Critical Damage.',
-    source: 'Wolf Slayer Level 1 (Crafting)',
-    estimatedCoins: 80000,
+    description: 'Critical Damage: +1% Requires Wolf Slayer 1.',
+    source: 'Crafting (Wolf Slayer 1)',
+    stage: 'Slayer',
     iconEmoji: '🐾',
-    loreLines: ['Grants +1% Critical Damage.']
+    loreLines: ['Critical Damage: +1%', 'Requires Wolf Slayer 1.']
   },
   {
     id: 'RED_CLAW_RING',
@@ -49,11 +49,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'red_claw',
     tier: 2,
-    description: 'Grants +3% Critical Damage.',
-    source: 'Wolf Slayer Level 5 (Crafting)',
-    estimatedCoins: 650000,
+    description: 'Critical Damage: +3% Requires Wolf Slayer 3.',
+    source: 'Crafting (Wolf Slayer 5)',
+    stage: 'Slayer',
     iconEmoji: '🐾',
-    loreLines: ['Grants +3% Critical Damage.']
+    loreLines: ['Critical Damage: +3%', 'Requires Wolf Slayer 3.']
   },
   {
     id: 'RED_CLAW_ARTIFACT',
@@ -62,11 +62,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'red_claw',
     tier: 3,
-    description: 'Grants +5% Critical Damage.',
-    source: 'Wolf Slayer Level 5 (Crafting)',
-    estimatedCoins: 4800000,
+    description: 'Critical Damage: +5% Requires Wolf Slayer 5.',
+    source: 'Crafting (Wolf Slayer 5)',
+    stage: 'Slayer',
     iconEmoji: '🐾',
-    loreLines: ['Grants +5% Critical Damage.']
+    loreLines: ['Critical Damage: +5%', 'Requires Wolf Slayer 5.']
   },
   // Frostclaw & Reaper Slayer Relics
   {
@@ -76,11 +76,11 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'frostclaw',
     tier: 1,
-    description: 'Grants +10% Critical Damage and Cold resistance.',
-    source: 'Wolf Slayer Level 8 (Crafting)',
-    estimatedCoins: 18000000,
+    description: 'Critical Damage: +7% Requires Wolf Slayer 7.',
+    source: 'Crafting (Wolf Slayer 8)',
+    stage: 'Slayer',
     iconEmoji: '❄️',
-    loreLines: ['Grants +10% Critical Damage.']
+    loreLines: ['Critical Damage: +7%', 'Requires Wolf Slayer 7.']
   },
   {
     id: 'REAPER_ORB',
@@ -89,10 +89,10 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Slayer',
     familyId: 'reaper_orb',
     tier: 1,
-    description: 'Grants +15 Strength and +5% life steal bonus.',
-    source: 'Zombie Slayer Level 8 (Crafting)',
-    estimatedCoins: 22000000,
+    description: 'Gain a stack of 2 Strength for every mob killed in the last 5 seconds. Requires Zombie Slayer 8.',
+    source: 'Crafting (Zombie Slayer 8)',
+    stage: 'Slayer',
     iconEmoji: '🔮',
-    loreLines: ['Grants +15 Strength.']
+    loreLines: ['Gain a stack of 2 Strength for every mob killed in the last 5 seconds.', 'Requires Zombie Slayer 8.']
   }
 ];

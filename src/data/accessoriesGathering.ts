@@ -9,11 +9,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'farming',
     tier: 1,
-    description: 'Increases your Speed by +10% while in the Farm or Barn.',
-    source: 'Wheat Collection IV (Crafting)',
-    estimatedCoins: 2500,
+    description: 'Grants +10 Speed while in Harvest Haven.',
+    source: 'Crafting (Wheat 4)',
+    stage: 'Early Collection',
     iconEmoji: '🌾',
-    loreLines: ['Increases Speed by +10% while in the Farm or Barn.']
+    loreLines: ['Grants +10 Speed while in Harvest Haven.']
   },
   {
     id: 'FARMER_ORB',
@@ -22,11 +22,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'farmer_orb',
     tier: 1,
-    description: 'Increases the growth rate of crops near you.',
-    source: 'Pumpkin Collection VI (Crafting)',
-    estimatedCoins: 35000,
+    description: 'Increases the regrowth rate of nearby crops on the public islands, regrowing an extra crop every 3 seconds.',
+    source: 'Crafting (Pumpkin 6)',
+    stage: 'Early Collection',
     iconEmoji: '🎃',
-    loreLines: ['Increases crop growth rate nearby.']
+    loreLines: ['Increases the regrowth rate of nearby crops on public islands.']
   },
   {
     id: 'VACCINE_TALISMAN',
@@ -35,11 +35,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'vaccine',
     tier: 1,
-    description: 'Grants immunity to Poison.',
-    source: 'Potato Collection III (Crafting)',
-    estimatedCoins: 4000,
+    description: 'Provides immunity to Poison damage.',
+    source: 'Crafting (Potato 3)',
+    stage: 'Early Collection',
     iconEmoji: '🥔',
-    loreLines: ['Grants complete immunity to Poison.']
+    loreLines: ['Provides immunity to Poison damage.']
   },
   {
     id: 'POTATO_TALISMAN',
@@ -48,11 +48,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'potato',
     tier: 1,
-    description: 'Increases Potato drop chance by +5%.',
-    source: 'Shiny Orb Drop',
-    estimatedCoins: 75000,
+    description: 'Speed: +1 Your potato minions farm 5% faster while wearing on your island.',
+    source: 'Shiny Orb',
+    stage: 'Rare Drop',
     iconEmoji: '🥔',
-    loreLines: ['Shiny Orb reward.']
+    loreLines: ['Speed: +1', 'Your potato minions farm 5% faster while wearing on your island.']
   },
   // Bamboo Family
   {
@@ -62,11 +62,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'bamboo',
     tier: 1,
-    description: 'Grants +10 Farming Fortune when harvesting Bamboo.',
-    source: 'Bamboo Collection II (Crafting)',
-    estimatedCoins: 5000,
+    description: 'Grants +1 Speed for every log or bamboo you cut in the last 10 seconds.',
+    source: 'Crafting (Bamboo 2)',
+    stage: 'Early Collection',
     iconEmoji: '🎍',
-    loreLines: ['+10 Farming Fortune for Bamboo.']
+    loreLines: ['Grants +1 Speed for every log or bamboo you cut in the last 10 seconds.']
   },
   {
     id: 'BAMBOO_RING',
@@ -75,11 +75,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'bamboo',
     tier: 2,
-    description: 'Grants +25 Farming Fortune when harvesting Bamboo.',
-    source: 'Bamboo Collection VII (Crafting)',
-    estimatedCoins: 45000,
+    description: 'Grants +2 Speed for every log or bamboo you cut in the last 10 seconds.',
+    source: 'Crafting (Bamboo 7)',
+    stage: 'Mid Collection',
     iconEmoji: '🎍',
-    loreLines: ['+25 Farming Fortune for Bamboo.']
+    loreLines: ['Grants +2 Speed for every log or bamboo you cut in the last 10 seconds.']
   },
   // Farmionaire Family
   {
@@ -89,11 +89,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'farmionaire',
     tier: 1,
-    description: 'Grants bonus Farming Fortune based on farming milestones.',
-    source: 'Farm-o-Matic Event',
-    estimatedCoins: 50000,
+    description: "Grants +5 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    source: 'Farm-o-Matic',
+    stage: 'Event',
     iconEmoji: '🚜',
-    loreLines: ['Farming Fortune milestone accessory.']
+    loreLines: ["Grants +5 Crop Fortune to a random crop during Ethan's Farming Contest."]
   },
   {
     id: 'FARMIONAIRE_RING',
@@ -102,11 +102,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'farmionaire',
     tier: 2,
-    description: 'Grants increased Farming Fortune from Farm-o-Matic.',
-    source: 'Farm-o-Matic Event',
-    estimatedCoins: 250000,
+    description: "Grants +15 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    source: 'Farm-o-Matic',
+    stage: 'Event',
     iconEmoji: '🚜',
-    loreLines: ['Tier 2 Farmionaire Accessory.']
+    loreLines: ["Grants +15 Crop Fortune to a random crop during Ethan's Farming Contest."]
   },
   {
     id: 'FARMIONAIRE_ARTIFACT',
@@ -115,11 +115,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'farmionaire',
     tier: 3,
-    description: 'Max tier Farmionaire accessory granting substantial Farming Fortune.',
-    source: 'Farm-o-Matic Event',
-    estimatedCoins: 1200000,
+    description: "Grants +25 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    source: 'Farm-o-Matic',
+    stage: 'Event',
     iconEmoji: '🚜',
-    loreLines: ['Tier 3 Farmionaire Accessory.']
+    loreLines: ["Grants +25 Crop Fortune to a random crop during Ethan's Farming Contest."]
   },
   // Cropie / Squash / Fermento Family
   {
@@ -129,11 +129,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'cropie_line',
     tier: 1,
-    description: 'Grants +10 Farming Fortune.',
-    source: 'Crafting with Cropies',
-    estimatedCoins: 45000,
+    description: 'Wheat Fortune: +10 Carrot Fortune: +10 Potato Fortune: +10 Beetroot Fortune: +10',
+    source: 'Crafting',
+    stage: 'Mid Collection',
     iconEmoji: '🌱',
-    loreLines: ['Grants +10 Farming Fortune.']
+    loreLines: ['Wheat Fortune: +10 Carrot Fortune: +10 Potato Fortune: +10 Beetroot Fortune: +10']
   },
   {
     id: 'SQUASH_RING',
@@ -142,11 +142,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'cropie_line',
     tier: 2,
-    description: 'Grants +20 Farming Fortune.',
-    source: 'Crafting: Cropie Talisman + Squashes',
-    estimatedCoins: 350000,
+    description: 'Wheat Fortune: +20 Carrot Fortune: +20 Potato Fortune: +20 Melon Fortune: +20 Pumpkin Fortune: +20 Cocoa Beans Fortune: +20 Beetroot Fortune: +20',
+    source: 'Crafting',
+    stage: 'Mid Collection',
     iconEmoji: '🎃',
-    loreLines: ['Grants +20 Farming Fortune.']
+    loreLines: ['Fortune bonuses across all crops: +20']
   },
   {
     id: 'FERMENTO_ARTIFACT',
@@ -155,11 +155,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'cropie_line',
     tier: 3,
-    description: 'Grants +30 Farming Fortune.',
-    source: 'Crafting: Squash Ring + Fermentos',
-    estimatedCoins: 2500000,
+    description: 'Farming Fortune: +30',
+    source: 'Crafting',
+    stage: 'High Collection',
     iconEmoji: '🍄',
-    loreLines: ['Grants +30 Farming Fortune.']
+    loreLines: ['Farming Fortune: +30']
   },
   // Foraging
   {
@@ -169,11 +169,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Foraging',
     familyId: 'wood_affinity',
     tier: 1,
-    description: 'Increases Speed by +10% while in any forest area.',
-    source: 'Oak Log Collection VIII (Crafting)',
-    estimatedCoins: 15000,
+    description: 'Grants +10 Speed while in Graveyard or Forest.',
+    source: 'Crafting (Oak Log 8)',
+    stage: 'Early Collection',
     iconEmoji: '🪵',
-    loreLines: ['Increases Speed by +10% while in any forest.']
+    loreLines: ['Grants +10 Speed while in Graveyard or Forest.']
   },
   // Mining Family
   {
@@ -183,11 +183,12 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'mine_affinity',
     tier: 1,
-    description: 'Increases Speed by +10% while in Coal, Gold, or Deep Caverns.',
-    source: 'Julia NPC (Hub) - 2,500 Coins',
-    estimatedCoins: 2500,
+    description: 'Grants +25 Speed while in Mining Islands.',
+    source: 'Julia (2.5K)',
+    npcCost: '2,500 Coins',
+    stage: 'NPC Shop',
     iconEmoji: '⛏️',
-    loreLines: ['Increases Speed by +10% while mining.']
+    loreLines: ['Grants +25 Speed while in Mining Islands.']
   },
   {
     id: 'MAGNETIC_TALISMAN',
@@ -196,11 +197,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'magnetic',
     tier: 1,
-    description: 'Increases item pickup radius by 3x.',
-    source: 'Emerald Collection III (Crafting)',
-    estimatedCoins: 12000,
+    description: 'Increases the item pick up range by 3x.',
+    source: 'Crafting (Emerald 3)',
+    stage: 'Early Collection',
     iconEmoji: '🧲',
-    loreLines: ['Increases pickup radius by 3x.']
+    loreLines: ['Increases the item pick up range by 3x.']
   },
   {
     id: 'GRAVITY_TALISMAN',
@@ -209,11 +210,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'gravity',
     tier: 1,
-    description: 'Grants +1 to +10 Strength and Defense near island center.',
-    source: 'Obsidian Collection III (Crafting)',
-    estimatedCoins: 18000,
+    description: 'Grants between +1 and +10 Strength and Defense the closer you are to the center of an island.',
+    source: 'Crafting (Obsidian 3)',
+    stage: 'Early Collection',
     iconEmoji: '🪐',
-    loreLines: ['Grants bonus stats near island center.']
+    loreLines: ['Grants between +1 and +10 Strength and Defense near island center.']
   },
   {
     id: 'COINS_TALISMAN',
@@ -222,11 +223,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'coins',
     tier: 1,
-    description: 'Causes monsters to drop coins upon death.',
-    source: 'Emerald Collection II (Crafting)',
-    estimatedCoins: 3000,
+    description: 'Spawns random coins around you if you are on a public island.',
+    source: 'Crafting (Emerald 2)',
+    stage: 'Early Collection',
     iconEmoji: '🪙',
-    loreLines: ['Monsters drop bonus coins.']
+    loreLines: ['Spawns random coins around you if you are on a public island.']
   },
   {
     id: 'EMERALD_RING',
@@ -235,11 +236,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Mining',
     familyId: 'emerald_ring',
     tier: 1,
-    description: 'Grants +1 Coin every minute while in hub.',
-    source: 'Emerald Collection V (Crafting)',
-    estimatedCoins: 25000,
+    description: 'Gives +1 coin every minute.',
+    source: 'Crafting (Emerald 5)',
+    stage: 'Early Collection',
     iconEmoji: '🟢',
-    loreLines: ['Grants +1 Coin per minute.']
+    loreLines: ['Gives +1 coin every minute.']
   },
   // Fishing (Seal of the Seas Family)
   {
@@ -249,11 +250,11 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Fishing',
     familyId: 'sea_seal',
     tier: 1,
-    description: 'Reduce damage taken from Sea Creatures by 10%.',
-    source: 'Fishing Quest Reward',
-    estimatedCoins: 85000,
+    description: 'Magic Find: +1% Grants +1 coin for every 25 coins you gain from mobs.',
+    source: '"Lost Treasures" quest (Steal coins option)',
+    stage: 'Quest',
     iconEmoji: '🌊',
-    loreLines: ['Reduce damage taken from Sea Creatures by 10%.']
+    loreLines: ['Magic Find: +1%', 'Grants +1 coin for every 25 coins you gain from mobs.']
   },
   {
     id: 'SEAL_OF_THE_OCEANS',
@@ -262,10 +263,10 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Fishing',
     familyId: 'sea_seal',
     tier: 2,
-    description: 'Reduce damage taken from Sea Creatures by 20%.',
-    source: '"Lost Treasures" Quest Reward',
-    estimatedCoins: 750000,
+    description: 'Magic Find: +1% Grants +1 coin for every 25 coins you gain from mobs.',
+    source: '"Lost Treasures" quest (Honest option)',
+    stage: 'Quest',
     iconEmoji: '🌊',
-    loreLines: ['Reduce damage taken from Sea Creatures by 20%.']
+    loreLines: ['Magic Find: +1%', 'Grants +1 coin for every 25 coins you gain from mobs.']
   }
 ];

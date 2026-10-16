@@ -9,11 +9,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_compactor',
     tier: 1,
-    description: 'Automatically compacts 1 item type into enchanted form.',
-    source: 'Redstone Collection IX (Crafting)',
-    estimatedCoins: 120000,
+    description: 'Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 1 configurable slots.',
+    source: 'Crafting (Redstone 9)',
+    stage: 'High Collection',
     iconEmoji: '⚙️',
-    loreLines: ['Compacts 1 configured item.']
+    loreLines: ['Automatically compacts materials.', '1 configurable slot.']
   },
   {
     id: 'PERSONAL_COMPACTOR_5000',
@@ -22,11 +22,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_compactor',
     tier: 2,
-    description: 'Automatically compacts up to 3 item types.',
-    source: 'Redstone Collection XI (Crafting)',
-    estimatedCoins: 450000,
+    description: 'Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 3 configurable slots.',
+    source: 'Crafting (Redstone 11)',
+    stage: 'High Collection',
     iconEmoji: '⚙️',
-    loreLines: ['Compacts up to 3 configured items.']
+    loreLines: ['Automatically compacts materials.', '3 configurable slots.']
   },
   {
     id: 'PERSONAL_COMPACTOR_6000',
@@ -35,11 +35,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_compactor',
     tier: 3,
-    description: 'Automatically compacts up to 7 item types.',
-    source: 'Redstone Collection XIII (Crafting)',
-    estimatedCoins: 1800000,
+    description: 'Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 7 configurable slots.',
+    source: 'Crafting (Redstone 13)',
+    stage: 'High Collection',
     iconEmoji: '⚙️',
-    loreLines: ['Compacts up to 7 configured items.']
+    loreLines: ['Automatically compacts materials.', '7 configurable slots.']
   },
   {
     id: 'PERSONAL_COMPACTOR_7000',
@@ -48,11 +48,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_compactor',
     tier: 4,
-    description: 'Automatically compacts up to 12 item types.',
-    source: 'Redstone Collection XIV (Crafting)',
-    estimatedCoins: 7500000,
+    description: 'Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 12 configurable slots.',
+    source: 'Crafting (Redstone 14)',
+    stage: 'High Collection',
     iconEmoji: '⚙️',
-    loreLines: ['Compacts up to 12 configured items.']
+    loreLines: ['Automatically compacts materials.', '12 configurable slots.']
   },
   // Personal Deletor Family
   {
@@ -62,11 +62,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_deletor',
     tier: 1,
-    description: 'Automatically deletes 1 junk item type on pickup.',
-    source: 'Iron Ingot Collection IX (Crafting)',
-    estimatedCoins: 85000,
+    description: 'Automatically deletes the selected items on pickup. This item has 1 configurable slots.',
+    source: 'Crafting (Iron Ingot 9)',
+    stage: 'High Collection',
     iconEmoji: '🗑️',
-    loreLines: ['Deletes 1 configured item.']
+    loreLines: ['Automatically deletes selected items on pickup.', '1 configurable slot.']
   },
   {
     id: 'PERSONAL_DELETOR_5000',
@@ -75,11 +75,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_deletor',
     tier: 2,
-    description: 'Automatically deletes up to 3 junk item types.',
-    source: 'Iron Ingot Collection X (Crafting)',
-    estimatedCoins: 350000,
+    description: 'Automatically deletes the selected items on pickup. This item has 3 configurable slots.',
+    source: 'Crafting (Iron Ingot 10)',
+    stage: 'High Collection',
     iconEmoji: '🗑️',
-    loreLines: ['Deletes up to 3 configured items.']
+    loreLines: ['Automatically deletes selected items on pickup.', '3 configurable slots.']
   },
   {
     id: 'PERSONAL_DELETOR_6000',
@@ -88,11 +88,11 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_deletor',
     tier: 3,
-    description: 'Automatically deletes up to 7 junk item types.',
-    source: 'Iron Ingot Collection XI (Crafting)',
-    estimatedCoins: 1500000,
+    description: 'Automatically deletes the selected items on pickup. This item has 7 configurable slots.',
+    source: 'Crafting (Iron Ingot 11)',
+    stage: 'High Collection',
     iconEmoji: '🗑️',
-    loreLines: ['Deletes up to 7 configured items.']
+    loreLines: ['Automatically deletes selected items on pickup.', '7 configurable slots.']
   },
   {
     id: 'PERSONAL_DELETOR_7000',
@@ -101,10 +101,10 @@ export const AUTOMATION_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'personal_deletor',
     tier: 4,
-    description: 'Automatically deletes up to 12 junk item types.',
-    source: 'Iron Ingot Collection XII (Crafting)',
-    estimatedCoins: 6500000,
+    description: 'Automatically deletes the selected items on pickup. This item has 12 configurable slots.',
+    source: 'Crafting (Iron Ingot 12)',
+    stage: 'High Collection',
     iconEmoji: '🗑️',
-    loreLines: ['Deletes up to 12 configured items.']
+    loreLines: ['Automatically deletes selected items on pickup.', '12 configurable slots.']
   }
 ];

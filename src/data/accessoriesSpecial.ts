@@ -9,11 +9,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'campfire',
     tier: 1,
-    description: 'Increases natural regeneration rate.',
-    source: '"Trial of Fire" Quest Tier 1',
-    estimatedCoins: 1000,
+    description: 'Regenerates 8~12 health per second while burning.',
+    source: '"Trial of Fire" quest',
+    stage: 'Quest',
     iconEmoji: '🔥',
-    loreLines: ['Campfire Trial Badge I.']
+    loreLines: ['Regenerates 8~12 health per second while burning.']
   },
   {
     id: 'CAMPFIRE_ADEPT_BADGE',
@@ -22,11 +22,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'campfire',
     tier: 2,
-    description: 'Increases natural regeneration rate.',
-    source: '"Trial of Fire" Quest Tier 7',
-    estimatedCoins: 15000,
+    description: 'Regenerates 14~20 health per second while burning.',
+    source: '"Trial of Fire" quest',
+    stage: 'Quest',
     iconEmoji: '🔥',
-    loreLines: ['Campfire Trial Badge II.']
+    loreLines: ['Regenerates 14~20 health per second while burning.']
   },
   {
     id: 'CAMPFIRE_CULTIST_BADGE',
@@ -35,11 +35,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'campfire',
     tier: 3,
-    description: 'Increases natural regeneration rate.',
-    source: '"Trial of Fire" Quest Tier 14',
-    estimatedCoins: 85000,
+    description: 'Regenerates 22~46 health per second while burning.',
+    source: '"Trial of Fire" quest',
+    stage: 'Quest',
     iconEmoji: '🔥',
-    loreLines: ['Campfire Trial Badge III.']
+    loreLines: ['Regenerates 22~46 health per second while burning.']
   },
   {
     id: 'CAMPFIRE_SCION_BADGE',
@@ -48,11 +48,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'campfire',
     tier: 4,
-    description: 'Increases natural regeneration rate.',
-    source: '"Trial of Fire" Quest Tier 21',
-    estimatedCoins: 500000,
+    description: 'Regenerates 32 health per second while burning.',
+    source: '"Trial of Fire" quest',
+    stage: 'Quest',
     iconEmoji: '🔥',
-    loreLines: ['Campfire Trial Badge IV.']
+    loreLines: ['Regenerates 32 health per second while burning.']
   },
   {
     id: 'CAMPFIRE_GOD_BADGE',
@@ -61,11 +61,14 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'campfire',
     tier: 5,
-    description: 'Maximizes health regeneration rate.',
-    source: '"Trial of Fire" Quest Tier 28',
-    estimatedCoins: 6000000,
+    description: 'Regenerates 48~64 health per second while burning. Also regenerates 7~15 health per second.',
+    source: '"Trial of Fire" quest',
+    stage: 'Quest',
     iconEmoji: '🔥',
-    loreLines: ['Campfire Trial Badge V (Max).']
+    loreLines: [
+      'Regenerates 48~64 health per second while burning.',
+      'Also regenerates 7~15 health per second.'
+    ]
   },
   // Feather Line
   {
@@ -75,11 +78,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'feather',
     tier: 1,
-    description: 'Reduces fall damage by 5%.',
-    source: 'Feather Collection IV (Crafting)',
-    estimatedCoins: 3500,
+    description: 'Increases the minimum height to take fall damage by 5 blocks.',
+    source: 'Crafting (Feather 4)',
+    stage: 'Early Collection',
     iconEmoji: '🪶',
-    loreLines: ['Reduces fall damage by 5%.']
+    loreLines: ['Increases the minimum height to take fall damage by 5 blocks.']
   },
   {
     id: 'FEATHER_RING',
@@ -88,11 +91,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'feather',
     tier: 2,
-    description: 'Reduces fall damage by 10%.',
-    source: 'Feather Collection VII (Crafting)',
-    estimatedCoins: 45000,
+    description: 'Increases how high you can fall before taking fall damage by 7 blocks, and reduces fall damage by 5%.',
+    source: 'Crafting (Feather 7)',
+    stage: 'Mid Collection',
     iconEmoji: '🪶',
-    loreLines: ['Reduces fall damage by 10%.']
+    loreLines: ['Increases fall height by 7 blocks and reduces fall damage by 5%.']
   },
   {
     id: 'FEATHER_ARTIFACT',
@@ -101,11 +104,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'feather',
     tier: 3,
-    description: 'Reduces fall damage by 15%.',
-    source: 'Feather Collection IX (Crafting)',
-    estimatedCoins: 380000,
+    description: 'Increases how high you can fall before taking fall damage by 10 blocks, and reduces fall damage by 15%.',
+    source: 'Crafting (Feather 9)',
+    stage: 'High Collection',
     iconEmoji: '🪶',
-    loreLines: ['Reduces fall damage by 15%.']
+    loreLines: ['Increases fall height by 10 blocks and reduces fall damage by 15%.']
   },
   {
     id: 'GOLDEN_FEATHER_BOOTS',
@@ -114,11 +117,14 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'golden_feather_boots',
     tier: 1,
-    description: 'Immunity to fall damage and grants +10 Speed.',
-    source: 'Feather Collection IX High Crafting',
-    estimatedCoins: 4500000,
+    description: 'Grants 10 seconds of slow falling while falling from more than 6 blocks. (effect is disabled while sneaking) Also negates fall damage.',
+    source: 'Crafting (Feather 9)',
+    stage: 'High Collection',
     iconEmoji: '🪶',
-    loreLines: ['Complete fall damage immunity.']
+    loreLines: [
+      'Grants 10 seconds of slow falling when falling >6 blocks.',
+      '(effect is disabled while sneaking) Also negates fall damage.'
+    ]
   },
   // Speed Line
   {
@@ -128,11 +134,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'speed',
     tier: 1,
-    description: 'Gives +1 Speed.',
-    source: 'Sugar Cane Collection II (Crafting)',
-    estimatedCoins: 2000,
+    description: 'Speed: +1',
+    source: 'Crafting (Sugar Cane 2)',
+    stage: 'Early Collection',
     iconEmoji: '⚡',
-    loreLines: ['Gives +1 Speed.']
+    loreLines: ['Speed: +1']
   },
   {
     id: 'SPEED_RING',
@@ -141,11 +147,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'speed',
     tier: 2,
-    description: 'Gives +3 Speed.',
-    source: 'Sugar Cane Collection V (Crafting)',
-    estimatedCoins: 25000,
+    description: 'Speed: +3',
+    source: 'Crafting (Sugar Cane 5)',
+    stage: 'Early Collection',
     iconEmoji: '⚡',
-    loreLines: ['Gives +3 Speed.']
+    loreLines: ['Speed: +3']
   },
   {
     id: 'SPEED_ARTIFACT',
@@ -154,11 +160,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'speed',
     tier: 3,
-    description: 'Gives +5 Speed.',
-    source: 'Sugar Cane Collection VIII (Crafting)',
-    estimatedCoins: 420000,
+    description: 'Speed: +5',
+    source: 'Crafting (Sugar Cane 8)',
+    stage: 'Mid Collection',
     iconEmoji: '⚡',
-    loreLines: ['Gives +5 Speed.']
+    loreLines: ['Speed: +5']
   },
   // Utility & Unique
   {
@@ -168,11 +174,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'night_vision',
     tier: 1,
-    description: 'Grants permanent Night Vision effect.',
-    source: 'Mushroom Collection VII (Crafting)',
-    estimatedCoins: 15000,
+    description: 'Grants Night Vision while in inventory or Accessory Bag.',
+    source: 'Crafting (Mushroom 7)',
+    stage: 'Mid Collection',
     iconEmoji: '👁️',
-    loreLines: ['Grants permanent Night Vision.']
+    loreLines: ['Grants Night Vision while in inventory or Accessory Bag.']
   },
   {
     id: 'SCAVENGER_TALISMAN',
@@ -181,11 +187,12 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'scavenger',
     tier: 1,
-    description: 'Monsters drop +0.5 coins per level when killed.',
-    source: 'Julia NPC (Hub) - 10,000 Coins',
-    estimatedCoins: 10000,
+    description: 'Grants extra coins on mob kills.',
+    source: 'Julia (10K)',
+    npcCost: '10,000 Coins',
+    stage: 'NPC Shop',
     iconEmoji: '💰',
-    loreLines: ['Monsters drop extra coins.']
+    loreLines: ['Grants extra coins on mob kills.']
   },
   {
     id: 'VILLAGE_AFFINITY_TALISMAN',
@@ -194,11 +201,12 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'village_affinity',
     tier: 1,
-    description: 'Increases Speed by +10% while in the Hub Village.',
-    source: 'Julia NPC (Hub) - 2,000 Coins',
-    estimatedCoins: 2000,
+    description: 'Grants +10 Speed while in Village.',
+    source: 'Julia (2K)',
+    npcCost: '2,000 Coins',
+    stage: 'NPC Shop',
     iconEmoji: '🏘️',
-    loreLines: ['+10% Speed in Hub Village.']
+    loreLines: ['Grants +10 Speed while in Village.']
   },
   {
     id: 'PIGGY_BANK',
@@ -207,11 +215,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'piggy_bank',
     tier: 1,
-    description: 'Saves your coins from being lost upon death.',
-    source: 'Raw Porkchop Collection V (Crafting)',
-    estimatedCoins: 45000,
+    description: 'Saves your coins on death. Works only when in player inventory. Triggers when losing 20,000+ coins',
+    source: 'Crafting (Raw Porkchop 5)',
+    stage: 'Early Collection',
     iconEmoji: '🐷',
-    loreLines: ['Saves coins upon death.']
+    loreLines: ['Saves your coins on death. Works only in inventory.', 'Triggers when losing 20,000+ coins.']
   },
   {
     id: 'PIGS_FOOT',
@@ -220,11 +228,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'pigs_foot',
     tier: 1,
-    description: 'Grants +1 Speed and +1 Health.',
+    description: 'Speed: +1',
     source: 'Fynn ("Ender Node Hunt" quest)',
-    estimatedCoins: 350000,
+    stage: 'Quest',
     iconEmoji: '🐾',
-    loreLines: ['"Ender Node Hunt" quest reward.']
+    loreLines: ['Speed: +1']
   },
   {
     id: 'EXPERIENCE_ARTIFACT',
@@ -233,11 +241,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'experience',
     tier: 1,
-    description: 'Gain +25% more experience orbs from all sources.',
-    source: 'Lapis Lazuli Collection IX (Crafting)',
-    estimatedCoins: 750000,
+    description: 'Every single experience orb grants 25% more XP.',
+    source: 'Crafting (Lapis Lazuli 9)',
+    stage: 'High Collection',
     iconEmoji: '✨',
-    loreLines: ['+25% Experience Orbs.']
+    loreLines: ['Every single experience orb grants 25% more XP.']
   },
   {
     id: 'DAYFREEZER',
@@ -246,11 +254,12 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'dayfreezer',
     tier: 1,
-    description: 'Freezes time on your private island to permanent Day.',
-    source: 'Zoe NPC (Hub) - 945 Bits',
-    estimatedCoins: 2500000,
+    description: 'Makes the time always seen as day while in inventory or accessory bag.',
+    source: 'Zoe (945)',
+    npcCost: '945 Bits',
+    stage: 'NPC Shop',
     iconEmoji: '☀️',
-    loreLines: ['Locks island time to Day.']
+    loreLines: ['Makes the time always seen as day while in inventory or accessory bag.']
   },
   {
     id: 'NIGHTFREEZER',
@@ -259,11 +268,12 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'nightfreezer',
     tier: 1,
-    description: 'Freezes time on your private island to permanent Night.',
-    source: 'Zoe NPC (Hub) - 945 Bits',
-    estimatedCoins: 2500000,
+    description: 'Makes the time always seen as night while in inventory or accessory bag.',
+    source: 'Zoe (945)',
+    npcCost: '945 Bits',
+    stage: 'NPC Shop',
     iconEmoji: '🌙',
-    loreLines: ['Locks island time to Night.']
+    loreLines: ['Makes the time always seen as night while in inventory or accessory bag.']
   },
   {
     id: 'SKYS_BADGE',
@@ -272,10 +282,11 @@ export const SPECIAL_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Misc',
     familyId: 'skys_badge',
     tier: 1,
-    description: 'Prestigious badge for SkyBlock collectors.',
-    source: 'Sky NPC - 21.5M Coins',
-    estimatedCoins: 21500000,
+    description: 'Health: +10 Pet Luck: +1',
+    source: 'Sky (21.5M)',
+    npcCost: '21,500,000 Coins',
+    stage: 'NPC Shop',
     iconEmoji: '🌟',
-    loreLines: ['Purchased from Sky for 21.5M Coins.']
+    loreLines: ['Health: +10 Pet Luck: +1']
   }
 ];

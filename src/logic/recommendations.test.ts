@@ -3,8 +3,19 @@ import { evaluatePlayerAccessories } from './accessoryMatcher.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
 import { SAMPLE_PROFILES } from '../data/sampleProfiles.ts';
 
+const STAGE_ORDER: Record<string, number> = {
+  'NPC Shop': 1,
+  'Early Collection': 2,
+  'Quest': 3,
+  'Mid Collection': 4,
+  'High Collection': 5,
+  'Event': 6,
+  'Slayer': 7,
+  'Rare Drop': 8
+};
+
 describe('recommendationsEngine', () => {
-  it('should rank cheapest missing accessories by lowest coin cost per MP', () => {
+  it('should rank missing accessories by authentic CraftersMC milestone stages', () => {
     // Earlygame adventurer is missing many accessories
     const earlygame = SAMPLE_PROFILES.find(p => p.id === 'earlygame')!;
     const evaluated = evaluatePlayerAccessories(earlygame.items);
@@ -17,33 +28,39 @@ describe('recommendationsEngine', () => {
           e.status === 'UPGRADABLE_NEXT' && e.upgradeRecommendation
             ? e.upgradeRecommendation.additionalMp
             : THEME_CONFIG.rarityMap[rarity]?.magicalPower || 3;
-        const cost = e.definition.estimatedCoins || 5000;
-        const costPerMp = mpGain > 0 ? cost / mpGain : Infinity;
+        const stage = e.definition.stage || 'Mid Collection';
+        const stageWeight = STAGE_ORDER[stage] || 5;
+
         return {
           id: e.definition.id,
           name: e.definition.name,
-          cost,
-          mpGain,
-          costPerMp
+          stage,
+          stageWeight,
+          mpGain
         };
       })
-      .filter(c => c.costPerMp > 0 && c.costPerMp < Infinity)
-      .sort((a, b) => a.costPerMp - b.costPerMp);
+      .sort((a, b) => {
+        if (a.stageWeight !== b.stageWeight) {
+          return a.stageWeight - b.stageWeight;
+        }
+        return b.mpGain - a.mpGain;
+      });
 
     expect(candidates.length).toBeGreaterThan(5);
 
-    // Verify sorted ascending by costPerMp
+    // Verify sorted ascending by stageWeight
     for (let i = 0; i < candidates.length - 1; i++) {
-      expect(candidates[i].costPerMp).toBeLessThanOrEqual(candidates[i + 1].costPerMp);
+      expect(candidates[i].stageWeight).toBeLessThanOrEqual(candidates[i + 1].stageWeight);
     }
 
-    // Affordable early missing items (like Skeleton / Mine Affinity / Village / Coins) should be in top candidates
-    const topIds = candidates.slice(0, 5).map(c => c.id);
-    expect(topIds.some(id => id.includes('SKELETON') || id.includes('MINE_AFFINITY') || id.includes('VILLAGE_AFFINITY') || id.includes('COINS'))).toBe(true);
+    // Early NPC Hub shop items (like Skeleton, Zombie, Mine Affinity, Village Affinity) should be in top candidates
+    const topCandidates = candidates.slice(0, 5);
+    expect(topCandidates.some(c => c.stage === 'NPC Shop' || c.stage === 'Early Collection')).toBe(true);
 
-    // Multi-million coin items (like Sky's Badge or Candy Relic or Frostclaw) should not be in the top 3
-    expect(topIds.slice(0, 3)).not.toContain('SKYS_BADGE');
-    expect(topIds.slice(0, 3)).not.toContain('CANDY_RELIC');
-    expect(topIds.slice(0, 3)).not.toContain('FROSTCLAW_RELIC');
+    // Late Slayer and multi-step Event items should not precede early NPC Shop / Early Collection
+    const topIds = topCandidates.map(c => c.id);
+    expect(topIds).not.toContain('FROSTCLAW_RELIC');
+    expect(topIds).not.toContain('CANDY_RELIC');
+    expect(topIds).not.toContain('REAPER_ORB');
   });
 });
