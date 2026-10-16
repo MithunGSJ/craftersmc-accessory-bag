@@ -10,6 +10,8 @@ export interface AuctionPriceSnapshot {
   readonly maxPrice: number;
   readonly avgPrice: number;
   readonly count: number;
+  readonly totalCount?: number;
+  readonly hasBin?: boolean;
 }
 
 export const BAZAAR_SNAPSHOT: Record<string, MaterialPriceSnapshot> = snapshot.bazaar as Record<string, MaterialPriceSnapshot>;

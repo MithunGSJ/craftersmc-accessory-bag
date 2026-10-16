@@ -57,6 +57,40 @@ describe('pricingEngine', () => {
     expect(breakdown.some(b => b.itemId === 'enchanted_feather' && b.count === 64)).toBe(true);
   });
 
+  it('evaluates Experience Artifact recipe: 9 Enchanted Lapis Blocks (1440 Enchanted Lapis)', () => {
+    const expDef = findAccessoryById('EXPERIENCE_ARTIFACT');
+    expect(expDef).toBeDefined();
+
+    const expRecipe = ACCESSORY_RECIPES['EXPERIENCE_ARTIFACT'];
+    expect(expRecipe).toBeDefined();
+    expect(expRecipe.ingredients[0].itemId).toBe('enchanted_lapis_block');
+    expect(expRecipe.ingredients[0].count).toBe(9);
+    expect(expRecipe.ingredients[0].subMaterial?.count).toBe(1440);
+    expect(expRecipe.ingredients[0].subMaterial?.itemId).toBe('enchanted_lapis_lazuli');
+
+    const blockPrice = getBazaarMaterialPrice('enchanted_lapis_block');
+    const lapisPrice = getBazaarMaterialPrice('enchanted_lapis_lazuli');
+    const nineBlocksCost = 9 * blockPrice;
+    const fourteenFortyLapisCost = 1440 * lapisPrice;
+
+    // Verify 9 Enchanted Lapis Blocks cost LESS than 1440 Enchanted Lapis Lazuli
+    expect(nineBlocksCost).toBeLessThan(fourteenFortyLapisCost);
+
+    const priceDetails = evaluateAccessoryPrice(expDef!);
+    expect(priceDetails.craftCost).toBeGreaterThan(0);
+    expect(priceDetails.craftBreakdown?.[0].subMaterial?.isCheaper).toBe(false); // Submaterial is more expensive, buying blocks directly is cheaper
+  });
+
+  it('calculates clean BIN auction stats without troll outliers for Experience Artifact', () => {
+    const expAuction = getAccessoryAuctionPrice('EXPERIENCE_ARTIFACT');
+    expect(expAuction).toBeDefined();
+    // Min, avg, max should reflect the actual ~385k market, NOT 1.9M avg or 5M max
+    expect(expAuction?.minPrice).toBe(385000);
+    expect(expAuction?.maxPrice).toBeLessThan(500000);
+    expect(expAuction?.avgPrice).toBeLessThan(400000);
+    expect(expAuction?.hasBin).toBe(true);
+  });
+
   it('evaluates NPC shop items correctly', () => {
     const mineAffinity = findAccessoryById('MINE_AFFINITY_TALISMAN');
     expect(mineAffinity).toBeDefined();

@@ -2,27 +2,26 @@
 
 ## Current Phase
 
-Completed (Pixel-Art Wiki Icons, Golden Feather Boots Tier 4 Upgrade, CraftersMC Bazaar & Auction Live Pricing Engine)
+Completed (Audited Crafting Recipes & In-Game 3x3 Grids, BIN Auction Outlier Trimming, Submaterial Cost Comparison)
 
 ## What Changed Last
 
-- Replaced all emojis across cards, modals, and recommendation panels with authentic, official CraftersMC Wiki pixel-art sprites stored locally in `public/icons/accessories/<id>.png` with crisp `image-rendering: pixelated;` and emoji fallback (`AccessoryIcon.tsx`).
-- Upgraded `FEATHER_ARTIFACT` to `GOLDEN_FEATHER_BOOTS` as Tier 4 of the `feather` upgrade family in `src/data/accessoriesSpecial.ts` and defined its craft recipe (Feather Artifact + 64x Enchanted Feathers).
-- Built `src/logic/pricingEngine.ts` and `src/data/accessoryRecipes.ts`:
-  - Defined recipes for craftable accessories.
-  - Queries CraftersMC Bazaar details (`/v1/skyblock/bazaar/{itemId}/details`) for `weeklyAveragePrice` of each ingredient, multiplies by quantity needed, and combines them (including base accessory costs) to calculate the authentic Craft Cost.
-  - Queries CraftersMC active auctions (`/v1/skyblock/auctions`) to extract least (min), highest (max), and average (avg) auction prices for mob drops and accessories.
-  - Displays dynamic pricing badges on cards, itemized crafting & auction breakdowns in modals, and cost-per-MP efficiency metrics in the recommendations panel.
-- Added comprehensive unit tests in `src/logic/pricingEngine.test.ts` (100% test pass: 32/32 tests across 10 test suites).
-- Passed all code quality gates: 0 TypeScript errors, 0 ESLint warnings, all 39 source files under 300 lines, and captured visual Playwright verification screenshots.
+- Audited and corrected `EXPERIENCE_ARTIFACT` recipe: updated to exact in-game 3x3 filled grid of **9x Enchanted Lapis Block** (equivalent to **1,440x Enchanted Lapis Lazuli**).
+- Incorporated dual-tier material comparison: computed direct Bazaar cost for 9x Enchanted Lapis Blocks (~230.6K coins) vs 1,440x Enchanted Lapis Lazuli (~699.2K coins), proving that buying 9x Blocks directly saves ~468.6K coins, and displayed this advice in the modal!
+- Overhauled CraftersMC Auction House analytics: prioritized active Buy-It-Now (BIN) listings and applied outlier trimming to filter out unbid starting bids (such as 1-coin bids and 5.0M unbid troll auctions).
+  - Corrected Experience Artifact from skewed 1.9M avg / 5.0M max to authentic **385.0K Lowest BIN / 385.5K Market Avg / 386.0K Highest BIN**!
+  - Corrected Bat Talisman from 223 coins (fake starting bid) to authentic **2.49M Lowest BIN / 2.66M Market Avg / 3.0M Highest BIN**!
+- Updated unit tests in `src/logic/pricingEngine.test.ts` (34/34 passing tests across 10 test suites).
+- Maintained strict code quality: all 39 source files under 300 lines, 0 TypeScript errors, 0 ESLint warnings.
+- Captured visual Playwright screenshot in `evidence/FEAT-013-experience-artifact-audit.png`.
 
 ## Known Problems
 
-- None. All user requirements and acceptance criteria verified and passing.
+- None. All user questions answered, recipes audited, and auction outliers eliminated.
 
 ## Next Three Steps
 
 1. Application is active on `http://localhost:5173`.
-2. Review the live visual demonstration with pixel-art sprites and real-time Bazaar/Auction valuations.
-3. Ready for user interaction and audit.
+2. Inspect Experience Artifact and other accessories in the modal to see dual-tier material pricing and clean BIN market distribution.
+3. Ready for final user inspection and review.
 

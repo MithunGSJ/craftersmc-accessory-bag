@@ -2,12 +2,23 @@ import { ACCESSORY_RECIPES, AccessoryRecipe } from '../data/accessoryRecipes.ts'
 import { BAZAAR_SNAPSHOT, AUCTION_SNAPSHOT, AuctionPriceSnapshot } from '../data/pricingData.ts';
 import { AccessoryDefinition } from '../data/accessoryTypes.ts';
 
+export interface SubMaterialComparison {
+  readonly itemId: string;
+  readonly name: string;
+  readonly count: number;
+  readonly unitPrice: number;
+  readonly totalCost: number;
+  readonly isCheaper: boolean;
+  readonly priceDifference: number;
+}
+
 export interface IngredientCost {
   readonly itemId: string;
   readonly name: string;
   readonly count: number;
   readonly unitPrice: number;
   readonly totalCost: number;
+  readonly subMaterial?: SubMaterialComparison;
 }
 
 export interface AccessoryPriceDetails {
@@ -98,13 +109,34 @@ export function calculateCraftCost(
   for (const ing of recipe.ingredients) {
     const unitPrice = getBazaarMaterialPrice(ing.itemId);
     const subtotal = Math.round(unitPrice * ing.count);
-    totalCost += subtotal;
+
+    let subComp: SubMaterialComparison | undefined;
+    if (ing.subMaterial) {
+      const subUnitPrice = getBazaarMaterialPrice(ing.subMaterial.itemId);
+      const subTotal = Math.round(subUnitPrice * ing.subMaterial.count);
+      const isCheaper = subTotal > 0 && (subtotal === 0 || subTotal < subtotal);
+      const priceDifference = Math.abs(subtotal - subTotal);
+      subComp = {
+        itemId: ing.subMaterial.itemId,
+        name: ing.subMaterial.name,
+        count: ing.subMaterial.count,
+        unitPrice: subUnitPrice,
+        totalCost: subTotal,
+        isCheaper,
+        priceDifference
+      };
+    }
+
+    const effectiveItemCost = subtotal > 0 ? subtotal : (subComp?.totalCost || 0);
+    totalCost += effectiveItemCost;
+
     breakdown.push({
       itemId: ing.itemId,
       name: ing.name,
       count: ing.count,
       unitPrice,
-      totalCost: subtotal
+      totalCost: effectiveItemCost,
+      subMaterial: subComp
     });
   }
 

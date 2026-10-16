@@ -1,7 +1,14 @@
+export interface SubMaterial {
+  readonly itemId: string;
+  readonly name: string;
+  readonly count: number;
+}
+
 export interface RecipeIngredient {
   readonly itemId: string;
   readonly name: string;
   readonly count: number;
+  readonly subMaterial?: SubMaterial;
 }
 
 export interface AccessoryRecipe {
@@ -112,7 +119,14 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   },
   EXPERIENCE_ARTIFACT: {
     targetId: 'EXPERIENCE_ARTIFACT',
-    ingredients: [{ itemId: 'enchanted_lapis_lazuli', name: 'Enchanted Lapis Lazuli', count: 512 }]
+    ingredients: [
+      {
+        itemId: 'enchanted_lapis_block',
+        name: 'Enchanted Lapis Block',
+        count: 9,
+        subMaterial: { itemId: 'enchanted_lapis_lazuli', name: 'Enchanted Lapis Lazuli', count: 1440 }
+      }
+    ]
   },
 
   // Combat / Mob items

@@ -133,28 +133,39 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
               <div style={{ fontSize: '0.8rem', color: '#93c5fd', fontWeight: 600, marginBottom: '6px' }}>
                 🌾 Crafting Recipe (Bazaar Material Weekly Averages):
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {priceInfo.craftBreakdown.map((ing, idx) => (
                   <div
                     key={idx}
                     style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontSize: '0.78rem',
                       background: 'rgba(255,255,255,0.03)',
-                      padding: '4px 8px',
+                      padding: '5px 8px',
                       borderRadius: '6px'
                     }}
                   >
-                    <span style={{ color: 'var(--text-secondary)' }}>
-                      • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
-                      <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>
-                        (@ {formatCoins(ing.unitPrice)}/ea)
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
+                      <span style={{ color: 'var(--text-secondary)' }}>
+                        • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
+                        <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>
+                          (@ {formatCoins(ing.unitPrice)}/ea)
+                        </span>
                       </span>
-                    </span>
-                    <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>
-                      {formatCoins(ing.totalCost)}
-                    </span>
+                      <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>
+                        {formatCoins(ing.totalCost)}
+                      </span>
+                    </div>
+                    {ing.subMaterial && (
+                      <div style={{ fontSize: '0.72rem', marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
+                        <span style={{ color: '#94a3b8' }}>
+                          ↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})
+                        </span>
+                        <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
+                          {ing.subMaterial.isCheaper
+                            ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
+                            : `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!`}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -172,20 +183,23 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
               padding: '8px 12px',
               marginTop: '6px'
             }}>
-              <div style={{ fontSize: '0.78rem', color: '#facc15', fontWeight: 700, marginBottom: '4px' }}>
-                🏛️ Active CraftersMC Auction House ({priceInfo.auction.count} listings):
+              <div style={{ fontSize: '0.78rem', color: '#facc15', fontWeight: 700, marginBottom: '4px', display: 'flex', justifyContent: 'space-between' }}>
+                <span>🏛️ CraftersMC Auction House ({priceInfo.auction.hasBin !== false ? 'BIN Market' : 'Bidding'})</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>
+                  {priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings
+                </span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '0.75rem', textAlign: 'center' }}>
                 <div>
-                  <div style={{ color: 'var(--text-muted)' }}>Least (Min)</div>
+                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)'}</div>
                   <div style={{ fontWeight: 700, color: '#38bdf8' }}>{formatCoins(priceInfo.auction.minPrice)}</div>
                 </div>
                 <div>
-                  <div style={{ color: 'var(--text-muted)' }}>Average</div>
+                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average'}</div>
                   <div style={{ fontWeight: 700, color: '#facc15' }}>{formatCoins(priceInfo.auction.avgPrice)}</div>
                 </div>
                 <div>
-                  <div style={{ color: 'var(--text-muted)' }}>Highest (Max)</div>
+                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)'}</div>
                   <div style={{ fontWeight: 700, color: '#f87171' }}>{formatCoins(priceInfo.auction.maxPrice)}</div>
                 </div>
               </div>
