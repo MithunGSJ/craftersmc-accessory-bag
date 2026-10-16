@@ -26,7 +26,7 @@
   {
     "id": "FEAT-005",
     "description": "Magical Power & Bag Statistics: Accurate computation of total Magical Power (MP), completion rate, rarity breakdown, and enrichment count.",
-    "status": "failing",
+    "status": "passing",
     "evidence": "evidence/FEAT-005-mp-stats.txt"
   },
   {
