@@ -1,11 +1,9 @@
 import React from 'react';
-import { playClickSound } from '../utils/soundEffects.ts';
 
 interface CustomLookupModalProps {
   readonly isOpen: boolean;
   readonly onClose: () => void;
   readonly onLookupApi: (username: string) => Promise<void>;
-  readonly onImportBase64: (base64: string, name: string) => void;
   readonly onLoadSimulated: (name: string) => void;
   readonly isLoading: boolean;
   readonly errorMessage: string | null;
@@ -15,15 +13,11 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   isOpen,
   onClose,
   onLookupApi,
-  onImportBase64,
   onLoadSimulated,
   isLoading,
   errorMessage
 }) => {
-  const [tab, setTab] = React.useState<'api' | 'nbt'>('api');
   const [username, setUsername] = React.useState('DarkKing0098994');
-  const [rawBase64, setRawBase64] = React.useState('');
-  const [customName, setCustomName] = React.useState('');
 
   if (!isOpen) return null;
 
@@ -31,13 +25,6 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
     e.preventDefault();
     if (!username.trim()) return;
     await onLookupApi(username.trim());
-  };
-
-  const handleNbtSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!rawBase64.trim()) return;
-    onImportBase64(rawBase64.trim(), customName.trim() || 'Custom Player');
-    onClose();
   };
 
   const handleQuickSimulate = () => {
@@ -50,7 +37,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div
         className="glass-card modal-content"
-        style={{ maxWidth: '520px' }}
+        style={{ maxWidth: '500px' }}
         onClick={e => e.stopPropagation()}
       >
         <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
@@ -58,32 +45,11 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
         </button>
 
         <h2 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '6px', color: '#FFFFFF' }}>
-          Player Lookup & Data Import
+          Player Lookup
         </h2>
         <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '18px' }}>
-          Query live CraftersMC Public API or test with your player gamertag.
+          Query live CraftersMC Public API for any player&apos;s SkyBlock accessory bag.
         </p>
-
-        <div className="filter-pills" style={{ marginBottom: '18px' }}>
-          <button
-            className={`pill-btn ${tab === 'api' ? 'active' : ''}`}
-            onClick={() => {
-              playClickSound();
-              setTab('api');
-            }}
-          >
-            Live CraftersMC API Lookup
-          </button>
-          <button
-            className={`pill-btn ${tab === 'nbt' ? 'active' : ''}`}
-            onClick={() => {
-              playClickSound();
-              setTab('nbt');
-            }}
-          >
-            Direct Base64 NBT Paste
-          </button>
-        </div>
 
         {errorMessage && (
           <div
@@ -118,86 +84,47 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
           </div>
         )}
 
-        {tab === 'api' ? (
-          <form onSubmit={handleApiSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-                PLAYER USERNAME, UUID, OR PIXEL ID *
-              </label>
-              <input
-                type="text"
-                className="search-input"
-                style={{ paddingLeft: '14px' }}
-                placeholder="e.g. DarkKing0098994"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                required
-              />
-            </div>
+        <form onSubmit={handleApiSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
+              PLAYER USERNAME, UUID, OR PIXEL ID *
+            </label>
+            <input
+              type="text"
+              className="search-input"
+              style={{ paddingLeft: '14px' }}
+              placeholder="e.g. DarkKing0098994"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+              autoFocus
+            />
+          </div>
 
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-              🔒 <strong>Server-Side Proxy:</strong> Requests are securely authenticated server-side. No API key is exposed to or required from your browser.
-            </div>
+          <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+            🔒 <strong>Server-Side Proxy:</strong> Requests are securely authenticated server-side. No API key is exposed to or required from your browser.
+          </div>
 
-            <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
-              <button
-                type="submit"
-                className="pill-btn active"
-                style={{ flex: 1, justifyContent: 'center', padding: '12px' }}
-                disabled={isLoading}
-              >
-                {isLoading ? '⏳ Fetching Profile...' : '🔍 Live API Fetch'}
-              </button>
-
-              <button
-                type="button"
-                className="pill-btn"
-                style={{ justifyContent: 'center', padding: '12px', borderColor: 'var(--accent-gold)' }}
-                onClick={handleQuickSimulate}
-              >
-                ⚡ Test Player
-              </button>
-            </div>
-          </form>
-        ) : (
-          <form onSubmit={handleNbtSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-                PLAYER ALIAS
-              </label>
-              <input
-                type="text"
-                className="search-input"
-                style={{ paddingLeft: '14px' }}
-                placeholder="e.g. ImportedBag_1"
-                value={customName}
-                onChange={e => setCustomName(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-                BASE64 GZIPPED NBT DATA *
-              </label>
-              <textarea
-                className="search-input"
-                style={{ padding: '10px 14px', height: '110px', resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: '0.78rem' }}
-                placeholder="H4sIAAAAAAAA/..."
-                value={rawBase64}
-                onChange={e => setRawBase64(e.target.value)}
-                required
-              />
-            </div>
-
+          <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
             <button
               type="submit"
               className="pill-btn active"
-              style={{ justifyContent: 'center', padding: '12px', marginTop: '6px' }}
+              style={{ flex: 1, justifyContent: 'center', padding: '12px' }}
+              disabled={isLoading}
             >
-              📥 Decode & Load Bag
+              {isLoading ? '⏳ Fetching Profile...' : '🔍 Live API Fetch'}
             </button>
-          </form>
-        )}
+
+            <button
+              type="button"
+              className="pill-btn"
+              style={{ justifyContent: 'center', padding: '12px', borderColor: 'var(--accent-gold)' }}
+              onClick={handleQuickSimulate}
+            >
+              ⚡ Test Player
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

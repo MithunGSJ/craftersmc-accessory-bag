@@ -9,7 +9,6 @@ import { RecommendationsPanel } from './components/RecommendationsPanel.tsx';
 import { CustomLookupModal } from './components/CustomLookupModal.tsx';
 import {
   loadSampleProfile,
-  loadFromBase64Nbt,
   fetchPlayerFromApi,
   createSimulatedProfileForPlayer,
   LoadedProfileData
@@ -74,12 +73,6 @@ export const App: React.FC = () => {
     } finally {
       setIsFetchingApi(false);
     }
-  };
-
-  const handleImportBase64 = (base64: string, name: string) => {
-    const data = loadFromBase64Nbt(base64, name);
-    setProfileData(data);
-    setCurrentProfileId('custom');
   };
 
   const handleLoadSimulated = (name: string) => {
@@ -176,7 +169,6 @@ export const App: React.FC = () => {
         isOpen={isLookupOpen}
         onClose={() => setIsLookupOpen(false)}
         onLookupApi={handleApiLookup}
-        onImportBase64={handleImportBase64}
         onLoadSimulated={handleLoadSimulated}
         isLoading={isFetchingApi}
         errorMessage={apiError}

@@ -2,23 +2,23 @@
 
 ## Current Phase
 
-Completed (FEAT-020: Server-Side API Key Security & Client Isolation)
+Completed (FEAT-021: Streamlined Player Lookup UI - Removed NBT Tab)
 
 ## What Changed Last
 
-- **Server-Side API Key Security & Client Isolation (FEAT-020)**:
-  - Encapsulated CraftersMC API Key strictly inside server-side environment (`.env` and Vite server proxy middleware).
-  - Updated `vite.config.ts`: Server proxy automatically attaches `X-API-Key` to outbound requests to `https://api.craftersmc.net` via `proxy.on('proxyReq')`.
-  - Removed all client-side API key code:
-    - Removed `DEFAULT_CRAFTERS_API_KEY` from `src/logic/profileLoader.ts`.
-    - Removed `apiKey` state, input field, and label from `src/components/CustomLookupModal.tsx`.
-    - Removed hardcoded `headers: { 'X-API-Key': ... }` from `src/logic/pricingEngine.ts`.
-    - Updated `src/App.tsx` and `src/components/CustomLookupModal.tsx` `handleApiLookup` signatures to omit API key arguments.
-  - Added `.env` and `.env.*` to `.gitignore`, created `.env.example`.
-  - Verified with `grep` that `44858bff-1259-457f-905d-514867e3780d` does not appear anywhere in `src/` or the production build `dist/`.
+- **Streamlined Player Lookup UI (FEAT-021)**:
+  - Removed `Direct Base64 NBT Paste` tab, tab switcher buttons, and raw NBT textarea from `src/components/CustomLookupModal.tsx`.
+  - Streamlined `CustomLookupModal.tsx` to 120 lines focusing solely on player lookup:
+    - Clean title: `Player Lookup`
+    - Subtitle: `Query live CraftersMC Public API for any player's SkyBlock accessory bag.`
+    - Auto-focused player username / UUID / Pixel ID input.
+    - Server-side proxy security notice.
+    - Action buttons: `🔍 Live API Fetch` and `⚡ Test Player`.
+  - Updated `src/components/HeroHeader.tsx`: Changed header button label from `Lookup Player / Raw NBT` to `Lookup Player`.
+  - Cleaned `src/App.tsx`: Removed `onImportBase64` and unused `loadFromBase64Nbt` import.
 - **Visual Evidence Verified**:
-  - `evidence/modal-lookup-no-apikey-verified.png`: Confirms the player lookup modal has zero API key fields, showing only the username input and server-side proxy security badge.
-  - `evidence/live-lookup-server-proxy-success.png`: Confirms seamless live player data fetch via the server-side proxy without any client-side API key.
+  - `evidence/header-lookup-player-btn-verified.png`: Confirms header displays `🔍 Lookup Player` alongside `Fresh Profile`.
+  - `evidence/modal-lookup-no-nbt-tab-verified.png`: Confirms lookup modal has zero tabs and no raw NBT textarea.
 - **Quality & Rule Compliance**:
   - 11/11 Vitest test suites passing (46 tests).
   - TypeScript strict mode passing with 0 errors (`npx tsc --noEmit`).

@@ -60,7 +60,7 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
           }}
         >
           <span>🔍</span>
-          <span>Lookup Player / Raw NBT</span>
+          <span>Lookup Player</span>
         </button>
 
         <button

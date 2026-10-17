@@ -118,6 +118,12 @@
     "description": "Server-Side API Key Security & Client Isolation: CraftersMC API Key is completely encapsulated in server-side environment variables (.env / Vite server proxy), removing all keys, headers, and input fields from client code and browser builds.",
     "status": "passing",
     "evidence": "evidence/modal-lookup-no-apikey-verified.png"
+  },
+  {
+    "id": "FEAT-021",
+    "description": "Streamlined Player Lookup UI: Removed redundant Direct Base64 NBT Paste tab and simplified modal and header to focus purely on live CraftersMC player lookup.",
+    "status": "passing",
+    "evidence": "evidence/modal-lookup-no-nbt-tab-verified.png"
   }
 ]
 
