@@ -34,4 +34,3 @@
 | DEC-030 | Remove Direct Base64 NBT Paste tab to streamline Player Lookup | Per user direction, removes raw NBT paste textarea and alias inputs, focusing the modal and header button solely on direct player lookup via the live CraftersMC API. |
 | DEC-031 | Initialize Player Lookup input empty on modal open | Per user direction, the input field in Player Lookup modal starts empty rather than pre-filling DarkKing0098994, using an example placeholder instead, while preserving demo testing if left empty on Test Player click. |
 | DEC-032 | Size Minecraft chest container and slots grid to fit-content | Per user direction, removes excessive blank space to the right of column 9 by constraining container and grid to fit-content (440px inner / 472px outer) and streamlining footer pagination labels. |
-

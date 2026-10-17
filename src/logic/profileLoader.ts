@@ -45,7 +45,8 @@ const makeItem = (
   displayName,
   rarity,
   reforge,
-  slot
+  slot,
+  lore: []
 });
 
 const AUTHENTIC_SIMULATED_ITEMS: readonly PlayerAccessoryItem[] = [
