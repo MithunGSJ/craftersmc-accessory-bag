@@ -277,5 +277,15 @@ describe('pricingEngine', () => {
     // After clear, cache is reset
     expect(getAccessoryAuctionPrice('MYTHIC_CUSTOM_TALISMAN')).toBeUndefined();
   });
+
+  it('evaluates Fermento Artifact craft cost with updated Condensed Fermento Bazaar valuation', () => {
+    const fermentoDef = findAccessoryById('FERMENTO_ARTIFACT');
+    expect(fermentoDef).toBeDefined();
+    const priceDetails = evaluateAccessoryPrice(fermentoDef!);
+    expect(priceDetails.primaryMethod).toBe('BAZAAR_CRAFT');
+    // Squash Ring (~17.9M) + 8x Condensed Fermento (Bazaar direct: ~35.9M or raw fermento: ~30.3M)
+    expect(priceDetails.effectivePrice).toBeGreaterThan(45000000);
+    expect(priceDetails.effectivePrice).toBeLessThan(56000000);
+  });
 });
 

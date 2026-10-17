@@ -59,10 +59,24 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
     { itemId: 'enchanted_oak_log', name: 'Enchanted Oak Log', count: 1 }
   ]),
 
-  // Cropie / Squash / Fermento
   CROPIE_TALISMAN: r('CROPIE_TALISMAN', [{ itemId: 'cropie', name: 'Cropie', count: 256 }]),
   SQUASH_RING: r('SQUASH_RING', [{ itemId: 'squash', name: 'Squash', count: 128 }], 'CROPIE_TALISMAN'),
-  FERMENTO_ARTIFACT: r('FERMENTO_ARTIFACT', [{ itemId: 'condensed_fermento', name: 'Condensed Fermento', count: 8 }], 'SQUASH_RING'),
+  FERMENTO_ARTIFACT: r(
+    'FERMENTO_ARTIFACT',
+    [
+      {
+        itemId: 'condensed_fermento',
+        name: 'Condensed Fermento',
+        count: 8,
+        subMaterial: {
+          itemId: 'fermento',
+          name: 'Fermento',
+          count: 72
+        }
+      }
+    ],
+    'SQUASH_RING'
+  ),
 
   // Mining & Utility
   COINS_TALISMAN: r('COINS_TALISMAN', [

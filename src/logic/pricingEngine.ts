@@ -80,9 +80,18 @@ export async function hydrateLivePricing(): Promise<boolean> {
     const res = await fetch('/api/pricing/live');
     if (!res.ok) return false;
     const data = await res.json();
-    if (data.success && data.auctions) {
-      for (const [id, snap] of Object.entries(data.auctions)) {
-        liveAuctionCache.set(id.toUpperCase(), snap as AuctionPriceSnapshot);
+    if (data.success) {
+      if (data.auctions) {
+        for (const [id, snap] of Object.entries(data.auctions)) {
+          liveAuctionCache.set(id.toUpperCase(), snap as AuctionPriceSnapshot);
+        }
+      }
+      if (data.bazaar) {
+        for (const [id, snap] of Object.entries(data.bazaar)) {
+          const item = snap as { avgPrice: number; weeklyAveragePrice?: number };
+          const p = item.weeklyAveragePrice || item.avgPrice;
+          if (p > 0) liveBazaarCache.set(id.toLowerCase(), p);
+        }
       }
       priceDetailsCache.clear();
       return true;
@@ -247,13 +256,8 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
     return result;
   }
 
-  // 4. Fallback for quest / special items
   if (acc.stage === 'Quest') {
-    result = {
-      effectivePrice: 0,
-      primaryMethod: 'FREE_QUEST',
-      displayLabel: 'Quest Reward'
-    };
+    result = { effectivePrice: 0, primaryMethod: 'FREE_QUEST', displayLabel: 'Quest Reward' };
     priceDetailsCache.set(acc.id, result);
     return result;
   }
@@ -280,13 +284,10 @@ export async function refreshLiveBazaarPrice(itemId: string): Promise<number | n
     const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(itemId)}/details`);
     if (!res.ok) return null;
     const json = await res.json();
-    if (json.success) {
-      const avg = json.weeklyAveragePrice || json.sellTopEntries?.[0]?.price || json.buyTopEntries?.[0]?.price || 0;
-      if (avg > 0) {
-        liveBazaarCache.set(itemId.toLowerCase(), avg);
-        priceDetailsCache.clear();
-        return avg;
-      }
+    const avg = json.weeklyAveragePrice || json.sellTopEntries?.[0]?.price || json.buyTopEntries?.[0]?.price || 0;
+    if (avg > 0) {
+      setLiveBazaarPrice(itemId, avg);
+      return avg;
     }
     return null;
   } catch {

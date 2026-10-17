@@ -18,6 +18,7 @@ export interface LiveAuctionPriceSummary {
 export interface LivePricingPayload {
   readonly timestamp: number;
   readonly auctions: Record<string, LiveAuctionPriceSummary>;
+  readonly bazaar?: Record<string, { avgPrice: number; weeklyAveragePrice: number }>;
   readonly totalLiveAuctions: number;
 }
 
@@ -88,9 +89,27 @@ export function livePricingPlugin(apiKey: string): Plugin {
         };
       }
 
+      const bazaarMap: Record<string, { avgPrice: number; weeklyAveragePrice: number }> = {};
+      const keyBazaarItems = ['condensed_fermento', 'fermento', 'squash', 'cropie'];
+      for (const item of keyBazaarItems) {
+        try {
+          const bRes = await fetch(`https://api.craftersmc.net/v1/skyblock/bazaar/${item}/details`, { headers });
+          if (bRes.ok) {
+            const bData = await bRes.json();
+            const avg = Number(bData.weeklyAveragePrice) || Number(bData.buyTopEntries?.[0]?.price) || 0;
+            if (avg > 0) {
+              bazaarMap[item] = { avgPrice: avg, weeklyAveragePrice: avg };
+            }
+          }
+        } catch {
+          // ignore individual item errors
+        }
+      }
+
       cachedPayload = {
         timestamp: Date.now(),
         auctions: summaryMap,
+        bazaar: bazaarMap,
         totalLiveAuctions: accessoryAuctions.length
       };
       lastFetchTime = Date.now();
