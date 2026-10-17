@@ -136,8 +136,11 @@
     "description": "Eliminate Horizontal Blank Space in Minecraft Chest Inventory GUI: Sized the chest GUI container and 9-slot grid to fit-content and streamlined footer labels, removing the extra empty space to the right of column 9.",
     "status": "passing",
     "evidence": "evidence/mc-gui-43items-fit-verified.png"
+  },
+  {
+    "id": "FEAT-024",
+    "description": "Card Grid Bag Slot Ordering: In Card Grid View, all accessories are ordered by their authentic in-game accessory bag slot indices (Slot #1, Slot #2, ...) with owned items appearing first in exact bag sequence.",
+    "status": "passing",
+    "evidence": "evidence/card-grid-bag-order-verified.png"
   }
 ]
-
-
-

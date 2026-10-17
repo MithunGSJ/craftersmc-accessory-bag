@@ -2,24 +2,19 @@
 
 ## Current Phase
 
-Completed (FEAT-023: Eliminate Horizontal Blank Space in Minecraft Chest Inventory GUI)
+Completed (FEAT-024: Card Grid Bag Slot Ordering)
 
 ## What Changed Last
 
-- **Eliminated Horizontal Blank Space in Minecraft Chest Inventory GUI (FEAT-023)**:
-  - Updated `src/index.css`:
-    - Set `.mc-gui-container` to `width: fit-content; box-sizing: border-box;`.
-    - Set `.mc-gui-grid` to `width: fit-content; box-sizing: border-box;`.
-    - Set `.mc-gui-footer` to `width: 100%; box-sizing: border-box; gap: 8px;`.
-  - Updated `src/components/MinecraftInventoryView.tsx`:
-    - Shortened pagination buttons to `◀ Prev` and `Next ▶`.
-    - Compacted page information label to `Page {currentPage} of {totalPages} ({ownedBagAccessories.length} Owned)` to fit perfectly within the 440px 9-slot chest width.
-  - Updated `src/logic/profileLoader.ts`:
-    - Defined authentic fallback accessories for `createSimulatedProfileForPlayer` ensuring `⚡ Test Player` accurately populates 43 items in local/offline test mode.
+- **Card Grid Bag Slot Ordering (FEAT-024)**:
+  - Created pure sorting helper `sortAccessoriesByBagOrder` in `src/logic/accessoryMatcher.ts` that sorts accessories by their in-game bag slot indices (`ownedItem.slot`), placing all owned items first in exact slot order (Slot 0..N) followed by unowned/missing accessories.
+  - Updated `src/App.tsx` so that `visibleAccessories` applies `sortAccessoriesByBagOrder`, guaranteeing that the Card Grid View displays all accessories in the exact order of their accessory bag.
+  - Updated `src/components/AccessoryCard.tsx` to display an amber `• Slot #{ownedItem.slot + 1}` badge for owned accessories, providing direct visual reference to in-game bag placement.
+  - Added unit test in `src/logic/accessoryMatcher.test.ts` verifying that `sortAccessoriesByBagOrder` sorts accessories accurately by slot index with unowned items trailing.
 - **Visual Evidence Verified**:
-  - `evidence/mc-gui-43items-fit-verified.png`: Confirms 9-column slots grid is snugly framed with symmetrical 12px padding and zero empty void on the right.
+  - `evidence/card-grid-bag-order-verified.png`: Confirms cards in Card Grid View are rendered in continuous sequential order: Slot #1 (Dayfreezer), Slot #2 (Nightfreezer), Slot #3 (Campfire God Badge), Slot #4 (Personal Compactor 7000), Slot #5 (Personal Deletor 7000), Slot #6 (Sky's Badge), Slot #7 (Candy Relic), Slot #8 (Red Claw Artifact), etc.
 - **Quality & Rule Compliance**:
-  - 11/11 Vitest test suites passing (46 tests).
+  - 11/11 Vitest test suites passing (47 tests).
   - TypeScript strict mode passing with 0 errors (`npx tsc --noEmit`).
   - Production build passing (`npm run build`).
   - All source files strictly under 300 lines (Rule 5).

@@ -13,7 +13,7 @@ import {
   createSimulatedProfileForPlayer,
   LoadedProfileData
 } from './logic/profileLoader.ts';
-import { evaluatePlayerAccessories, filterAccessories } from './logic/accessoryMatcher.ts';
+import { evaluatePlayerAccessories, filterAccessories, sortAccessoriesByBagOrder } from './logic/accessoryMatcher.ts';
 import { calculateBagStatistics } from './logic/statsCalculator.ts';
 import { EvaluatedAccessory, AccessoryCategory } from './data/accessoryTypes.ts';
 import { ItemRarity, THEME_CONFIG } from './config/themeConfig.ts';
@@ -45,14 +45,15 @@ export const App: React.FC = () => {
     return calculateBagStatistics(evaluatedAll);
   }, [evaluatedAll]);
 
-  // Filtered view
+  // Filtered view sorted by bag slot order
   const visibleAccessories = React.useMemo(() => {
-    return filterAccessories(evaluatedAll, {
+    const filtered = filterAccessories(evaluatedAll, {
       statusFilter,
       categoryFilter,
       rarityFilter,
       searchQuery
     });
+    return sortAccessoriesByBagOrder(filtered);
   }, [evaluatedAll, statusFilter, categoryFilter, rarityFilter, searchQuery]);
 
   const handleSelectSample = (id: string) => {

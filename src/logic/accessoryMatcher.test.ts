@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { evaluatePlayerAccessories, filterAccessories } from './accessoryMatcher.ts';
+import { evaluatePlayerAccessories, filterAccessories, sortAccessoriesByBagOrder } from './accessoryMatcher.ts';
 import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 
 describe('accessoryMatcher', () => {
@@ -237,5 +237,41 @@ describe('accessoryMatcher', () => {
     // Reaper Orb is independent zombie slayer item, so it remains MISSING (not UPGRADABLE_NEXT from Zombie Artifact)
     expect(reaperOrb?.status).toBe('MISSING');
   });
+
+  it('should sort accessories by in-game bag slot index with owned items first', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      {
+        id: 'ITEM_B',
+        internalId: 'FIRE_TALISMAN',
+        displayName: 'Fire Talisman',
+        rarity: 'COMMON',
+        slot: 5,
+        lore: []
+      },
+      {
+        id: 'ITEM_A',
+        internalId: 'CAMPFIRE_GOD_BADGE',
+        displayName: 'Campfire God Badge',
+        rarity: 'LEGENDARY',
+        slot: 1,
+        lore: []
+      }
+    ];
+
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const sorted = sortAccessoriesByBagOrder(evaluated);
+
+    // First item should be slot 1 (Campfire God Badge)
+    expect(sorted[0].ownedItem?.slot).toBe(1);
+    expect(sorted[0].definition.id).toBe('CAMPFIRE_GOD_BADGE');
+
+    // Second item should be slot 5 (Fire Talisman)
+    expect(sorted[1].ownedItem?.slot).toBe(5);
+    expect(sorted[1].definition.id).toBe('FIRE_TALISMAN');
+
+    // Remaining items should be unowned
+    expect(sorted[2].ownedItem).toBeUndefined();
+  });
 });
+
 

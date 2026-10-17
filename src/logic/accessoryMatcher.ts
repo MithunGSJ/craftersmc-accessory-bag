@@ -63,6 +63,19 @@ export function filterAccessories(
   });
 }
 
+export function sortAccessoriesByBagOrder(
+  items: readonly EvaluatedAccessory[]
+): EvaluatedAccessory[] {
+  return items.slice().sort((a, b) => {
+    const aSlot = a.ownedItem?.slot !== undefined ? a.ownedItem.slot : Infinity;
+    const bSlot = b.ownedItem?.slot !== undefined ? b.ownedItem.slot : Infinity;
+    if (aSlot !== bSlot) {
+      return aSlot - bSlot;
+    }
+    return 0;
+  });
+}
+
 export function evaluatePlayerAccessories(
   playerItems: readonly PlayerAccessoryItem[],
   options: MatcherOptions = {}
