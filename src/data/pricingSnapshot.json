@@ -189,8 +189,12 @@
       "weeklyAveragePrice": 1280
     },
     "revenant_flesh": {
-      "avgPrice": 15,
-      "weeklyAveragePrice": 15
+      "avgPrice": 349.5,
+      "weeklyAveragePrice": 338.6
+    },
+    "revenant_viscera": {
+      "avgPrice": 111996,
+      "weeklyAveragePrice": 109038.9
     },
     "wolf_tooth": {
       "avgPrice": 45,
