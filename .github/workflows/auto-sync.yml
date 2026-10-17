@@ -1,0 +1,51 @@
+name: Automated Daily Wiki & Pricing Sync
+
+on:
+  schedule:
+    # Run every day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-test:
+    name: Sync CraftersMC Wiki, Validate & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync Wiki Data & Accessories Sprites
+        run: npm run sync:wiki
+
+      - name: Run Vitest Regression Suite
+        run: npm test -- --run
+
+      - name: Verify Strict TypeScript & Production Build
+        run: npm run build
+
+      - name: Commit and push asset and catalog changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add public/icons/accessories/
+          if git diff --staged --quiet; then
+            echo "No changes detected. Catalog and sprites are up to date."
+          else
+            git commit -m "chore(sync): automated daily wiki & sprite sync [skip ci]"
+            git push
+          fi

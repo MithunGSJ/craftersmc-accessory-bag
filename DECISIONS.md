@@ -38,3 +38,4 @@
 | DEC-034 | Aggregate live auction data into /api/pricing/live background middleware | Provides dynamic real-time auction market stats with outlier trimming to client pricing engine with 5-minute memory cache. |
 | DEC-035 | Decode dynamic Mojang skull textures and synthesize uncataloged accessory definitions | Enables zero-day accessories to render exact head textures via pixelated 8x8 face crop and automatically assigns active MP based on item lore rarity without crashing. |
 | DEC-036 | Implement automated MediaWiki scraper engine with sprite sync | Scrapes craftersmc.wiki.gg/api.php for authentic accessories, decodes HTML entities, and auto-downloads official PNG sprites with retry backoff to /public/icons/accessories/. |
+| DEC-037 | Implement automated GitHub Actions daily sync and validation workflow | Runs daily scheduled cron at midnight UTC to sync MediaWiki accessories, execute Vitest tests, run production build, and automatically commit sprite assets. |

@@ -164,7 +164,7 @@
   {
     "id": "FEAT-028",
     "description": "Automated CI/CD GitHub Actions Workflow (.github/workflows/auto-sync.yml): Scheduled cron workflow that runs wiki sync, executes Vitest regression tests, and automates asset and recipe updates.",
-    "status": "failing",
-    "evidence": ""
+    "status": "passing",
+    "evidence": "tmp/evidence_feat_028_github_workflow.json"
   }
 ]
