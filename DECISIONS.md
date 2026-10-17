@@ -27,3 +27,5 @@
 | DEC-023 | Update Special rarity Magical Power to 5 MP | Accurately matches official CraftersMC Thaumaturgy Magical Power table (<https://craftersmc.wiki.gg/wiki/Thaumaturgy#Magical_Power>). |
 | DEC-024 | Display owned bag accessories strictly in NBT slot order in chest GUI, and render Missing & Upgradable accessories in Card Grid at bottom | Respects in-game line-up order in chest view while keeping missing/upgradable progression accessible in full card layout below. |
 | DEC-025 | Verify 100% of non-Special accessory recipes and market pricing from CraftersMC Wiki | Corrected 25 crafting formulas across collections, slayers, compactors/deletors, and spooky events, and validated market pricing without outliers. |
+| DEC-026 | Retain solely Fresh Profile and Lookup Player in profile selector bar, and display 'No offers were made in auction house' when auction history is unavailable | Per user direction, removes pre-bundled profile shortcuts to streamline focus on player lookup and empty state audit, and replaces 'Unobtainable' with accurate auction history messaging. |
+

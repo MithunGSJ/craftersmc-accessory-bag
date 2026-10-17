@@ -16,9 +16,9 @@ const STAGE_ORDER: Record<string, number> = {
 
 describe('recommendationsEngine', () => {
   it('should rank missing accessories by authentic CraftersMC milestone stages', () => {
-    // Earlygame adventurer is missing many accessories
-    const earlygame = SAMPLE_PROFILES.find(p => p.id === 'earlygame')!;
-    const evaluated = evaluatePlayerAccessories(earlygame.items);
+    // Fresh profile is missing all accessories
+    const fresh = SAMPLE_PROFILES.find(p => p.id === 'fresh')!;
+    const evaluated = evaluatePlayerAccessories(fresh.items);
 
     const candidates = evaluated
       .filter(e => e.status === 'MISSING' || e.status === 'UPGRADABLE_NEXT')

@@ -11,11 +11,10 @@ describe('profileLoader', () => {
     }
   });
 
-  it('should load Endgame profile with high tier items', () => {
-    const profile = loadSampleProfile('endgame');
-    expect(profile.playerName).toBe('DarkKing0098994');
-    expect(profile.items.length).toBeGreaterThan(10);
-    expect(profile.source).toBe('sample');
+  it('should only contain Fresh Profile in bundled sample profiles', () => {
+    expect(SAMPLE_PROFILES.length).toBe(1);
+    expect(SAMPLE_PROFILES[0].id).toBe('fresh');
+    expect(SAMPLE_PROFILES[0].name).toBe('Fresh Profile');
   });
 
   it('should load Fresh profile with zero items', () => {

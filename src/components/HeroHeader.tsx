@@ -45,7 +45,7 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
               }}
               title={sample.description}
             >
-              <span>{sample.id === 'endgame' ? '👑' : sample.id === 'midgame' ? '⚔️' : sample.id === 'earlygame' ? '🌱' : '🥚'}</span>
+              <span>🥚</span>
               <span>{sample.name}</span>
             </button>
           );

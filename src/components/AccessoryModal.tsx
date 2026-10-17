@@ -174,14 +174,8 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
             </div>
           )}
 
-          {priceInfo.auction && (
-            <div style={{
-              background: 'rgba(234, 179, 8, 0.08)',
-              border: '1px solid rgba(234, 179, 8, 0.2)',
-              borderRadius: '8px',
-              padding: '8px 12px',
-              marginTop: '6px'
-            }}>
+          {priceInfo.auction ? (
+            <div style={{ background: 'rgba(234, 179, 8, 0.08)', border: '1px solid rgba(234, 179, 8, 0.2)', borderRadius: '8px', padding: '8px 12px', marginTop: '6px' }}>
               <div style={{ fontSize: '0.78rem', color: '#facc15', fontWeight: 700, marginBottom: '4px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>🏛️ CraftersMC Auction House ({priceInfo.auction.hasBin !== false ? 'BIN Market' : 'Bidding'})</span>
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>
@@ -203,7 +197,12 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
                 </div>
               </div>
             </div>
-          )}
+          ) : priceInfo.primaryMethod !== 'BAZAAR_CRAFT' && priceInfo.primaryMethod !== 'NPC_SHOP' && priceInfo.primaryMethod !== 'FREE_QUEST' ? (
+            <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '8px', padding: '10px 12px', marginTop: '8px', fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>🏛️</span>
+              <span>No offers were made in auction house.</span>
+            </div>
+          ) : null}
         </div>
 
         {/* Lore / Description */}

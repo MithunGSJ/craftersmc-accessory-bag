@@ -20,9 +20,9 @@ import { EvaluatedAccessory, AccessoryCategory } from './data/accessoryTypes.ts'
 import { ItemRarity, THEME_CONFIG } from './config/themeConfig.ts';
 
 export const App: React.FC = () => {
-  const [currentProfileId, setCurrentProfileId] = React.useState('endgame');
+  const [currentProfileId, setCurrentProfileId] = React.useState('fresh');
   const [profileData, setProfileData] = React.useState<LoadedProfileData>(() =>
-    loadSampleProfile('endgame')
+    loadSampleProfile('fresh')
   );
 
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -140,7 +140,7 @@ export const App: React.FC = () => {
           <MinecraftInventoryView
             accessories={visibleAccessories}
             onSelectAccessory={acc => setSelectedAccessory(acc)}
-            defaultBagNumber={currentProfileId === 'endgame' ? 11 : 1}
+            defaultBagNumber={1}
           />
         ) : (
           <section className="accessory-grid" aria-label="Accessories catalog">

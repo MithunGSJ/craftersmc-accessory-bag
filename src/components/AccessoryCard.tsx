@@ -109,13 +109,17 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
                 ? 'rgba(34, 197, 94, 0.15)'
                 : priceInfo.primaryMethod === 'AUCTION'
                 ? 'rgba(234, 179, 8, 0.15)'
-                : 'rgba(56, 189, 248, 0.15)',
+                : priceInfo.primaryMethod === 'NPC_SHOP'
+                ? 'rgba(56, 189, 248, 0.15)'
+                : 'rgba(148, 163, 184, 0.15)',
             color:
               priceInfo.primaryMethod === 'BAZAAR_CRAFT'
                 ? '#4ade80'
                 : priceInfo.primaryMethod === 'AUCTION'
                 ? '#facc15'
-                : 'var(--accent-cyan)'
+                : priceInfo.primaryMethod === 'NPC_SHOP'
+                ? 'var(--accent-cyan)'
+                : '#94a3b8'
           }}
           title={
             priceInfo.auction

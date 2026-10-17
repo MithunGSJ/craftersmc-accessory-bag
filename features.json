@@ -94,6 +94,12 @@
     "description": "Comprehensive CraftersMC Wiki Recipe & Price Verification for all 44 PDF Accessories: Fully verified crafting recipes (Feather line, Golden Feather Boots, Bamboo line, Farming Talisman, Farmer Orb, Vaccine Talisman, Coins Talisman, Emerald Ring, Magnetic Talisman, Gravity Talisman, Piggy Bank, Personal Compactors 4000-7000, Personal Deletors 4000-7000, Candy Relic, Bat Person line, Intimidation line) and authentic market pricing (Bazaar ingredients, NPC costs, Auction BIN snapshots without outliers).",
     "status": "passing",
     "evidence": "evidence/FEAT-016-all-pdf-recipes-and-prices.txt"
+  },
+  {
+    "id": "FEAT-017",
+    "description": "Single-profile Header & Auction Fallback Display: Retained solely 'Fresh Profile' and 'Lookup Player' in hero bar; updated Potato Talisman as a Shiny Pig event drop, and displayed 'No offers were made in auction house' when listing history is unavailable.",
+    "status": "passing",
+    "evidence": "evidence/FEAT-017-fresh-profile-and-auction-fallback.txt"
   }
 ]
 

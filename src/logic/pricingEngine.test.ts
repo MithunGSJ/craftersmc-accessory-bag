@@ -109,6 +109,13 @@ describe('pricingEngine', () => {
     expect(price.auction?.avgPrice).toBeGreaterThan(1000000);
   });
 
+  it('evaluates items without auction history as "No offers were made in auction house"', () => {
+    const potato = findAccessoryById('POTATO_TALISMAN');
+    expect(potato).toBeDefined();
+    const price = evaluateAccessoryPrice(potato!);
+    expect(price.displayLabel).toBe('No offers were made in auction house');
+  });
+
   it('formats coins into readable suffixes', () => {
     expect(formatCoins(500)).toBe('500');
     expect(formatCoins(2500)).toBe('2.5K');

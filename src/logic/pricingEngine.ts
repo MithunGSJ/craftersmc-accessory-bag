@@ -224,7 +224,7 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
   result = {
     effectivePrice: fallback,
     primaryMethod: fallback > 0 ? 'AUCTION' : 'UNOBTAINABLE',
-    displayLabel: fallback > 0 ? `${formatCoins(fallback)}` : 'Unobtainable'
+    displayLabel: fallback > 0 ? `${formatCoins(fallback)}` : 'No offers were made in auction house'
   };
   priceDetailsCache.set(acc.id, result);
   return result;
