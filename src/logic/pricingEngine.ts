@@ -57,17 +57,49 @@ export function getAccessoryAuctionPrice(accessoryId: string): AuctionPriceSnaps
   return AUCTION_SNAPSHOT[normalized];
 }
 
+export function setLiveAuctionPrice(accessoryId: string, snapshot: AuctionPriceSnapshot): void {
+  const normalized = accessoryId.toUpperCase().replace(/^TRPIXEL:/, '').trim();
+  liveAuctionCache.set(normalized, snapshot);
+  priceDetailsCache.clear();
+}
+
+export function setLiveBazaarPrice(itemId: string, price: number): void {
+  const normalized = itemId.toLowerCase().trim();
+  liveBazaarCache.set(normalized, price);
+  priceDetailsCache.clear();
+}
+
+export function clearPricingCache(): void {
+  liveAuctionCache.clear();
+  liveBazaarCache.clear();
+  priceDetailsCache.clear();
+}
+
+export async function hydrateLivePricing(): Promise<boolean> {
+  try {
+    const res = await fetch('/api/pricing/live');
+    if (!res.ok) return false;
+    const data = await res.json();
+    if (data.success && data.auctions) {
+      for (const [id, snap] of Object.entries(data.auctions)) {
+        liveAuctionCache.set(id.toUpperCase(), snap as AuctionPriceSnapshot);
+      }
+      priceDetailsCache.clear();
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
 export function parseNpcCost(costStr?: string): number | undefined {
-  if (!costStr) return undefined;
-  if (/gems|bits/i.test(costStr)) return undefined;
+  if (!costStr || /gems|bits/i.test(costStr)) return undefined;
   const match = costStr.match(/([\d,.]+)\s*([KkMmBb])?(?:\s*coins|\b|$)/i);
   if (!match) return undefined;
   const num = parseFloat(match[1].replace(/,/g, ''));
-  const unit = match[2]?.toUpperCase();
-  if (unit === 'K') return num * 1000;
-  if (unit === 'M') return num * 1000000;
-  if (unit === 'B') return num * 1000000000;
-  return num;
+  const mult: Record<string, number> = { K: 1e3, M: 1e6, B: 1e9 };
+  return num * (mult[match[2]?.toUpperCase() || ''] || 1);
 }
 
 export function calculateCraftCost(
@@ -237,9 +269,9 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
 }
 
 export function formatCoins(amount: number): string {
-  if (amount >= 1000000000) return `${(amount / 1000000000).toFixed(1)}B`;
-  if (amount >= 1000000) return `${(amount / 1000000).toFixed(1)}M`;
-  if (amount >= 1000) return `${(amount / 1000).toFixed(1)}K`;
+  if (amount >= 1e9) return `${(amount / 1e9).toFixed(1)}B`;
+  if (amount >= 1e6) return `${(amount / 1e6).toFixed(1)}M`;
+  if (amount >= 1e3) return `${(amount / 1e3).toFixed(1)}K`;
   return Math.round(amount).toLocaleString();
 }
 

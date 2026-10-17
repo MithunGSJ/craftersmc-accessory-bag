@@ -4,7 +4,9 @@ import {
   calculateCraftCost,
   getBazaarMaterialPrice,
   getAccessoryAuctionPrice,
-  formatCoins
+  formatCoins,
+  setLiveAuctionPrice,
+  clearPricingCache
 } from './pricingEngine.ts';
 import { ACCESSORY_RECIPES } from '../data/accessoryRecipes.ts';
 import { findAccessoryById } from '../data/accessoryRegistry.ts';
@@ -258,6 +260,25 @@ describe('pricingEngine', () => {
       { itemId: 'spooky_fragment', name: 'Spooky Fragment', count: 16 },
       { itemId: 'ectoplasm', name: 'Ectoplasm', count: 128 }
     ]);
+  });
+
+  it('supports dynamic hydration of live auction prices and cache clearing', () => {
+    setLiveAuctionPrice('MYTHIC_CUSTOM_TALISMAN', {
+      minPrice: 5000000,
+      cleanMinPrice: 5000000,
+      cleanMedianPrice: 5500000,
+      maxPrice: 6000000,
+      sampleCount: 10,
+      outlierCount: 1,
+      source: 'LIVE_AUCTION'
+    });
+    const price = getAccessoryAuctionPrice('MYTHIC_CUSTOM_TALISMAN');
+    expect(price?.cleanMedianPrice).toBe(5500000);
+    expect(price?.source).toBe('LIVE_AUCTION');
+
+    clearPricingCache();
+    // After clear, cache is reset
+    expect(getAccessoryAuctionPrice('MYTHIC_CUSTOM_TALISMAN')).toBeUndefined();
   });
 });
 

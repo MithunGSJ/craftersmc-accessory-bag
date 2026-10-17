@@ -2,29 +2,22 @@
 
 ## Current Phase
 
-Completed (FEAT-024: Card Grid Bag Slot Ordering)
+Phase 5: Full End-to-End Automation (Implementing FEAT-026: Dynamic NBT Skull Texture Extraction & Uncataloged Accessory Fallback)
 
 ## What Changed Last
 
-- **Card Grid Bag Slot Ordering (FEAT-024)**:
-  - Created pure sorting helper `sortAccessoriesByBagOrder` in `src/logic/accessoryMatcher.ts` that sorts accessories by their in-game bag slot indices (`ownedItem.slot`), placing all owned items first in exact slot order (Slot 0..N) followed by unowned/missing accessories.
-  - Updated `src/App.tsx` so that `visibleAccessories` applies `sortAccessoriesByBagOrder`, guaranteeing that the Card Grid View displays all accessories in the exact order of their accessory bag.
-  - Updated `src/components/AccessoryCard.tsx` to display an amber `• Slot #{ownedItem.slot + 1}` badge for owned accessories, providing direct visual reference to in-game bag placement.
-  - Added unit test in `src/logic/accessoryMatcher.test.ts` verifying that `sortAccessoriesByBagOrder` sorts accessories accurately by slot index with unowned items trailing.
-- **Visual Evidence Verified**:
-  - `evidence/card-grid-bag-order-verified.png`: Confirms cards in Card Grid View are rendered in continuous sequential order: Slot #1 (Dayfreezer), Slot #2 (Nightfreezer), Slot #3 (Campfire God Badge), Slot #4 (Personal Compactor 7000), Slot #5 (Personal Deletor 7000), Slot #6 (Sky's Badge), Slot #7 (Candy Relic), Slot #8 (Red Claw Artifact), etc.
-- **Quality & Rule Compliance**:
-  - 11/11 Vitest test suites passing (47 tests).
-  - TypeScript strict mode passing with 0 errors (`npx tsc --noEmit`).
-  - Production build passing (`npm run build`).
-  - All source files strictly under 300 lines (Rule 5).
+- **Completed FEAT-025 (Live Bazaar & Auction Pricing Engine Middleware)**:
+  - Built Vite server background plugin `src/server/livePricingPlugin.ts` polling `/v1/skyblock/auctions` and caching aggregated min/avg/median/max stats at `/api/pricing/live`.
+  - Added dynamic pricing cache hydration in `src/logic/pricingEngine.ts` with `hydrateLivePricing()`, `setLiveAuctionPrice()`, and `clearPricingCache()`.
+  - Added unit test in `src/logic/pricingEngine.test.ts`. Verified with Vitest (15/15 passed).
+  - Saved evidence to `tmp/evidence_feat_025_live_pricing.json` and marked `FEAT-025` passing in `features.json`.
 
 ## Known Problems
 
-- None. All requested features, corrections, and visual behaviors are passing with verified evidence.
+- None.
 
 ## Next Three Steps
 
-1. Commit all verified changes to git with a descriptive commit message.
-2. Present full verification results and evidence to the user.
-3. Stand by for any further instructions.
+1. Implement `FEAT-026`: Dynamic NBT skull texture extraction in `src/logic/accessoryParser.ts` and uncataloged item fallback in `src/logic/accessoryMatcher.ts` and `AccessoryIcon.tsx`.
+2. Implement `FEAT-027`: Automated MediaWiki scraper engine script `scripts/syncWikiData.ts` and `npm run sync:wiki` command.
+3. Implement `FEAT-028`: Automated CI/CD GitHub Actions Workflow (`.github/workflows/auto-sync.yml`).

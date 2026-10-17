@@ -15,6 +15,7 @@ import {
 } from './logic/profileLoader.ts';
 import { evaluatePlayerAccessories, filterAccessories, sortAccessoriesByBagOrder } from './logic/accessoryMatcher.ts';
 import { calculateBagStatistics } from './logic/statsCalculator.ts';
+import { hydrateLivePricing } from './logic/pricingEngine.ts';
 import { EvaluatedAccessory, AccessoryCategory } from './data/accessoryTypes.ts';
 import { ItemRarity, THEME_CONFIG } from './config/themeConfig.ts';
 
@@ -34,6 +35,13 @@ export const App: React.FC = () => {
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
   const [isFetchingApi, setIsFetchingApi] = React.useState(false);
   const [apiError, setApiError] = React.useState<string | null>(null);
+  const [, setPricingHydrated] = React.useState(false);
+
+  React.useEffect(() => {
+    void hydrateLivePricing().then(ok => {
+      if (ok) setPricingHydrated(true);
+    });
+  }, []);
 
   // Evaluate accessories
   const evaluatedAll = React.useMemo(() => {

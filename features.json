@@ -142,5 +142,29 @@
     "description": "Card Grid Bag Slot Ordering: In Card Grid View, all accessories are ordered by their authentic in-game accessory bag slot indices (Slot #1, Slot #2, ...) with owned items appearing first in exact bag sequence.",
     "status": "passing",
     "evidence": "evidence/card-grid-bag-order-verified.png"
+  },
+  {
+    "id": "FEAT-025",
+    "description": "Live Bazaar & Auction Pricing Engine Middleware: Vite proxy server background worker polls /v1/bazaar and /v1/auction/active, serves /api/pricing/live endpoint, and dynamically hydrates client pricing engine with offline snapshot fallback.",
+    "status": "passing",
+    "evidence": "tmp/evidence_feat_025_live_pricing.json"
+  },
+  {
+    "id": "FEAT-026",
+    "description": "Dynamic NBT Skull Texture & Uncataloged Accessory Fallback: Client-side parser decodes Mojang skull texture URLs (textures.minecraft.net/texture/<hash>) from Base64 NBT SkullOwner and dynamically supports uncataloged items with active MP and skin rendering.",
+    "status": "failing",
+    "evidence": ""
+  },
+  {
+    "id": "FEAT-027",
+    "description": "MediaWiki Scraper Engine (scripts/syncWikiData.ts & npm run sync:wiki): Automated CLI tool that queries craftersmc.wiki.gg/api.php, extracts master accessory table, infobox upgrade families, crafting recipes, and auto-downloads item PNG sprites.",
+    "status": "failing",
+    "evidence": ""
+  },
+  {
+    "id": "FEAT-028",
+    "description": "Automated CI/CD GitHub Actions Workflow (.github/workflows/auto-sync.yml): Scheduled cron workflow that runs wiki sync, executes Vitest regression tests, and automates asset and recipe updates.",
+    "status": "failing",
+    "evidence": ""
   }
 ]
