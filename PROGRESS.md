@@ -2,35 +2,26 @@
 
 ## Current Phase
 
-Completed (FEAT-018: Coin NPC Accessories Auction Price Suppression)
+Completed (FEAT-019: Accurate NPC Base Accessory Craft Valuation in Upgrade Chains)
 
 ## What Changed Last
 
-- **Coin NPC Accessories Auction Price Suppression (FEAT-018)**:
-  - Updated `src/logic/pricingEngine.ts`: When an accessory is purchasable from an NPC using coins (`npcNum && npcNum > 0`), explicitly set `auction: undefined`.
-  - Affected coin NPC items:
-    - `Mine Affinity Talisman` (2,500 coins from Julia/Adventurer)
-    - `Village Affinity Talisman` (2,000 coins from Adventurer)
-    - `Scavenger Talisman` (10,000 coins from Adventurer)
-    - `Sky's Badge` (21,500,000 coins from Sky)
-    - `Skeleton Talisman` (500 coins from Adventurer)
-    - `Zombie Talisman` (500 coins from Adventurer)
-    - `Intimidation Talisman` (10,000 coins from Adventurer)
-    - `Blood God Crest` (1,250,000 coins from Romero)
-    - `New Year's Cake Bag` (250,000 coins from Baker)
-  - UI Behaviors Verified:
-    - **AccessoryCard**: Removed the secondary `AH: ~...` badge; card tooltip shows `NPC: <price>` instead of auction min/max/avg.
-    - **AccessoryModal**: Removed `CraftersMC Auction House` market box and "No offers were made" box; displays exact `NPC: <price> Coins` valuation badge in cyan.
-    - **MinecraftTooltip**: Shows `🪙 NPC: <price>` without any AH range line.
-    - Non-coin items (Dayfreezer / Nightfreezer at 945 Gems) and drop/craft accessories retain auction pricing where applicable.
+- **Accurate Base NPC Talisman Craft Valuation (FEAT-019)**:
+  - Updated `src/logic/pricingEngine.ts` in `calculateCraftCost`:
+    - When an accessory recipe upgrades from a base accessory (`recipe.upgradesFrom`), resolved its definition via `findAccessoryById`.
+    - If the parent accessory has an NPC shop cost (`parentNpc = parseNpcCost(parentDef?.npcCost)`), its authentic guaranteed NPC cost is used (e.g. 500 coins for `Zombie Talisman`, 10,000 coins for `Intimidation Talisman`).
+    - Fixed recipe breakdown ingredient naming to display clean title-cased names (`1x Zombie Talisman` instead of `1x ZOMBIE TALISMAN`).
+    - Removed stale/inflated auction listings from `pricingSnapshot.json` for coin NPC items (`ZOMBIE_TALISMAN`, `VILLAGE_AFFINITY_TALISMAN`, `INTIMIDATION_TALISMAN`).
+  - **Zombie Ring Verification**:
+    - `• 1x Zombie Talisman (@ 500/ea)  500`
+    - `• 64x Revenant Flesh (@ 350/ea)  22.4K`
+    - `Total Craft Cost: ~22.9K (22,868 coins)` (down from inaccurate ~122.4K).
 - **Visual Evidence Verified**:
-  - `evidence/card-mine-affinity-npc-no-auction.png`: Shows Mine Affinity Talisman card with `🪙 NPC: 2.5K` and zero auction badges.
-  - `evidence/modal-mine-affinity-npc-no-auction.png`: Shows modal with `NPC: 2,500 Coins` and zero auction house boxes.
-  - `evidence/card-skys-badge-npc-no-auction.png`: Shows Sky's Badge card with `🪙 NPC: 21.5M` and zero auction badges.
-  - `evidence/modal-skys-badge-npc-no-auction.png`: Shows Sky's Badge modal with `NPC: 21,500,000 Coins` and zero auction house boxes.
+  - `evidence/modal-zombie-ring-500-cost-verified.png`: Confirms `Zombie Ring` craft breakdown uses 500 coins for `Zombie Talisman` and total craft cost ~22.9K.
+  - `evidence/card-zombie-ring-verified.png`: Confirms `Zombie Ring` card badge displays `🌾 Craft: ~22.9K`.
 - **Quality & Rule Compliance**:
-  - Added unit test assertions in `src/logic/pricingEngine.test.ts` and `src/logic/auditPdf.test.ts`.
-  - 11/11 Vitest test suites passing (45 tests).
+  - Unit test in `src/logic/pricingEngine.test.ts` verifying `Zombie Ring` craft breakdown and 500 coin unit price.
+  - 11/11 Vitest test suites passing (46 tests).
   - TypeScript strict mode passing with 0 errors (`npx tsc --noEmit`).
   - Production build passing (`npm run build`).
   - Source files strictly under 300 lines (Rule 5).

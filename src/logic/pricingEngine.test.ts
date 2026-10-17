@@ -57,6 +57,21 @@ describe('pricingEngine', () => {
     expect(breakdown.some(b => b.itemId === 'enchanted_feather' && b.count === 160)).toBe(true);
     expect(breakdown.some(b => b.itemId === 'golden_feather' && b.count === 1)).toBe(true);
   });
+  it('evaluates Zombie Ring craft cost using 500 coin NPC cost for Zombie Talisman instead of auction', () => {
+    const ringDef = findAccessoryById('ZOMBIE_RING');
+    expect(ringDef).toBeDefined();
+    const priceDetails = evaluateAccessoryPrice(ringDef!);
+    expect(priceDetails.primaryMethod).toBe('BAZAAR_CRAFT');
+
+    const baseTalisman = priceDetails.craftBreakdown?.find(b => b.itemId === 'ZOMBIE_TALISMAN');
+    expect(baseTalisman).toBeDefined();
+    expect(baseTalisman?.name).toBe('Zombie Talisman');
+    expect(baseTalisman?.unitPrice).toBe(500);
+    expect(baseTalisman?.totalCost).toBe(500);
+    // Total craft cost is 500 + 64 * 349.5 (~22.8K), NOT 122.4K
+    expect(priceDetails.effectivePrice).toBeLessThan(30000);
+    expect(priceDetails.effectivePrice).toBeGreaterThan(20000);
+  });
 
   it('evaluates Experience Artifact recipe: 9 Enchanted Lapis Blocks (1440 Enchanted Lapis)', () => {
     const expDef = findAccessoryById('EXPERIENCE_ARTIFACT');

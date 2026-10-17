@@ -1,6 +1,7 @@
 import { ACCESSORY_RECIPES, AccessoryRecipe } from '../data/accessoryRecipes.ts';
 import { BAZAAR_SNAPSHOT, AUCTION_SNAPSHOT, AuctionPriceSnapshot } from '../data/pricingData.ts';
 import { AccessoryDefinition } from '../data/accessoryTypes.ts';
+import { findAccessoryById } from '../data/accessoryRegistry.ts';
 
 export interface SubMaterialComparison {
   readonly itemId: string;
@@ -83,24 +84,29 @@ export function calculateCraftCost(
 
   // If this item upgrades from a base accessory, calculate its base craft cost
   if (recipe.upgradesFrom) {
+    const parentDef = findAccessoryById(recipe.upgradesFrom);
+    const parentName = parentDef ? parentDef.name : recipe.upgradesFrom.replace(/_/g, ' ');
     const parentRecipe = ACCESSORY_RECIPES[recipe.upgradesFrom];
+
     if (parentRecipe) {
       const parentResult = calculateCraftCost(parentRecipe, visited);
       totalCost += parentResult.totalCost;
       breakdown.push({
         itemId: recipe.upgradesFrom,
-        name: recipe.upgradesFrom.replace(/_/g, ' '),
+        name: parentName,
         count: 1,
         unitPrice: parentResult.totalCost,
         totalCost: parentResult.totalCost
       });
     } else {
-      const parentAuction = getAccessoryAuctionPrice(recipe.upgradesFrom);
-      const parentPrice = parentAuction?.avgPrice || 10000;
+      const parentNpc = parseNpcCost(parentDef?.npcCost);
+      const parentPrice = parentNpc && parentNpc > 0
+        ? parentNpc
+        : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || 10000);
       totalCost += parentPrice;
       breakdown.push({
         itemId: recipe.upgradesFrom,
-        name: recipe.upgradesFrom.replace(/_/g, ' '),
+        name: parentName,
         count: 1,
         unitPrice: parentPrice,
         totalCost: parentPrice

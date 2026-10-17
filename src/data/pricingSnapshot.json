@@ -2170,30 +2170,6 @@
       "totalCount": 3,
       "hasBin": true
     },
-    "ZOMBIE_TALISMAN": {
-      "minPrice": 99998,
-      "avgPrice": 99999,
-      "maxPrice": 99999,
-      "count": 2,
-      "totalCount": 2,
-      "hasBin": true
-    },
-    "VILLAGE_AFFINITY_TALISMAN": {
-      "minPrice": 99999,
-      "avgPrice": 99999,
-      "maxPrice": 99999,
-      "count": 1,
-      "totalCount": 1,
-      "hasBin": true
-    },
-    "INTIMIDATION_TALISMAN": {
-      "minPrice": 60000,
-      "avgPrice": 153333,
-      "maxPrice": 199999,
-      "count": 3,
-      "totalCount": 3,
-      "hasBin": true
-    },
     "WHEAT_HARVESTER": {
       "minPrice": 8599999,
       "avgPrice": 8599999,

@@ -106,6 +106,12 @@
     "description": "Coin NPC Accessories Auction Price Suppression: Omit auction prices, AH badges, and auction house market boxes for all accessories purchasable from NPCs with coins, displaying guaranteed NPC coin costs exclusively.",
     "status": "passing",
     "evidence": "evidence/modal-mine-affinity-npc-no-auction.png"
+  },
+  {
+    "id": "FEAT-019",
+    "description": "Accurate NPC Base Accessory Craft Valuation: Upgrade recipes inheriting from base NPC accessories (e.g. Zombie Ring inheriting Zombie Talisman) use the guaranteed 500-coin NPC vendor cost rather than inflated auction listing prices.",
+    "status": "passing",
+    "evidence": "evidence/modal-zombie-ring-500-cost-verified.png"
   }
 ]
 
