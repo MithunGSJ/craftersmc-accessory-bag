@@ -129,6 +129,7 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
                   id={definition.id}
                   name={definition.name}
                   fallbackEmoji={definition.iconEmoji}
+                  skinUrl={item.ownedItem?.skinUrl || item.skinUrl}
                   size={32}
                 />
               </div>

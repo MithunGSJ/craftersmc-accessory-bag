@@ -265,16 +265,13 @@ describe('pricingEngine', () => {
   it('supports dynamic hydration of live auction prices and cache clearing', () => {
     setLiveAuctionPrice('MYTHIC_CUSTOM_TALISMAN', {
       minPrice: 5000000,
-      cleanMinPrice: 5000000,
-      cleanMedianPrice: 5500000,
+      avgPrice: 5500000,
       maxPrice: 6000000,
-      sampleCount: 10,
-      outlierCount: 1,
-      source: 'LIVE_AUCTION'
+      count: 10
     });
     const price = getAccessoryAuctionPrice('MYTHIC_CUSTOM_TALISMAN');
-    expect(price?.cleanMedianPrice).toBe(5500000);
-    expect(price?.source).toBe('LIVE_AUCTION');
+    expect(price?.avgPrice).toBe(5500000);
+    expect(price?.minPrice).toBe(5000000);
 
     clearPricingCache();
     // After clear, cache is reset

@@ -3,7 +3,8 @@ import pako from 'pako';
 import {
   stripMinecraftCodes,
   extractRarityFromLore,
-  parseAccessoryBagBase64
+  parseAccessoryBagBase64,
+  extractSkullTextureUrl
 } from './accessoryParser.ts';
 
 describe('accessoryParser', () => {
@@ -99,6 +100,40 @@ describe('accessoryParser', () => {
     expect(parsed[0].displayName).toBe('Personal Compactor 7000');
     expect(parsed[0].reforge).toBe('Pleasant');
     expect(parsed[0].rarity).toBe('LEGENDARY');
+  });
+
+  it('extracts direct Mojang skin texture URL from SkullOwner NBT compound', () => {
+    const rawSkinJson = JSON.stringify({
+      textures: {
+        SKIN: {
+          url: 'http://textures.minecraft.net/texture/3f4e8b3b723547ec94589255a8220f8c87ab56f3458cf5f5904571f5a5e3f'
+        }
+      }
+    });
+    const base64Value = btoa(rawSkinJson);
+
+    const mockTag = {
+      SkullOwner: {
+        Properties: {
+          textures: [
+            {
+              Value: base64Value
+            }
+          ]
+        }
+      }
+    };
+
+    const url = extractSkullTextureUrl(mockTag);
+    expect(url).toBe('https://textures.minecraft.net/texture/3f4e8b3b723547ec94589255a8220f8c87ab56f3458cf5f5904571f5a5e3f');
+  });
+
+  it('gracefully handles missing, empty, or corrupted SkullOwner NBT tags', () => {
+    expect(extractSkullTextureUrl(undefined)).toBeUndefined();
+    expect(extractSkullTextureUrl({})).toBeUndefined();
+    expect(extractSkullTextureUrl({ SkullOwner: {} })).toBeUndefined();
+    expect(extractSkullTextureUrl({ SkullOwner: { Properties: { textures: [] } } })).toBeUndefined();
+    expect(extractSkullTextureUrl({ SkullOwner: { Properties: { textures: [{ Value: 'invalid-b64-json' }] } } })).toBeUndefined();
   });
 });
 

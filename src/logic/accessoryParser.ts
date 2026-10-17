@@ -45,6 +45,34 @@ export function extractRarityFromLore(lore: readonly string[]): ItemRarity | und
   return undefined;
 }
 
+export function extractSkullTextureUrl(tag: NbtCompound | undefined): string | undefined {
+  if (!tag || typeof tag !== 'object') return undefined;
+  const skullOwner = tag['SkullOwner'] as NbtCompound | undefined;
+  if (!skullOwner || typeof skullOwner !== 'object') return undefined;
+
+  const properties = skullOwner['Properties'] as NbtCompound | undefined;
+  if (!properties || typeof properties !== 'object') return undefined;
+
+  const textures = properties['textures'] as Array<Record<string, unknown>> | undefined;
+  if (!Array.isArray(textures) || textures.length === 0) return undefined;
+
+  const first = textures[0];
+  const value = typeof first?.['Value'] === 'string' ? first['Value'] : undefined;
+  if (!value) return undefined;
+
+  try {
+    const decoded = atob(value);
+    const parsed = JSON.parse(decoded);
+    const skinUrl = parsed?.textures?.SKIN?.url;
+    if (typeof skinUrl === 'string' && skinUrl.startsWith('http')) {
+      return skinUrl.replace(/^http:\/\//i, 'https://');
+    }
+  } catch {
+    // Ignore invalid JSON / base64
+  }
+  return undefined;
+}
+
 export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem[] {
   if (!base64Data || base64Data.trim() === '') return [];
 
@@ -91,6 +119,11 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
         const slot = typeof item['slot'] === 'number' ? item['slot'] : index;
         const rarity = extractRarityFromColorCode(rawName) || catalogEntry?.baseRarity || 'COMMON';
 
+        const skinUrl =
+          (typeof item['skinUrl'] === 'string' ? item['skinUrl'] : undefined) ||
+          (typeof item['texture'] === 'string' && item['texture'].startsWith('http') ? item['texture'] : undefined) ||
+          extractSkullTextureUrl(item['tag'] as NbtCompound | undefined);
+
         result.push({
           id: `${internalId}_${slot}`,
           internalId,
@@ -98,7 +131,9 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
           rarity,
           reforge,
           slot,
-          lore: catalogEntry?.loreLines || [displayName]
+          lore: catalogEntry?.loreLines || [displayName],
+          skinUrl,
+          isUncataloged: !catalogEntry
         });
       });
       return result;
@@ -132,8 +167,9 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
 
         const modifier = extraAttrs?.['modifier'] as string | undefined;
         const enrichment = extraAttrs?.['accessory_enrichment'] as string | undefined;
+        const skinUrl = extractSkullTextureUrl(tag);
 
-        if (catalogEntry || rawId) {
+        if (catalogEntry || rawId || cleanName) {
           result.push({
             id: `${internalId}_${slot}`,
             internalId: internalId || cleanName.toUpperCase().replace(/\s+/g, '_'),
@@ -142,7 +178,9 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
             reforge: modifier ? modifier.charAt(0).toUpperCase() + modifier.slice(1) : undefined,
             enrichment: enrichment ? enrichment.replace(/_/g, ' ') : undefined,
             slot,
-            lore: cleanLore
+            lore: cleanLore,
+            skinUrl,
+            isUncataloged: !catalogEntry
           });
         }
       });

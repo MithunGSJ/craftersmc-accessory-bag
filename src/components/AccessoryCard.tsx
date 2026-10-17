@@ -11,7 +11,7 @@ interface AccessoryCardProps {
 }
 
 export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick }) => {
-  const { definition, status, ownedItem, effectiveMagicalPower } = evaluated;
+  const { definition, status, ownedItem, effectiveMagicalPower, skinUrl } = evaluated;
   const rarity = ownedItem ? ownedItem.rarity : definition.baseRarity;
   const style = THEME_CONFIG.rarityMap[rarity] || THEME_CONFIG.rarityMap.COMMON;
   const priceInfo = evaluateAccessoryPrice(definition);
@@ -64,6 +64,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
             id={definition.id}
             name={definition.name}
             fallbackEmoji={definition.iconEmoji}
+            skinUrl={ownedItem?.skinUrl || skinUrl}
             size={32}
           />
         </div>

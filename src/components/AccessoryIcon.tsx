@@ -4,6 +4,7 @@ interface AccessoryIconProps {
   readonly id: string;
   readonly name: string;
   readonly fallbackEmoji: string;
+  readonly skinUrl?: string;
   readonly size?: number;
 }
 
@@ -11,9 +12,11 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
   id,
   name,
   fallbackEmoji,
+  skinUrl,
   size = 32
 }) => {
   const [candidateIndex, setCandidateIndex] = useState(0);
+  const [skinFailed, setSkinFailed] = useState(false);
 
   // Generate potential filenames to ensure icon always loads
   const candidates = React.useMemo(() => {
@@ -35,12 +38,45 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
     return Array.from(new Set(list));
   }, [id, name]);
 
-  // Reset candidate index when id changes
+  // Reset candidate index when id or skinUrl changes
   React.useEffect(() => {
     setCandidateIndex(0);
-  }, [id]);
+    setSkinFailed(false);
+  }, [id, skinUrl]);
 
   if (candidateIndex >= candidates.length) {
+    if (skinUrl && !skinFailed) {
+      return (
+        <span
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            overflow: 'hidden',
+            position: 'relative',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0
+          }}
+        >
+          <img
+            src={skinUrl}
+            alt={name}
+            onError={() => setSkinFailed(true)}
+            style={{
+              width: `${size * 8}px`,
+              height: `${size * 8}px`,
+              position: 'absolute',
+              left: `-${size}px`,
+              top: `-${size}px`,
+              imageRendering: 'pixelated',
+              maxWidth: 'none'
+            }}
+          />
+        </span>
+      );
+    }
+
     return (
       <span
         style={{

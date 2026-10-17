@@ -35,6 +35,8 @@ export interface PlayerAccessoryItem {
   readonly enrichment?: string;
   readonly slot: number;
   readonly lore: readonly string[];
+  readonly skinUrl?: string;
+  readonly isUncataloged?: boolean;
   readonly extraAttributes?: Record<string, string | number | boolean>;
 }
 
@@ -47,6 +49,8 @@ export interface EvaluatedAccessory {
   readonly effectiveMagicalPower: number;
   readonly familyMaxTierOwned: number;
   readonly isHighestInFamily: boolean;
+  readonly skinUrl?: string;
+  readonly isUncataloged?: boolean;
   readonly upgradeRecommendation?: {
     readonly nextTierId: string;
     readonly nextTierName: string;

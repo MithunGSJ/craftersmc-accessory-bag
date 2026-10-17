@@ -152,8 +152,8 @@
   {
     "id": "FEAT-026",
     "description": "Dynamic NBT Skull Texture & Uncataloged Accessory Fallback: Client-side parser decodes Mojang skull texture URLs (textures.minecraft.net/texture/<hash>) from Base64 NBT SkullOwner and dynamically supports uncataloged items with active MP and skin rendering.",
-    "status": "failing",
-    "evidence": ""
+    "status": "passing",
+    "evidence": "tmp/evidence_feat_026_skull_and_uncataloged.json"
   },
   {
     "id": "FEAT-027",

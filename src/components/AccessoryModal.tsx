@@ -22,7 +22,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
 
   if (!evaluated) return null;
 
-  const { definition, status, ownedItem, effectiveMagicalPower, upgradeRecommendation } = evaluated;
+  const { definition, status, ownedItem, effectiveMagicalPower, upgradeRecommendation, skinUrl } = evaluated;
   const rarity = ownedItem ? ownedItem.rarity : definition.baseRarity;
   const style = THEME_CONFIG.rarityMap[rarity] || THEME_CONFIG.rarityMap.COMMON;
   const familyChain = ACCESSORIES_BY_FAMILY[definition.familyId] || [definition];
@@ -70,6 +70,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
               id={definition.id}
               name={definition.name}
               fallbackEmoji={definition.iconEmoji}
+              skinUrl={ownedItem?.skinUrl || skinUrl}
               size={44}
             />
           </div>

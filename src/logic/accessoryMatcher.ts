@@ -160,8 +160,42 @@ export function evaluatePlayerAccessories(
       effectiveMagicalPower,
       familyMaxTierOwned: familyMaxTier,
       isHighestInFamily: def.tier === (familyMembers[familyMembers.length - 1]?.tier || 1),
+      skinUrl: ownedItem?.skinUrl,
+      isUncataloged: Boolean(ownedItem?.isUncataloged),
       upgradeRecommendation
     });
+  }
+
+  // Support zero-day uncataloged player accessories dynamically
+  for (const item of playerItems) {
+    const internalId = item.internalId.toUpperCase();
+    if (!findAccessoryById(internalId)) {
+      const synthDef = {
+        id: item.internalId,
+        name: item.displayName,
+        baseRarity: item.rarity,
+        category: 'Misc' as const,
+        familyId: item.internalId.toLowerCase(),
+        tier: 1,
+        description: item.lore.length > 0 ? item.lore[0] : 'In-game accessory',
+        source: 'In-Game / Uncataloged',
+        iconEmoji: '🔮',
+        loreLines: item.lore
+      };
+
+      const baseMp = THEME_CONFIG.rarityMap[item.rarity]?.magicalPower || 0;
+
+      result.push({
+        definition: synthDef,
+        status: 'OWNED',
+        ownedItem: item,
+        skinUrl: item.skinUrl,
+        isUncataloged: true,
+        effectiveMagicalPower: baseMp,
+        familyMaxTierOwned: 1,
+        isHighestInFamily: true
+      });
+    }
   }
 
   return result;

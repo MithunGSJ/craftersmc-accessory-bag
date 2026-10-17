@@ -240,37 +240,38 @@ describe('accessoryMatcher', () => {
 
   it('should sort accessories by in-game bag slot index with owned items first', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'ITEM_B',
-        internalId: 'FIRE_TALISMAN',
-        displayName: 'Fire Talisman',
-        rarity: 'COMMON',
-        slot: 5,
-        lore: []
-      },
-      {
-        id: 'ITEM_A',
-        internalId: 'CAMPFIRE_GOD_BADGE',
-        displayName: 'Campfire God Badge',
-        rarity: 'LEGENDARY',
-        slot: 1,
-        lore: []
-      }
+      { id: 'ITEM_B', internalId: 'FIRE_TALISMAN', displayName: 'Fire Talisman', rarity: 'COMMON', slot: 5, lore: [] },
+      { id: 'ITEM_A', internalId: 'CAMPFIRE_GOD_BADGE', displayName: 'Campfire God Badge', rarity: 'LEGENDARY', slot: 1, lore: [] }
     ];
 
     const evaluated = evaluatePlayerAccessories(playerItems);
     const sorted = sortAccessoriesByBagOrder(evaluated);
 
-    // First item should be slot 1 (Campfire God Badge)
     expect(sorted[0].ownedItem?.slot).toBe(1);
     expect(sorted[0].definition.id).toBe('CAMPFIRE_GOD_BADGE');
-
-    // Second item should be slot 5 (Fire Talisman)
     expect(sorted[1].ownedItem?.slot).toBe(5);
     expect(sorted[1].definition.id).toBe('FIRE_TALISMAN');
-
-    // Remaining items should be unowned
     expect(sorted[2].ownedItem).toBeUndefined();
+  });
+
+  it('dynamically supports uncataloged accessories with skinUrl and rarity MP', () => {
+    const item: PlayerAccessoryItem = {
+      id: 'CUSTOM_PENDANT_0',
+      internalId: 'CUSTOM_PENDANT',
+      displayName: 'Custom Pendant',
+      rarity: 'MYTHIC',
+      slot: 7,
+      lore: ['A mysterious zero-day talisman'],
+      skinUrl: 'https://textures.minecraft.net/texture/12345',
+      isUncataloged: true
+    };
+    const evaluated = evaluatePlayerAccessories([item]);
+    const found = evaluated.find(e => e.definition.id === 'CUSTOM_PENDANT');
+    expect(found).toBeDefined();
+    expect(found?.status).toBe('OWNED');
+    expect(found?.isUncataloged).toBe(true);
+    expect(found?.skinUrl).toBe('https://textures.minecraft.net/texture/12345');
+    expect(found?.effectiveMagicalPower).toBe(22);
   });
 });
 
