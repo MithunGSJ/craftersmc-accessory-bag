@@ -112,6 +112,12 @@
     "description": "Accurate NPC Base Accessory Craft Valuation: Upgrade recipes inheriting from base NPC accessories (e.g. Zombie Ring inheriting Zombie Talisman) use the guaranteed 500-coin NPC vendor cost rather than inflated auction listing prices.",
     "status": "passing",
     "evidence": "evidence/modal-zombie-ring-500-cost-verified.png"
+  },
+  {
+    "id": "FEAT-020",
+    "description": "Server-Side API Key Security & Client Isolation: CraftersMC API Key is completely encapsulated in server-side environment variables (.env / Vite server proxy), removing all keys, headers, and input fields from client code and browser builds.",
+    "status": "passing",
+    "evidence": "evidence/modal-lookup-no-apikey-verified.png"
   }
 ]
 

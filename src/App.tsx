@@ -61,11 +61,11 @@ export const App: React.FC = () => {
     setProfileData(loadSampleProfile(id));
   };
 
-  const handleApiLookup = async (username: string, apiKey: string) => {
+  const handleApiLookup = async (username: string) => {
     setIsFetchingApi(true);
     setApiError(null);
     try {
-      const data = await fetchPlayerFromApi(username, apiKey);
+      const data = await fetchPlayerFromApi(username);
       setProfileData(data);
       setCurrentProfileId('custom');
       setIsLookupOpen(false);

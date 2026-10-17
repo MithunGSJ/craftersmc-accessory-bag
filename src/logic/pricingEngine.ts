@@ -245,9 +245,7 @@ export function formatCoins(amount: number): string {
 
 export async function refreshLiveBazaarPrice(itemId: string): Promise<number | null> {
   try {
-    const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(itemId)}/details`, {
-      headers: { 'X-API-Key': '44858bff-1259-457f-905d-514867e3780d' }
-    });
+    const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(itemId)}/details`);
     if (!res.ok) return null;
     const json = await res.json();
     if (json.success) {

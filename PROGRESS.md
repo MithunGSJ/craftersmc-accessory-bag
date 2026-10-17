@@ -2,29 +2,28 @@
 
 ## Current Phase
 
-Completed (FEAT-019: Accurate NPC Base Accessory Craft Valuation in Upgrade Chains)
+Completed (FEAT-020: Server-Side API Key Security & Client Isolation)
 
 ## What Changed Last
 
-- **Accurate Base NPC Talisman Craft Valuation (FEAT-019)**:
-  - Updated `src/logic/pricingEngine.ts` in `calculateCraftCost`:
-    - When an accessory recipe upgrades from a base accessory (`recipe.upgradesFrom`), resolved its definition via `findAccessoryById`.
-    - If the parent accessory has an NPC shop cost (`parentNpc = parseNpcCost(parentDef?.npcCost)`), its authentic guaranteed NPC cost is used (e.g. 500 coins for `Zombie Talisman`, 10,000 coins for `Intimidation Talisman`).
-    - Fixed recipe breakdown ingredient naming to display clean title-cased names (`1x Zombie Talisman` instead of `1x ZOMBIE TALISMAN`).
-    - Removed stale/inflated auction listings from `pricingSnapshot.json` for coin NPC items (`ZOMBIE_TALISMAN`, `VILLAGE_AFFINITY_TALISMAN`, `INTIMIDATION_TALISMAN`).
-  - **Zombie Ring Verification**:
-    - `• 1x Zombie Talisman (@ 500/ea)  500`
-    - `• 64x Revenant Flesh (@ 350/ea)  22.4K`
-    - `Total Craft Cost: ~22.9K (22,868 coins)` (down from inaccurate ~122.4K).
+- **Server-Side API Key Security & Client Isolation (FEAT-020)**:
+  - Encapsulated CraftersMC API Key strictly inside server-side environment (`.env` and Vite server proxy middleware).
+  - Updated `vite.config.ts`: Server proxy automatically attaches `X-API-Key` to outbound requests to `https://api.craftersmc.net` via `proxy.on('proxyReq')`.
+  - Removed all client-side API key code:
+    - Removed `DEFAULT_CRAFTERS_API_KEY` from `src/logic/profileLoader.ts`.
+    - Removed `apiKey` state, input field, and label from `src/components/CustomLookupModal.tsx`.
+    - Removed hardcoded `headers: { 'X-API-Key': ... }` from `src/logic/pricingEngine.ts`.
+    - Updated `src/App.tsx` and `src/components/CustomLookupModal.tsx` `handleApiLookup` signatures to omit API key arguments.
+  - Added `.env` and `.env.*` to `.gitignore`, created `.env.example`.
+  - Verified with `grep` that `44858bff-1259-457f-905d-514867e3780d` does not appear anywhere in `src/` or the production build `dist/`.
 - **Visual Evidence Verified**:
-  - `evidence/modal-zombie-ring-500-cost-verified.png`: Confirms `Zombie Ring` craft breakdown uses 500 coins for `Zombie Talisman` and total craft cost ~22.9K.
-  - `evidence/card-zombie-ring-verified.png`: Confirms `Zombie Ring` card badge displays `🌾 Craft: ~22.9K`.
+  - `evidence/modal-lookup-no-apikey-verified.png`: Confirms the player lookup modal has zero API key fields, showing only the username input and server-side proxy security badge.
+  - `evidence/live-lookup-server-proxy-success.png`: Confirms seamless live player data fetch via the server-side proxy without any client-side API key.
 - **Quality & Rule Compliance**:
-  - Unit test in `src/logic/pricingEngine.test.ts` verifying `Zombie Ring` craft breakdown and 500 coin unit price.
   - 11/11 Vitest test suites passing (46 tests).
   - TypeScript strict mode passing with 0 errors (`npx tsc --noEmit`).
   - Production build passing (`npm run build`).
-  - Source files strictly under 300 lines (Rule 5).
+  - All source files strictly under 300 lines (Rule 5).
 
 ## Known Problems
 

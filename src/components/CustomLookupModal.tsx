@@ -4,7 +4,7 @@ import { playClickSound } from '../utils/soundEffects.ts';
 interface CustomLookupModalProps {
   readonly isOpen: boolean;
   readonly onClose: () => void;
-  readonly onLookupApi: (username: string, apiKey: string) => Promise<void>;
+  readonly onLookupApi: (username: string) => Promise<void>;
   readonly onImportBase64: (base64: string, name: string) => void;
   readonly onLoadSimulated: (name: string) => void;
   readonly isLoading: boolean;
@@ -22,7 +22,6 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
 }) => {
   const [tab, setTab] = React.useState<'api' | 'nbt'>('api');
   const [username, setUsername] = React.useState('DarkKing0098994');
-  const [apiKey, setApiKey] = React.useState('44858bff-1259-457f-905d-514867e3780d');
   const [rawBase64, setRawBase64] = React.useState('');
   const [customName, setCustomName] = React.useState('');
 
@@ -31,7 +30,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   const handleApiSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim()) return;
-    await onLookupApi(username.trim(), apiKey.trim());
+    await onLookupApi(username.trim());
   };
 
   const handleNbtSubmit = (e: React.FormEvent) => {
@@ -136,21 +135,8 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
               />
             </div>
 
-            <div>
-              <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-                CRAFTERSMC API KEY (REQUIRED BY SERVER)
-              </label>
-              <input
-                type="password"
-                className="search-input"
-                style={{ paddingLeft: '14px' }}
-                placeholder="Enter key (obtained in Minecraft chat via /api new)"
-                value={apiKey}
-                onChange={e => setApiKey(e.target.value)}
-              />
-              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
-                💡 CraftersMC requires an API key for player stats. Run <code>/api new</code> on the server to get one.
-              </span>
+            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+              🔒 <strong>Server-Side Proxy:</strong> Requests are securely authenticated server-side. No API key is exposed to or required from your browser.
             </div>
 
             <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>

@@ -3,8 +3,6 @@ import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 import { parseAccessoryBagBase64 } from './accessoryParser.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
 
-export const DEFAULT_CRAFTERS_API_KEY = '44858bff-1259-457f-905d-514867e3780d';
-
 export interface LoadedProfileData {
   readonly playerName: string;
   readonly profileName: string;
@@ -56,8 +54,7 @@ export function loadFromBase64Nbt(base64: string, playerName = 'Custom Player'):
 }
 
 export async function fetchPlayerFromApi(
-  identifier: string,
-  apiKey?: string
+  identifier: string
 ): Promise<LoadedProfileData> {
   const cleanId = identifier.trim();
   const cacheKey = cleanId.toLowerCase();
@@ -67,10 +64,8 @@ export async function fetchPlayerFromApi(
     return cached.data;
   }
 
-  const effectiveKey = (apiKey && apiKey.trim() !== '') ? apiKey.trim() : DEFAULT_CRAFTERS_API_KEY;
   const headers: Record<string, string> = {
-    Accept: 'application/json',
-    'X-API-Key': effectiveKey
+    Accept: 'application/json'
   };
 
   // Use local Vite proxy in browser environment to eliminate CORS errors
@@ -86,16 +81,14 @@ export async function fetchPlayerFromApi(
     response = await fetch(playerUrl, { headers });
   } catch (netErr) {
     throw new Error(
-      'Unable to connect to CraftersMC API. Please check your internet connection or supply an API key.'
+      'Unable to connect to CraftersMC API. Please check your internet connection.'
     );
   }
 
   if (!response.ok) {
     if (response.status === 401) {
-      const errBody = (await response.json().catch(() => ({}))) as { message?: string };
       throw new Error(
-        errBody.message ||
-          'CraftersMC API requires an API key (X-API-Key). Obtain one in-game using "/api new" and enter it below.'
+        'CraftersMC API authorization error. Check server CRAFTERS_API_KEY environment variable.'
       );
     }
     if (response.status === 404) {
