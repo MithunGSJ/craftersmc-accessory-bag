@@ -100,6 +100,12 @@
     "description": "Single-profile Header & Auction Fallback Display: Retained solely 'Fresh Profile' and 'Lookup Player' in hero bar; updated Potato Talisman as a Shiny Pig event drop, and displayed 'No offers were made in auction house' when listing history is unavailable.",
     "status": "passing",
     "evidence": "evidence/FEAT-017-fresh-profile-and-auction-fallback.txt"
+  },
+  {
+    "id": "FEAT-018",
+    "description": "Coin NPC Accessories Auction Price Suppression: Omit auction prices, AH badges, and auction house market boxes for all accessories purchasable from NPCs with coins, displaying guaranteed NPC coin costs exclusively.",
+    "status": "passing",
+    "evidence": "evidence/modal-mine-affinity-npc-no-auction.png"
   }
 ]
 

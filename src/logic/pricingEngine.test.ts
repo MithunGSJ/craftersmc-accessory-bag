@@ -92,12 +92,20 @@ describe('pricingEngine', () => {
     expect(expAuction?.hasBin).toBe(true);
   });
 
-  it('evaluates NPC shop items correctly', () => {
+  it('evaluates NPC shop items correctly and does not show auction price for coin NPC items', () => {
     const mineAffinity = findAccessoryById('MINE_AFFINITY_TALISMAN');
     expect(mineAffinity).toBeDefined();
     const price = evaluateAccessoryPrice(mineAffinity!);
     expect(price.npcCost).toBe(2500);
     expect(price.primaryMethod).toBe('NPC_SHOP');
+    expect(price.auction).toBeUndefined();
+
+    const skysBadge = findAccessoryById('SKYS_BADGE');
+    expect(skysBadge).toBeDefined();
+    const skyPrice = evaluateAccessoryPrice(skysBadge!);
+    expect(skyPrice.npcCost).toBe(21500000);
+    expect(skyPrice.primaryMethod).toBe('NPC_SHOP');
+    expect(skyPrice.auction).toBeUndefined();
   });
 
   it('evaluates auction/drop items correctly', () => {

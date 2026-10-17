@@ -189,7 +189,7 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
         effectivePrice: npcNum,
         primaryMethod: 'NPC_SHOP',
         npcCost: npcNum,
-        auction,
+        auction: undefined,
         displayLabel: `NPC: ${formatCoins(npcNum)}`
       };
       priceDetailsCache.set(acc.id, result);

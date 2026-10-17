@@ -54,6 +54,9 @@ describe('Audit PDF Accessories', () => {
         expect(pricing.primaryMethod).toBe('NPC_SHOP');
         expect(pricing.displayLabel).not.toContain('~');
         expect(pricing.displayLabel).not.toContain('Est');
+        if (!/gems/i.test(def.npcCost)) {
+          expect(pricing.auction).toBeUndefined();
+        }
       }
     }
   });
