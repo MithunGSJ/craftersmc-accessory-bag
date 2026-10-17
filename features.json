@@ -124,6 +124,13 @@
     "description": "Streamlined Player Lookup UI: Removed redundant Direct Base64 NBT Paste tab and simplified modal and header to focus purely on live CraftersMC player lookup.",
     "status": "passing",
     "evidence": "evidence/modal-lookup-no-nbt-tab-verified.png"
+  },
+  {
+    "id": "FEAT-022",
+    "description": "Empty Default State for Player Lookup Input: When opening the Player Lookup modal, the input field starts completely empty with a subtle placeholder ('e.g. DarkKing0098994') instead of pre-populating with a username, and resets cleanly upon re-opening.",
+    "status": "passing",
+    "evidence": "evidence/modal-lookup-empty-input-verified.png"
   }
 ]
+
 

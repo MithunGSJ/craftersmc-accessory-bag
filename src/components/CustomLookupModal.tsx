@@ -17,7 +17,13 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   isLoading,
   errorMessage
 }) => {
-  const [username, setUsername] = React.useState('DarkKing0098994');
+  const [username, setUsername] = React.useState('');
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setUsername('');
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
