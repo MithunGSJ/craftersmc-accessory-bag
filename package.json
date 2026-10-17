@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "sync:wiki": "tsx scripts/syncWikiData.ts",
     "verify": "node verify.js"
   },
   "dependencies": {

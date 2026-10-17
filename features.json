@@ -158,8 +158,8 @@
   {
     "id": "FEAT-027",
     "description": "MediaWiki Scraper Engine (scripts/syncWikiData.ts & npm run sync:wiki): Automated CLI tool that queries craftersmc.wiki.gg/api.php, extracts master accessory table, infobox upgrade families, crafting recipes, and auto-downloads item PNG sprites.",
-    "status": "failing",
-    "evidence": ""
+    "status": "passing",
+    "evidence": "tmp/evidence_feat_027_wiki_sync.json"
   },
   {
     "id": "FEAT-028",
