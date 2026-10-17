@@ -54,7 +54,8 @@ describe('pricingEngine', () => {
     const bootsRecipe = ACCESSORY_RECIPES['GOLDEN_FEATHER_BOOTS'];
     const { breakdown } = calculateCraftCost(bootsRecipe);
     expect(breakdown.some(b => b.itemId === 'FEATHER_ARTIFACT')).toBe(true);
-    expect(breakdown.some(b => b.itemId === 'enchanted_feather' && b.count === 64)).toBe(true);
+    expect(breakdown.some(b => b.itemId === 'enchanted_feather' && b.count === 160)).toBe(true);
+    expect(breakdown.some(b => b.itemId === 'golden_feather' && b.count === 1)).toBe(true);
   });
 
   it('evaluates Experience Artifact recipe: 9 Enchanted Lapis Blocks (1440 Enchanted Lapis)', () => {
@@ -184,6 +185,48 @@ describe('pricingEngine', () => {
     expect(roRecipe.upgradesFrom).toBeUndefined();
     expect(roRecipe.ingredients).toEqual([
       { itemId: 'scythe_blade', name: 'Scythe Blade', count: 8 }
+    ]);
+  });
+
+  it('validates verified recipes for Piggy Bank, Compactors, Deletors, Spooky and Mining lines', () => {
+    // Piggy Bank: 96x enchanted_raw_porkchop + 1x chest
+    const pbRecipe = ACCESSORY_RECIPES['PIGGY_BANK'];
+    expect(pbRecipe).toBeDefined();
+    expect(pbRecipe.ingredients[0].count).toBe(96);
+    expect(pbRecipe.ingredients[1].itemId).toBe('chest');
+
+    // Vaccine Talisman: 9x poisonous_potato
+    const vtRecipe = ACCESSORY_RECIPES['VACCINE_TALISMAN'];
+    expect(vtRecipe.ingredients).toEqual([
+      { itemId: 'poisonous_potato', name: 'Poisonous Potato', count: 9 }
+    ]);
+
+    // Coins Talisman: 20x emerald + 5x gold_ingot
+    const ctRecipe = ACCESSORY_RECIPES['COINS_TALISMAN'];
+    expect(ctRecipe.ingredients).toEqual([
+      { itemId: 'emerald', name: 'Emerald', count: 20 },
+      { itemId: 'gold_ingot', name: 'Gold Ingot', count: 5 }
+    ]);
+
+    // Personal Compactor 7000: 56x enchanted_redstone_block
+    const pc7k = ACCESSORY_RECIPES['PERSONAL_COMPACTOR_7000'];
+    expect(pc7k.ingredients[0].count).toBe(56);
+    expect(pc7k.upgradesFrom).toBe('PERSONAL_COMPACTOR_6000');
+
+    // Personal Deletor 7000: 7x enchanted_iron_block
+    const pd7k = ACCESSORY_RECIPES['PERSONAL_DELETOR_7000'];
+    expect(pd7k.ingredients[0].count).toBe(7);
+    expect(pd7k.upgradesFrom).toBe('PERSONAL_DELETOR_6000');
+
+    // Candy Relic: 1024x purple_candy
+    const crRecipe = ACCESSORY_RECIPES['CANDY_RELIC'];
+    expect(crRecipe.ingredients[0].count).toBe(1024);
+
+    // Bat Person Artifact: 16x spooky_fragment + 128x ectoplasm
+    const bpaRecipe = ACCESSORY_RECIPES['BAT_PERSON_ARTIFACT'];
+    expect(bpaRecipe.ingredients).toEqual([
+      { itemId: 'spooky_fragment', name: 'Spooky Fragment', count: 16 },
+      { itemId: 'ectoplasm', name: 'Ectoplasm', count: 128 }
     ]);
   });
 });

@@ -28,9 +28,12 @@ function r(
 export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   // Feather Line
   FEATHER_TALISMAN: r('FEATHER_TALISMAN', [{ itemId: 'feather', name: 'Feather', count: 108 }]),
-  FEATHER_RING: r('FEATHER_RING', [{ itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 224 }], 'FEATHER_TALISMAN'),
+  FEATHER_RING: r('FEATHER_RING', [{ itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 7 }], 'FEATHER_TALISMAN'),
   FEATHER_ARTIFACT: r('FEATHER_ARTIFACT', [{ itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 128 }], 'FEATHER_RING'),
-  GOLDEN_FEATHER_BOOTS: r('GOLDEN_FEATHER_BOOTS', [{ itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 64 }], 'FEATHER_ARTIFACT'),
+  GOLDEN_FEATHER_BOOTS: r('GOLDEN_FEATHER_BOOTS', [
+    { itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 160 },
+    { itemId: 'golden_feather', name: 'Golden Feather', count: 1 }
+  ], 'FEATHER_ARTIFACT'),
 
   // Speed Line
   SPEED_TALISMAN: r('SPEED_TALISMAN', [{ itemId: 'sugar_cane', name: 'Sugar Cane', count: 108 }]),
@@ -38,13 +41,19 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   SPEED_ARTIFACT: r('SPEED_ARTIFACT', [{ itemId: 'enchanted_sugar_cane', name: 'Enchanted Sugar Cane', count: 48 }], 'SPEED_RING'),
 
   // Bamboo Line
-  BAMBOO_TALISMAN: r('BAMBOO_TALISMAN', [{ itemId: 'bamboo', name: 'Bamboo', count: 512 }]),
-  BAMBOO_RING: r('BAMBOO_RING', [{ itemId: 'enchanted_bamboo', name: 'Enchanted Bamboo', count: 256 }], 'BAMBOO_TALISMAN'),
+  BAMBOO_TALISMAN: r('BAMBOO_TALISMAN', [{ itemId: 'bamboo', name: 'Bamboo', count: 288 }]),
+  BAMBOO_RING: r('BAMBOO_RING', [{ itemId: 'enchanted_bamboo', name: 'Enchanted Bamboo', count: 64 }], 'BAMBOO_TALISMAN'),
 
   // Farming & Gathering
-  FARMING_TALISMAN: r('FARMING_TALISMAN', [{ itemId: 'wheat', name: 'Wheat', count: 576 }]),
-  FARMER_ORB: r('FARMER_ORB', [{ itemId: 'enchanted_pumpkin', name: 'Enchanted Pumpkin', count: 64 }]),
-  VACCINE_TALISMAN: r('VACCINE_TALISMAN', [{ itemId: 'enchanted_potato', name: 'Enchanted Potato', count: 144 }]),
+  FARMING_TALISMAN: r('FARMING_TALISMAN', [
+    { itemId: 'wheat', name: 'Wheat', count: 5 },
+    { itemId: 'wheat_seeds', name: 'Wheat Seeds', count: 4 }
+  ]),
+  FARMER_ORB: r('FARMER_ORB', [
+    { itemId: 'enchanted_pumpkin', name: 'Enchanted Pumpkin', count: 8 },
+    { itemId: 'enchanted_blaze_powder', name: 'Enchanted Blaze Powder', count: 1 }
+  ]),
+  VACCINE_TALISMAN: r('VACCINE_TALISMAN', [{ itemId: 'poisonous_potato', name: 'Poisonous Potato', count: 9 }]),
   WOOD_AFFINITY_TALISMAN: r('WOOD_AFFINITY_TALISMAN', [
     { itemId: 'oak_leaves', name: 'Oak Leaves', count: 8 },
     { itemId: 'enchanted_oak_log', name: 'Enchanted Oak Log', count: 1 }
@@ -56,10 +65,20 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   FERMENTO_ARTIFACT: r('FERMENTO_ARTIFACT', [{ itemId: 'condensed_fermento', name: 'Condensed Fermento', count: 8 }], 'SQUASH_RING'),
 
   // Mining & Utility
-  COINS_TALISMAN: r('COINS_TALISMAN', [{ itemId: 'emerald', name: 'Emerald', count: 128 }]),
-  EMERALD_RING: r('EMERALD_RING', [{ itemId: 'enchanted_emerald', name: 'Enchanted Emerald', count: 256 }]),
-  MAGNETIC_TALISMAN: r('MAGNETIC_TALISMAN', [{ itemId: 'emerald', name: 'Emerald', count: 128 }]),
-  GRAVITY_TALISMAN: r('GRAVITY_TALISMAN', [{ itemId: 'obsidian', name: 'Obsidian', count: 128 }]),
+  COINS_TALISMAN: r('COINS_TALISMAN', [
+    { itemId: 'emerald', name: 'Emerald', count: 20 },
+    { itemId: 'gold_ingot', name: 'Gold Ingot', count: 5 }
+  ]),
+  EMERALD_RING: r('EMERALD_RING', [{ itemId: 'enchanted_emerald', name: 'Enchanted Emerald', count: 32 }]),
+  MAGNETIC_TALISMAN: r('MAGNETIC_TALISMAN', [
+    { itemId: 'emerald', name: 'Emerald', count: 128 },
+    { itemId: 'redstone', name: 'Redstone', count: 32 }
+  ]),
+  GRAVITY_TALISMAN: r('GRAVITY_TALISMAN', [{ itemId: 'obsidian', name: 'Obsidian', count: 144 }]),
+  PIGGY_BANK: r('PIGGY_BANK', [
+    { itemId: 'enchanted_raw_porkchop', name: 'Enchanted Raw Porkchop', count: 96 },
+    { itemId: 'chest', name: 'Chest', count: 1 }
+  ]),
   EXPERIENCE_ARTIFACT: r('EXPERIENCE_ARTIFACT', [{
     itemId: 'enchanted_lapis_block',
     name: 'Enchanted Lapis Block',
@@ -97,16 +116,35 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   ]),
 
   // Personal Compactors
-  PERSONAL_COMPACTOR_4000: r('PERSONAL_COMPACTOR_4000', [{ itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 112 }]),
-  PERSONAL_COMPACTOR_5000: r('PERSONAL_COMPACTOR_5000', [{ itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 224 }], 'PERSONAL_COMPACTOR_4000'),
-  PERSONAL_COMPACTOR_6000: r('PERSONAL_COMPACTOR_6000', [{ itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 448 }], 'PERSONAL_COMPACTOR_5000'),
-  PERSONAL_COMPACTOR_7000: r('PERSONAL_COMPACTOR_7000', [{ itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 896 }], 'PERSONAL_COMPACTOR_6000'),
+  PERSONAL_COMPACTOR_4000: r('PERSONAL_COMPACTOR_4000', [
+    { itemId: 'super_compactor_3000', name: 'Super Compactor 3000', count: 1 },
+    { itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 7 }
+  ]),
+  PERSONAL_COMPACTOR_5000: r('PERSONAL_COMPACTOR_5000', [
+    { itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 14 }
+  ], 'PERSONAL_COMPACTOR_4000'),
+  PERSONAL_COMPACTOR_6000: r('PERSONAL_COMPACTOR_6000', [
+    { itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 28 }
+  ], 'PERSONAL_COMPACTOR_5000'),
+  PERSONAL_COMPACTOR_7000: r('PERSONAL_COMPACTOR_7000', [
+    { itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 56 }
+  ], 'PERSONAL_COMPACTOR_6000'),
 
   // Personal Deletors
-  PERSONAL_DELETOR_4000: r('PERSONAL_DELETOR_4000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 112 }]),
-  PERSONAL_DELETOR_5000: r('PERSONAL_DELETOR_5000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 224 }], 'PERSONAL_DELETOR_4000'),
-  PERSONAL_DELETOR_6000: r('PERSONAL_DELETOR_6000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 448 }], 'PERSONAL_DELETOR_5000'),
-  PERSONAL_DELETOR_7000: r('PERSONAL_DELETOR_7000', [{ itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 896 }], 'PERSONAL_DELETOR_6000'),
+  PERSONAL_DELETOR_4000: r('PERSONAL_DELETOR_4000', [
+    { itemId: 'enchanted_lava_bucket', name: 'Enchanted Lava Bucket', count: 1 },
+    { itemId: 'enchanted_redstone_block', name: 'Enchanted Redstone Block', count: 1 },
+    { itemId: 'enchanted_iron_ingot', name: 'Enchanted Iron Ingot', count: 112 }
+  ]),
+  PERSONAL_DELETOR_5000: r('PERSONAL_DELETOR_5000', [
+    { itemId: 'enchanted_iron_ingot', name: 'Enchanted Iron Ingot', count: 224 }
+  ], 'PERSONAL_DELETOR_4000'),
+  PERSONAL_DELETOR_6000: r('PERSONAL_DELETOR_6000', [
+    { itemId: 'enchanted_iron_ingot', name: 'Enchanted Iron Ingot', count: 448 }
+  ], 'PERSONAL_DELETOR_5000'),
+  PERSONAL_DELETOR_7000: r('PERSONAL_DELETOR_7000', [
+    { itemId: 'enchanted_iron_block', name: 'Enchanted Iron Block', count: 7 }
+  ], 'PERSONAL_DELETOR_6000'),
 
   // Slayer Recipes (Wolf & Zombie Slayer lines)
   RED_CLAW_TALISMAN: r('RED_CLAW_TALISMAN', [
@@ -152,11 +190,19 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
   CANDY_TALISMAN: r('CANDY_TALISMAN', [{ itemId: 'green_candy', name: 'Green Candy', count: 16 }]),
   CANDY_RING: r('CANDY_RING', [{ itemId: 'green_candy', name: 'Green Candy', count: 64 }], 'CANDY_TALISMAN'),
   CANDY_ARTIFACT: r('CANDY_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 32 }], 'CANDY_RING'),
-  CANDY_RELIC: r('CANDY_RELIC', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 64 }], 'CANDY_ARTIFACT'),
+  CANDY_RELIC: r('CANDY_RELIC', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 1024 }], 'CANDY_ARTIFACT'),
   BAT_RING: r('BAT_RING', [{ itemId: 'green_candy', name: 'Green Candy', count: 64 }], 'BAT_TALISMAN'),
   BAT_ARTIFACT: r('BAT_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 64 }], 'BAT_RING'),
-  BAT_PERSON_RING: r('BAT_PERSON_RING', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 128 }], 'BAT_PERSON_TALISMAN'),
-  BAT_PERSON_ARTIFACT: r('BAT_PERSON_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 256 }], 'BAT_PERSON_RING'),
+  BAT_PERSON_RING: r('BAT_PERSON_RING', [
+    { itemId: 'spooky_fragment', name: 'Spooky Fragment', count: 4 },
+    { itemId: 'ectoplasm', name: 'Ectoplasm', count: 32 }
+  ], 'BAT_PERSON_TALISMAN'),
+  BAT_PERSON_ARTIFACT: r('BAT_PERSON_ARTIFACT', [
+    { itemId: 'spooky_fragment', name: 'Spooky Fragment', count: 16 },
+    { itemId: 'ectoplasm', name: 'Ectoplasm', count: 128 }
+  ], 'BAT_PERSON_RING'),
+  INTIMIDATION_RING: r('INTIMIDATION_RING', [{ itemId: 'green_candy', name: 'Green Candy', count: 100 }], 'INTIMIDATION_TALISMAN'),
+  INTIMIDATION_ARTIFACT: r('INTIMIDATION_ARTIFACT', [{ itemId: 'purple_candy', name: 'Purple Candy', count: 100 }], 'INTIMIDATION_RING'),
   WOLF_RING: r('WOLF_RING', [
     { itemId: 'weak_wolf_catalyst', name: 'Weak Wolf Catalyst', count: 1 },
     { itemId: 'enchanted_bone', name: 'Enchanted Bone', count: 14 }

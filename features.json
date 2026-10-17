@@ -88,6 +88,12 @@
     "description": "Accessory Hierarchy, Wiki Recipes, Thaumaturgy MP, Pig's Foot Icon, and Minecraft Inventory NBT Slot Order Layout: Corrected families (Fire Talisman standalone, Fire Extinguisher -> Fire Devourer, Frostclaw Relic -> Red Claw Artifact, standalone Reaper Orb), verified CraftersMC wiki crafting recipes, Special rarity 5 MP, Pig's Foot sprite loading, and Minecraft inventory bag slot order with bottom Missing/Upgradable card grid.",
     "status": "passing",
     "evidence": "evidence/FEAT-015-verified-recipes-and-layout.txt"
+  },
+  {
+    "id": "FEAT-016",
+    "description": "Comprehensive CraftersMC Wiki Recipe & Price Verification for all 44 PDF Accessories: Fully verified crafting recipes (Feather line, Golden Feather Boots, Bamboo line, Farming Talisman, Farmer Orb, Vaccine Talisman, Coins Talisman, Emerald Ring, Magnetic Talisman, Gravity Talisman, Piggy Bank, Personal Compactors 4000-7000, Personal Deletors 4000-7000, Candy Relic, Bat Person line, Intimidation line) and authentic market pricing (Bazaar ingredients, NPC costs, Auction BIN snapshots without outliers).",
+    "status": "passing",
+    "evidence": "evidence/FEAT-016-all-pdf-recipes-and-prices.txt"
   }
 ]
 

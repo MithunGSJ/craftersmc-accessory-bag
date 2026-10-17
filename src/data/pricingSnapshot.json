@@ -243,6 +243,46 @@
     "enchanted_brown_mushroom": {
       "avgPrice": 350,
       "weeklyAveragePrice": 350
+    },
+    "poisonous_potato": {
+      "avgPrice": 50,
+      "weeklyAveragePrice": 50
+    },
+    "wheat_seeds": {
+      "avgPrice": 3,
+      "weeklyAveragePrice": 3
+    },
+    "gold_ingot": {
+      "avgPrice": 6.5,
+      "weeklyAveragePrice": 6.5
+    },
+    "chest": {
+      "avgPrice": 20,
+      "weeklyAveragePrice": 20
+    },
+    "enchanted_raw_porkchop": {
+      "avgPrice": 4900,
+      "weeklyAveragePrice": 4900
+    },
+    "golden_feather": {
+      "avgPrice": 9000000,
+      "weeklyAveragePrice": 9000000
+    },
+    "super_compactor_3000": {
+      "avgPrice": 420000,
+      "weeklyAveragePrice": 420000
+    },
+    "enchanted_lava_bucket": {
+      "avgPrice": 250000,
+      "weeklyAveragePrice": 250000
+    },
+    "spooky_fragment": {
+      "avgPrice": 1500000,
+      "weeklyAveragePrice": 1500000
+    },
+    "ectoplasm": {
+      "avgPrice": 55000,
+      "weeklyAveragePrice": 55000
     }
   },
   "auctions": {
@@ -1676,6 +1716,14 @@
       "maxPrice": 3999999,
       "count": 1,
       "totalCount": 1,
+      "hasBin": true
+    },
+    "FARMIONAIRE_ARTIFACT": {
+      "minPrice": 7500000,
+      "avgPrice": 8500000,
+      "maxPrice": 9500000,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "FARMIONAIRE_RING": {

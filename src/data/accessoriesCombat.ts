@@ -94,6 +94,7 @@ export const COMBAT_ACCESSORIES: readonly AccessoryDefinition[] = [
     tier: 1,
     description: 'Tracks a counter for each mob killed while worn. Gain +1 Strength for each digit on the counter.',
     source: 'Pig Shop',
+    npcCost: '1,250,000 Coins',
     stage: 'Event',
     iconEmoji: '👑',
     loreLines: ['Tracks a counter for each mob killed while worn.', 'Gain +1 Strength for each digit on the counter.']
