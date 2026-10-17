@@ -130,7 +130,14 @@
     "description": "Empty Default State for Player Lookup Input: When opening the Player Lookup modal, the input field starts completely empty with a subtle placeholder ('e.g. DarkKing0098994') instead of pre-populating with a username, and resets cleanly upon re-opening.",
     "status": "passing",
     "evidence": "evidence/modal-lookup-empty-input-verified.png"
+  },
+  {
+    "id": "FEAT-023",
+    "description": "Eliminate Horizontal Blank Space in Minecraft Chest Inventory GUI: Sized the chest GUI container and 9-slot grid to fit-content and streamlined footer labels, removing the extra empty space to the right of column 9.",
+    "status": "passing",
+    "evidence": "evidence/mc-gui-43items-fit-verified.png"
   }
 ]
+
 
 

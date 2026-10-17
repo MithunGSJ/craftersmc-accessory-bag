@@ -145,11 +145,11 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
             onClick={handlePrevPage}
             aria-label="Previous page"
           >
-            ◀ Prev Page
+            ◀ Prev
           </button>
 
           <span className="mc-gui-page-info">
-            Page {currentPage} of {totalPages} ({ownedBagAccessories.length} Owned in Bag)
+            Page {currentPage} of {totalPages} ({ownedBagAccessories.length} Owned)
           </span>
 
           <button
@@ -159,7 +159,7 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
             onClick={handleNextPage}
             aria-label="Next page"
           >
-            Next Page ▶
+            Next ▶
           </button>
         </div>
       </div>

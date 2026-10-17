@@ -420,7 +420,9 @@ a:hover {
   font-family: 'Silkscreen', 'VT323', monospace;
   position: relative;
   user-select: none;
+  width: fit-content;
   max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
 }
 
@@ -462,6 +464,8 @@ a:hover {
   border-left: 2px solid #373737;
   border-right: 2px solid #FFFFFF;
   border-bottom: 2px solid #FFFFFF;
+  width: fit-content;
+  box-sizing: border-box;
 }
 
 .mc-slot {
@@ -528,6 +532,9 @@ a:hover {
   justify-content: space-between;
   margin-top: 10px;
   padding: 2px 2px 0 2px;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mc-gui-btn {
