@@ -167,6 +167,18 @@ export const App: React.FC = () => {
           <strong>CraftersMC Public API Accessory Bag Auditor</strong> • Version 1.0.0
         </div>
         <div style={{ marginTop: '6px' }}>{THEME_CONFIG.legalDisclaimer}</div>
+        <div style={{ marginTop: '8px', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+          Accessory data, recipes &amp; item sprites sourced with gratitude from the{' '}
+          <a
+            href="https://wiki.craftersmc.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--accent-cyan)', textDecoration: 'underline' }}
+          >
+            CraftersMC Community Wiki
+          </a>
+          .
+        </div>
       </footer>
 
       <AccessoryModal
