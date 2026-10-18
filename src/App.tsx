@@ -171,7 +171,9 @@ export const App: React.FC = () => {
 
       <AccessoryModal
         evaluated={selectedAccessory}
+        allEvaluated={evaluatedAll}
         onClose={() => setSelectedAccessory(null)}
+        onSelectAccessory={setSelectedAccessory}
       />
 
       <CustomLookupModal

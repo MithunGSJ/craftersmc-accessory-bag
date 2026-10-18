@@ -8,16 +8,26 @@ import { evaluateAccessoryPrice, formatCoins } from '../logic/pricingEngine.ts';
 
 interface AccessoryModalProps {
   readonly evaluated: EvaluatedAccessory | null;
+  readonly allEvaluated?: readonly EvaluatedAccessory[];
   readonly onClose: () => void;
+  readonly onSelectAccessory?: (acc: EvaluatedAccessory) => void;
 }
 
-export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClose }) => {
+export const AccessoryModal: React.FC<AccessoryModalProps> = ({
+  evaluated,
+  allEvaluated,
+  onClose,
+  onSelectAccessory
+}) => {
+  const contentRef = React.useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    if (contentRef.current) contentRef.current.scrollTop = 0;
+  }, [evaluated?.definition.id]);
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
   if (!evaluated) return null;
@@ -28,18 +38,31 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
   const familyChain = ACCESSORIES_BY_FAMILY[definition.familyId] || [definition];
   const priceInfo = evaluateAccessoryPrice(definition);
 
-  const statusColor =
-    status === 'OWNED'
-      ? 'var(--status-owned)'
-      : status === 'UPGRADABLE_NEXT'
-      ? 'var(--status-upgradable)'
-      : status === 'UPGRADED_PREVIOUS'
-      ? 'var(--text-muted)'
-      : 'var(--status-missing)';
+  const statusColor = status === 'OWNED'
+    ? 'var(--status-owned)'
+    : status === 'UPGRADABLE_NEXT'
+    ? 'var(--status-upgradable)'
+    : status === 'UPGRADED_PREVIOUS'
+    ? 'var(--text-muted)'
+    : 'var(--status-missing)';
+
+  const handleSelectTier = (tierItem: (typeof familyChain)[number]) => {
+    if (tierItem.id === definition.id || !onSelectAccessory) return;
+    playClickSound();
+    const target = allEvaluated?.find(e => e.definition.id === tierItem.id) || {
+      definition: tierItem,
+      status: 'MISSING' as const,
+      effectiveMagicalPower: 0,
+      familyMaxTierOwned: 0,
+      isHighestInFamily: tierItem.tier === familyChain[familyChain.length - 1]?.tier
+    };
+    onSelectAccessory(target);
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div
+        ref={contentRef}
         className="glass-card modal-content"
         style={{
           border: `1px solid ${style.border}`,
@@ -62,17 +85,8 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
 
         {/* Header with Pixel Art Icon */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
-          <div
-            className="card-icon-box"
-            style={{ width: '56px', height: '56px', borderColor: style.border, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <AccessoryIcon
-              id={definition.id}
-              name={definition.name}
-              fallbackEmoji={definition.iconEmoji}
-              skinUrl={ownedItem?.skinUrl || skinUrl}
-              size={44}
-            />
+          <div className="card-icon-box" style={{ width: '56px', height: '56px', borderColor: style.border, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <AccessoryIcon id={definition.id} name={definition.name} fallbackEmoji={definition.iconEmoji} skinUrl={ownedItem?.skinUrl || skinUrl} size={44} />
           </div>
           <div>
             <h2 style={{ color: style.color, fontSize: '1.35rem', fontWeight: 800 }}>
@@ -92,9 +106,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
               <span className="mp-pill">
                 {effectiveMagicalPower > 0
                   ? `+${effectiveMagicalPower} Active MP`
-                  : status === 'OWNED' && definition.familyId === 'day_night_freezer'
-                  ? '0 Active MP (Shared)'
-                  : '0 Active MP'}
+                  : status === 'OWNED' && definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'}
               </span>
             </div>
           </div>
@@ -184,18 +196,16 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
                 </span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '0.75rem', textAlign: 'center' }}>
-                <div>
-                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)'}</div>
-                  <div style={{ fontWeight: 700, color: '#38bdf8' }}>{formatCoins(priceInfo.auction.minPrice)}</div>
-                </div>
-                <div>
-                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average'}</div>
-                  <div style={{ fontWeight: 700, color: '#facc15' }}>{formatCoins(priceInfo.auction.avgPrice)}</div>
-                </div>
-                <div>
-                  <div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)'}</div>
-                  <div style={{ fontWeight: 700, color: '#f87171' }}>{formatCoins(priceInfo.auction.maxPrice)}</div>
-                </div>
+                {([
+                  { label: priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)', val: priceInfo.auction.minPrice, color: '#38bdf8' },
+                  { label: priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average', val: priceInfo.auction.avgPrice, color: '#facc15' },
+                  { label: priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)', val: priceInfo.auction.maxPrice, color: '#f87171' }
+                ] as const).map((stat, i) => (
+                  <div key={i}>
+                    <div style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
+                    <div style={{ fontWeight: 700, color: stat.color }}>{formatCoins(stat.val)}</div>
+                  </div>
+                ))}
               </div>
             </div>
           ) : priceInfo.primaryMethod !== 'BAZAAR_CRAFT' && priceInfo.primaryMethod !== 'NPC_SHOP' && priceInfo.primaryMethod !== 'FREE_QUEST' ? (
@@ -254,26 +264,19 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({ evaluated, onClo
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
               {familyChain.map(tierItem => {
                 const isThis = tierItem.id === definition.id;
-                const tierStyle = THEME_CONFIG.rarityMap[tierItem.baseRarity];
+                const tierColor = THEME_CONFIG.rarityMap[tierItem.baseRarity]?.color || '#FFFFFF';
                 return (
-                  <span
+                  <button
                     key={tierItem.id}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '4px 10px',
-                      borderRadius: '8px',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                      background: isThis ? 'rgba(255, 184, 0, 0.2)' : 'rgba(255,255,255,0.05)',
-                      border: `1px solid ${isThis ? 'var(--accent-gold)' : 'rgba(255,255,255,0.1)'}`,
-                      color: tierStyle?.color || '#FFFFFF'
-                    }}
+                    type="button"
+                    className={`hierarchy-chip ${isThis ? 'active' : ''}`}
+                    style={{ color: tierColor }}
+                    onClick={() => handleSelectTier(tierItem)}
+                    title={isThis ? 'Currently viewing' : `View T${tierItem.tier}: ${tierItem.name}`}
                   >
                     <AccessoryIcon id={tierItem.id} name={tierItem.name} fallbackEmoji={tierItem.iconEmoji} size={18} />
                     T{tierItem.tier}: {tierItem.name}
-                  </span>
+                  </button>
                 );
               })}
             </div>

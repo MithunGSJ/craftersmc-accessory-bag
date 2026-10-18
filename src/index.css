@@ -370,6 +370,41 @@ a:hover {
   justify-content: center;
 }
 
+.hierarchy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  font-family: inherit;
+  outline: none;
+}
+
+.hierarchy-chip:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hierarchy-chip:active:not(.active) {
+  transform: translateY(0);
+}
+
+.hierarchy-chip.active {
+  background: rgba(255, 184, 0, 0.2);
+  border-color: var(--accent-gold);
+  cursor: default;
+  box-shadow: 0 0 12px rgba(255, 184, 0, 0.25);
+}
+
 .disclaimer-banner {
   background: rgba(18, 22, 34, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.06);
