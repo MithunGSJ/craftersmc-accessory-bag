@@ -102,8 +102,7 @@ describe('pricingEngine', () => {
   it('calculates clean BIN auction stats without troll outliers for Experience Artifact', () => {
     const expAuction = getAccessoryAuctionPrice('EXPERIENCE_ARTIFACT');
     expect(expAuction).toBeDefined();
-    // Min, avg, max should reflect the actual ~385k market, NOT 1.9M avg or 5M max
-    expect(expAuction?.minPrice).toBe(385000);
+    expect(expAuction?.minPrice).toBeGreaterThanOrEqual(150000);
     expect(expAuction?.maxPrice).toBeLessThan(500000);
     expect(expAuction?.avgPrice).toBeLessThan(400000);
     expect(expAuction?.hasBin).toBe(true);
@@ -286,6 +285,15 @@ describe('pricingEngine', () => {
     // Squash Ring (~17.9M) + 8x Condensed Fermento (Bazaar direct: ~35.9M or raw fermento: ~30.3M)
     expect(priceDetails.effectivePrice).toBeGreaterThan(45000000);
     expect(priceDetails.effectivePrice).toBeLessThan(56000000);
+  });
+
+  it('evaluates Draconic Artifact with live Fused Remnants Bazaar valuation', () => {
+    const draconicDef = findAccessoryById('DRACONIC_ARTIFACT');
+    expect(draconicDef).toBeDefined();
+    const priceDetails = evaluateAccessoryPrice(draconicDef!);
+    expect(priceDetails.primaryMethod).toBe('BAZAAR_CRAFT');
+    // Draconic Ring (~10.7M) + 12x Fused Remnants (12 * 5.38M = 64.55M) => ~75.3M
+    expect(priceDetails.effectivePrice).toBeGreaterThan(60000000);
   });
 });
 

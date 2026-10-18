@@ -90,7 +90,22 @@ export function livePricingPlugin(apiKey: string): Plugin {
       }
 
       const bazaarMap: Record<string, { avgPrice: number; weeklyAveragePrice: number }> = {};
-      const keyBazaarItems = ['condensed_fermento', 'fermento', 'squash', 'cropie'];
+      const keyBazaarItems = [
+        'condensed_fermento',
+        'fermento',
+        'squash',
+        'cropie',
+        'fused_remnants',
+        'fire_fragment',
+        'spooky_fragment',
+        'golden_feather',
+        'glacial_fang',
+        'tessellated_ender_pearl',
+        'ectoplasm',
+        'enchanted_packed_ice',
+        'enchanted_iron_block',
+        'enchanted_lava_bucket'
+      ];
       for (const item of keyBazaarItems) {
         try {
           const bRes = await fetch(`https://api.craftersmc.net/v1/skyblock/bazaar/${item}/details`, { headers });
