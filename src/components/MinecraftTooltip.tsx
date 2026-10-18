@@ -31,18 +31,18 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
 
       {/* Reforge & Enrichment */}
       {ownedItem?.reforge && (
-        <div style={{ color: '#5555FF', fontSize: '0.9rem' }}>
+        <div style={{ color: '#5555FF', fontSize: '16px' }}>
           Reforge: {ownedItem.reforge}
         </div>
       )}
       {ownedItem?.enrichment && (
-        <div style={{ color: '#00AAAA', fontSize: '0.9rem' }}>
+        <div style={{ color: '#00AAAA', fontSize: '16px' }}>
           ✦ {ownedItem.enrichment}
         </div>
       )}
 
       {/* Status Tags */}
-      <div style={{ margin: '4px 0', fontSize: '0.95rem' }}>
+      <div style={{ margin: '4px 0', fontSize: '18px' }}>
         {isUpgradable ? (
           <>
             <span style={{ color: '#FF5555' }}>✖ MISSING</span>{' '}
@@ -63,14 +63,16 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
       </div>
 
       {/* Magical Power */}
-      <div style={{ color: '#55FFFF', margin: '4px 0', fontWeight: 'bold' }}>
+      <div style={{ color: '#55FFFF', margin: '4px 0', fontWeight: 'bold', fontSize: '18px' }}>
         Magical Power: +{effectiveMagicalPower > 0 ? effectiveMagicalPower : style.magicalPower} MP
       </div>
 
       {/* Pricing / Obtaining Info */}
-      <div style={{ color: '#FFAA00', fontSize: '0.9rem', marginTop: '4px' }}>
+      <div style={{ color: '#FFAA00', fontSize: '16px', marginTop: '4px' }}>
         {priceInfo.primaryMethod === 'BAZAAR_CRAFT' && (
-          <div style={{ color: '#55FF55' }}>🌾 Craft: ~{priceInfo.displayLabel} (Bazaar)</div>
+          <div style={{ color: '#55FF55' }}>
+            🌾 {priceInfo.displayLabel.startsWith('Craft:') ? priceInfo.displayLabel : `Craft: ~${priceInfo.displayLabel}`} (Bazaar)
+          </div>
         )}
         {priceInfo.primaryMethod === 'AUCTION' && (
           <div style={{ color: '#FFFF55' }}>🏛️ AH: ~{priceInfo.displayLabel}</div>
@@ -79,7 +81,7 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
           <div style={{ color: '#FFAA00' }}>🪙 {priceInfo.displayLabel}</div>
         )}
         {priceInfo.auction && priceInfo.primaryMethod !== 'AUCTION' && (
-          <div style={{ color: '#AAAAAA', fontSize: '0.82rem' }}>
+          <div style={{ color: '#AAAAAA', fontSize: '15px' }}>
             AH Range: Min {priceInfo.auction.minPrice >= 1000000 ? `${(priceInfo.auction.minPrice / 1000000).toFixed(1)}M` : `${Math.round(priceInfo.auction.minPrice / 1000)}K`} - Avg {priceInfo.auction.avgPrice >= 1000000 ? `${(priceInfo.auction.avgPrice / 1000000).toFixed(1)}M` : `${Math.round(priceInfo.auction.avgPrice / 1000)}K`}
           </div>
         )}
@@ -89,7 +91,7 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
       <div className="mc-tooltip-footer" style={{ color: style.color }}>
         {style.label} ACCESSORY
       </div>
-      <div style={{ color: '#777777', fontSize: '0.8rem', marginTop: '2px' }}>
+      <div style={{ color: '#888888', fontSize: '14px', marginTop: '2px' }}>
         (Click to view crafting recipe &amp; details)
       </div>
     </div>
