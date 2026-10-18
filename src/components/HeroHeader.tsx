@@ -72,8 +72,9 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
         </button>
       </div>
 
-      <div className="disclaimer-banner" style={{ margin: '12px auto 0 auto', maxWidth: '850px' }}>
-        <strong>Compliance Notice:</strong> {THEME_CONFIG.legalDisclaimer}
+      <div className="disclaimer-banner compliance-highlight" style={{ margin: '14px auto 0 auto', maxWidth: '850px' }}>
+        <span className="compliance-tag">⚖️ Compliance Notice</span>
+        <span className="compliance-text">{THEME_CONFIG.legalDisclaimer}</span>
       </div>
     </header>
   );

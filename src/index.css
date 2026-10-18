@@ -418,6 +418,52 @@ a:hover {
   line-height: 1.6;
 }
 
+.disclaimer-banner.compliance-highlight {
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(18, 22, 34, 0.9) 50%, rgba(255, 184, 0, 0.05) 100%);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 0.82rem;
+  color: #D1D5DB;
+  text-align: center;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(0, 229, 255, 0.1);
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.disclaimer-banner.compliance-highlight:hover {
+  border-color: rgba(0, 229, 255, 0.5);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45), 0 0 22px rgba(0, 229, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.compliance-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.compliance-text {
+  color: #CBD5E1;
+  font-weight: 450;
+}
+
 @media (max-width: 768px) {
   .app-container {
     padding: 16px 12px 40px 12px;
