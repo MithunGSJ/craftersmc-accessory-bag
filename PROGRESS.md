@@ -23,8 +23,7 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
   - Added standalone CLI script [scripts/watchWiki.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/watchWiki.ts) executable via `npm run watch:wiki`.
   - Updated [.github/workflows/auto-sync.yml](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/.github/workflows/auto-sync.yml) scheduled cron to `*/30 * * * *` (runs every 30 minutes in GitHub Actions) and updated [scripts/verifyFeat028.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyFeat028.ts).
 
-- **UI & Test Verification**:
-  - Added real-time glowing status indicator in [src/components/HeroHeader.tsx](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/components/HeroHeader.tsx).
+  - Removed MediaWiki sync status banner text from UI per user direction, keeping the hero header clean and minimalist while background polling continues silently.
   - Added unit test suite [src/logic/wikiRecipeSync.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiRecipeSync.test.ts) (59/59 Vitest unit tests pass across 12 test files).
   - Production build succeeds with 0 errors. All source files strictly under 300 lines (0 files >= 300 lines).
 
