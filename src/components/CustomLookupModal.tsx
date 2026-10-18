@@ -93,7 +93,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
         <form onSubmit={handleApiSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           <div>
             <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '6px', fontWeight: 600 }}>
-              PLAYER USERNAME, UUID, OR PIXEL ID *
+              GAMERTAG / USERNAME *
             </label>
             <input
               type="text"
