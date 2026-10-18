@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { extractRecipesForAccessory, ScrapedAccessoryRecipe } from './extractWikiRecipes.ts';
+import { evaluateObtainability, isObtainableAccessory } from '../src/logic/wikiBrain.ts';
 
 export interface ScrapedAccessory {
   id: string;
@@ -11,6 +12,8 @@ export interface ScrapedAccessory {
   source: string;
   imageFileName?: string;
   spriteUrl?: string;
+  isObtainable?: boolean;
+  statusFlag?: string;
 }
 
 const WIKI_API_URL = 'https://craftersmc.wiki.gg/api.php?action=parse&page=Accessories&prop=text&format=json';
@@ -109,6 +112,7 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
     const source = stripHtml(cell3);
 
     const spriteUrl = imageFileName ? `${WIKI_BASE_IMAGE_URL}/${imageFileName}` : undefined;
+    const obtainability = evaluateObtainability({ name, source, description });
 
     accessories.push({
       id,
@@ -117,7 +121,9 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
       description,
       source,
       imageFileName,
-      spriteUrl
+      spriteUrl,
+      isObtainable: obtainability.isObtainable,
+      statusFlag: obtainability.status
     });
   }
 
@@ -192,6 +198,7 @@ export async function runWikiSync(): Promise<{
 
   let scrapedRecipes = 0;
   for (const item of items) {
+    if (!isObtainableAccessory(item)) continue;
     const isCrafted = item.source.toLowerCase().includes('craft') || item.source.toLowerCase().includes('collection');
     if (isCrafted && !recipesMap[item.id]) {
       const pageTitle = item.name.replace(/ /g, '_');

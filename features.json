@@ -166,5 +166,11 @@
     "description": "Automated CI/CD GitHub Actions Workflow (.github/workflows/auto-sync.yml): Scheduled cron workflow that runs wiki sync, executes Vitest regression tests, and automates asset and recipe updates.",
     "status": "passing",
     "evidence": "tmp/evidence_feat_028_github_workflow.json"
+  },
+  {
+    "id": "FEAT-029",
+    "description": "Admin & Unobtainable Accessory Filter Engine (WikiBrain): Intelligent parser that deeply examines CraftersMC MediaWiki wikitext templates ({{Ambox admin}}, {{Ambox removed}}, source: Removed, Unobtainable, staff bug bounties), filtering out Acacia Stop, Beta Fish, Filthy Rich Talisman, Mini Fairy, Magical Encyclopedia, Creative Mind, and Game Breaker so they never appear as missing accessories to regular players.",
+    "status": "passing",
+    "evidence": "evidence/FEAT-029-unobtainable-filter.txt"
   }
 ]

@@ -24,8 +24,10 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
   - Updated [.github/workflows/auto-sync.yml](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/.github/workflows/auto-sync.yml) scheduled cron to `*/30 * * * *` (runs every 30 minutes in GitHub Actions) and updated [scripts/verifyFeat028.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyFeat028.ts).
 
   - Removed MediaWiki sync status banner text from UI per user direction, keeping the hero header clean and minimalist while background polling continues silently.
-  - Optimized `.mc-tooltip` typography: eliminated blurriness by switching from 2px bleed shadow to a crisp 1px drop shadow, aligned all font sizes to exact pixel boundaries (23px title, 19px body, 18px tags, 16px pricing, 14px footer), boosted text contrast, and fixed the duplicate `Craft: ~Craft:` label prefix.
-  - Added unit test suite [src/logic/wikiRecipeSync.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiRecipeSync.test.ts) (59/59 Vitest unit tests pass across 12 test files).
+  - Implemented WikiBrain intelligence engine ([src/logic/wikiBrain.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.ts)) to deeply evaluate MediaWiki wikitext flags (`{{Ambox admin}}`, `{{Ambox removed}}`, `source: Removed`, `Unobtainable`, one-off staff rewards).
+  - Automatically filtered out non-obtainable accessories (`Acacia Stop`, `Beta Fish`, `Filthy Rich Talisman`, `Mini Fairy`, `Magical Encyclopedia`, `Creative Mind`, `Game Breaker`) from the catalog, ensuring they never appear as missing accessories to regular players.
+  - Active catalog refined to 90 authentic obtainable accessories across 49 families (50 missing accessories on fresh profile).
+  - Added unit test suite [src/logic/wikiBrain.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.test.ts) (64/64 Vitest unit tests pass across 13 test files).
   - Production build succeeds with 0 errors. All source files strictly under 300 lines (0 files >= 300 lines).
 
 ## Known Problems

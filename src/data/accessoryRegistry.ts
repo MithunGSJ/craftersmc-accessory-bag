@@ -7,6 +7,7 @@ import { SPECIAL_ACCESSORIES } from './accessoriesSpecial.ts';
 import { AccessoryDefinition, AccessoryCategory } from './accessoryTypes.ts';
 import { ItemRarity } from '../config/themeConfig.ts';
 import wikiAccessoriesData from './wikiAccessories.json';
+import { isObtainableAccessory, inferStageFromWiki } from '../logic/wikiBrain.ts';
 
 const BASE_ACCESSORIES: readonly AccessoryDefinition[] = [
   ...COMBAT_ACCESSORIES,
@@ -50,10 +51,11 @@ interface ScrapedWikiItem {
 const dynamicWikiAccessories: AccessoryDefinition[] = [];
 for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
   const upperId = item.id.toUpperCase();
-  if (!existingIds.has(upperId)) {
+  if (!existingIds.has(upperId) && isObtainableAccessory(item)) {
     const validRarities: readonly string[] = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'SPECIAL', 'VERY_SPECIAL'];
     const rarity = (validRarities.includes(item.rarity) ? item.rarity : 'COMMON') as ItemRarity;
     const category = inferCategory(item.name, item.source, item.description);
+    const stage = inferStageFromWiki(item.source);
     const tier = inferTier(item.name);
     const familyId = upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '');
 
@@ -64,6 +66,7 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
       category,
       familyId,
       tier,
+      stage,
       description: item.description || item.name,
       source: item.source || 'CraftersMC Wiki',
       iconEmoji: '💎',
@@ -74,7 +77,7 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
 }
 
 export const ALL_ACCESSORIES: readonly AccessoryDefinition[] = [
-  ...BASE_ACCESSORIES,
+  ...BASE_ACCESSORIES.filter(acc => isObtainableAccessory(acc)),
   ...dynamicWikiAccessories
 ];
 
