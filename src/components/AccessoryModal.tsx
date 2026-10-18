@@ -226,16 +226,12 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
           </div>
         </div>
 
-        {/* Reforge & Enrichment */}
-        {ownedItem && (
-          <div style={{ marginBottom: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        {/* Active Reforge (only displayed if item has a reforge) */}
+        {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
+          <div style={{ marginBottom: '16px' }}>
             <div style={{ background: 'rgba(255, 184, 0, 0.08)', padding: '10px 14px', borderRadius: '10px', border: '1px solid rgba(255, 184, 0, 0.2)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--accent-gold)', fontWeight: 600 }}>Active Reforge</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF' }}>{ownedItem.reforge || 'None'}</div>
-            </div>
-            <div style={{ background: 'rgba(0, 229, 255, 0.08)', padding: '10px 14px', borderRadius: '10px', border: '1px solid rgba(0, 229, 255, 0.2)' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>Stat Enrichment</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF' }}>{ownedItem.enrichment || 'None'}</div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#FFFFFF' }}>{ownedItem?.reforge}</div>
             </div>
           </div>
         )}

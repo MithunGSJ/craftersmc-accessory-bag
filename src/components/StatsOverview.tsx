@@ -64,7 +64,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
           {playerName}
         </div>
         <span className="stat-subtext">
-          {profileName} • {stats.reforgeCount} Reforges • {stats.enrichmentCount} Enriched
+          {profileName} • {stats.reforgeCount} Reforges
         </span>
       </div>
     </section>

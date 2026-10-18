@@ -155,7 +155,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
         )}
       </div>
 
-      {ownedItem?.reforge && (
+      {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
         <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
           <span
             style={{
@@ -167,22 +167,8 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
               color: 'var(--accent-gold)'
             }}
           >
-            Reforge: {ownedItem.reforge}
+            Reforge: {ownedItem?.reforge}
           </span>
-          {ownedItem.enrichment && (
-            <span
-              style={{
-                fontSize: '0.72rem',
-                fontWeight: 600,
-                padding: '2px 6px',
-                borderRadius: '4px',
-                background: 'rgba(0, 229, 255, 0.15)',
-                color: 'var(--accent-cyan)'
-              }}
-            >
-              ✦ {ownedItem.enrichment}
-            </span>
-          )}
         </div>
       )}
 

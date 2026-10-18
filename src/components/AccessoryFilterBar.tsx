@@ -35,7 +35,7 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
           <input
             type="text"
             className="search-input"
-            placeholder="Search accessory name, reforge, enrichment, or source..."
+            placeholder="Search accessory name, reforge, or source..."
             value={searchQuery}
             onChange={e => onSearchChange(e.target.value)}
           />

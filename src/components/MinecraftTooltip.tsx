@@ -29,15 +29,10 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
         {ownedItem?.displayName || definition.name}
       </div>
 
-      {/* Reforge & Enrichment */}
-      {ownedItem?.reforge && (
+      {/* Reforge */}
+      {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
         <div style={{ color: '#5555FF', fontSize: '16px' }}>
-          Reforge: {ownedItem.reforge}
-        </div>
-      )}
-      {ownedItem?.enrichment && (
-        <div style={{ color: '#00AAAA', fontSize: '16px' }}>
-          ✦ {ownedItem.enrichment}
+          Reforge: {ownedItem?.reforge}
         </div>
       )}
 
