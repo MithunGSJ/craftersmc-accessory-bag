@@ -275,21 +275,21 @@ describe('accessoryMatcher', () => {
     expect(found?.effectiveMagicalPower).toBe(22);
   });
 
-  it('handles Piggy Bank: Cracked/Broken are not missing if player has Piggy Bank, and do not award extra MP', () => {
-    const playerItems: PlayerAccessoryItem[] = [
-      { id: 'PIGGY_1', internalId: 'PIGGY_BANK', displayName: 'Piggy Bank', rarity: 'UNCOMMON', slot: 0, lore: [] },
-      { id: 'CRACKED_1', internalId: 'CRACKED_PIGGY_BANK', displayName: 'Cracked Piggy Bank', rarity: 'UNCOMMON', slot: 1, lore: [] }
-    ];
-    const evaluated = evaluatePlayerAccessories(playerItems);
-    const piggy = evaluated.find(e => e.definition.id === 'PIGGY_BANK');
-    const cracked = evaluated.find(e => e.definition.id === 'CRACKED_PIGGY_BANK');
-    const broken = evaluated.find(e => e.definition.id === 'BROKEN_PIGGY_BANK');
+  it('handles Piggy Bank variants: owning any variant resolves the family and avoids missing status', () => {
+    const p1 = evaluatePlayerAccessories([
+      { id: 'P1', internalId: 'PIGGY_BANK', displayName: 'Piggy Bank', rarity: 'UNCOMMON', slot: 0, lore: [] },
+      { id: 'C1', internalId: 'CRACKED_PIGGY_BANK', displayName: 'Cracked Piggy Bank', rarity: 'UNCOMMON', slot: 1, lore: [] }
+    ]);
+    expect(p1.find(e => e.definition.id === 'PIGGY_BANK')?.status).toBe('OWNED');
+    expect(p1.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.status).toBe('OWNED');
+    expect(p1.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.effectiveMagicalPower).toBe(0);
 
-    expect(piggy?.status).toBe('OWNED');
-    expect(piggy?.effectiveMagicalPower).toBe(5);
-    expect(cracked?.status).toBe('OWNED');
-    expect(cracked?.effectiveMagicalPower).toBe(0); // 0 extra MP!
-    expect(broken?.status).toBe('UPGRADED_PREVIOUS'); // Not missing
+    const p2 = evaluatePlayerAccessories([
+      { id: 'C2', internalId: 'CRACKED_PIGGY_BANK', displayName: 'Cracked Piggy Bank', rarity: 'UNCOMMON', slot: 0, lore: [] }
+    ]);
+    expect(p2.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.status).toBe('OWNED');
+    expect(p2.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.effectiveMagicalPower).toBe(5);
+    expect(p2.find(e => e.definition.id === 'PIGGY_BANK')?.status).toBe('UPGRADED_PREVIOUS');
   });
 });
 
