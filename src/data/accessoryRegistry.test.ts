@@ -33,4 +33,23 @@ describe('accessoryRegistry', () => {
     expect(item?.name).toBe('Zombie Talisman');
     expect(item?.baseRarity).toBe('COMMON');
   });
+
+  it('guarantees zero duplicate accessories by normalized name across the catalog', () => {
+    const seenNames = new Set<string>();
+    for (const item of ALL_ACCESSORIES) {
+      const normalized = item.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      expect(seenNames.has(normalized), `Duplicate accessory name found: ${item.name} (${item.id})`).toBe(false);
+      seenNames.add(normalized);
+    }
+  });
+
+  it('resolves apostrophe ID aliases for Pig\'s Foot, Sky\'s Badge, and New Year\'s Cake Bag', () => {
+    expect(findAccessoryById('PIG_S_FOOT')?.id).toBe('PIGS_FOOT');
+    expect(findAccessoryById('PIGS_FOOT')?.id).toBe('PIGS_FOOT');
+    expect(findAccessoryById('SKY_S_BADGE')?.id).toBe('SKYS_BADGE');
+    expect(findAccessoryById('SKYS_BADGE')?.id).toBe('SKYS_BADGE');
+    expect(findAccessoryById('NEW_YEAR_S_CAKE_BAG')?.id).toBe('NEW_YEARS_CAKE_BAG');
+    expect(findAccessoryById('NEW_YEAR_CAKE_BAG')?.id).toBe('NEW_YEARS_CAKE_BAG');
+    expect(findAccessoryById('NEW_YEARS_CAKE_BAG')?.id).toBe('NEW_YEARS_CAKE_BAG');
+  });
 });

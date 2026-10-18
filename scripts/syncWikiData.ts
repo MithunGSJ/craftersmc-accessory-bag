@@ -100,7 +100,8 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
     if (!nameMatch) continue;
 
     const name = nameMatch[1].trim();
-    const id = name.toUpperCase().replace(/[^A-Z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+    const cleanForId = name.replace(/['’]/g, '').trim();
+    const id = cleanForId.toUpperCase().replace(/[^A-Z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
 
     // Cell 1: Rarity
     const rarity = parseRarity(cell1);

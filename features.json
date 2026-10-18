@@ -178,5 +178,11 @@
     "description": "Piggy Bank Degraded Variants & Non-Stacking MP Engine: Unified Piggy Bank, Cracked Piggy Bank, and Broken Piggy Bank under the shared 'piggy_bank' family with degraded variant tags. If a player owns Piggy Bank, Cracked and Broken variants are excluded from missing lists and never award extra MP; on fresh profiles, only Piggy Bank appears as missing.",
     "status": "passing",
     "evidence": "evidence/FEAT-030-piggy-bank-variants.txt"
+  },
+  {
+    "id": "FEAT-031",
+    "description": "Apostrophe Accessory Deduplication & ID Aliasing (Pig's Foot, Sky's Badge, New Year's Cake Bag): Deduplicated dynamic wiki accessory parsing by normalized name and contracted ID, resolving apostrophe underscore ID discrepancies (PIG_S_FOOT -> PIGS_FOOT, SKY_S_BADGE -> SKYS_BADGE, NEW_YEAR_S_CAKE_BAG -> NEW_YEARS_CAKE_BAG) so owned in-bag items never show phantom missing cards.",
+    "status": "passing",
+    "evidence": "evidence/FEAT-031-deduplicate-owned-accessories.txt"
   }
 ]

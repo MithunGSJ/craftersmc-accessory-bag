@@ -19,6 +19,7 @@ const BASE_ACCESSORIES: readonly AccessoryDefinition[] = [
 ];
 
 const existingIds = new Set(BASE_ACCESSORIES.map(a => a.id.toUpperCase()));
+const existingNames = new Set(BASE_ACCESSORIES.map(a => a.name.toLowerCase().replace(/[^a-z0-9]/g, '')));
 
 function inferCategory(name: string, source: string, desc: string): AccessoryCategory {
   const text = `${name} ${source} ${desc}`.toLowerCase();
@@ -51,7 +52,11 @@ interface ScrapedWikiItem {
 const dynamicWikiAccessories: AccessoryDefinition[] = [];
 for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
   const upperId = item.id.toUpperCase();
-  if (!existingIds.has(upperId) && isObtainableAccessory(item)) {
+  const normalizedName = item.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const contractedId = upperId.replace(/_S_/g, 'S_').replace(/_S$/, 'S');
+  const alreadyExists = existingIds.has(upperId) || existingIds.has(contractedId) || existingNames.has(normalizedName);
+
+  if (!alreadyExists && isObtainableAccessory(item)) {
     const validRarities: readonly string[] = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'SPECIAL', 'VERY_SPECIAL'];
     const rarity = (validRarities.includes(item.rarity) ? item.rarity : 'COMMON') as ItemRarity;
     const category = inferCategory(item.name, item.source, item.description);
@@ -75,6 +80,8 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
       isDegradedVariant: isPiggyVariant
     });
     existingIds.add(upperId);
+    existingIds.add(contractedId);
+    existingNames.add(normalizedName);
   }
 }
 
@@ -118,8 +125,21 @@ export const CATEGORIES: readonly AccessoryCategory[] = [
   'Misc'
 ];
 
+const ID_ALIASES: Record<string, string> = {
+  PIG_S_FOOT: 'PIGS_FOOT',
+  SKY_S_BADGE: 'SKYS_BADGE',
+  NEW_YEAR_S_CAKE_BAG: 'NEW_YEARS_CAKE_BAG',
+  NEW_YEAR_CAKE_BAG: 'NEW_YEARS_CAKE_BAG'
+};
+
 export function findAccessoryById(id: string): AccessoryDefinition | undefined {
-  return ACCESSORY_BY_ID.get(id.toUpperCase().trim());
+  const upper = id.toUpperCase().trim();
+  const direct = ACCESSORY_BY_ID.get(upper);
+  if (direct) return direct;
+  const aliased = ID_ALIASES[upper];
+  if (aliased) return ACCESSORY_BY_ID.get(aliased);
+  const contracted = upper.replace(/_S_/g, 'S_').replace(/_S$/, 'S');
+  return ACCESSORY_BY_ID.get(contracted);
 }
 
 export function findAccessoryByName(name: string): AccessoryDefinition | undefined {

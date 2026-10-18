@@ -33,7 +33,13 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
     - When a player owns Cracked or Broken, Piggy Bank is marked as repairable (`UPGRADABLE_NEXT`), fulfilling the family without missing penalty.
     - Enforced non-stacking MP: only one piggy bank in the family can ever grant active Magical Power (+5 MP), with zero extra MP for duplicates.
     - Playwright test [scripts/verifyPiggyBankMissing.cjs](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyPiggyBankMissing.cjs) and screenshot [tmp/piggy_bank_missing_verified.png](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/tmp/piggy_bank_missing_verified.png) verify zero broken/cracked missing cards for both fresh and owned profiles.
-  - Added unit test suite [src/logic/wikiBrain.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.test.ts) (65/65 Vitest unit tests pass across 13 test files).
+  - **Apostrophe Accessory Deduplication & ID Aliasing**:
+    - Discovered root cause of `Pig's Foot`, `Sky's Badge`, and `New Year's Cake Bag` appearing as missing: wiki scraper replaced apostrophes with underscores (`PIG_S_FOOT`, `SKY_S_BADGE`, `NEW_YEAR_S_CAKE_BAG`), failing exact ID match against baseline items (`PIGS_FOOT`, `SKYS_BADGE`, `NEW_YEARS_CAKE_BAG`) and creating duplicate phantom accessories.
+    - Added deduplication by normalized name (`name.toLowerCase().replace(/[^a-z0-9]/g, '')`) and contracted ID in [src/data/accessoryRegistry.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/data/accessoryRegistry.ts).
+    - Added alias and contracted fallback in `findAccessoryById` and name lookup in `accessoryMatcher.ts` to ensure in-game bag items match canonical IDs regardless of naming format.
+    - Updated wiki scraper [scripts/syncWikiData.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/syncWikiData.ts) and [src/data/wikiAccessories.json](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/data/wikiAccessories.json) to eliminate duplicate IDs.
+    - Verified with Playwright [scripts/verifyOwnedNotMissing.cjs](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyOwnedNotMissing.cjs) and screenshot [tmp/owned_not_missing_verified.png](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/tmp/owned_not_missing_verified.png): 0 missing cards, all 3 show strictly as Owned.
+  - Added unit test suite [src/data/accessoryRegistry.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/data/accessoryRegistry.test.ts) (67/67 Vitest unit tests pass across 13 test files).
   - Production build succeeds with 0 errors. All source files strictly under 300 lines (0 files >= 300 lines).
 
 ## Known Problems

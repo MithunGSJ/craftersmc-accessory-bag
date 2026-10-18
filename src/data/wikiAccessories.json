@@ -473,7 +473,7 @@
     "statusFlag": "REMOVED"
   },
   {
-    "id": "NEW_YEAR_S_CAKE_BAG",
+    "id": "NEW_YEARS_CAKE_BAG",
     "name": "New Year's Cake Bag",
     "rarity": "UNCOMMON",
     "description": "Health: +0 Holds New Year Cakes. Each unique New Year Cake in this bag grants you +1 Health. Item Ability: Cake Storage Right Click Place cakes in the bag.",
@@ -605,7 +605,7 @@
     "statusFlag": "OBTAINABLE"
   },
   {
-    "id": "PIG_S_FOOT",
+    "id": "PIGS_FOOT",
     "name": "Pig's Foot",
     "rarity": "RARE",
     "description": "Speed: +1",
@@ -704,7 +704,7 @@
     "statusFlag": "OBTAINABLE"
   },
   {
-    "id": "SKY_S_BADGE",
+    "id": "SKYS_BADGE",
     "name": "Sky's Badge",
     "rarity": "LEGENDARY",
     "description": "Health: +10 Pet Luck: +1",

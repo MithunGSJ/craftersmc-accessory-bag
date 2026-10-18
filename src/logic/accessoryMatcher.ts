@@ -1,4 +1,4 @@
-import { ALL_ACCESSORIES, ACCESSORIES_BY_FAMILY, findAccessoryById } from '../data/accessoryRegistry.ts';
+import { ALL_ACCESSORIES, ACCESSORIES_BY_FAMILY, findAccessoryById, findAccessoryByName } from '../data/accessoryRegistry.ts';
 import {
   PlayerAccessoryItem,
   EvaluatedAccessory,
@@ -90,8 +90,11 @@ export function evaluatePlayerAccessories(
     if (!ownedMap.has(internalId)) {
       ownedMap.set(internalId, item);
     }
-    const def = findAccessoryById(internalId);
+    const def = findAccessoryById(internalId) || findAccessoryByName(item.displayName);
     if (def) {
+      if (!ownedMap.has(def.id.toUpperCase())) {
+        ownedMap.set(def.id.toUpperCase(), item);
+      }
       const currentMax = familyMaxTierMap.get(def.familyId) || 0;
       if (def.tier > currentMax) {
         familyMaxTierMap.set(def.familyId, def.tier);
