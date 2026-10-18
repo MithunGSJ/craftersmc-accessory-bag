@@ -111,11 +111,6 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
               {style.label}
             </span>
             <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>• {definition.category}</span>
-            {ownedItem?.slot !== undefined && (
-              <span style={{ fontSize: '0.72rem', color: 'var(--accent-gold)', fontWeight: 600 }}>
-                • Slot #{ownedItem.slot + 1}
-              </span>
-            )}
           </div>
         </div>
       </div>
