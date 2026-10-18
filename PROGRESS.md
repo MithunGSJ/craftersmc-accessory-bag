@@ -6,11 +6,12 @@ Phase 5: Full End-to-End Automation Complete (All Features FEAT-001 through FEAT
 
 ## What Changed Last
 
-- **Completed FEAT-028 (Automated CI/CD GitHub Actions Workflow)**:
-  - Authored `.github/workflows/auto-sync.yml` running daily cron (`0 0 * * *`) and `workflow_dispatch`.
-  - Configured pipeline to checkout repository, setup Node 20 with npm caching, run `npm run sync:wiki`, execute `npm test -- --run`, verify strict production build (`npm run build`), and commit asset updates to `public/icons/accessories/`.
-  - Verified workflow schema and logic with `scripts/verifyFeat028.ts`.
-  - Saved evidence to `tmp/evidence_feat_028_github_workflow.json` and marked `FEAT-028` passing in `features.json`.
+- **Completed Interactive Upgrade Family Hierarchy Navigation**:
+  - Enhanced `AccessoryModal.tsx` and `src/index.css` with interactive `.hierarchy-chip` buttons.
+  - Users can now click on any tier in the Upgrade Family Hierarchy (e.g. `T1: Bat Person Talisman`, `T3: Bat Person Artifact`, or any other accessory family) to instantly inspect that tier.
+  - Automatically resets modal scroll to top on navigation and plays tactile sound effect.
+  - Highlighted current tier with glowing gold border and distinct active styling.
+  - Automated browser verification passed via `scripts/testHierarchyClick.cjs` with screenshots captured in `tmp/hierarchy_*.png`.
 
 ## Known Problems
 
