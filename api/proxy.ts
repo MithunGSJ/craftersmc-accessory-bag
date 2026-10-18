@@ -19,7 +19,12 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   const url = new URL(request.url);
-  const cleanPath = url.pathname.replace(/^\/api/, '');
+  // Support both direct route and rewritten route headers
+  const matchedPath =
+    request.headers.get('x-matched-path') ||
+    request.headers.get('x-forwarded-uri') ||
+    url.pathname;
+  const cleanPath = matchedPath.replace(/^\/api(\/proxy)?/, '');
   const targetUrl = `${TARGET_API_BASE}${cleanPath}${url.search}`;
 
   const apiKey = process.env.CRAFTERS_API_KEY || '';
