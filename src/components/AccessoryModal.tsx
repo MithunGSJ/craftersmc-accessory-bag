@@ -38,13 +38,22 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
   const familyChain = ACCESSORIES_BY_FAMILY[definition.familyId] || [definition];
   const priceInfo = evaluateAccessoryPrice(definition);
 
-  const statusColor = status === 'OWNED'
-    ? 'var(--status-owned)'
-    : status === 'UPGRADABLE_NEXT'
-    ? 'var(--status-upgradable)'
-    : status === 'UPGRADED_PREVIOUS'
-    ? 'var(--text-muted)'
-    : 'var(--status-missing)';
+  const statusColor = status === 'OWNED' ? 'var(--status-owned)' : status === 'UPGRADABLE_NEXT' ? 'var(--status-upgradable)' : status === 'UPGRADED_PREVIOUS' ? 'var(--text-muted)' : 'var(--status-missing)';
+
+  const isOwned = status === 'OWNED';
+  const isUpgradable = status === 'UPGRADABLE_NEXT';
+  const baseMp = style.magicalPower || 0;
+  const ownedTierDef = familyChain.find(m => m.tier === evaluated.familyMaxTierOwned);
+  const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
+  const netGain = Math.max(0, baseMp - ownedTierMp);
+
+  const modalMpText = isOwned
+    ? effectiveMagicalPower > 0
+      ? `+${effectiveMagicalPower} Active MP`
+      : definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'
+    : isUpgradable && netGain > 0 && netGain < baseMp
+    ? `+${netGain} MP Upgrade (+${baseMp} Base)`
+    : `+${baseMp} Potential MP`;
 
   const handleSelectTier = (tierItem: (typeof familyChain)[number]) => {
     if (tierItem.id === definition.id || !onSelectAccessory) return;
@@ -103,11 +112,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
               ) : (
                 <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
               )}
-              <span className="mp-pill">
-                {effectiveMagicalPower > 0
-                  ? `+${effectiveMagicalPower} Active MP`
-                  : status === 'OWNED' && definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'}
-              </span>
+              <span className="mp-pill">{modalMpText}</span>
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { THEME_CONFIG } from '../config/themeConfig.ts';
 import { playEquipSound } from '../utils/soundEffects.ts';
 import { AccessoryIcon } from './AccessoryIcon.tsx';
 import { evaluateAccessoryPrice } from '../logic/pricingEngine.ts';
+import { ACCESSORIES_BY_FAMILY } from '../data/accessoryRegistry.ts';
 
 interface AccessoryCardProps {
   readonly evaluated: EvaluatedAccessory;
@@ -20,6 +21,38 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
   const isMissing = status === 'MISSING';
   const isUpgradable = status === 'UPGRADABLE_NEXT';
   const isPrevious = status === 'UPGRADED_PREVIOUS';
+
+  const baseMp = style.magicalPower || 0;
+  let mpLabel = '0 MP';
+  let mpTitle = '0 Magical Power';
+
+  if (isOwned) {
+    if (effectiveMagicalPower > 0) {
+      mpLabel = `+${effectiveMagicalPower} MP`;
+      mpTitle = `+${effectiveMagicalPower} Active MP`;
+    } else {
+      mpLabel = '0 MP';
+      mpTitle = '0 Active MP (Superseded or Non-Stacking)';
+    }
+  } else {
+    if (isUpgradable) {
+      const family = ACCESSORIES_BY_FAMILY[definition.familyId] || [];
+      const ownedTierDef = family.find(m => m.tier === evaluated.familyMaxTierOwned);
+      const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
+      const netGain = Math.max(0, baseMp - ownedTierMp);
+
+      if (netGain > 0 && netGain < baseMp) {
+        mpLabel = `+${netGain} MP`;
+        mpTitle = `+${netGain} MP Upgrade Gain (+${baseMp} MP Base Value)`;
+      } else {
+        mpLabel = `+${baseMp} MP`;
+        mpTitle = `+${baseMp} Potential MP (${style.label})`;
+      }
+    } else {
+      mpLabel = `+${baseMp} MP`;
+      mpTitle = `+${baseMp} Potential MP (${style.label})`;
+    }
+  }
 
   const statusLabel = isOwned
     ? 'Owned'
@@ -217,8 +250,8 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
           )}
         </div>
 
-        <span className="mp-pill">
-          {effectiveMagicalPower > 0 ? `+${effectiveMagicalPower} MP` : `0 MP`}
+        <span className="mp-pill" title={mpTitle}>
+          {mpLabel}
         </span>
       </div>
     </article>
