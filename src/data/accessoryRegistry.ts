@@ -139,12 +139,49 @@ export function findAccessoryById(id: string): AccessoryDefinition | undefined {
   const aliased = ID_ALIASES[upper];
   if (aliased) return ACCESSORY_BY_ID.get(aliased);
   const contracted = upper.replace(/_S_/g, 'S_').replace(/_S$/, 'S');
-  return ACCESSORY_BY_ID.get(contracted);
+  const contractedMatch = ACCESSORY_BY_ID.get(contracted);
+  if (contractedMatch) return contractedMatch;
+
+  // Alphanumeric fallback matches across underscore/space/apostrophe variations
+  const alpha = upper.replace(/[^A-Z0-9]/g, '').toLowerCase();
+  const directAlpha = ACCESSORY_BY_NAME.get(alpha);
+  if (directAlpha) return directAlpha;
+
+  // Plural/possessive tolerance: match if variations differ only by 's' (e.g. NEW_YEAR_CAKE_BAG <-> newyearscakebag)
+  const alphaNoS = alpha.replace(/s/g, '');
+  if (alphaNoS.length >= 4) {
+    for (const [key, def] of ACCESSORY_BY_NAME.entries()) {
+      if (key.replace(/s/g, '') === alphaNoS) {
+        return def;
+      }
+    }
+  }
+  return undefined;
 }
+
+const COMMON_REFORGES: readonly string[] = [
+  'pleasant', 'shaded', 'silky', 'sweet', 'bloody', 'bountiful', 'gentle',
+  'odd', 'fast', 'fair', 'epic', 'sharp', 'heroic', 'spicy', 'legendary',
+  'deadly', 'fine', 'grand', 'hasty', 'neat', 'rapid', 'unreal', 'awkward',
+  'rich', 'clean', 'fierce', 'heavy', 'light', 'mythic', 'pure', 'smart',
+  'titanic', 'wise', 'bizarre', 'itchy', 'ominous', 'pretty', 'shiny',
+  'simple', 'strange', 'vivid', 'godly', 'demonic', 'forceful', 'hurtful',
+  'keen', 'strong', 'superior', 'unpleasant', 'zealous'
+];
 
 export function findAccessoryByName(name: string): AccessoryDefinition | undefined {
   const normalized = name.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return ACCESSORY_BY_NAME.get(normalized);
+  const direct = ACCESSORY_BY_NAME.get(normalized);
+  if (direct) return direct;
+
+  for (const ref of COMMON_REFORGES) {
+    if (normalized.startsWith(ref)) {
+      const stripped = normalized.slice(ref.length);
+      const match = ACCESSORY_BY_NAME.get(stripped);
+      if (match) return match;
+    }
+  }
+  return undefined;
 }
 
 export function getFamilyHighestTier(familyId: string): AccessoryDefinition | undefined {

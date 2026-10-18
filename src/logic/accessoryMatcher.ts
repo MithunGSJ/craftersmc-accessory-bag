@@ -182,7 +182,8 @@ export function evaluatePlayerAccessories(
   // Support zero-day uncataloged player accessories dynamically
   for (const item of playerItems) {
     const internalId = item.internalId.toUpperCase();
-    if (!findAccessoryById(internalId)) {
+    const matchedDef = findAccessoryById(internalId) || findAccessoryByName(item.displayName);
+    if (!matchedDef) {
       const synthDef = {
         id: item.internalId,
         name: item.displayName,

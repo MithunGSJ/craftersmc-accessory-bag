@@ -99,7 +99,12 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
       cell0.match(/title="([^"]+)"/i);
     if (!nameMatch) continue;
 
-    const name = nameMatch[1].trim();
+    const rawName = nameMatch[1].trim();
+    const name = rawName
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'");
     const cleanForId = name.replace(/['’]/g, '').trim();
     const id = cleanForId.toUpperCase().replace(/[^A-Z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
 

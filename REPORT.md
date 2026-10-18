@@ -39,6 +39,7 @@ This report maps every acceptance criterion from `features.json` to its verified
 | **FEAT-029** | Admin & Unobtainable Accessory Filter Engine (WikiBrain) | **PASSING** | `evidence/FEAT-029-unobtainable-filter.txt` | WikiBrain deeply analyzes wikitext flags and filters out Acacia Stop, Beta Fish, Filthy Rich Talisman, Mini Fairy, Magical Encyclopedia, Creative Mind, and Game Breaker. |
 | **FEAT-030** | Piggy Bank Degraded Variants & Non-Stacking MP Engine | **PASSING** | `evidence/FEAT-030-piggy-bank-variants.txt` | Unified Piggy Bank, Cracked Piggy Bank, and Broken Piggy Bank under shared family; excluded variants from missing lists when Piggy Bank is owned and prevented duplicate MP. |
 | **FEAT-031** | Apostrophe Accessory Deduplication & ID Aliasing (Pig's Foot, Sky's Badge, New Year's Cake Bag) | **PASSING** | `evidence/FEAT-031-deduplicate-owned-accessories.txt` | Deduplicated dynamic wiki accessory parsing by normalized name and contracted ID, resolving apostrophe underscore ID discrepancies (PIG_S_FOOT -> PIGS_FOOT, SKY_S_BADGE -> SKYS_BADGE, NEW_YEAR_S_CAKE_BAG -> NEW_YEARS_CAKE_BAG) so owned in-bag items never show phantom missing cards. |
+| **FEAT-032** | Future Accessory Resilience Engine | **PASSING** | `evidence/FEAT-032-future-accessory-resilience.txt` | Universal matching, deduplication, and obtainability architecture guaranteeing that future accessories discovered via MediaWiki sync, in-game NBT, or profile imports never show as false missing cards, handle apostrophe contractions (_S_ <-> S_), possessive tolerance (NEW_YEAR_CAKE_BAG <-> New Year's Cake Bag), automatic reforge prefix stripping (Pleasant, Shaded, Silky, Godly, etc.), and WikiBrain obtainability checks. |
 
 ---
 
@@ -56,4 +57,4 @@ This report maps every acceptance criterion from `features.json` to its verified
 3. **Polish Pass (c) - Performance and Cleanliness:**
    - Strict TypeScript compiler check passed with zero errors (`tsc && vite build` in 2.39s).
    - Clean, modular code structure: all TypeScript/JavaScript source files strictly under 300 lines.
-   - 64/64 Vitest tests passing across 13 test suites.
+   - 74/74 Vitest tests passing across 14 test suites.

@@ -39,8 +39,13 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
     - Added alias and contracted fallback in `findAccessoryById` and name lookup in `accessoryMatcher.ts` to ensure in-game bag items match canonical IDs regardless of naming format.
     - Updated wiki scraper [scripts/syncWikiData.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/syncWikiData.ts) and [src/data/wikiAccessories.json](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/data/wikiAccessories.json) to eliminate duplicate IDs.
     - Verified with Playwright [scripts/verifyOwnedNotMissing.cjs](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyOwnedNotMissing.cjs) and screenshot [tmp/owned_not_missing_verified.png](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/tmp/owned_not_missing_verified.png): 0 missing cards, all 3 show strictly as Owned.
-  - Added unit test suite [src/data/accessoryRegistry.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/data/accessoryRegistry.test.ts) (67/67 Vitest unit tests pass across 13 test files).
-  - Production build succeeds with 0 errors. All source files strictly under 300 lines (0 files >= 300 lines).
+  - **Future Accessory Resilience Engine (FEAT-032)**:
+    - Guaranteed all future accessories discovered via the 30-minute MediaWiki polling engine, added via in-game NBT, or imported via profiles will never suffer from duplicate entries, phantom missing cards, or uncataloged card cloning.
+    - Added possessive/plural tolerance in `findAccessoryById` (e.g. `NEW_YEAR_CAKE_BAG` automatically matches `New Year's Cake Bag`).
+    - Added reforge prefix stripper across 50 in-game reforges (`Pleasant`, `Shaded`, `Silky`, `Godly`, etc.) in `findAccessoryByName` so reforged player items cleanly resolve to their base canonical definition.
+    - Updated `evaluatePlayerAccessories` to check both ID and `displayName` before synthesizing uncataloged definitions, completely preventing duplicate cards.
+    - Added comprehensive unit test suite [src/logic/futureAccessoryResilience.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/futureAccessoryResilience.test.ts) covering apostrophe contractions, possessive variations, reforge stripping, punctuation tolerance, and obtainability filtering.
+    - All 74 Vitest unit tests pass across 14 test suites. Production build succeeds with 0 errors. All source files strictly under 300 lines.
 
 ## Known Problems
 
@@ -48,6 +53,6 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
 
 ## Next Three Steps
 
-1. Commit changes to git repository.
-2. Present comprehensive audit and review log to the user.
-3. Keep dev server and background sync worker active.
+1. Commit all changes to the git repository with descriptive commit message.
+2. Present complete, detailed audit and review log to the user.
+3. Keep background sync worker and dev server running.
