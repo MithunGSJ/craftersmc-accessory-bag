@@ -107,9 +107,6 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
             />
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-            🔒 <strong>Server-Side Proxy:</strong> Requests are securely authenticated server-side. No API key is exposed to or required from your browser.
-          </div>
 
           <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
             <button
