@@ -24,6 +24,7 @@ export interface AccessoryDefinition {
   readonly npcCost?: string;
   readonly stage?: 'NPC Shop' | 'Early Collection' | 'Mid Collection' | 'Quest' | 'High Collection' | 'Slayer' | 'Event' | 'Rare Drop';
   readonly estimatedCoins?: number;
+  readonly isDegradedVariant?: boolean;
 }
 
 export interface PlayerAccessoryItem {

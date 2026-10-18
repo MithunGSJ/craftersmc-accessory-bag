@@ -108,7 +108,17 @@ export function evaluatePlayerAccessories(
     const isOwned = Boolean(ownedItem);
 
     let status: AccessoryStatus;
-    if (familyMaxTier > def.tier) {
+    if (def.isDegradedVariant) {
+      if (isOwned) {
+        status = 'OWNED';
+      } else {
+        // Degraded variants (Cracked/Broken Piggy Bank) are damaged states, never missing
+        status = 'UPGRADED_PREVIOUS';
+      }
+    } else if (def.id === 'PIGGY_BANK' && !isOwned && (ownedMap.has('CRACKED_PIGGY_BANK') || ownedMap.has('BROKEN_PIGGY_BANK'))) {
+      // Player owns a damaged piggy bank; pristine piggy bank is available as a repair/upgrade
+      status = 'UPGRADABLE_NEXT';
+    } else if (familyMaxTier > def.tier) {
       // Player already owns a strictly higher tier in this family; lower tier is superseded
       status = 'UPGRADED_PREVIOUS';
     } else if (isOwned) {
@@ -129,7 +139,7 @@ export function evaluatePlayerAccessories(
     const baseMp = THEME_CONFIG.rarityMap[rarity]?.magicalPower || 0;
     // Only the highest owned tier in a family contributes active MP, and only ONE item per family can grant MP
     let effectiveMagicalPower = 0;
-    if (isOwned && def.tier === familyMaxTier) {
+    if (isOwned && (def.tier === familyMaxTier || def.isDegradedVariant)) {
       if (!awardedFamilyMp.has(def.familyId)) {
         effectiveMagicalPower = baseMp;
         awardedFamilyMp.add(def.familyId);

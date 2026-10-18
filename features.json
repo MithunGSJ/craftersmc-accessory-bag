@@ -172,5 +172,11 @@
     "description": "Admin & Unobtainable Accessory Filter Engine (WikiBrain): Intelligent parser that deeply examines CraftersMC MediaWiki wikitext templates ({{Ambox admin}}, {{Ambox removed}}, source: Removed, Unobtainable, staff bug bounties), filtering out Acacia Stop, Beta Fish, Filthy Rich Talisman, Mini Fairy, Magical Encyclopedia, Creative Mind, and Game Breaker so they never appear as missing accessories to regular players.",
     "status": "passing",
     "evidence": "evidence/FEAT-029-unobtainable-filter.txt"
+  },
+  {
+    "id": "FEAT-030",
+    "description": "Piggy Bank Degraded Variants & Non-Stacking MP Engine: Unified Piggy Bank, Cracked Piggy Bank, and Broken Piggy Bank under the shared 'piggy_bank' family with degraded variant tags. If a player owns Piggy Bank, Cracked and Broken variants are excluded from missing lists and never award extra MP; on fresh profiles, only Piggy Bank appears as missing.",
+    "status": "passing",
+    "evidence": "evidence/FEAT-030-piggy-bank-variants.txt"
   }
 ]

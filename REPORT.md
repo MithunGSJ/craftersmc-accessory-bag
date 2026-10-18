@@ -37,6 +37,7 @@ This report maps every acceptance criterion from `features.json` to its verified
 | **FEAT-027** | MediaWiki Scraper Engine (scripts/syncWikiData.ts) | **PASSING** | `tmp/evidence_feat_027_wiki_sync.json` | Queries MediaWiki API, parses tables, infoboxes, and downloads PNG sprites. |
 | **FEAT-028** | Automated CI/CD GitHub Actions Workflow (.github/workflows/auto-sync.yml) | **PASSING** | `tmp/evidence_feat_028_github_workflow.json` | Scheduled 30-min cron runs wiki sync, Vitest unit tests, and automated updates. |
 | **FEAT-029** | Admin & Unobtainable Accessory Filter Engine (WikiBrain) | **PASSING** | `evidence/FEAT-029-unobtainable-filter.txt` | WikiBrain deeply analyzes wikitext flags and filters out Acacia Stop, Beta Fish, Filthy Rich Talisman, Mini Fairy, Magical Encyclopedia, Creative Mind, and Game Breaker. |
+| **FEAT-030** | Piggy Bank Degraded Variants & Non-Stacking MP Engine | **PASSING** | `evidence/FEAT-030-piggy-bank-variants.txt` | Unified Piggy Bank, Cracked Piggy Bank, and Broken Piggy Bank under shared family; excluded variants from missing lists when Piggy Bank is owned and prevented duplicate MP. |
 
 ---
 

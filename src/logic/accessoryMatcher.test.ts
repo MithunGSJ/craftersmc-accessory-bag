@@ -3,12 +3,13 @@ import { evaluatePlayerAccessories, filterAccessories, sortAccessoriesByBagOrder
 import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 
 describe('accessoryMatcher', () => {
-  it('should mark all accessories as MISSING for a player with an empty bag', () => {
+  it('should mark all standard accessories as MISSING for a player with an empty bag', () => {
     const evaluated = evaluatePlayerAccessories([]);
     expect(evaluated.length).toBeGreaterThan(20);
     const missing = evaluated.filter(e => e.status === 'MISSING');
-    // All items should be missing since nothing is owned
-    expect(missing.length).toBe(evaluated.length);
+    const standardDefs = evaluated.filter(e => !e.definition.isDegradedVariant);
+    expect(missing.length).toBe(standardDefs.length);
+    expect(evaluated.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.status).toBe('UPGRADED_PREVIOUS');
   });
 
   it('should mark owned accessories correctly and identify superseded previous tiers', () => {
@@ -272,6 +273,23 @@ describe('accessoryMatcher', () => {
     expect(found?.isUncataloged).toBe(true);
     expect(found?.skinUrl).toBe('https://textures.minecraft.net/texture/12345');
     expect(found?.effectiveMagicalPower).toBe(22);
+  });
+
+  it('handles Piggy Bank: Cracked/Broken are not missing if player has Piggy Bank, and do not award extra MP', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'PIGGY_1', internalId: 'PIGGY_BANK', displayName: 'Piggy Bank', rarity: 'UNCOMMON', slot: 0, lore: [] },
+      { id: 'CRACKED_1', internalId: 'CRACKED_PIGGY_BANK', displayName: 'Cracked Piggy Bank', rarity: 'UNCOMMON', slot: 1, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const piggy = evaluated.find(e => e.definition.id === 'PIGGY_BANK');
+    const cracked = evaluated.find(e => e.definition.id === 'CRACKED_PIGGY_BANK');
+    const broken = evaluated.find(e => e.definition.id === 'BROKEN_PIGGY_BANK');
+
+    expect(piggy?.status).toBe('OWNED');
+    expect(piggy?.effectiveMagicalPower).toBe(5);
+    expect(cracked?.status).toBe('OWNED');
+    expect(cracked?.effectiveMagicalPower).toBe(0); // 0 extra MP!
+    expect(broken?.status).toBe('UPGRADED_PREVIOUS'); // Not missing
   });
 });
 

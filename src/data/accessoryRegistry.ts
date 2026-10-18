@@ -57,7 +57,8 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
     const category = inferCategory(item.name, item.source, item.description);
     const stage = inferStageFromWiki(item.source);
     const tier = inferTier(item.name);
-    const familyId = upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '');
+    const isPiggyVariant = upperId === 'CRACKED_PIGGY_BANK' || upperId === 'BROKEN_PIGGY_BANK';
+    const familyId = isPiggyVariant ? 'piggy_bank' : upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '');
 
     dynamicWikiAccessories.push({
       id: upperId,
@@ -65,12 +66,13 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
       baseRarity: rarity,
       category,
       familyId,
-      tier,
+      tier: isPiggyVariant ? 1 : tier,
       stage,
       description: item.description || item.name,
-      source: item.source || 'CraftersMC Wiki',
-      iconEmoji: '💎',
-      loreLines: item.description ? [item.description] : [item.name]
+      source: isPiggyVariant ? 'Damaged state of Piggy Bank' : (item.source || 'CraftersMC Wiki'),
+      iconEmoji: isPiggyVariant ? '🐷' : '💎',
+      loreLines: item.description ? [item.description] : [item.name],
+      isDegradedVariant: isPiggyVariant
     });
     existingIds.add(upperId);
   }

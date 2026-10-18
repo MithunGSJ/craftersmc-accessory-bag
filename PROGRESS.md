@@ -26,8 +26,14 @@ Phase 5: Automated 30-Minute MediaWiki Recipe Extraction & Polling Engine Comple
   - Removed MediaWiki sync status banner text from UI per user direction, keeping the hero header clean and minimalist while background polling continues silently.
   - Implemented WikiBrain intelligence engine ([src/logic/wikiBrain.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.ts)) to deeply evaluate MediaWiki wikitext flags (`{{Ambox admin}}`, `{{Ambox removed}}`, `source: Removed`, `Unobtainable`, one-off staff rewards).
   - Automatically filtered out non-obtainable accessories (`Acacia Stop`, `Beta Fish`, `Filthy Rich Talisman`, `Mini Fairy`, `Magical Encyclopedia`, `Creative Mind`, `Game Breaker`) from the catalog, ensuring they never appear as missing accessories to regular players.
-  - Active catalog refined to 90 authentic obtainable accessories across 49 families (50 missing accessories on fresh profile).
-  - Added unit test suite [src/logic/wikiBrain.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.test.ts) (64/64 Vitest unit tests pass across 13 test files).
+  - **Piggy Bank Degraded Variants & Non-Stacking MP**:
+    - Unified `Piggy Bank`, `Cracked Piggy Bank`, and `Broken Piggy Bank` into the shared `'piggy_bank'` family.
+    - Added `isDegradedVariant` flag to indicate damaged states triggered by in-game deaths.
+    - When a player owns `Piggy Bank`, neither Cracked nor Broken appears as missing, eliminating duplicate missing cards.
+    - When a player owns Cracked or Broken, Piggy Bank is marked as repairable (`UPGRADABLE_NEXT`), fulfilling the family without missing penalty.
+    - Enforced non-stacking MP: only one piggy bank in the family can ever grant active Magical Power (+5 MP), with zero extra MP for duplicates.
+    - Playwright test [scripts/verifyPiggyBankMissing.cjs](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/scripts/verifyPiggyBankMissing.cjs) and screenshot [tmp/piggy_bank_missing_verified.png](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/tmp/piggy_bank_missing_verified.png) verify zero broken/cracked missing cards for both fresh and owned profiles.
+  - Added unit test suite [src/logic/wikiBrain.test.ts](file:///C:/Users/OM/Documents/Crafters%20-%20Copy/src/logic/wikiBrain.test.ts) (65/65 Vitest unit tests pass across 13 test files).
   - Production build succeeds with 0 errors. All source files strictly under 300 lines (0 files >= 300 lines).
 
 ## Known Problems
