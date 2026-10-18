@@ -37,16 +37,16 @@ const liveBazaarCache = new Map<string, number>();
 const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
 const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
 
+const NPC_RAW_MATERIALS: Record<string, number> = { chest: 20, oak_leaves: 12, poisonous_potato: 50, wheat_seeds: 12 };
+
 export function getBazaarMaterialPrice(itemId: string): number {
   const normalized = itemId.toLowerCase().trim();
-  if (liveBazaarCache.has(normalized)) {
-    return liveBazaarCache.get(normalized)!;
-  }
+  if (liveBazaarCache.has(normalized)) return liveBazaarCache.get(normalized)!;
   const snap = BAZAAR_SNAPSHOT[normalized];
-  if (snap && snap.avgPrice > 0) {
-    return snap.avgPrice;
-  }
-  return 0;
+  if (snap && snap.avgPrice > 0) return snap.avgPrice;
+  const ah = getAccessoryAuctionPrice(itemId);
+  if (ah && ah.avgPrice > 0) return ah.avgPrice;
+  return NPC_RAW_MATERIALS[normalized] || 0;
 }
 
 export function getAccessoryAuctionPrice(accessoryId: string): AuctionPriceSnapshot | undefined {

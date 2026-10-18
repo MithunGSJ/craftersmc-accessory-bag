@@ -10,6 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "sync:wiki": "tsx scripts/syncWikiData.ts",
+    "sync:pricing": "tsx scripts/syncPricing.ts",
     "verify": "node verify.js"
   },
   "dependencies": {

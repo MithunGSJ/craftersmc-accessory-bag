@@ -32,6 +32,11 @@ jobs:
       - name: Sync Wiki Data & Accessories Sprites
         run: npm run sync:wiki
 
+      - name: Sync Live Bazaar & Auction Pricing
+        run: npm run sync:pricing
+        env:
+          CRAFTERS_API_KEY: ${{ secrets.CRAFTERS_API_KEY }}
+
       - name: Run Vitest Regression Suite
         run: npm test -- --run
 
@@ -42,10 +47,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add public/icons/accessories/
+          git add public/icons/accessories/ src/data/pricingSnapshot.json
           if git diff --staged --quiet; then
-            echo "No changes detected. Catalog and sprites are up to date."
+            echo "No changes detected. Catalog, sprites, and prices are up to date."
           else
-            git commit -m "chore(sync): automated daily wiki & sprite sync [skip ci]"
+            git commit -m "chore(sync): automated daily wiki, sprites & pricing sync [skip ci]"
             git push
           fi
