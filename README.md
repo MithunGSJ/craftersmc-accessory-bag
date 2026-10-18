@@ -152,11 +152,8 @@ craftersmc-accessory-bag/
 │   └── index.css          # Design token system and glassmorphism styling
 ├── public/
 │   └── icons/accessories/ # 86 authentic CraftersMC Wiki pixel-art sprites
-├── scripts/               # Quality verification scripts and data scrapers
-├── evidence/              # Visual verification screenshots and compliance metrics
-├── DECISIONS.md           # Architectural decision record
-├── PROGRESS.md            # Work session tracking and recent milestones
-├── REPORT.md              # Acceptance criteria evidence mapping
-├── verify.js              # One-command verification runner
+├── api/                   # Serverless CraftersMC API proxy for Vercel deployment
+├── scripts/               # Wiki data sync, live pricing scraper, and automation
+├── vercel.json            # Vercel SPA routing and serverless proxy rewrites
 └── package.json           # Project manifest and scripts
 ```

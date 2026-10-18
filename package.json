@@ -12,7 +12,7 @@
     "sync:wiki": "tsx scripts/syncWikiData.ts",
     "sync:pricing": "tsx scripts/syncPricing.ts",
     "watch:wiki": "tsx scripts/watchWiki.ts",
-    "verify": "node verify.js"
+    "verify": "tsc --noEmit && vitest run"
   },
   "dependencies": {
     "pako": "^2.1.0",
