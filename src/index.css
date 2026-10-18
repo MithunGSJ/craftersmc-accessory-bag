@@ -382,6 +382,7 @@ a:hover {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-user-select: none;
   user-select: none;
   font-family: inherit;
   outline: none;
