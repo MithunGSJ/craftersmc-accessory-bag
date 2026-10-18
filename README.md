@@ -117,7 +117,7 @@ This application complies with the **CraftersMC Public API Usage Policy**:
 
 ## Acknowledgements & Credits
 
-- **[CraftersMC Community Wiki](https://wiki.craftersmc.net)**: Accessory item lore, crafting recipes, obtaining requirements, and authentic pixel-art sprite artwork are sourced with deep appreciation from the CraftersMC Wiki and its community contributors.
+- **[CraftersMC Community Wiki](https://craftersmc.wiki.gg)**: Accessory item lore, crafting recipes, obtaining requirements, and authentic pixel-art sprite artwork are sourced with deep appreciation from the CraftersMC Wiki and its community contributors.
 - **CraftersMC Staff & Developers**: For providing the public API and the dynamic Minecraft SkyBlock sandbox experience.
 
 ---

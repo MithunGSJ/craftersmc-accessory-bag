@@ -170,7 +170,7 @@ export const App: React.FC = () => {
         <div style={{ marginTop: '8px', fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
           Accessory data, recipes &amp; item sprites sourced with gratitude from the{' '}
           <a
-            href="https://wiki.craftersmc.net"
+            href="https://craftersmc.wiki.gg"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: 'var(--accent-cyan)', textDecoration: 'underline' }}
