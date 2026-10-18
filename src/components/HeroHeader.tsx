@@ -72,6 +72,11 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
         </button>
       </div>
 
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginTop: '4px', marginBottom: '8px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+        <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 8px #22c55e' }} />
+        <span>CraftersMC MediaWiki: <strong>Active 30m Sync</strong> • Auto-extracts new accessories & recipes</span>
+      </div>
+
       <div className="disclaimer-banner" style={{ margin: '12px auto 0 auto', maxWidth: '850px' }}>
         <strong>Compliance Notice:</strong> {THEME_CONFIG.legalDisclaimer}
       </div>

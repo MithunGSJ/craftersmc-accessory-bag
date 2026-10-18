@@ -296,4 +296,3 @@ describe('pricingEngine', () => {
     expect(priceDetails.effectivePrice).toBeGreaterThan(60000000);
   });
 });
-

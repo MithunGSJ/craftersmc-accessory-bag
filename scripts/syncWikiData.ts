@@ -1,7 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-interface ScrapedAccessory {
+import { extractRecipesForAccessory, ScrapedAccessoryRecipe } from './extractWikiRecipes.ts';
+
+export interface ScrapedAccessory {
   id: string;
   name: string;
   rarity: string;
@@ -74,9 +76,14 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
 
     const cells = row.match(/<td[\s\S]*?<\/td>/gi) || [];
     if (cells.length < 4) continue;
+    const cell0 = cells[0];
+    const cell1 = cells[1];
+    const cell2 = cells[2];
+    const cell3 = cells[3];
+    if (!cell0 || !cell1 || !cell2 || !cell3) continue;
 
     // Cell 0: Icon + Name
-    const imgMatch = cells[0].match(/<img\s+alt="([^"]+\.png)"/i);
+    const imgMatch = cell0.match(/<img\s+alt="([^"]+\.png)"/i);
     const imageFileName = imgMatch
       ? imgMatch[1]
           .replace(/&#39;/g, "'")
@@ -85,21 +92,21 @@ export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
       : undefined;
 
     const nameMatch =
-      cells[0].match(/class="mcfont">([^<]+)<\/span>/i) ||
-      cells[0].match(/title="([^"]+)"/i);
+      cell0.match(/class="mcfont">([^<]+)<\/span>/i) ||
+      cell0.match(/title="([^"]+)"/i);
     if (!nameMatch) continue;
 
     const name = nameMatch[1].trim();
     const id = name.toUpperCase().replace(/[^A-Z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
 
     // Cell 1: Rarity
-    const rarity = parseRarity(cells[1]);
+    const rarity = parseRarity(cell1);
 
     // Cell 2: Description
-    const description = stripHtml(cells[2]);
+    const description = stripHtml(cell2);
 
     // Cell 3: Source / Obtaining
-    const source = stripHtml(cells[3]);
+    const source = stripHtml(cell3);
 
     const spriteUrl = imageFileName ? `${WIKI_BASE_IMAGE_URL}/${imageFileName}` : undefined;
 
@@ -167,6 +174,36 @@ export async function runWikiSync(): Promise<{
       }
     }
   }
+
+  // Save parsed accessories to wikiAccessories.json
+  const wikiAccessoriesPath = path.resolve(process.cwd(), 'src/data/wikiAccessories.json');
+  fs.writeFileSync(wikiAccessoriesPath, JSON.stringify(items, null, 2));
+
+  // Scrape crafting recipes from wiki pages
+  const wikiRecipesPath = path.resolve(process.cwd(), 'src/data/wikiRecipes.json');
+  const recipesMap: Record<string, ScrapedAccessoryRecipe> = {};
+  if (fs.existsSync(wikiRecipesPath)) {
+    try {
+      Object.assign(recipesMap, JSON.parse(fs.readFileSync(wikiRecipesPath, 'utf8')));
+    } catch {
+      // ignore parse error
+    }
+  }
+
+  let scrapedRecipes = 0;
+  for (const item of items) {
+    const isCrafted = item.source.toLowerCase().includes('craft') || item.source.toLowerCase().includes('collection');
+    if (isCrafted && !recipesMap[item.id]) {
+      const pageTitle = item.name.replace(/ /g, '_');
+      const extracted = await extractRecipesForAccessory(pageTitle);
+      for (const r of extracted) {
+        recipesMap[r.targetId] = r;
+        scrapedRecipes++;
+      }
+    }
+  }
+  fs.writeFileSync(wikiRecipesPath, JSON.stringify(recipesMap, null, 2));
+  console.log(`📜 Wiki recipes synced: ${Object.keys(recipesMap).length} total recipes (${scrapedRecipes} newly scraped).`);
 
   console.log(`📊 Wiki Sync Complete: ${items.length} items parsed, ${existingSprites} sprites existing, ${downloadedSprites} downloaded, ${failedSprites} failed.`);
 

@@ -1,9 +1,9 @@
-name: Automated Daily Wiki & Pricing Sync
+name: Automated 30-Minute Wiki & Pricing Sync
 
 on:
   schedule:
-    # Run every day at 00:00 UTC
-    - cron: '0 0 * * *'
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -47,10 +47,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add public/icons/accessories/ src/data/pricingSnapshot.json
+          git add public/icons/accessories/ src/data/pricingSnapshot.json src/data/wikiAccessories.json src/data/wikiRecipes.json
           if git diff --staged --quiet; then
             echo "No changes detected. Catalog, sprites, and prices are up to date."
           else
-            git commit -m "chore(sync): automated daily wiki, sprites & pricing sync [skip ci]"
+            git commit -m "chore(sync): automated 30-min wiki, sprites & pricing sync [skip ci]"
             git push
           fi

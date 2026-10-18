@@ -1,0 +1,695 @@
+[
+  {
+    "id": "ACACIA_STOP",
+    "name": "Acacia Stop",
+    "rarity": "LEGENDARY",
+    "description": "Item Passive: Where you goin' dude Grants +15 Speed while held in player inventory.",
+    "source": "Admin-only",
+    "imageFileName": "Enchanted_Acacia_Log.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Enchanted_Acacia_Log.png"
+  },
+  {
+    "id": "BAMBOO_RING",
+    "name": "Bamboo Ring",
+    "rarity": "UNCOMMON",
+    "description": "Grants +2 Speed for every log or bamboo you cut in the last 10 seconds.",
+    "source": "Crafting ( Bamboo 7)",
+    "imageFileName": "Bamboo_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Bamboo_Ring.png"
+  },
+  {
+    "id": "BAMBOO_TALISMAN",
+    "name": "Bamboo Talisman",
+    "rarity": "COMMON",
+    "description": "Grants +1 Speed for every log or bamboo you cut in the last 10 seconds.",
+    "source": "Crafting ( Bamboo 2)",
+    "imageFileName": "Bamboo_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Bamboo_Talisman.png"
+  },
+  {
+    "id": "BETA_FISH",
+    "name": "Beta Fish",
+    "rarity": "SPECIAL",
+    "description": "",
+    "source": "Removed",
+    "imageFileName": "Beta_Fish.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Beta_Fish.png"
+  },
+  {
+    "id": "BLOOD_GOD_CREST",
+    "name": "Blood God Crest",
+    "rarity": "COMMON",
+    "description": "Tracks a counter for each mob killed while worn. Gain +1 Strength for each digit on the counter.",
+    "source": "Pig Shop",
+    "imageFileName": "Blood_God_Crest.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Blood_God_Crest.png"
+  },
+  {
+    "id": "BROKEN_PIGGY_BANK",
+    "name": "Broken Piggy Bank",
+    "rarity": "UNCOMMON",
+    "description": "Shattered and out of fuction!",
+    "source": "Crafting ( Raw Porkchop 5)",
+    "imageFileName": "Broken_Piggy_Bank.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Broken_Piggy_Bank.png"
+  },
+  {
+    "id": "CAKE_SLICE",
+    "name": "Cake Slice",
+    "rarity": "RARE",
+    "description": "Speed: +3",
+    "source": "\"Half-Baked Duo\" quest",
+    "imageFileName": "Cake_Slice.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Cake_Slice.png"
+  },
+  {
+    "id": "CAMPFIRE_ADEPT_BADGE",
+    "name": "Campfire Adept Badge",
+    "rarity": "UNCOMMON",
+    "description": "Regenerates 14~20 health per second while burning.",
+    "source": "\"Trial of Fire\" quest",
+    "imageFileName": "Campfire_Adept_Badge.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Campfire_Adept_Badge.png"
+  },
+  {
+    "id": "COINS_TALISMAN",
+    "name": "Coins Talisman",
+    "rarity": "COMMON",
+    "description": "Spawns random coins around you if you are on a public island.",
+    "source": "Crafting ( Emerald 2)",
+    "imageFileName": "Coins_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Coins_Talisman.png"
+  },
+  {
+    "id": "CRACKED_PIGGY_BANK",
+    "name": "Cracked Piggy Bank",
+    "rarity": "UNCOMMON",
+    "description": "Saves 75% of your coins on death. Works only when in player inventory. Triggers when losing 20,000+ coins",
+    "source": "Crafting ( Raw Porkchop 5)",
+    "imageFileName": "Cracked_Piggy_Bank.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Cracked_Piggy_Bank.png"
+  },
+  {
+    "id": "CREATIVE_MIND",
+    "name": "Creative Mind",
+    "rarity": "SPECIAL",
+    "description": "This item was awarded to [player] for presenting a creative idea that has been added to SkyBlock.",
+    "source": "",
+    "imageFileName": "Creative_Mind.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Creative_Mind.png"
+  },
+  {
+    "id": "CROPIE_TALISMAN",
+    "name": "Cropie Talisman",
+    "rarity": "COMMON",
+    "description": "Wheat Fortune: +10 Carrot Fortune: +10 Potato Fortune: +10 Beetroot Fortune: +10",
+    "source": "Crafting",
+    "imageFileName": "Cropie_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Cropie_Talisman.png"
+  },
+  {
+    "id": "DAYFREEZER",
+    "name": "Dayfreezer",
+    "rarity": "LEGENDARY",
+    "description": "Makes the time always seen as day while in inventory or accessory bag.",
+    "source": "Zoe (945)",
+    "imageFileName": "Dayfreezer.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Dayfreezer.png"
+  },
+  {
+    "id": "DRACONIC_ARTIFACT",
+    "name": "Draconic Artifact",
+    "rarity": "EPIC",
+    "description": "Health: +3 Deal 5% bonus damage to Dragons.",
+    "source": "Crafting",
+    "imageFileName": "Draconic_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Draconic_Artifact.png"
+  },
+  {
+    "id": "DRACONIC_RING",
+    "name": "Draconic Ring",
+    "rarity": "RARE",
+    "description": "Health: +2 Deal 3% bonus damage to Dragons.",
+    "source": "Crafting",
+    "imageFileName": "Draconic_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Draconic_Ring.png"
+  },
+  {
+    "id": "DRACONIC_TALISMAN",
+    "name": "Draconic Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Health: +1 Deal 2% bonus damage to Dragons.",
+    "source": "Crafting",
+    "imageFileName": "Draconic_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Draconic_Talisman.png"
+  },
+  {
+    "id": "EMERALD_RING",
+    "name": "Emerald Ring",
+    "rarity": "UNCOMMON",
+    "description": "Gives +1 coin every minute.",
+    "source": "Crafting ( Emerald 5)",
+    "imageFileName": "Emerald_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Emerald_Ring.png"
+  },
+  {
+    "id": "EXPERIENCE_ARTIFACT",
+    "name": "Experience Artifact",
+    "rarity": "EPIC",
+    "description": "Every single experience orb grants 25% more XP.",
+    "source": "Crafting ( Lapis Lazuli 9)",
+    "imageFileName": "Experience_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Experience_Artifact.png"
+  },
+  {
+    "id": "FARMER_ORB",
+    "name": "Farmer Orb",
+    "rarity": "UNCOMMON",
+    "description": "Increases the regrowth rate of nearby crops on the public islands, regrowing an extra crop every 3 seconds.",
+    "source": "Crafting ( Pumpkin 6)",
+    "imageFileName": "Farmer_Orb.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Farmer_Orb.png"
+  },
+  {
+    "id": "FARMING_TALISMAN",
+    "name": "Farming Talisman",
+    "rarity": "COMMON",
+    "description": "Grants +10 Speed while in Harvest Haven.",
+    "source": "Crafting ( Wheat 4)",
+    "imageFileName": "Farming_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Farming_Talisman.png"
+  },
+  {
+    "id": "FARMIONAIRE_ARTIFACT",
+    "name": "Farmionaire Artifact",
+    "rarity": "RARE",
+    "description": "Grants +25 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    "source": "Farm-o-Matic",
+    "imageFileName": "Farmionaire_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Farmionaire_Artifact.png"
+  },
+  {
+    "id": "FARMIONAIRE_RING",
+    "name": "Farmionaire Ring",
+    "rarity": "UNCOMMON",
+    "description": "Grants +15 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    "source": "Farm-o-Matic",
+    "imageFileName": "Farmionaire_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Farmionaire_Ring.png"
+  },
+  {
+    "id": "FARMIONAIRE_TALISMAN",
+    "name": "Farmionaire Talisman",
+    "rarity": "COMMON",
+    "description": "Grants +5 Crop Fortune to a random crop during Ethan's Farming Contest.",
+    "source": "Farm-o-Matic",
+    "imageFileName": "Farmionaire_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Farmionaire_Talisman.png"
+  },
+  {
+    "id": "FEATHER_ARTIFACT",
+    "name": "Feather Artifact",
+    "rarity": "RARE",
+    "description": "Increases how high you can fall before taking fall damage by 10 blocks, and reduces fall damage by 15%.",
+    "source": "Crafting ( Feather 9)",
+    "imageFileName": "Feather_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Feather_Artifact.png"
+  },
+  {
+    "id": "FEATHER_RING",
+    "name": "Feather Ring",
+    "rarity": "UNCOMMON",
+    "description": "Increases how high you can fall before taking fall damage by 7 blocks, and reduces fall damage by 5%.",
+    "source": "Crafting ( Feather 7)",
+    "imageFileName": "Feather_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Feather_Ring.png"
+  },
+  {
+    "id": "FEATHER_TALISMAN",
+    "name": "Feather Talisman",
+    "rarity": "COMMON",
+    "description": "Increases the minimum height to take fall damage by 5 blocks.",
+    "source": "Crafting ( Feather 4)",
+    "imageFileName": "Feather_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Feather_Talisman.png"
+  },
+  {
+    "id": "FERMENTO_ARTIFACT",
+    "name": "Fermento Artifact",
+    "rarity": "RARE",
+    "description": "Farming Fortune: +30",
+    "source": "Crafting",
+    "imageFileName": "Fermento_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Fermento_Artifact.png"
+  },
+  {
+    "id": "FILTHY_RICH_TALISMAN",
+    "name": "Filthy Rich Talisman",
+    "rarity": "SPECIAL",
+    "description": "",
+    "source": "Removed",
+    "imageFileName": "Filthy_Rich_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Filthy_Rich_Talisman.png"
+  },
+  {
+    "id": "FIRE_DEVOURER",
+    "name": "Fire Devourer",
+    "rarity": "EPIC",
+    "description": "Reduces damage you get from Fire mobs by 20%. (Eye of the Cliff, Fire Envoy and Heartigniter)",
+    "source": "Crafting",
+    "imageFileName": "Fire_Devourer.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Fire_Devourer.png"
+  },
+  {
+    "id": "FIRE_EXTINGUISHER",
+    "name": "Fire Extinguisher",
+    "rarity": "RARE",
+    "description": "Reduces damage you get from Fire mobs by 10%. (Eye of the Cliff, Fire Envoy and Heartigniter)",
+    "source": "Crafting",
+    "imageFileName": "Fire_Extinguisher.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Fire_Extinguisher.png"
+  },
+  {
+    "id": "FIRE_TALISMAN",
+    "name": "Fire Talisman",
+    "rarity": "COMMON",
+    "description": "Provides immunity to Fire.",
+    "source": "Crafting ( Blaze Rod 5)",
+    "imageFileName": "Fire_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Fire_Talisman.png"
+  },
+  {
+    "id": "FROSTCLAW_RELIC",
+    "name": "Frostclaw Relic",
+    "rarity": "LEGENDARY",
+    "description": "Critical Damage: +7% Requires Wolf Slayer 7.",
+    "source": "Crafting ( Wolf Slayer 8)",
+    "imageFileName": "Frostclaw_Relic.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Frostclaw_Relic.png"
+  },
+  {
+    "id": "GAME_BREAKER",
+    "name": "Game Breaker",
+    "rarity": "SPECIAL",
+    "description": "This item was awarded to [player] for reporting a bug that could break the game.",
+    "source": "",
+    "imageFileName": "Game_Breaker.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Game_Breaker.png"
+  },
+  {
+    "id": "GOLDEN_FEATHER_BOOTS",
+    "name": "Golden Feather Boots",
+    "rarity": "LEGENDARY",
+    "description": "Grants 10 seconds of slow falling while falling from more than 6 blocks. (effect is disabled while sneaking) Also negates fall damage.",
+    "source": "Crafting ( Feather 9)",
+    "imageFileName": "Golden_Feather_Boots.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Golden_Feather_Boots.png"
+  },
+  {
+    "id": "GRAVITY_TALISMAN",
+    "name": "Gravity Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Grants between +1 and +10 Strength and Defense the closer you are to the center of an island.",
+    "source": "Crafting ( Obsidian 3)",
+    "imageFileName": "Gravity_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Gravity_Talisman.png"
+  },
+  {
+    "id": "HUNTER_RING",
+    "name": "Hunter Ring",
+    "rarity": "RARE",
+    "description": "Combat Wisdom: +5 Requires Wolf Slayer 7.",
+    "source": "Crafting ( Wolf Slayer 7)",
+    "imageFileName": "Hunter_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Hunter_Ring.png"
+  },
+  {
+    "id": "HUNTER_TALISMAN",
+    "name": "Hunter Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Combat Wisdom: +2 Requires Wolf Slayer 6.",
+    "source": "Crafting ( Wolf Slayer 6)",
+    "imageFileName": "Hunter_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Hunter_Talisman.png"
+  },
+  {
+    "id": "INTIMIDATION_TALISMAN",
+    "name": "Intimidation Talisman",
+    "rarity": "COMMON",
+    "description": "",
+    "source": "Julia (10K)",
+    "imageFileName": "Intimidation_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Intimidation_Talisman.png"
+  },
+  {
+    "id": "LAVA_TALISMAN",
+    "name": "Lava Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Provides immunity to Lava.",
+    "source": "Crafting ( Magma Cream 7)",
+    "imageFileName": "Lava_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Lava_Talisman.png"
+  },
+  {
+    "id": "MAGICAL_ENCYCLOPEDIA",
+    "name": "Magical Encyclopedia",
+    "rarity": "SPECIAL",
+    "description": "This item has been specially delivered to Peawio, who put a lot of effort to create SkyBlock's first Wiki page!",
+    "source": "Unobtainable",
+    "imageFileName": "Magical_Encyclopedia.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Magical_Encyclopedia.png"
+  },
+  {
+    "id": "MAGNETIC_TALISMAN",
+    "name": "Magnetic Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Increases the item pick up range by 3x.",
+    "source": "Crafting ( Emerald 3)",
+    "imageFileName": "Magnetic_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Magnetic_Talisman.png"
+  },
+  {
+    "id": "MINE_AFFINITY_TALISMAN",
+    "name": "Mine Affinity Talisman",
+    "rarity": "COMMON",
+    "description": "Grants +25 Speed while in Mining Islands.",
+    "source": "Julia (2.5K)",
+    "imageFileName": "Mine_Affinity_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Mine_Affinity_Talisman.png"
+  },
+  {
+    "id": "MINI_FAIRY",
+    "name": "Mini Fairy",
+    "rarity": "SPECIAL",
+    "description": "",
+    "source": "Removed",
+    "imageFileName": "Mini_Fairy.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Mini_Fairy.png"
+  },
+  {
+    "id": "NEW_YEAR_S_CAKE_BAG",
+    "name": "New Year's Cake Bag",
+    "rarity": "UNCOMMON",
+    "description": "Health: +0 Holds New Year Cakes. Each unique New Year Cake in this bag grants you +1 Health. Item Ability: Cake Storage Right Click Place cakes in the bag.",
+    "source": "North (250K)",
+    "imageFileName": "New_Year's_Cake_Bag.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/New_Year's_Cake_Bag.png"
+  },
+  {
+    "id": "NIGHT_VISION_CHARM",
+    "name": "Night Vision Charm",
+    "rarity": "COMMON",
+    "description": "Grants Night Vision while in inventory or Accessory Bag.",
+    "source": "Crafting ( Mushroom 7)",
+    "imageFileName": "Night_Vision_Charm.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Night_Vision_Charm.png"
+  },
+  {
+    "id": "NIGHTFREEZER",
+    "name": "Nightfreezer",
+    "rarity": "LEGENDARY",
+    "description": "Makes the time always seen as night while in inventory or accessory bag.",
+    "source": "Zoe (945)",
+    "imageFileName": "Nightfreezer.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Nightfreezer.png"
+  },
+  {
+    "id": "PERSONAL_COMPACTOR_4000",
+    "name": "Personal Compactor 4000",
+    "rarity": "UNCOMMON",
+    "description": "Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 1 configurable slots.",
+    "source": "Crafting ( Redstone 9)",
+    "imageFileName": "Personal_Compactor_4000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Compactor_4000.png"
+  },
+  {
+    "id": "PERSONAL_COMPACTOR_5000",
+    "name": "Personal Compactor 5000",
+    "rarity": "RARE",
+    "description": "Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 3 configurable slots.",
+    "source": "Crafting ( Redstone 11",
+    "imageFileName": "Personal_Compactor_5000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Compactor_5000.png"
+  },
+  {
+    "id": "PERSONAL_COMPACTOR_6000",
+    "name": "Personal Compactor 6000",
+    "rarity": "EPIC",
+    "description": "Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 7 configurable slots.",
+    "source": "Crafting ( Redstone 13)",
+    "imageFileName": "Personal_Compactor_6000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Compactor_6000.png"
+  },
+  {
+    "id": "PERSONAL_COMPACTOR_7000",
+    "name": "Personal Compactor 7000",
+    "rarity": "LEGENDARY",
+    "description": "Automatically transforms certain materials in your inventory into enchanted or block forms. This item has 12 configurable slots.",
+    "source": "Crafting ( Redstone 14)",
+    "imageFileName": "Personal_Compactor_7000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Compactor_7000.png"
+  },
+  {
+    "id": "PERSONAL_DELETOR_4000",
+    "name": "Personal Deletor 4000",
+    "rarity": "UNCOMMON",
+    "description": "Automatically deletes the selected items on pickup. This item has 1 configurable slots.",
+    "source": "Crafting ( Iron Ingot 9)",
+    "imageFileName": "Personal_Deletor_4000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Deletor_4000.png"
+  },
+  {
+    "id": "PERSONAL_DELETOR_5000",
+    "name": "Personal Deletor 5000",
+    "rarity": "RARE",
+    "description": "Automatically deletes the selected items on pickup. This item has 3 configurable slots.",
+    "source": "Crafting ( Iron Ingot 10)",
+    "imageFileName": "Personal_Deletor_5000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Deletor_5000.png"
+  },
+  {
+    "id": "PERSONAL_DELETOR_6000",
+    "name": "Personal Deletor 6000",
+    "rarity": "EPIC",
+    "description": "Automatically deletes the selected items on pickup. This item has 7 configurable slots.",
+    "source": "Crafting ( Iron Ingot 11",
+    "imageFileName": "Personal_Deletor_6000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Deletor_6000.png"
+  },
+  {
+    "id": "PERSONAL_DELETOR_7000",
+    "name": "Personal Deletor 7000",
+    "rarity": "LEGENDARY",
+    "description": "Automatically deletes the selected items on pickup. This item has 12 configurable slots.",
+    "source": "Crafting ( Iron Ingot 12)",
+    "imageFileName": "Personal_Deletor_7000.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Personal_Deletor_7000.png"
+  },
+  {
+    "id": "PIGGY_BANK",
+    "name": "Piggy Bank",
+    "rarity": "UNCOMMON",
+    "description": "Saves your coins on death. Works only when in player inventory. Triggers when losing 20,000+ coins",
+    "source": "Crafting ( Raw Porkchop 5)",
+    "imageFileName": "Piggy_Bank.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Piggy_Bank.png"
+  },
+  {
+    "id": "PIG_S_FOOT",
+    "name": "Pig's Foot",
+    "rarity": "RARE",
+    "description": "Speed: +1",
+    "source": "Fynn (\"Ender Node Hunt\" quest)",
+    "imageFileName": "Pig's_Foot.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Pig's_Foot.png"
+  },
+  {
+    "id": "POTATO_TALISMAN",
+    "name": "Potato Talisman",
+    "rarity": "COMMON",
+    "description": "Speed: +1 Your potato minions farm 5% faster while wearing on your island.",
+    "source": "Shiny Orb",
+    "imageFileName": "Potato_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Potato_Talisman.png"
+  },
+  {
+    "id": "REAPER_ORB",
+    "name": "Reaper Orb",
+    "rarity": "LEGENDARY",
+    "description": "Gain a stack of 2 Strength for every mob killed in the last 5 seconds. Requires Zombie Slayer 8.",
+    "source": "Crafting ( Zombie Slayer 8)",
+    "imageFileName": "Reaper_Orb.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Reaper_Orb.png"
+  },
+  {
+    "id": "RED_CLAW_ARTIFACT",
+    "name": "Red Claw Artifact",
+    "rarity": "EPIC",
+    "description": "Critical Damage: +5% Requires Wolf Slayer 5.",
+    "source": "Crafting ( Wolf Slayer 5)",
+    "imageFileName": "Red_Claw_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Red_Claw_Artifact.png"
+  },
+  {
+    "id": "RED_CLAW_RING",
+    "name": "Red Claw Ring",
+    "rarity": "RARE",
+    "description": "Critical Damage: +3% Requires Wolf Slayer 3.",
+    "source": "Crafting ( Wolf Slayer 5)",
+    "imageFileName": "Red_Claw_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Red_Claw_Ring.png"
+  },
+  {
+    "id": "RED_CLAW_TALISMAN",
+    "name": "Red Claw Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Critical Damage: +1% Requires Wolf Slayer 1.",
+    "source": "Crafting ( Wolf Slayer 1)",
+    "imageFileName": "Red_Claw_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Red_Claw_Talisman.png"
+  },
+  {
+    "id": "SCAVENGER_TALISMAN",
+    "name": "Scavenger Talisman",
+    "rarity": "COMMON",
+    "description": "Grants extra coins on mob kills.",
+    "source": "Julia (10K)",
+    "imageFileName": "Scavenger_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Scavenger_Talisman.png"
+  },
+  {
+    "id": "SEAL_OF_THE_OCEANS",
+    "name": "Seal of the Oceans",
+    "rarity": "RARE",
+    "description": "Magic Find: +1% Grants +1 coin for every 25 coins you gain from mobs.",
+    "source": "\"Lost Treasures\" quest",
+    "imageFileName": "Seal_of_the_Oceans.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Seal_of_the_Oceans.png"
+  },
+  {
+    "id": "SKELETON_TALISMAN",
+    "name": "Skeleton Talisman",
+    "rarity": "COMMON",
+    "description": "Reduces the damage taken from Skeletons by 5%.",
+    "source": "Julia (500)",
+    "imageFileName": "Skeleton_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Skeleton_Talisman.png"
+  },
+  {
+    "id": "SKY_S_BADGE",
+    "name": "Sky's Badge",
+    "rarity": "LEGENDARY",
+    "description": "Health: +10 Pet Luck: +1",
+    "source": "Sky (21.5M)",
+    "imageFileName": "Sky's_Badge.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Sky's_Badge.png"
+  },
+  {
+    "id": "SPEED_ARTIFACT",
+    "name": "Speed Artifact",
+    "rarity": "RARE",
+    "description": "Speed: +5",
+    "source": "Crafting ( Sugar Cane 8)",
+    "imageFileName": "Speed_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Speed_Artifact.png"
+  },
+  {
+    "id": "SPEED_RING",
+    "name": "Speed Ring",
+    "rarity": "UNCOMMON",
+    "description": "Speed: +3",
+    "source": "Crafting ( Sugar Cane 5)",
+    "imageFileName": "Speed_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Speed_Ring.png"
+  },
+  {
+    "id": "SPEED_TALISMAN",
+    "name": "Speed Talisman",
+    "rarity": "COMMON",
+    "description": "Speed: +1",
+    "source": "Crafting ( Sugar Cane 2)",
+    "imageFileName": "Speed_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Speed_Talisman.png"
+  },
+  {
+    "id": "SQUASH_RING",
+    "name": "Squash Ring",
+    "rarity": "UNCOMMON",
+    "description": "Wheat Fortune: +20 Carrot Fortune: +20 Potato Fortune: +20 Melon Fortune: +20 Pumpkin Fortune: +20 Cocoa Beans Fortune: +20 Beetroot Fortune: +20",
+    "source": "Crafting",
+    "imageFileName": "Squash_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Squash_Ring.png"
+  },
+  {
+    "id": "VACCINE_TALISMAN",
+    "name": "Vaccine Talisman",
+    "rarity": "COMMON",
+    "description": "Provides immunity to Poison damage.",
+    "source": "Crafting ( Potato 3)",
+    "imageFileName": "Vaccine_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Vaccine_Talisman.png"
+  },
+  {
+    "id": "VILLAGE_AFFINITY_TALISMAN",
+    "name": "Village Affinity Talisman",
+    "rarity": "COMMON",
+    "description": "Grants +10 Speed while in Village.",
+    "source": "Julia (2K)",
+    "imageFileName": "Village_Affinity_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Village_Affinity_Talisman.png"
+  },
+  {
+    "id": "WOLF_RING",
+    "name": "Wolf Ring",
+    "rarity": "UNCOMMON",
+    "description": "Reduces the damage taken from Wolves by 10%.",
+    "source": "Crafting",
+    "imageFileName": "Wolf_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Wolf_Ring.png"
+  },
+  {
+    "id": "WOLF_TALISMAN",
+    "name": "Wolf Talisman",
+    "rarity": "COMMON",
+    "description": "Reduces the damage taken from Wolves by 5%.",
+    "source": "Dropped from Old Wolf (0.01%)",
+    "imageFileName": "Wolf_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Wolf_Talisman.png"
+  },
+  {
+    "id": "WOOD_AFFINITY_TALISMAN",
+    "name": "Wood Affinity Talisman",
+    "rarity": "UNCOMMON",
+    "description": "Grants +10 Speed while in Graveyard or Forest.",
+    "source": "Crafting ( Oak Log 8)",
+    "imageFileName": "Wood_Affinity_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Wood_Affinity_Talisman.png"
+  },
+  {
+    "id": "ZOMBIE_ARTIFACT",
+    "name": "Zombie Artifact",
+    "rarity": "RARE",
+    "description": "Reduces the damage taken from Zombies by 15%. Requires Zombie Slayer 7.",
+    "source": "Crafting ( Zombie Slayer 7)",
+    "imageFileName": "Zombie_Artifact.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Zombie_Artifact.png"
+  },
+  {
+    "id": "ZOMBIE_RING",
+    "name": "Zombie Ring",
+    "rarity": "UNCOMMON",
+    "description": "Reduces the damage taken from Zombies by 10%. Requires Zombie Slayer 2.",
+    "source": "Crafting ( Zombie Slayer 2)",
+    "imageFileName": "Zombie_Ring.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Zombie_Ring.png"
+  },
+  {
+    "id": "ZOMBIE_TALISMAN",
+    "name": "Zombie Talisman",
+    "rarity": "COMMON",
+    "description": "Reduces the damage taken from Zombies by 5%.",
+    "source": "Julia (500)",
+    "imageFileName": "Zombie_Talisman.png",
+    "spriteUrl": "https://craftersmc.wiki.gg/images/Zombie_Talisman.png"
+  }
+]

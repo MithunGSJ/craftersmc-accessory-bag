@@ -1,0 +1,584 @@
+{
+  "BAMBOO_RING": {
+    "targetId": "BAMBOO_RING",
+    "targetName": "Bamboo Ring",
+    "upgradesFrom": "BAMBOO_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "enchanted_bamboo",
+        "name": "Enchanted Bamboo",
+        "count": 64
+      }
+    ]
+  },
+  "BAMBOO_TALISMAN": {
+    "targetId": "BAMBOO_TALISMAN",
+    "targetName": "Bamboo Talisman",
+    "ingredients": [
+      {
+        "itemId": "bamboo",
+        "name": "Bamboo",
+        "count": 288
+      }
+    ]
+  },
+  "COINS_TALISMAN": {
+    "targetId": "COINS_TALISMAN",
+    "targetName": "Coins Talisman",
+    "ingredients": [
+      {
+        "itemId": "emerald",
+        "name": "Emerald",
+        "count": 20
+      },
+      {
+        "itemId": "gold_ingot",
+        "name": "Gold Ingot",
+        "count": 5
+      }
+    ]
+  },
+  "CROPIE_TALISMAN": {
+    "targetId": "CROPIE_TALISMAN",
+    "targetName": "Cropie Talisman",
+    "ingredients": [
+      {
+        "itemId": "cropie",
+        "name": "Cropie",
+        "count": 256
+      }
+    ]
+  },
+  "SQUASH_RING": {
+    "targetId": "SQUASH_RING",
+    "targetName": "Squash Ring",
+    "upgradesFrom": "CROPIE_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "squash",
+        "name": "Squash",
+        "count": 128
+      }
+    ]
+  },
+  "DRACONIC_ARTIFACT": {
+    "targetId": "DRACONIC_ARTIFACT",
+    "targetName": "Draconic Artifact",
+    "upgradesFrom": "DRACONIC_RING",
+    "ingredients": [
+      {
+        "itemId": "fused_remnants",
+        "name": "Fused Remnants",
+        "count": 12
+      },
+      {
+        "itemId": "tessellated_ender_pearl",
+        "name": "Tessellated Ender Pearl",
+        "count": 2
+      },
+      {
+        "itemId": "mite_gel",
+        "name": "Mite Gel",
+        "count": 128
+      }
+    ]
+  },
+  "DRACONIC_RING": {
+    "targetId": "DRACONIC_RING",
+    "targetName": "Draconic Ring",
+    "upgradesFrom": "DRACONIC_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "fused_remnants",
+        "name": "Fused Remnants",
+        "count": 4
+      },
+      {
+        "itemId": "mite_gel",
+        "name": "Mite Gel",
+        "count": 96
+      },
+      {
+        "itemId": "tessellated_ender_pearl",
+        "name": "Tessellated Ender Pearl",
+        "count": 1
+      }
+    ]
+  },
+  "DRACONIC_TALISMAN": {
+    "targetId": "DRACONIC_TALISMAN",
+    "targetName": "Draconic Talisman",
+    "ingredients": [
+      {
+        "itemId": "fused_remnants",
+        "name": "Fused Remnants",
+        "count": 2
+      },
+      {
+        "itemId": "mite_gel",
+        "name": "Mite Gel",
+        "count": 96
+      },
+      {
+        "itemId": "absolute_ender_pearl",
+        "name": "Absolute Ender Pearl",
+        "count": 32
+      }
+    ]
+  },
+  "EMERALD_RING": {
+    "targetId": "EMERALD_RING",
+    "targetName": "Emerald Ring",
+    "ingredients": [
+      {
+        "itemId": "enchanted_emerald",
+        "name": "Enchanted Emerald",
+        "count": 32
+      }
+    ]
+  },
+  "EXPERIENCE_ARTIFACT": {
+    "targetId": "EXPERIENCE_ARTIFACT",
+    "targetName": "Experience Artifact",
+    "ingredients": [
+      {
+        "itemId": "enchanted_lapis_block",
+        "name": "Enchanted Lapis Block",
+        "count": 9
+      }
+    ]
+  },
+  "FARMER_ORB": {
+    "targetId": "FARMER_ORB",
+    "targetName": "Farmer Orb",
+    "ingredients": [
+      {
+        "itemId": "enchanted_pumpkin",
+        "name": "Enchanted Pumpkin",
+        "count": 8
+      },
+      {
+        "itemId": "enchanted_blaze_powder",
+        "name": "Enchanted Blaze Powder",
+        "count": 1
+      }
+    ]
+  },
+  "FARMING_TALISMAN": {
+    "targetId": "FARMING_TALISMAN",
+    "targetName": "Farming Talisman",
+    "ingredients": [
+      {
+        "itemId": "wheat",
+        "name": "Wheat",
+        "count": 5
+      },
+      {
+        "itemId": "wheat_seeds",
+        "name": "Wheat Seeds",
+        "count": 4
+      }
+    ]
+  },
+  "FEATHER_ARTIFACT": {
+    "targetId": "FEATHER_ARTIFACT",
+    "targetName": "Feather Artifact",
+    "upgradesFrom": "FEATHER_RING",
+    "ingredients": [
+      {
+        "itemId": "enchanted_feather",
+        "name": "Enchanted Feather",
+        "count": 128
+      }
+    ]
+  },
+  "GOLDEN_FEATHER_BOOTS": {
+    "targetId": "GOLDEN_FEATHER_BOOTS",
+    "targetName": "Golden Feather Boots",
+    "upgradesFrom": "FEATHER_ARTIFACT",
+    "ingredients": [
+      {
+        "itemId": "enchanted_feather",
+        "name": "Enchanted Feather",
+        "count": 160
+      },
+      {
+        "itemId": "golden_feather",
+        "name": "Golden Feather",
+        "count": 1
+      }
+    ]
+  },
+  "FEATHER_RING": {
+    "targetId": "FEATHER_RING",
+    "targetName": "Feather Ring",
+    "upgradesFrom": "FEATHER_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "enchanted_feather",
+        "name": "Enchanted Feather",
+        "count": 7
+      }
+    ]
+  },
+  "FEATHER_TALISMAN": {
+    "targetId": "FEATHER_TALISMAN",
+    "targetName": "Feather Talisman",
+    "ingredients": [
+      {
+        "itemId": "feather",
+        "name": "Feather",
+        "count": 108
+      }
+    ]
+  },
+  "FERMENTO_ARTIFACT": {
+    "targetId": "FERMENTO_ARTIFACT",
+    "targetName": "Fermento Artifact",
+    "upgradesFrom": "SQUASH_RING",
+    "ingredients": [
+      {
+        "itemId": "condensed_fermento",
+        "name": "Condensed Fermento",
+        "count": 8
+      }
+    ]
+  },
+  "FIRE_DEVOURER": {
+    "targetId": "FIRE_DEVOURER",
+    "targetName": "Fire Devourer",
+    "ingredients": [
+      {
+        "itemId": "fire_fragment",
+        "name": "Fire Fragment",
+        "count": 4
+      },
+      {
+        "itemId": "fire_extinguisher",
+        "name": "Fire Extinguisher",
+        "count": 1
+      }
+    ]
+  },
+  "FIRE_EXTINGUISHER": {
+    "targetId": "FIRE_EXTINGUISHER",
+    "targetName": "Fire Extinguisher",
+    "ingredients": [
+      {
+        "itemId": "envoy_s_horn",
+        "name": "Envoy's Horn",
+        "count": 8
+      }
+    ]
+  },
+  "FIRE_TALISMAN": {
+    "targetId": "FIRE_TALISMAN",
+    "targetName": "Fire Talisman",
+    "ingredients": [
+      {
+        "itemId": "enchanted_blaze_powder",
+        "name": "Enchanted Blaze Powder",
+        "count": 9
+      }
+    ]
+  },
+  "FROSTCLAW_RELIC": {
+    "targetId": "FROSTCLAW_RELIC",
+    "targetName": "Frostclaw Relic",
+    "upgradesFrom": "RED_CLAW_ARTIFACT",
+    "ingredients": [
+      {
+        "itemId": "glacial_fang",
+        "name": "Glacial Fang",
+        "count": 64
+      },
+      {
+        "itemId": "enchanted_packed_ice",
+        "name": "Enchanted Packed Ice",
+        "count": 128
+      }
+    ]
+  },
+  "GRAVITY_TALISMAN": {
+    "targetId": "GRAVITY_TALISMAN",
+    "targetName": "Gravity Talisman",
+    "ingredients": [
+      {
+        "itemId": "obsidian",
+        "name": "Obsidian",
+        "count": 144
+      }
+    ]
+  },
+  "HUNTER_RING": {
+    "targetId": "HUNTER_RING",
+    "targetName": "Hunter Ring",
+    "upgradesFrom": "HUNTER_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "golden_tooth",
+        "name": "Golden Tooth",
+        "count": 224
+      },
+      {
+        "itemId": "grizzly_bait",
+        "name": "Grizzly Bait",
+        "count": 1
+      }
+    ]
+  },
+  "HUNTER_TALISMAN": {
+    "targetId": "HUNTER_TALISMAN",
+    "targetName": "Hunter Talisman",
+    "ingredients": [
+      {
+        "itemId": "golden_tooth",
+        "name": "Golden Tooth",
+        "count": 64
+      },
+      {
+        "itemId": "enchanted_rotten_flesh",
+        "name": "Enchanted Rotten Flesh",
+        "count": 32
+      }
+    ]
+  },
+  "LAVA_TALISMAN": {
+    "targetId": "LAVA_TALISMAN",
+    "targetName": "Lava Talisman",
+    "ingredients": [
+      {
+        "itemId": "enchanted_magma_cream",
+        "name": "Enchanted Magma Cream",
+        "count": 9
+      }
+    ]
+  },
+  "MAGNETIC_TALISMAN": {
+    "targetId": "MAGNETIC_TALISMAN",
+    "targetName": "Magnetic Talisman",
+    "ingredients": [
+      {
+        "itemId": "emerald",
+        "name": "Emerald",
+        "count": 128
+      },
+      {
+        "itemId": "redstone_dust",
+        "name": "Redstone Dust",
+        "count": 32
+      }
+    ]
+  },
+  "NIGHT_VISION_CHARM": {
+    "targetId": "NIGHT_VISION_CHARM",
+    "targetName": "Night Vision Charm",
+    "ingredients": [
+      {
+        "itemId": "enchanted_red_mushroom",
+        "name": "Enchanted Red Mushroom",
+        "count": 4
+      },
+      {
+        "itemId": "enchanted_brown_mushroom",
+        "name": "Enchanted Brown Mushroom",
+        "count": 4
+      }
+    ]
+  },
+  "PIGGY_BANK": {
+    "targetId": "PIGGY_BANK",
+    "targetName": "Piggy Bank",
+    "ingredients": [
+      {
+        "itemId": "enchanted_raw_porkchop",
+        "name": "Enchanted Raw Porkchop",
+        "count": 24
+      },
+      {
+        "itemId": "broken_piggy_bank",
+        "name": "Broken Piggy Bank",
+        "count": 1
+      }
+    ]
+  },
+  "REAPER_ORB": {
+    "targetId": "REAPER_ORB",
+    "targetName": "Reaper Orb",
+    "ingredients": [
+      {
+        "itemId": "scythe_blade",
+        "name": "Scythe Blade",
+        "count": 8
+      }
+    ]
+  },
+  "RED_CLAW_ARTIFACT": {
+    "targetId": "RED_CLAW_ARTIFACT",
+    "targetName": "Red Claw Artifact",
+    "upgradesFrom": "RED_CLAW_RING",
+    "ingredients": [
+      {
+        "itemId": "enchanted_leather",
+        "name": "Enchanted Leather",
+        "count": 128
+      },
+      {
+        "itemId": "golden_tooth",
+        "name": "Golden Tooth",
+        "count": 54
+      },
+      {
+        "itemId": "red_claw_egg",
+        "name": "Red Claw Egg",
+        "count": 1
+      }
+    ]
+  },
+  "RED_CLAW_RING": {
+    "targetId": "RED_CLAW_RING",
+    "targetName": "Red Claw Ring",
+    "upgradesFrom": "RED_CLAW_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "enchanted_leather",
+        "name": "Enchanted Leather",
+        "count": 32
+      },
+      {
+        "itemId": "golden_tooth",
+        "name": "Golden Tooth",
+        "count": 8
+      }
+    ]
+  },
+  "RED_CLAW_TALISMAN": {
+    "targetId": "RED_CLAW_TALISMAN",
+    "targetName": "Red Claw Talisman",
+    "ingredients": [
+      {
+        "itemId": "wolf_tooth",
+        "name": "Wolf Tooth",
+        "count": 8
+      },
+      {
+        "itemId": "enchanted_bone",
+        "name": "Enchanted Bone",
+        "count": 1
+      }
+    ]
+  },
+  "SPEED_ARTIFACT": {
+    "targetId": "SPEED_ARTIFACT",
+    "targetName": "Speed Artifact",
+    "upgradesFrom": "SPEED_RING",
+    "ingredients": [
+      {
+        "itemId": "enchanted_sugar_cane",
+        "name": "Enchanted Sugar Cane",
+        "count": 48
+      }
+    ]
+  },
+  "SPEED_RING": {
+    "targetId": "SPEED_RING",
+    "targetName": "Speed Ring",
+    "upgradesFrom": "SPEED_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "enchanted_sugar",
+        "name": "Enchanted Sugar",
+        "count": 96
+      }
+    ]
+  },
+  "SPEED_TALISMAN": {
+    "targetId": "SPEED_TALISMAN",
+    "targetName": "Speed Talisman",
+    "ingredients": [
+      {
+        "itemId": "sugar_cane",
+        "name": "Sugar Cane",
+        "count": 108
+      }
+    ]
+  },
+  "VACCINE_TALISMAN": {
+    "targetId": "VACCINE_TALISMAN",
+    "targetName": "Vaccine Talisman",
+    "ingredients": [
+      {
+        "itemId": "poisonous_potato",
+        "name": "Poisonous Potato",
+        "count": 9
+      }
+    ]
+  },
+  "WOLF_RING": {
+    "targetId": "WOLF_RING",
+    "targetName": "Wolf Ring",
+    "upgradesFrom": "WOLF_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "enchanted_bone",
+        "name": "Enchanted Bone",
+        "count": 14
+      },
+      {
+        "itemId": "weak_wolf_catalyst",
+        "name": "Weak Wolf Catalyst",
+        "count": 1
+      }
+    ]
+  },
+  "WOOD_AFFINITY_TALISMAN": {
+    "targetId": "WOOD_AFFINITY_TALISMAN",
+    "targetName": "Wood Affinity Talisman",
+    "ingredients": [
+      {
+        "itemId": "oak_leaves",
+        "name": "Oak Leaves",
+        "count": 8
+      },
+      {
+        "itemId": "enchanted_oak_log",
+        "name": "Enchanted Oak Log",
+        "count": 1
+      }
+    ]
+  },
+  "ZOMBIE_ARTIFACT": {
+    "targetId": "ZOMBIE_ARTIFACT",
+    "targetName": "Zombie Artifact",
+    "upgradesFrom": "ZOMBIE_RING",
+    "ingredients": [
+      {
+        "itemId": "enchanted_iron_ingot",
+        "name": "Enchanted Iron Ingot",
+        "count": 32
+      },
+      {
+        "itemId": "enchanted_diamond",
+        "name": "Enchanted Diamond",
+        "count": 16
+      },
+      {
+        "itemId": "revenant_viscera",
+        "name": "Revenant Viscera",
+        "count": 48
+      }
+    ]
+  },
+  "ZOMBIE_RING": {
+    "targetId": "ZOMBIE_RING",
+    "targetName": "Zombie Ring",
+    "upgradesFrom": "ZOMBIE_TALISMAN",
+    "ingredients": [
+      {
+        "itemId": "revenant_flesh",
+        "name": "Revenant Flesh",
+        "count": 64
+      }
+    ]
+  }
+}

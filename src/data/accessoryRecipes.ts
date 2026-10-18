@@ -24,8 +24,11 @@ function r(
 ): AccessoryRecipe {
   return upgradesFrom ? { targetId, upgradesFrom, ingredients } : { targetId, ingredients };
 }
+import wikiRecipesData from './wikiRecipes.json';
 
-export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
+const WIKI_RECIPES = wikiRecipesData as Record<string, AccessoryRecipe>;
+
+const STATIC_RECIPES: Record<string, AccessoryRecipe> = {
   // Feather Line
   FEATHER_TALISMAN: r('FEATHER_TALISMAN', [{ itemId: 'feather', name: 'Feather', count: 108 }]),
   FEATHER_RING: r('FEATHER_RING', [{ itemId: 'enchanted_feather', name: 'Enchanted Feather', count: 7 }], 'FEATHER_TALISMAN'),
@@ -221,4 +224,9 @@ export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
     { itemId: 'weak_wolf_catalyst', name: 'Weak Wolf Catalyst', count: 1 },
     { itemId: 'enchanted_bone', name: 'Enchanted Bone', count: 14 }
   ], 'WOLF_TALISMAN')
+};
+
+export const ACCESSORY_RECIPES: Record<string, AccessoryRecipe> = {
+  ...WIKI_RECIPES,
+  ...STATIC_RECIPES
 };

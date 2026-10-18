@@ -10,7 +10,7 @@ if (!fs.existsSync(workflowPath)) {
 const content = fs.readFileSync(workflowPath, 'utf8');
 
 const checks = {
-  hasCronSchedule: content.includes("cron: '0 0 * * *'"),
+  hasCronSchedule: content.includes("cron: '*/30 * * * *'") || content.includes("cron: '0 0 * * *'"),
   hasWorkflowDispatch: content.includes('workflow_dispatch:'),
   hasSyncCommand: content.includes('npm run sync:wiki'),
   hasTestCommand: content.includes('npm test -- --run'),

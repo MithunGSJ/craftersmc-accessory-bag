@@ -1,4 +1,5 @@
 import type { Plugin, Connect } from 'vite';
+import { startWikiSyncWorker, getWikiSyncStatus, triggerWikiSync } from './wikiSyncWorker.ts';
 
 interface AuctionItem {
   readonly itemId: string;
@@ -149,15 +150,32 @@ export function livePricingPlugin(apiKey: string): Plugin {
       })();
       return;
     }
+    if (url === '/api/wiki/status') {
+      res.setHeader('Content-Type', 'application/json');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.end(JSON.stringify(getWikiSyncStatus()));
+      return;
+    }
+    if (url === '/api/wiki/sync') {
+      void (async () => {
+        const result = await triggerWikiSync();
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.end(JSON.stringify(result));
+      })();
+      return;
+    }
     next();
   };
 
   return {
     name: 'craftersmc-live-pricing',
     configureServer(server) {
+      startWikiSyncWorker();
       server.middlewares.use(handler);
     },
     configurePreviewServer(server) {
+      startWikiSyncWorker();
       server.middlewares.use(handler);
     }
   };
