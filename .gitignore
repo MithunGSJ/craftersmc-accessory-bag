@@ -10,3 +10,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Development evidence and temporary outputs
+evidence/
+tmp/
+*.pdf
+openapi.json
+.agents/
