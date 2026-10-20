@@ -93,8 +93,8 @@
       "weeklyAveragePrice": 4.177500000000002
     },
     "enchanted_oak_log": {
-      "avgPrice": 556,
-      "weeklyAveragePrice": 556.0154905660377,
+      "avgPrice": 557,
+      "weeklyAveragePrice": 556.6131943127962,
       "buyVolume": 30163,
       "sellVolume": 73516
     },
@@ -186,7 +186,7 @@
     },
     "enchanted_rotten_flesh": {
       "avgPrice": 532,
-      "weeklyAveragePrice": 532.145703504043,
+      "weeklyAveragePrice": 531.5615289367429,
       "buyVolume": 48603,
       "sellVolume": 82141
     },
@@ -256,9 +256,9 @@
     },
     "revenant_flesh": {
       "avgPrice": 331,
-      "weeklyAveragePrice": 331.4566615705353,
+      "weeklyAveragePrice": 331.4306287300488,
       "buyVolume": 210251,
-      "sellVolume": 260421
+      "sellVolume": 261201
     },
     "wolf_tooth": {
       "avgPrice": 1254,
@@ -632,10 +632,10 @@
     },
     "ENDERMAN_PET": {
       "minPrice": 40000,
-      "avgPrice": 76240,
+      "avgPrice": 77333,
       "maxPrice": 248000,
-      "count": 40,
-      "totalCount": 43,
+      "count": 39,
+      "totalCount": 42,
       "hasBin": true
     },
     "SHINY_SHARD": {
@@ -1675,7 +1675,7 @@
       "avgPrice": 316667,
       "maxPrice": 550000,
       "count": 6,
-      "totalCount": 8,
+      "totalCount": 7,
       "hasBin": true
     },
     "FROZEN_SCYTHE": {
@@ -1848,10 +1848,10 @@
     },
     "FARMIONAIRE_TALISMAN": {
       "minPrice": 1200000,
-      "avgPrice": 1375000,
-      "maxPrice": 1500000,
-      "count": 4,
-      "totalCount": 5,
+      "avgPrice": 1333333,
+      "maxPrice": 1499999,
+      "count": 3,
+      "totalCount": 4,
       "hasBin": true
     },
     "OBSIDIAN_CHESTPLATE": {
@@ -2648,10 +2648,10 @@
     },
     "ENCHANTED_DANDELION": {
       "minPrice": 5000000,
-      "avgPrice": 6687500,
-      "maxPrice": 10000000,
-      "count": 8,
-      "totalCount": 11,
+      "avgPrice": 6214286,
+      "maxPrice": 9500000,
+      "count": 7,
+      "totalCount": 10,
       "hasBin": true
     },
     "ZOMBIE_TALISMAN": {
@@ -2696,10 +2696,10 @@
     },
     "HARDENED_DIAMOND_HELMET": {
       "minPrice": 18999,
-      "avgPrice": 58209,
+      "avgPrice": 65412,
       "maxPrice": 100000,
-      "count": 9,
-      "totalCount": 13,
+      "count": 7,
+      "totalCount": 11,
       "hasBin": true
     },
     "CACTUS_CHAINSAW": {
@@ -2723,7 +2723,7 @@
       "avgPrice": 69444,
       "maxPrice": 100000,
       "count": 6,
-      "totalCount": 10,
+      "totalCount": 9,
       "hasBin": true
     },
     "ELEGANT_TUXEDO_LEGGINGS": {
