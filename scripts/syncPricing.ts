@@ -40,8 +40,8 @@ async function fetchWithRetry<T>(url: string, retries = 5): Promise<{ status: nu
       });
 
       if (res.status === 429) {
-        console.log(`⏳ HTTP 429 rate limit on ${url}. Sleeping 20s (attempt ${attempt}/${retries})...`);
-        await sleep(20000);
+        console.log(`⏳ HTTP 429 rate limit on ${url}. Sleeping 60s to reset quota (attempt ${attempt}/${retries})...`);
+        await sleep(60000);
         continue;
       }
 
@@ -142,8 +142,30 @@ export async function runPricingSync(): Promise<{
   console.log('🌾 Syncing live Bazaar prices for all dynamic materials...');
   let updatedMaterials = 0;
 
+  const NPC_PRICES: Record<string, number> = {
+    chest: 20,
+    oak_leaves: 12,
+    poisonous_potato: 50,
+    wheat_seeds: 12
+  };
+
   for (let i = 0; i < dynamicMaterials.length; i++) {
     const itemId = dynamicMaterials[i];
+
+    // Check NPC raw shop items (saves API quota)
+    if (NPC_PRICES[itemId] !== undefined) {
+      const npcPrice = NPC_PRICES[itemId];
+      snapshot.bazaar[itemId] = {
+        avgPrice: npcPrice,
+        weeklyAveragePrice: npcPrice,
+        buyVolume: 0,
+        sellVolume: 0
+      };
+      updatedMaterials++;
+      console.log(`[${i + 1}/${dynamicMaterials.length}] 🪙 NPC ${itemId}: ${npcPrice} coins`);
+      continue;
+    }
+
     await sleep(2500); // 2.5s pacing strictly avoids 40 req/min limits
 
     const res = await fetchWithRetry<BazaarDetailResponse>(
@@ -174,6 +196,8 @@ export async function runPricingSync(): Promise<{
         };
         updatedMaterials++;
         console.log(`[${i + 1}/${dynamicMaterials.length}] 🏛️ AH ${itemId}: ${ahItem.avgPrice.toLocaleString()} coins`);
+      } else {
+        console.log(`[${i + 1}/${dynamicMaterials.length}] ℹ️ UNTRADED ${itemId}: No active listings found on Bazaar or AH`);
       }
     }
   }
