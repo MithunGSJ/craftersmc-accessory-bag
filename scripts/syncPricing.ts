@@ -40,8 +40,8 @@ async function fetchWithRetry<T>(url: string, retries = 5): Promise<{ status: nu
       });
 
       if (res.status === 429) {
-        console.log(`⏳ HTTP 429 rate limit on ${url}. Sleeping 60s to reset quota (attempt ${attempt}/${retries})...`);
-        await sleep(60000);
+        console.log(`⏳ HTTP 429 rate limit on ${url}. Sleeping 70s to reset quota (attempt ${attempt}/${retries})...`);
+        await sleep(70000);
         continue;
       }
 
