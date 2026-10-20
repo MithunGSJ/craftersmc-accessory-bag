@@ -130,13 +130,13 @@
     },
     "enchanted_lapis_lazuli": {
       "avgPrice": 530,
-      "weeklyAveragePrice": 529.5287192982456,
+      "weeklyAveragePrice": 529.9883243243244,
       "buyVolume": 50497,
       "sellVolume": 762
     },
     "redstone": {
       "avgPrice": 8,
-      "weeklyAveragePrice": 7.574920634920635,
+      "weeklyAveragePrice": 7.575714285714286,
       "buyVolume": 51992,
       "sellVolume": 0
     },
@@ -151,10 +151,10 @@
       "weeklyAveragePrice": 63.67412345679013
     },
     "golden_tooth": {
-      "avgPrice": 215614,
-      "weeklyAveragePrice": 215613.63199999998,
-      "buyVolume": 625,
-      "sellVolume": 586
+      "avgPrice": 221423,
+      "weeklyAveragePrice": 221423.16021518986,
+      "buyVolume": 726,
+      "sellVolume": 843
     },
     "green_candy": {
       "avgPrice": 3694,
@@ -170,7 +170,7 @@
     },
     "enchanted_iron_ingot": {
       "avgPrice": 1353,
-      "weeklyAveragePrice": 1353.0788389830514,
+      "weeklyAveragePrice": 1352.9814683544312,
       "buyVolume": 37357,
       "sellVolume": 23211
     },
@@ -197,8 +197,8 @@
       "sellVolume": 3701
     },
     "enchanted_bone": {
-      "avgPrice": 789,
-      "weeklyAveragePrice": 788.9982122186495,
+      "avgPrice": 792,
+      "weeklyAveragePrice": 791.7725732484078,
       "buyVolume": 24711,
       "sellVolume": 24868
     },
@@ -235,8 +235,8 @@
       "sellVolume": 48
     },
     "enchanted_packed_ice": {
-      "avgPrice": 42505,
-      "weeklyAveragePrice": 42505.3028125,
+      "avgPrice": 42492,
+      "weeklyAveragePrice": 42492.324041450775,
       "buyVolume": 2424,
       "sellVolume": 12698
     },
@@ -295,8 +295,8 @@
       "sellVolume": 10
     },
     "mite_gel": {
-      "avgPrice": 1925,
-      "weeklyAveragePrice": 1925.2117637795245,
+      "avgPrice": 1924,
+      "weeklyAveragePrice": 1924.029023255811,
       "buyVolume": 7910,
       "sellVolume": 6426
     },
@@ -314,7 +314,9 @@
     },
     "oak_leaves": {
       "avgPrice": 12,
-      "weeklyAveragePrice": 12
+      "weeklyAveragePrice": 12,
+      "buyVolume": 0,
+      "sellVolume": 0
     },
     "enchanted_blaze_powder": {
       "avgPrice": 1544,
@@ -336,27 +338,31 @@
     },
     "poisonous_potato": {
       "avgPrice": 50,
-      "weeklyAveragePrice": 50
+      "weeklyAveragePrice": 50,
+      "buyVolume": 0,
+      "sellVolume": 0
     },
     "wheat_seeds": {
-      "avgPrice": 6,
-      "weeklyAveragePrice": 5.5288085106382985,
-      "buyVolume": 1168,
-      "sellVolume": 36841
+      "avgPrice": 12,
+      "weeklyAveragePrice": 12,
+      "buyVolume": 0,
+      "sellVolume": 0
     },
     "gold_ingot": {
       "avgPrice": 46,
-      "weeklyAveragePrice": 46.165427777777786,
+      "weeklyAveragePrice": 46.10662968099862,
       "buyVolume": 152905,
       "sellVolume": 61862
     },
     "chest": {
       "avgPrice": 20,
-      "weeklyAveragePrice": 20
+      "weeklyAveragePrice": 20,
+      "buyVolume": 0,
+      "sellVolume": 0
     },
     "enchanted_raw_porkchop": {
-      "avgPrice": 2504,
-      "weeklyAveragePrice": 2504.147298033284,
+      "avgPrice": 2507,
+      "weeklyAveragePrice": 2507.105766312596,
       "buyVolume": 24283,
       "sellVolume": 18982
     },
@@ -367,8 +373,8 @@
       "sellVolume": 11
     },
     "super_compactor_3000": {
-      "avgPrice": 404924,
-      "weeklyAveragePrice": 404924.0678537865,
+      "avgPrice": 404865,
+      "weeklyAveragePrice": 404865.044124353,
       "buyVolume": 145,
       "sellVolume": 328
     },
