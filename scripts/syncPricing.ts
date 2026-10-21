@@ -149,6 +149,11 @@ export async function runPricingSync(): Promise<{
     wheat_seeds: 12
   };
 
+  const BAZAAR_ALIASES: Record<string, string> = {
+    envoys_horn: 'envoy_horns',
+    envoy_horn: 'envoy_horns'
+  };
+
   for (let i = 0; i < dynamicMaterials.length; i++) {
     const itemId = dynamicMaterials[i];
 
@@ -168,8 +173,9 @@ export async function runPricingSync(): Promise<{
 
     await sleep(2500); // 2.5s pacing strictly avoids 40 req/min limits
 
+    const queryId = BAZAAR_ALIASES[itemId] || itemId;
     const res = await fetchWithRetry<BazaarDetailResponse>(
-      `https://api.craftersmc.net/v1/skyblock/bazaar/${itemId}/details`
+      `https://api.craftersmc.net/v1/skyblock/bazaar/${queryId}/details`
     );
 
     if (res.status === 200 && res.data?.success) {
@@ -179,12 +185,14 @@ export async function runPricingSync(): Promise<{
       const sellTop = Number(d.sellTopEntries?.[0]?.price) || 0;
       const effectivePrice = Math.round(weekly || buyTop || sellTop);
 
-      snapshot.bazaar[itemId] = {
+      const entry = {
         avgPrice: effectivePrice,
         weeklyAveragePrice: weekly || effectivePrice,
         buyVolume: d.buyVolume || 0,
         sellVolume: d.sellVolume || 0
       };
+      snapshot.bazaar[itemId] = entry;
+      if (queryId !== itemId) snapshot.bazaar[queryId] = entry;
       updatedMaterials++;
       console.log(`[${i + 1}/${dynamicMaterials.length}] ✅ BAZAAR ${itemId}: ${effectivePrice.toLocaleString()} coins`);
     } else {
@@ -197,7 +205,12 @@ export async function runPricingSync(): Promise<{
         updatedMaterials++;
         console.log(`[${i + 1}/${dynamicMaterials.length}] 🏛️ AH ${itemId}: ${ahItem.avgPrice.toLocaleString()} coins`);
       } else {
-        console.log(`[${i + 1}/${dynamicMaterials.length}] ℹ️ UNTRADED ${itemId}: No active listings found on Bazaar or AH`);
+        const existing = snapshot.bazaar[itemId];
+        if (existing && existing.avgPrice > 0) {
+          console.log(`[${i + 1}/${dynamicMaterials.length}] 📦 FALLBACK ${itemId}: ${existing.avgPrice.toLocaleString()} coins (Retained baseline: item not exposed in CraftersMC Bazaar API)`);
+        } else {
+          console.log(`[${i + 1}/${dynamicMaterials.length}] ℹ️ UNTRADED ${itemId}: No active listings found on Bazaar or AH`);
+        }
       }
     }
   }

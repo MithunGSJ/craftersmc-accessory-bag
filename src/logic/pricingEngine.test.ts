@@ -197,11 +197,11 @@ describe('pricingEngine', () => {
   });
 
   it('validates verified CraftersMC wiki recipes for Fire Extinguisher, Fire Devourer, Frostclaw Relic, and Reaper Orb', () => {
-    // Fire Extinguisher: 8x envoys_horn
+    // Fire Extinguisher: 8x envoy_horns
     const feRecipe = ACCESSORY_RECIPES['FIRE_EXTINGUISHER'];
     expect(feRecipe).toBeDefined();
     expect(feRecipe.ingredients).toEqual([
-      { itemId: 'envoys_horn', name: "Envoy's Horn", count: 8 }
+      { itemId: 'envoy_horns', name: "Envoy's Horn", count: 8 }
     ]);
 
     // Fire Devourer: 1x FIRE_EXTINGUISHER + 4x fire_fragment

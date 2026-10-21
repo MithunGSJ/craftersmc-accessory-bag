@@ -218,9 +218,17 @@
       "buyVolume": 1322,
       "sellVolume": 4580
     },
+    "envoy_horns": {
+      "avgPrice": 566,
+      "weeklyAveragePrice": 565.759,
+      "buyVolume": 15254,
+      "sellVolume": 3267
+    },
     "envoys_horn": {
-      "avgPrice": 28175,
-      "weeklyAveragePrice": 28175
+      "avgPrice": 566,
+      "weeklyAveragePrice": 565.759,
+      "buyVolume": 15254,
+      "sellVolume": 3267
     },
     "fire_fragment": {
       "avgPrice": 3388535,

@@ -123,7 +123,7 @@ const STATIC_RECIPES: Record<string, AccessoryRecipe> = {
   // Combat / Mob items
   FIRE_TALISMAN: r('FIRE_TALISMAN', [{ itemId: 'enchanted_blaze_powder', name: 'Enchanted Blaze Powder', count: 9 }]),
   FIRE_EXTINGUISHER: r('FIRE_EXTINGUISHER', [
-    { itemId: 'envoys_horn', name: "Envoy's Horn", count: 8 }
+    { itemId: 'envoy_horns', name: "Envoy's Horn", count: 8 }
   ]),
   FIRE_DEVOURER: r('FIRE_DEVOURER', [{ itemId: 'fire_fragment', name: 'Fire Fragment', count: 4 }], 'FIRE_EXTINGUISHER'),
   LAVA_TALISMAN: r('LAVA_TALISMAN', [{ itemId: 'enchanted_magma_cream', name: 'Enchanted Magma Cream', count: 9 }]),

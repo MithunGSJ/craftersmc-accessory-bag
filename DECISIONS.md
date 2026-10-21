@@ -1,0 +1,5 @@
+# Architecture & Design Decisions
+
+- **Bazaar Item ID Aliasing for Envoy's Horn (`envoy_horns`)**: CraftersMC API names the Bazaar product `envoy_horns` (plural), whereas wiki recipes referred to `envoys_horn`. Added bi-directional alias mapping in `pricingEngine.ts` and `syncPricing.ts` so both names seamlessly resolve to live Bazaar data.
+- **Red Claw Egg Baseline Retention & Fallback Logging**: CraftersMC REST API (`/v1/resources/skyblock/bazaar/items`) maintains an exact whitelist of 285 allowed Bazaar items which currently excludes `red_claw_egg`. Retained baseline price (8,500,000 coins) and updated sync logging to identify retained fallback baseline instead of misleading `UNTRADED` warnings.
+- **Browser Navigation vs API Key**: Direct browser navigation to `api.craftersmc.net` lacks the required `X-API-Key` HTTP header. Documented browser testing via local Vite / Vercel proxy (`/api/v1/...`) which transparently attaches the required header.

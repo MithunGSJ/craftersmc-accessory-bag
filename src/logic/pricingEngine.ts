@@ -38,34 +38,32 @@ const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
 const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
 
 const NPC_RAW_MATERIALS: Record<string, number> = { chest: 20, oak_leaves: 12, poisonous_potato: 50, wheat_seeds: 12 };
+const BAZAAR_ITEM_ALIASES: Record<string, string> = { envoys_horn: 'envoy_horns', envoy_horn: 'envoy_horns' };
 
 export function getBazaarMaterialPrice(itemId: string): number {
-  const normalized = itemId.toLowerCase().trim();
+  const raw = itemId.toLowerCase().trim();
+  const normalized = BAZAAR_ITEM_ALIASES[raw] || raw;
   if (liveBazaarCache.has(normalized)) return liveBazaarCache.get(normalized)!;
-  const snap = BAZAAR_SNAPSHOT[normalized];
+  if (liveBazaarCache.has(raw)) return liveBazaarCache.get(raw)!;
+  const snap = BAZAAR_SNAPSHOT[normalized] || BAZAAR_SNAPSHOT[raw];
   if (snap && snap.avgPrice > 0) return snap.avgPrice;
   const ah = getAccessoryAuctionPrice(itemId);
   if (ah && ah.avgPrice > 0) return ah.avgPrice;
-  return NPC_RAW_MATERIALS[normalized] || 0;
+  return NPC_RAW_MATERIALS[normalized] || NPC_RAW_MATERIALS[raw] || 0;
 }
 
 export function getAccessoryAuctionPrice(accessoryId: string): AuctionPriceSnapshot | undefined {
   const normalized = accessoryId.toUpperCase().replace(/^TRPIXEL:/, '').trim();
-  if (liveAuctionCache.has(normalized)) {
-    return liveAuctionCache.get(normalized);
-  }
-  return AUCTION_SNAPSHOT[normalized];
+  return liveAuctionCache.get(normalized) || AUCTION_SNAPSHOT[normalized];
 }
 
 export function setLiveAuctionPrice(accessoryId: string, snapshot: AuctionPriceSnapshot): void {
-  const normalized = accessoryId.toUpperCase().replace(/^TRPIXEL:/, '').trim();
-  liveAuctionCache.set(normalized, snapshot);
+  liveAuctionCache.set(accessoryId.toUpperCase().replace(/^TRPIXEL:/, '').trim(), snapshot);
   priceDetailsCache.clear();
 }
 
 export function setLiveBazaarPrice(itemId: string, price: number): void {
-  const normalized = itemId.toLowerCase().trim();
-  liveBazaarCache.set(normalized, price);
+  liveBazaarCache.set(itemId.toLowerCase().trim(), price);
   priceDetailsCache.clear();
 }
 
@@ -281,12 +279,15 @@ export function formatCoins(amount: number): string {
 
 export async function refreshLiveBazaarPrice(itemId: string): Promise<number | null> {
   try {
-    const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(itemId)}/details`);
+    const raw = itemId.toLowerCase().trim();
+    const queryId = BAZAAR_ITEM_ALIASES[raw] || raw;
+    const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(queryId)}/details`);
     if (!res.ok) return null;
     const json = await res.json();
     const avg = json.weeklyAveragePrice || json.sellTopEntries?.[0]?.price || json.buyTopEntries?.[0]?.price || 0;
     if (avg > 0) {
       setLiveBazaarPrice(itemId, avg);
+      if (queryId !== itemId) setLiveBazaarPrice(queryId, avg);
       return avg;
     }
     return null;
