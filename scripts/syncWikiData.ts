@@ -40,7 +40,7 @@ function parseRarity(tdHtml: string): string {
   return 'COMMON';
 }
 
-async function fetchWithRetry(url: string, init?: RequestInit, retries = 3): Promise<Response> {
+async function fetchWithRetry(url: string, init?: RequestInit, retries = 4): Promise<Response> {
   let lastError: unknown;
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -48,15 +48,22 @@ async function fetchWithRetry(url: string, init?: RequestInit, retries = 3): Pro
         ...init,
         signal: AbortSignal.timeout(30000)
       });
+      if (!res.ok && (res.status >= 500 || res.status === 429)) {
+        console.warn(`⏳ HTTP ${res.status} from ${url} (attempt ${attempt}/${retries}). Retrying...`);
+        if (attempt < retries) {
+          await new Promise(r => setTimeout(r, attempt * 3000));
+          continue;
+        }
+      }
       return res;
     } catch (err) {
       lastError = err;
       if (attempt < retries) {
-        await new Promise(r => setTimeout(r, attempt * 1500));
+        await new Promise(r => setTimeout(r, attempt * 3000));
       }
     }
   }
-  throw lastError;
+  throw lastError || new Error(`Network request failed after ${retries} attempts`);
 }
 
 export async function scrapeWikiAccessories(): Promise<ScrapedAccessory[]> {
@@ -158,8 +165,26 @@ export async function runWikiSync(): Promise<{
   items: ScrapedAccessory[];
 }> {
   console.log('🔄 Connecting to CraftersMC MediaWiki API...');
-  const items = await scrapeWikiAccessories();
-  console.log(`✅ Parsed ${items.length} accessories from official Wiki table.`);
+  let items: ScrapedAccessory[] = [];
+  const wikiAccessoriesPath = path.resolve(process.cwd(), 'src/data/wikiAccessories.json');
+
+  try {
+    items = await scrapeWikiAccessories();
+    console.log(`✅ Parsed ${items.length} accessories from official Wiki table.`);
+  } catch (err: unknown) {
+    if (fs.existsSync(wikiAccessoriesPath)) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      console.warn(`⚠️ Warning: MediaWiki API request failed (${errMsg}). Preserving existing cached catalog.`);
+      try {
+        items = JSON.parse(fs.readFileSync(wikiAccessoriesPath, 'utf8'));
+        console.log(`📦 Loaded ${items.length} accessories from existing cache.`);
+      } catch {
+        throw err;
+      }
+    } else {
+      throw err;
+    }
+  }
 
   if (!fs.existsSync(ICONS_DIR)) {
     fs.mkdirSync(ICONS_DIR, { recursive: true });
@@ -188,7 +213,6 @@ export async function runWikiSync(): Promise<{
   }
 
   // Save parsed accessories to wikiAccessories.json
-  const wikiAccessoriesPath = path.resolve(process.cwd(), 'src/data/wikiAccessories.json');
   fs.writeFileSync(wikiAccessoriesPath, JSON.stringify(items, null, 2));
 
   // Scrape crafting recipes from wiki pages
