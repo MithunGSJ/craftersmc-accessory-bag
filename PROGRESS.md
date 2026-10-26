@@ -4,14 +4,14 @@
 - Maintenance, Live Market Price Syncing & CraftersMC API Alignment
 
 ## What Changed Last
-- Fixed Envoy's Horn Bazaar item mapping: CraftersMC API uses `envoy_horns` (weekly average ~566 coins, 15k+ volume). Added alias mapping and updated `src/data/accessoryRecipes.ts`, `src/data/pricingSnapshot.json`, and `scripts/syncPricing.ts`.
-- Investigated `red_claw_egg`: verified CraftersMC REST API whitelist (285 items) currently omits `red_claw_egg`, and clarified sync logging to retain realistic baseline (8.5M coins).
-- Explained the browser `missing_api_key` response when clicking direct API URLs in terminal without headers.
+- Treated Dayfreezer and Nightfreezer as mutually interchangeable variants in `day_night_freezer` family: if a player owns either one, the other is marked `UPGRADED_PREVIOUS` and suppressed from missing views, missing counts, and recommendations.
+- Updated `AccessoryModal` to display "Freezer Variants (Shared MP)" and indicate shared MP when one variant is already owned.
+- Deduplicated `RecommendationsPanel` by family so alternative variants never take multiple recommendation slots.
 
 ## Known Problems
-- `red_claw_egg` is traded on Bazaar in-game on CraftersMC, but the official public REST API (`api.craftersmc.net`) does not yet expose it in `/v1/skyblock/bazaar/:itemId/details`. Baseline pricing is preserved.
+- `red_claw_egg` is traded on Bazaar in-game on CraftersMC, but the official public REST API (`api.craftersmc.net`) does not yet expose it in `/v1/skyblock/bazaar/:itemId/details`. Baseline pricing (8.5M coins) is preserved.
 
 ## Next Three Steps
-1. Verify live GitHub Actions automated pricing sync passes cleanly with the new alias mapping.
-2. Ask user for current in-game market price for Red Claw Egg to refine baseline if needed.
+1. Verify live GitHub Actions automated pricing sync passes cleanly.
+2. Confirm user satisfaction with Dayfreezer/Nightfreezer single-family mutual resolution.
 3. Monitor CraftersMC API updates for when server administrators add `red_claw_egg` to their REST API whitelist.

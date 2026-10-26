@@ -47,10 +47,15 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
   const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
   const netGain = Math.max(0, baseMp - ownedTierMp);
 
+  const isFamilyFreezerOwned = definition.familyId === 'day_night_freezer' &&
+    Boolean(allEvaluated?.some(e => e.definition.familyId === 'day_night_freezer' && e.status === 'OWNED'));
+
   const modalMpText = isOwned
     ? effectiveMagicalPower > 0
       ? `+${effectiveMagicalPower} Active MP`
       : definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'
+    : isFamilyFreezerOwned
+    ? '0 Potential MP (Shared MP Owned)'
     : isUpgradable && netGain > 0 && netGain < baseMp
     ? `+${netGain} MP Upgrade (+${baseMp} Base)`
     : `+${baseMp} Potential MP`;
@@ -260,7 +265,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
         {familyChain.length > 1 && (
           <div>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
-              Upgrade Family Hierarchy
+              {definition.familyId === 'day_night_freezer' ? 'Freezer Variants (Shared MP)' : 'Upgrade Family Hierarchy'}
             </span>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
               {familyChain.map(tierItem => {
@@ -273,10 +278,10 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                     className={`hierarchy-chip ${isThis ? 'active' : ''}`}
                     style={{ color: tierColor }}
                     onClick={() => handleSelectTier(tierItem)}
-                    title={isThis ? 'Currently viewing' : `View T${tierItem.tier}: ${tierItem.name}`}
+                    title={isThis ? 'Currently viewing' : `View ${tierItem.name}`}
                   >
                     <AccessoryIcon id={tierItem.id} name={tierItem.name} fallbackEmoji={tierItem.iconEmoji} size={18} />
-                    T{tierItem.tier}: {tierItem.name}
+                    {definition.familyId === 'day_night_freezer' ? tierItem.name : `T${tierItem.tier}: ${tierItem.name}`}
                   </button>
                 );
               })}

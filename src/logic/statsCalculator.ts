@@ -42,6 +42,8 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     VERY_SPECIAL: 0
   };
 
+  const countedMissingFamilies = new Set<string>();
+
   for (const item of evaluated) {
     if (item.status === 'OWNED') {
       ownedCount++;
@@ -54,9 +56,12 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     } else if (item.status === 'UPGRADABLE_NEXT') {
       upgradableCount++;
     } else if (item.status === 'MISSING') {
-      // Only count missing if it is tier 1 or no tier is owned in the family
+      // Only count missing once per unowned family
       if (item.familyMaxTierOwned === 0 && item.definition.tier === 1) {
-        missingCount++;
+        if (!countedMissingFamilies.has(item.definition.familyId)) {
+          countedMissingFamilies.add(item.definition.familyId);
+          missingCount++;
+        }
       }
     }
   }

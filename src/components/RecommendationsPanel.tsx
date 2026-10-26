@@ -59,6 +59,7 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
       }
       return b.mpGain - a.mpGain;
     })
+    .filter((c, idx, arr) => arr.findIndex(item => item.evaluated.definition.familyId === c.evaluated.definition.familyId) === idx)
     .slice(0, 4);
 
   if (candidates.length === 0) return null;

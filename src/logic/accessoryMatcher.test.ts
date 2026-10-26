@@ -81,39 +81,37 @@ describe('accessoryMatcher', () => {
     expect(hasPrevious).toBe(false);
   });
 
-  it('allows only ONE of Dayfreezer and Nightfreezer to count towards +16 MP when both are owned', () => {
-    const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'DAYFREEZER_0',
-        internalId: 'DAYFREEZER',
-        displayName: 'Dayfreezer',
-        rarity: 'LEGENDARY',
-        slot: 0,
-        lore: []
-      },
-      {
-        id: 'NIGHTFREEZER_0',
-        internalId: 'NIGHTFREEZER',
-        displayName: 'Nightfreezer',
-        rarity: 'LEGENDARY',
-        slot: 1,
-        lore: []
-      }
-    ];
+  it('treats Dayfreezer and Nightfreezer as one family: owning one resolves the family and avoids showing the other as missing', () => {
+    // 1. Owning only Dayfreezer
+    const pDay = evaluatePlayerAccessories([
+      { id: 'D0', internalId: 'DAYFREEZER', displayName: 'Dayfreezer', rarity: 'LEGENDARY', slot: 0, lore: [] }
+    ]);
+    expect(pDay.find(e => e.definition.id === 'DAYFREEZER')?.status).toBe('OWNED');
+    expect(pDay.find(e => e.definition.id === 'DAYFREEZER')?.effectiveMagicalPower).toBe(16);
+    expect(pDay.find(e => e.definition.id === 'NIGHTFREEZER')?.status).toBe('UPGRADED_PREVIOUS');
+    const filteredDay = filterAccessories(pDay, { statusFilter: 'MISSING', categoryFilter: 'ALL', rarityFilter: 'ALL' });
+    expect(filteredDay.some(e => e.definition.familyId === 'day_night_freezer')).toBe(false);
 
-    const evaluated = evaluatePlayerAccessories(playerItems);
-    const day = evaluated.find(e => e.definition.id === 'DAYFREEZER');
-    const night = evaluated.find(e => e.definition.id === 'NIGHTFREEZER');
+    // 2. Owning only Nightfreezer
+    const pNight = evaluatePlayerAccessories([
+      { id: 'N0', internalId: 'NIGHTFREEZER', displayName: 'Nightfreezer', rarity: 'LEGENDARY', slot: 0, lore: [] }
+    ]);
+    expect(pNight.find(e => e.definition.id === 'NIGHTFREEZER')?.status).toBe('OWNED');
+    expect(pNight.find(e => e.definition.id === 'NIGHTFREEZER')?.effectiveMagicalPower).toBe(16);
+    expect(pNight.find(e => e.definition.id === 'DAYFREEZER')?.status).toBe('UPGRADED_PREVIOUS');
+    const filteredNight = filterAccessories(pNight, { statusFilter: 'MISSING', categoryFilter: 'ALL', rarityFilter: 'ALL' });
+    expect(filteredNight.some(e => e.definition.familyId === 'day_night_freezer')).toBe(false);
 
-    expect(day?.status).toBe('OWNED');
-    expect(night?.status).toBe('OWNED');
-
-    // Exactly one should provide 16 MP, and the other should provide 0 MP (non-stacking)
-    const dayMp = day?.effectiveMagicalPower || 0;
-    const nightMp = night?.effectiveMagicalPower || 0;
+    // 3. Owning both
+    const pBoth = evaluatePlayerAccessories([
+      { id: 'D0', internalId: 'DAYFREEZER', displayName: 'Dayfreezer', rarity: 'LEGENDARY', slot: 0, lore: [] },
+      { id: 'N0', internalId: 'NIGHTFREEZER', displayName: 'Nightfreezer', rarity: 'LEGENDARY', slot: 1, lore: [] }
+    ]);
+    expect(pBoth.find(e => e.definition.id === 'DAYFREEZER')?.status).toBe('OWNED');
+    expect(pBoth.find(e => e.definition.id === 'NIGHTFREEZER')?.status).toBe('OWNED');
+    const dayMp = pBoth.find(e => e.definition.id === 'DAYFREEZER')?.effectiveMagicalPower || 0;
+    const nightMp = pBoth.find(e => e.definition.id === 'NIGHTFREEZER')?.effectiveMagicalPower || 0;
     expect(dayMp + nightMp).toBe(16);
-    expect(Math.max(dayMp, nightMp)).toBe(16);
-    expect(Math.min(dayMp, nightMp)).toBe(0);
   });
 
   it('supersedes lower tier accessories when a higher tier is owned (e.g. Personal Deletor 7000 over 4000/5000/6000)', () => {

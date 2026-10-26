@@ -121,6 +121,9 @@ export function evaluatePlayerAccessories(
     } else if (def.id === 'PIGGY_BANK' && !isOwned && (ownedMap.has('CRACKED_PIGGY_BANK') || ownedMap.has('BROKEN_PIGGY_BANK'))) {
       // Player owns a variation of the piggy bank; pristine piggy bank is considered resolved and not shown in missing
       status = 'UPGRADED_PREVIOUS';
+    } else if (def.familyId === 'day_night_freezer' && !isOwned && (ownedMap.has('DAYFREEZER') || ownedMap.has('NIGHTFREEZER'))) {
+      // Dayfreezer and Nightfreezer are considered one: owning either one is enough, so the other is not missing
+      status = 'UPGRADED_PREVIOUS';
     } else if (familyMaxTier > def.tier) {
       // Player already owns a strictly higher tier in this family; lower tier is superseded
       status = 'UPGRADED_PREVIOUS';
