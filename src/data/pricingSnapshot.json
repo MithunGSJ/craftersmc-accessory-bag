@@ -1,51 +1,51 @@
 {
   "bazaar": {
     "feather": {
-      "avgPrice": 6,
-      "weeklyAveragePrice": 5.5106966292134825,
-      "buyVolume": 8695,
+      "avgPrice": 5,
+      "weeklyAveragePrice": 5.457244444444443,
+      "buyVolume": 8620,
       "sellVolume": 7741
     },
     "enchanted_feather": {
       "avgPrice": 425,
-      "weeklyAveragePrice": 424.5574579439264,
-      "buyVolume": 14574,
-      "sellVolume": 19478
+      "weeklyAveragePrice": 425.2305925925938,
+      "buyVolume": 12135,
+      "sellVolume": 20427
     },
     "sugar_cane": {
-      "avgPrice": 32,
-      "weeklyAveragePrice": 31.777765517241377,
-      "buyVolume": 72399,
-      "sellVolume": 28221
+      "avgPrice": 34,
+      "weeklyAveragePrice": 33.854,
+      "buyVolume": 85199,
+      "sellVolume": 27187
     },
     "enchanted_sugar": {
-      "avgPrice": 448,
-      "weeklyAveragePrice": 448.33693693693704,
-      "buyVolume": 74596,
-      "sellVolume": 3206
+      "avgPrice": 450,
+      "weeklyAveragePrice": 450.44490909090916,
+      "buyVolume": 75184,
+      "sellVolume": 3410
     },
     "enchanted_sugar_cane": {
       "avgPrice": 55574,
       "weeklyAveragePrice": 55573.582486486484,
-      "buyVolume": 1119,
+      "buyVolume": 1164,
       "sellVolume": 841
     },
     "bamboo": {
-      "avgPrice": 30,
-      "weeklyAveragePrice": 30.441842105263156,
-      "buyVolume": 144676,
-      "sellVolume": 8304
+      "avgPrice": 31,
+      "weeklyAveragePrice": 30.8344,
+      "buyVolume": 142882,
+      "sellVolume": 1038
     },
     "enchanted_bamboo": {
       "avgPrice": 218,
-      "weeklyAveragePrice": 218.32412345679003,
-      "buyVolume": 37263,
-      "sellVolume": 67895
+      "weeklyAveragePrice": 218.31918518518512,
+      "buyVolume": 37199,
+      "sellVolume": 68268
     },
     "wheat": {
       "avgPrice": 2,
-      "weeklyAveragePrice": 1.5177952755905513,
-      "buyVolume": 27092,
+      "weeklyAveragePrice": 1.5098437500000002,
+      "buyVolume": 27032,
       "sellVolume": 0
     },
     "enchanted_bread": {
@@ -57,10 +57,10 @@
       "weeklyAveragePrice": 3.3325357142857146
     },
     "enchanted_pumpkin": {
-      "avgPrice": 1580,
-      "weeklyAveragePrice": 1579.781188940091,
-      "buyVolume": 6726,
-      "sellVolume": 6199
+      "avgPrice": 1584,
+      "weeklyAveragePrice": 1584.1575855855845,
+      "buyVolume": 6598,
+      "sellVolume": 7540
     },
     "potato": {
       "avgPrice": 9.07,
@@ -71,54 +71,54 @@
       "weeklyAveragePrice": 296.65356249999985
     },
     "cropie": {
-      "avgPrice": 36336,
-      "weeklyAveragePrice": 36335.674547486014,
-      "buyVolume": 2462,
-      "sellVolume": 607
+      "avgPrice": 36485,
+      "weeklyAveragePrice": 36485.228693641606,
+      "buyVolume": 2387,
+      "sellVolume": 812
     },
     "squash": {
-      "avgPrice": 82955,
-      "weeklyAveragePrice": 82954.54907936505,
+      "avgPrice": 83794,
+      "weeklyAveragePrice": 83793.80343749996,
       "buyVolume": 52671,
-      "sellVolume": 67
+      "sellVolume": 36
     },
     "fermento": {
-      "avgPrice": 382536,
-      "weeklyAveragePrice": 382535.62573584914,
-      "buyVolume": 6350,
-      "sellVolume": 373
+      "avgPrice": 381431,
+      "weeklyAveragePrice": 381430.6473846155,
+      "buyVolume": 6388,
+      "sellVolume": 378
     },
     "oak_log": {
       "avgPrice": 4.18,
       "weeklyAveragePrice": 4.177500000000002
     },
     "enchanted_oak_log": {
-      "avgPrice": 492,
-      "weeklyAveragePrice": 491.82258436213993,
-      "buyVolume": 27051,
-      "sellVolume": 57959
+      "avgPrice": 500,
+      "weeklyAveragePrice": 499.70429149797576,
+      "buyVolume": 27251,
+      "sellVolume": 56918
     },
     "emerald": {
       "avgPrice": 192,
-      "weeklyAveragePrice": 191.53806741573035,
-      "buyVolume": 129698,
+      "weeklyAveragePrice": 191.7650337078652,
+      "buyVolume": 129006,
       "sellVolume": 15252
     },
     "enchanted_emerald": {
-      "avgPrice": 1231,
-      "weeklyAveragePrice": 1231.2639520958087,
-      "buyVolume": 13057,
-      "sellVolume": 5764
+      "avgPrice": 1212,
+      "weeklyAveragePrice": 1211.6131320754719,
+      "buyVolume": 12989,
+      "sellVolume": 5968
     },
     "enchanted_emerald_block": {
       "avgPrice": 152962.22,
       "weeklyAveragePrice": 152962.22235897428
     },
     "obsidian": {
-      "avgPrice": 22,
-      "weeklyAveragePrice": 21.771972696245744,
-      "buyVolume": 21656,
-      "sellVolume": 42501
+      "avgPrice": 19,
+      "weeklyAveragePrice": 18.70550684931508,
+      "buyVolume": 25925,
+      "sellVolume": 42207
     },
     "enchanted_obsidian": {
       "avgPrice": 1627.17,
@@ -131,54 +131,54 @@
     "enchanted_lapis_lazuli": {
       "avgPrice": 762,
       "weeklyAveragePrice": 762.3656363636364,
-      "buyVolume": 32846,
+      "buyVolume": 32796,
       "sellVolume": 6086
     },
     "redstone": {
       "avgPrice": 4,
-      "weeklyAveragePrice": 4.457268292682926,
-      "buyVolume": 38231,
-      "sellVolume": 192
+      "weeklyAveragePrice": 4.467604938271604,
+      "buyVolume": 38210,
+      "sellVolume": 0
     },
     "enchanted_redstone_block": {
-      "avgPrice": 29078,
-      "weeklyAveragePrice": 29077.835735632183,
-      "buyVolume": 9346,
-      "sellVolume": 7806
+      "avgPrice": 29000,
+      "weeklyAveragePrice": 28999.814786127165,
+      "buyVolume": 9182,
+      "sellVolume": 7531
     },
     "iron_ingot": {
       "avgPrice": 63.67,
       "weeklyAveragePrice": 63.67412345679013
     },
     "golden_tooth": {
-      "avgPrice": 236839,
-      "weeklyAveragePrice": 236839.1855530726,
-      "buyVolume": 378,
-      "sellVolume": 264
+      "avgPrice": 237000,
+      "weeklyAveragePrice": 236999.57766399998,
+      "buyVolume": 605,
+      "sellVolume": 323
     },
     "green_candy": {
-      "avgPrice": 3887,
-      "weeklyAveragePrice": 3887.4874157303307,
-      "buyVolume": 34573,
+      "avgPrice": 3888,
+      "weeklyAveragePrice": 3887.5020224719033,
+      "buyVolume": 34541,
       "sellVolume": 28731
     },
     "purple_candy": {
-      "avgPrice": 23901,
-      "weeklyAveragePrice": 23900.52559763314,
-      "buyVolume": 7344,
-      "sellVolume": 6507
+      "avgPrice": 23851,
+      "weeklyAveragePrice": 23851.104579545456,
+      "buyVolume": 6770,
+      "sellVolume": 4010
     },
     "enchanted_iron_ingot": {
-      "avgPrice": 1393,
-      "weeklyAveragePrice": 1393.1500909090907,
-      "buyVolume": 23716,
-      "sellVolume": 19632
+      "avgPrice": 1395,
+      "weeklyAveragePrice": 1395.1064744186044,
+      "buyVolume": 25286,
+      "sellVolume": 18399
     },
     "enchanted_magma_cream": {
-      "avgPrice": 624,
-      "weeklyAveragePrice": 624.4847085714287,
-      "buyVolume": 36919,
-      "sellVolume": 72807
+      "avgPrice": 625,
+      "weeklyAveragePrice": 624.8325917159764,
+      "buyVolume": 35635,
+      "sellVolume": 72873
     },
     "enchanted_blaze_rod": {
       "avgPrice": 1100,
@@ -186,20 +186,20 @@
     },
     "enchanted_rotten_flesh": {
       "avgPrice": 511,
-      "weeklyAveragePrice": 510.75363922942245,
-      "buyVolume": 66242,
-      "sellVolume": 96274
+      "weeklyAveragePrice": 511.0972401433696,
+      "buyVolume": 67794,
+      "sellVolume": 98813
     },
     "revenant_viscera": {
-      "avgPrice": 98020,
-      "weeklyAveragePrice": 98019.9124263566,
-      "buyVolume": 1133,
-      "sellVolume": 4374
+      "avgPrice": 97495,
+      "weeklyAveragePrice": 97495.42331707319,
+      "buyVolume": 1086,
+      "sellVolume": 4409
     },
     "enchanted_bone": {
-      "avgPrice": 860,
-      "weeklyAveragePrice": 859.6501044776123,
-      "buyVolume": 13216,
+      "avgPrice": 857,
+      "weeklyAveragePrice": 857.4783703703707,
+      "buyVolume": 13191,
       "sellVolume": 18768
     },
     "enchanted_red_mushroom_block": {
@@ -207,22 +207,22 @@
       "weeklyAveragePrice": 600
     },
     "enchanted_iron_block": {
-      "avgPrice": 85828,
-      "weeklyAveragePrice": 85827.69970666674,
-      "buyVolume": 609,
-      "sellVolume": 3026
+      "avgPrice": 85697,
+      "weeklyAveragePrice": 85697.34484353749,
+      "buyVolume": 831,
+      "sellVolume": 3019
     },
     "enchanted_lapis_block": {
-      "avgPrice": 25441,
-      "weeklyAveragePrice": 25440.510045112776,
-      "buyVolume": 635,
-      "sellVolume": 5227
+      "avgPrice": 25432,
+      "weeklyAveragePrice": 25432.052421052624,
+      "buyVolume": 640,
+      "sellVolume": 5225
     },
     "envoy_horns": {
-      "avgPrice": 633,
-      "weeklyAveragePrice": 632.9707936507938,
-      "buyVolume": 15162,
-      "sellVolume": 3294
+      "avgPrice": 640,
+      "weeklyAveragePrice": 640.1761250000002,
+      "buyVolume": 15144,
+      "sellVolume": 3356
     },
     "envoys_horn": {
       "avgPrice": 566,
@@ -231,87 +231,87 @@
       "sellVolume": 3267
     },
     "fire_fragment": {
-      "avgPrice": 2905006,
-      "weeklyAveragePrice": 2905005.6996250004,
-      "buyVolume": 35,
-      "sellVolume": 12
+      "avgPrice": 2904711,
+      "weeklyAveragePrice": 2904711.2467058827,
+      "buyVolume": 32,
+      "sellVolume": 19
     },
     "glacial_fang": {
-      "avgPrice": 1058753,
-      "weeklyAveragePrice": 1058752.8568163263,
-      "buyVolume": 5371,
-      "sellVolume": 15
+      "avgPrice": 1084820,
+      "weeklyAveragePrice": 1084819.5796444442,
+      "buyVolume": 5357,
+      "sellVolume": 16
     },
     "enchanted_packed_ice": {
-      "avgPrice": 39330,
-      "weeklyAveragePrice": 39329.852512195124,
-      "buyVolume": 2586,
-      "sellVolume": 12699
+      "avgPrice": 39776,
+      "weeklyAveragePrice": 39776.27798757764,
+      "buyVolume": 2580,
+      "sellVolume": 12370
     },
     "grizzly_bait": {
       "avgPrice": 1259800,
       "weeklyAveragePrice": 1259800
     },
     "scythe_blade": {
-      "avgPrice": 37000000,
-      "weeklyAveragePrice": 37000000
+      "avgPrice": 37500000,
+      "weeklyAveragePrice": 37500000
     },
     "enchanted_diamond": {
       "avgPrice": 1277,
-      "weeklyAveragePrice": 1276.6991804123707,
-      "buyVolume": 33346,
-      "sellVolume": 26755
+      "weeklyAveragePrice": 1276.684668393782,
+      "buyVolume": 36285,
+      "sellVolume": 28557
     },
     "revenant_flesh": {
       "avgPrice": 311,
-      "weeklyAveragePrice": 311.4564737631189,
-      "buyVolume": 132373,
-      "sellVolume": 243734
+      "weeklyAveragePrice": 310.56857101449316,
+      "buyVolume": 245755,
+      "sellVolume": 206457
     },
     "wolf_tooth": {
-      "avgPrice": 1300,
-      "weeklyAveragePrice": 1299.5218712446342,
-      "buyVolume": 182322,
-      "sellVolume": 23214
+      "avgPrice": 1307,
+      "weeklyAveragePrice": 1306.5599332638155,
+      "buyVolume": 209575,
+      "sellVolume": 23264
     },
     "enchanted_leather": {
-      "avgPrice": 3320,
-      "weeklyAveragePrice": 3320.331698113209,
-      "buyVolume": 3179,
-      "sellVolume": 19300
+      "avgPrice": 3285,
+      "weeklyAveragePrice": 3285.172000000001,
+      "buyVolume": 2934,
+      "sellVolume": 19044
     },
     "red_claw_egg": {
       "avgPrice": 16500000,
       "weeklyAveragePrice": 16500000
     },
     "weak_wolf_catalyst": {
-      "avgPrice": 567,
-      "weeklyAveragePrice": 567.2788292682928,
-      "buyVolume": 14,
+      "avgPrice": 499,
+      "weeklyAveragePrice": 499.12780952380973,
+      "buyVolume": 12,
       "sellVolume": 470
     },
     "condensed_fermento": {
       "avgPrice": 2300001,
       "weeklyAveragePrice": 2300001,
-      "buyVolume": 90,
+      "buyVolume": 84,
       "sellVolume": 11
     },
     "fused_remnants": {
       "avgPrice": 6570895,
       "weeklyAveragePrice": 6570894.885894735,
-      "buyVolume": 13043,
+      "buyVolume": 13041,
       "sellVolume": 6
     },
     "mite_gel": {
-      "avgPrice": 1896,
-      "weeklyAveragePrice": 1895.922250950563,
-      "buyVolume": 7988,
-      "sellVolume": 4267
+      "avgPrice": 1895,
+      "weeklyAveragePrice": 1894.666661538454,
+      "buyVolume": 7883,
+      "sellVolume": 4236
     },
     "absolute_ender_pearl": {
-      "avgPrice": 10580,
-      "weeklyAveragePrice": 10580.025617977532,
-      "buyVolume": 5796,
+      "avgPrice": 10583,
+      "weeklyAveragePrice": 10582.640867469883,
+      "buyVolume": 5794,
       "sellVolume": 7349
     },
     "tessellated_ender_pearl": {
@@ -327,22 +327,22 @@
       "sellVolume": 0
     },
     "enchanted_blaze_powder": {
-      "avgPrice": 1695,
-      "weeklyAveragePrice": 1695.3365822784788,
-      "buyVolume": 62924,
-      "sellVolume": 22484
+      "avgPrice": 1700,
+      "weeklyAveragePrice": 1699.6415205479425,
+      "buyVolume": 63440,
+      "sellVolume": 26774
     },
     "enchanted_red_mushroom": {
-      "avgPrice": 4072,
-      "weeklyAveragePrice": 4072.2163578947357,
-      "buyVolume": 4175,
-      "sellVolume": 1217
+      "avgPrice": 3895,
+      "weeklyAveragePrice": 3894.976919786095,
+      "buyVolume": 3637,
+      "sellVolume": 1206
     },
     "enchanted_brown_mushroom": {
-      "avgPrice": 3789,
-      "weeklyAveragePrice": 3789.3865931034475,
-      "buyVolume": 8250,
-      "sellVolume": 287
+      "avgPrice": 3835,
+      "weeklyAveragePrice": 3835.035363057324,
+      "buyVolume": 7556,
+      "sellVolume": 224
     },
     "poisonous_potato": {
       "avgPrice": 50,
@@ -358,9 +358,9 @@
     },
     "gold_ingot": {
       "avgPrice": 26,
-      "weeklyAveragePrice": 25.691617094017094,
-      "buyVolume": 174735,
-      "sellVolume": 71868
+      "weeklyAveragePrice": 25.861290102389077,
+      "buyVolume": 172768,
+      "sellVolume": 64732
     },
     "chest": {
       "avgPrice": 20,
@@ -370,9 +370,9 @@
     },
     "enchanted_raw_porkchop": {
       "avgPrice": 2591,
-      "weeklyAveragePrice": 2591.260935350759,
-      "buyVolume": 13003,
-      "sellVolume": 11213
+      "weeklyAveragePrice": 2591.367825850343,
+      "buyVolume": 16349,
+      "sellVolume": 11711
     },
     "golden_feather": {
       "avgPrice": 5911157,
@@ -381,37 +381,37 @@
       "sellVolume": 15
     },
     "super_compactor_3000": {
-      "avgPrice": 403395,
-      "weeklyAveragePrice": 403394.82775401144,
-      "buyVolume": 198,
-      "sellVolume": 190
+      "avgPrice": 402928,
+      "weeklyAveragePrice": 402928.4687065225,
+      "buyVolume": 243,
+      "sellVolume": 179
     },
     "enchanted_lava_bucket": {
-      "avgPrice": 142387,
-      "weeklyAveragePrice": 142387.26286956508,
-      "buyVolume": 115877,
-      "sellVolume": 313
+      "avgPrice": 142668,
+      "weeklyAveragePrice": 142667.62879637998,
+      "buyVolume": 115876,
+      "sellVolume": 305
     },
     "spooky_fragment": {
-      "avgPrice": 115489,
-      "weeklyAveragePrice": 115489.08573684211,
-      "buyVolume": 163,
-      "sellVolume": 397
+      "avgPrice": 113752,
+      "weeklyAveragePrice": 113751.94209523809,
+      "buyVolume": 123,
+      "sellVolume": 357
     },
     "ectoplasm": {
-      "avgPrice": 146570,
-      "weeklyAveragePrice": 146570.11013207547,
-      "buyVolume": 340,
-      "sellVolume": 80
+      "avgPrice": 146776,
+      "weeklyAveragePrice": 146776.12530232556,
+      "buyVolume": 342,
+      "sellVolume": 79
     }
   },
   "auctions": {
     "PET_AUGMENT_FORAGING_EXP_BOOST_50": {
-      "minPrice": 1090000,
-      "avgPrice": 1090000,
+      "minPrice": 1000000,
+      "avgPrice": 1045000,
       "maxPrice": 1090000,
-      "count": 1,
-      "totalCount": 1,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "BAT_TALISMAN": {
@@ -423,11 +423,11 @@
       "hasBin": true
     },
     "REVENANT_BOOTS": {
-      "minPrice": 517000,
-      "avgPrice": 805333,
+      "minPrice": 479000,
+      "avgPrice": 671400,
       "maxPrice": 999000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 6,
+      "totalCount": 6,
       "hasBin": true
     },
     "ARMOR_OF_MAGMA_CHESTPLATE": {
@@ -447,11 +447,11 @@
       "hasBin": true
     },
     "JUNGLE_AXE": {
-      "minPrice": 19999,
-      "avgPrice": 19999,
+      "minPrice": 14999,
+      "avgPrice": 17599,
       "maxPrice": 20000,
-      "count": 13,
-      "totalCount": 13,
+      "count": 25,
+      "totalCount": 25,
       "hasBin": true
     },
     "SPEEDSTER_LEGGINGS": {
@@ -480,10 +480,10 @@
     },
     "MELON_DICER": {
       "minPrice": 1800000,
-      "avgPrice": 2150000,
-      "maxPrice": 3000000,
-      "count": 4,
-      "totalCount": 4,
+      "avgPrice": 1900000,
+      "maxPrice": 2000000,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "FEATHER_ARTIFACT": {
@@ -495,35 +495,35 @@
       "hasBin": true
     },
     "OVERFLUX_CAPACITOR": {
-      "minPrice": 13000000,
-      "avgPrice": 14000000,
+      "minPrice": 10000000,
+      "avgPrice": 12666667,
       "maxPrice": 15000000,
-      "count": 2,
-      "totalCount": 2,
-      "hasBin": true
-    },
-    "ENDER_BOW": {
-      "minPrice": 80000,
-      "avgPrice": 540000,
-      "maxPrice": 1000000,
-      "count": 2,
+      "count": 3,
       "totalCount": 3,
       "hasBin": true
     },
+    "ENDER_BOW": {
+      "minPrice": 100000,
+      "avgPrice": 100000,
+      "maxPrice": 100000,
+      "count": 5,
+      "totalCount": 6,
+      "hasBin": true
+    },
     "FIRE_EXTINGUISHER": {
-      "minPrice": 99999,
-      "avgPrice": 108250,
+      "minPrice": 80000,
+      "avgPrice": 99666,
       "maxPrice": 117000,
-      "count": 4,
-      "totalCount": 4,
+      "count": 6,
+      "totalCount": 6,
       "hasBin": true
     },
     "REVENANT_FALCHION": {
       "minPrice": 695000,
-      "avgPrice": 999375,
-      "maxPrice": 1400000,
-      "count": 8,
-      "totalCount": 8,
+      "avgPrice": 982500,
+      "maxPrice": 1250000,
+      "count": 6,
+      "totalCount": 7,
       "hasBin": true
     },
     "BLAZE_CHESTPLATE": {
@@ -552,10 +552,10 @@
     },
     "ZOMBIE_HEART": {
       "minPrice": 140000,
-      "avgPrice": 145333,
+      "avgPrice": 146470,
       "maxPrice": 170000,
-      "count": 15,
-      "totalCount": 17,
+      "count": 17,
+      "totalCount": 19,
       "hasBin": true
     },
     "CROPIE_HELMET": {
@@ -575,11 +575,11 @@
       "hasBin": true
     },
     "TIGER_PET": {
-      "minPrice": 300000,
-      "avgPrice": 2599285,
+      "minPrice": 299999,
+      "avgPrice": 2064117,
       "maxPrice": 6500000,
-      "count": 21,
-      "totalCount": 21,
+      "count": 24,
+      "totalCount": 24,
       "hasBin": true
     },
     "HARDENED_DIAMOND_CHESTPLATE": {
@@ -591,19 +591,19 @@
       "hasBin": true
     },
     "CANDY_THE_FISH": {
-      "minPrice": 2500000,
-      "avgPrice": 2500000,
+      "minPrice": 1000000,
+      "avgPrice": 1750000,
       "maxPrice": 2500000,
-      "count": 1,
-      "totalCount": 1,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "ZOMBIE_PET": {
       "minPrice": 150000,
-      "avgPrice": 189000,
+      "avgPrice": 176000,
       "maxPrice": 400000,
-      "count": 15,
-      "totalCount": 22,
+      "count": 23,
+      "totalCount": 27,
       "hasBin": true
     },
     "INFINIDIRT_WAND": {
@@ -623,11 +623,11 @@
       "hasBin": true
     },
     "GOLEM_SWORD": {
-      "minPrice": 300000,
-      "avgPrice": 300000,
+      "minPrice": 240000,
+      "avgPrice": 280000,
       "maxPrice": 300000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "OCELOT_PET": {
@@ -640,10 +640,10 @@
     },
     "ENDERMAN_PET": {
       "minPrice": 30000,
-      "avgPrice": 37889,
+      "avgPrice": 34733,
       "maxPrice": 50000,
-      "count": 14,
-      "totalCount": 17,
+      "count": 20,
+      "totalCount": 30,
       "hasBin": true
     },
     "SHINY_SHARD": {
@@ -655,19 +655,19 @@
       "hasBin": true
     },
     "BAT_PET": {
-      "minPrice": 99999,
-      "avgPrice": 1756666,
-      "maxPrice": 4500000,
-      "count": 6,
-      "totalCount": 9,
+      "minPrice": 1200000,
+      "avgPrice": 1450000,
+      "maxPrice": 1900000,
+      "count": 5,
+      "totalCount": 8,
       "hasBin": true
     },
     "EXPERIENCE_ARTIFACT": {
-      "minPrice": 280000,
-      "avgPrice": 379143,
+      "minPrice": 383000,
+      "avgPrice": 386769,
       "maxPrice": 394500,
-      "count": 15,
-      "totalCount": 16,
+      "count": 14,
+      "totalCount": 15,
       "hasBin": true
     },
     "LEAPING_SWORD": {
@@ -679,19 +679,19 @@
       "hasBin": true
     },
     "BUILDERS_WAND": {
-      "minPrice": 78999999,
-      "avgPrice": 78999999,
-      "maxPrice": 78999999,
+      "minPrice": 88888888,
+      "avgPrice": 88888888,
+      "maxPrice": 88888888,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
     },
     "BLOCK_ZAPPER": {
-      "minPrice": 14000000,
-      "avgPrice": 14450000,
+      "minPrice": 13999999,
+      "avgPrice": 14300000,
       "maxPrice": 14900000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "CRYSTAL_CHESTPLATE": {
@@ -727,24 +727,24 @@
       "hasBin": true
     },
     "CRYSTALLIZED_HEART": {
-      "minPrice": 469599,
-      "avgPrice": 501900,
+      "minPrice": 469000,
+      "avgPrice": 488192,
       "maxPrice": 599999,
-      "count": 14,
-      "totalCount": 14,
+      "count": 24,
+      "totalCount": 24,
       "hasBin": true
     },
     "GHOUL_PET": {
       "minPrice": 245000,
-      "avgPrice": 1143250,
+      "avgPrice": 1219909,
       "maxPrice": 2600000,
-      "count": 14,
-      "totalCount": 15,
+      "count": 12,
+      "totalCount": 14,
       "hasBin": true
     },
     "HOE_OF_GREATEST_TILLING": {
-      "minPrice": 1499999,
-      "avgPrice": 1499999,
+      "minPrice": 1400000,
+      "avgPrice": 1466666,
       "maxPrice": 1500000,
       "count": 3,
       "totalCount": 3,
@@ -759,10 +759,10 @@
       "hasBin": true
     },
     "TUBER_STAFF": {
-      "minPrice": 899000,
-      "avgPrice": 949167,
+      "minPrice": 875000,
+      "avgPrice": 935286,
       "maxPrice": 1200000,
-      "count": 6,
+      "count": 7,
       "totalCount": 11,
       "hasBin": true
     },
@@ -783,19 +783,19 @@
       "hasBin": false
     },
     "ASPECT_OF_THE_END": {
-      "minPrice": 950000,
-      "avgPrice": 1200000,
+      "minPrice": 775000,
+      "avgPrice": 1097727,
       "maxPrice": 1800000,
-      "count": 6,
-      "totalCount": 6,
+      "count": 11,
+      "totalCount": 11,
       "hasBin": true
     },
     "ASPECT_OF_THE_DRAGONS": {
       "minPrice": 4000000,
-      "avgPrice": 5129000,
+      "avgPrice": 4838500,
       "maxPrice": 7999999,
-      "count": 9,
-      "totalCount": 10,
+      "count": 12,
+      "totalCount": 12,
       "hasBin": true
     },
     "RUNAAN_BOW": {
@@ -808,18 +808,18 @@
     },
     "GRAPPLING_HOOK": {
       "minPrice": 30000,
-      "avgPrice": 50000,
+      "avgPrice": 43846,
       "maxPrice": 60000,
-      "count": 9,
-      "totalCount": 9,
+      "count": 13,
+      "totalCount": 13,
       "hasBin": true
     },
     "RABBIT_PET": {
       "minPrice": 699999,
       "avgPrice": 1604444,
       "maxPrice": 2249998,
-      "count": 10,
-      "totalCount": 11,
+      "count": 11,
+      "totalCount": 13,
       "hasBin": true
     },
     "REVIVED_HEART": {
@@ -863,51 +863,51 @@
       "hasBin": true
     },
     "WITCH_HAT": {
-      "minPrice": 777000,
-      "avgPrice": 777000,
-      "maxPrice": 777000,
+      "minPrice": 1000000,
+      "avgPrice": 1000000,
+      "maxPrice": 1000000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
     },
     "YOUNG_DRAGON_HELMET": {
       "minPrice": 700000,
-      "avgPrice": 866333,
+      "avgPrice": 899750,
       "maxPrice": 1000000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 4,
+      "totalCount": 4,
       "hasBin": true
     },
     "END_STONE_SWORD": {
-      "minPrice": 122000,
-      "avgPrice": 150778,
-      "maxPrice": 200000,
-      "count": 9,
-      "totalCount": 10,
+      "minPrice": 120000,
+      "avgPrice": 144375,
+      "maxPrice": 149000,
+      "count": 8,
+      "totalCount": 9,
       "hasBin": true
     },
     "OLD_DRAGON_CHESTPLATE": {
-      "minPrice": 500000,
-      "avgPrice": 799714,
-      "maxPrice": 1000000,
-      "count": 7,
-      "totalCount": 7,
+      "minPrice": 700000,
+      "avgPrice": 750000,
+      "maxPrice": 800000,
+      "count": 5,
+      "totalCount": 5,
       "hasBin": true
     },
     "YOUNG_DRAGON_CHESTPLATE": {
       "minPrice": 887000,
-      "avgPrice": 962333,
+      "avgPrice": 971750,
       "maxPrice": 1000000,
-      "count": 3,
+      "count": 4,
       "totalCount": 4,
       "hasBin": true
     },
     "YOUNG_DRAGON_LEGGINGS": {
-      "minPrice": 890000,
-      "avgPrice": 944500,
-      "maxPrice": 999000,
-      "count": 2,
-      "totalCount": 2,
+      "minPrice": 1000000,
+      "avgPrice": 1000000,
+      "maxPrice": 1000000,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "YOUNG_DRAGON_BOOTS": {
@@ -915,7 +915,7 @@
       "avgPrice": 898000,
       "maxPrice": 898000,
       "count": 1,
-      "totalCount": 1,
+      "totalCount": 2,
       "hasBin": true
     },
     "FLAMERANG": {
@@ -935,11 +935,11 @@
       "hasBin": true
     },
     "REAPER_FALCHION": {
-      "minPrice": 2100000,
-      "avgPrice": 2365000,
-      "maxPrice": 4000000,
-      "count": 12,
-      "totalCount": 12,
+      "minPrice": 2160000,
+      "avgPrice": 2228000,
+      "maxPrice": 2500000,
+      "count": 7,
+      "totalCount": 7,
       "hasBin": true
     },
     "MINECRAFT:DIAMOND_CHESTPLATE": {
@@ -952,18 +952,18 @@
     },
     "ELEPHANT_PET": {
       "minPrice": 2999000,
-      "avgPrice": 24640140,
+      "avgPrice": 25160303,
       "maxPrice": 42000000,
-      "count": 8,
+      "count": 7,
       "totalCount": 8,
       "hasBin": true
     },
     "LION_PET": {
-      "minPrice": 19999000,
-      "avgPrice": 19999000,
+      "minPrice": 18000000,
+      "avgPrice": 18999500,
       "maxPrice": 19999000,
-      "count": 1,
-      "totalCount": 1,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "SHINY_ROD": {
@@ -975,27 +975,27 @@
       "hasBin": false
     },
     "MINECRAFT:ENCHANTED_BOOK": {
-      "minPrice": 100000,
-      "avgPrice": 100000,
-      "maxPrice": 100000,
-      "count": 1,
-      "totalCount": 8,
+      "minPrice": 459000,
+      "avgPrice": 479500,
+      "maxPrice": 500000,
+      "count": 2,
+      "totalCount": 4,
       "hasBin": true
     },
     "UNSTABLE_DRAGON_BOOTS": {
-      "minPrice": 849000,
-      "avgPrice": 849000,
-      "maxPrice": 849000,
+      "minPrice": 600000,
+      "avgPrice": 600000,
+      "maxPrice": 600000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
     },
     "SILVERFISH_PET": {
-      "minPrice": 5000000,
-      "avgPrice": 5333333,
+      "minPrice": 4000000,
+      "avgPrice": 4571429,
       "maxPrice": 6000000,
-      "count": 4,
-      "totalCount": 6,
+      "count": 8,
+      "totalCount": 10,
       "hasBin": true
     },
     "BEHEADED_HORROR": {
@@ -1007,11 +1007,11 @@
       "hasBin": true
     },
     "MANA_FLUX_POWER_ORB": {
-      "minPrice": 4499000,
-      "avgPrice": 7099200,
+      "minPrice": 10000000,
+      "avgPrice": 10666333,
       "maxPrice": 11999000,
-      "count": 5,
-      "totalCount": 5,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "BLAZE_HELMET": {
@@ -1023,11 +1023,11 @@
       "hasBin": true
     },
     "REVENANT_LEGGINGS": {
-      "minPrice": 500000,
-      "avgPrice": 678000,
+      "minPrice": 499000,
+      "avgPrice": 648167,
       "maxPrice": 1000000,
-      "count": 6,
-      "totalCount": 6,
+      "count": 8,
+      "totalCount": 8,
       "hasBin": true
     },
     "MINECRAFT:GOLDEN_AXE": {
@@ -1039,11 +1039,11 @@
       "hasBin": true
     },
     "PERSONAL_COMPACTOR_7000": {
-      "minPrice": 3500000,
-      "avgPrice": 3799667,
+      "minPrice": 3900000,
+      "avgPrice": 3949500,
       "maxPrice": 3999000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "DRAGONFADE_CLOAK": {
@@ -1055,11 +1055,11 @@
       "hasBin": true
     },
     "CANDY_CORN": {
-      "minPrice": 190000,
-      "avgPrice": 199524,
+      "minPrice": 100000,
+      "avgPrice": 187083,
       "maxPrice": 200000,
-      "count": 21,
-      "totalCount": 21,
+      "count": 24,
+      "totalCount": 24,
       "hasBin": true
     },
     "BLAZE_BOOTS": {
@@ -1074,8 +1074,8 @@
       "minPrice": 1200000,
       "avgPrice": 1887500,
       "maxPrice": 1950000,
-      "count": 22,
-      "totalCount": 23,
+      "count": 21,
+      "totalCount": 22,
       "hasBin": true
     },
     "PERSONAL_COMPACTOR_4000": {
@@ -1103,27 +1103,27 @@
       "hasBin": true
     },
     "ARMOR_OF_MAGMA_BOOTS": {
-      "minPrice": 70000,
-      "avgPrice": 182800,
+      "minPrice": 198000,
+      "avgPrice": 211000,
       "maxPrice": 250000,
-      "count": 5,
-      "totalCount": 5,
+      "count": 4,
+      "totalCount": 4,
       "hasBin": true
     },
     "PERSONAL_DELETOR_4000": {
-      "minPrice": 750000,
-      "avgPrice": 750000,
-      "maxPrice": 750000,
+      "minPrice": 900000,
+      "avgPrice": 900000,
+      "maxPrice": 900000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
     },
     "END_STONE_BOW": {
-      "minPrice": 99999,
-      "avgPrice": 187500,
+      "minPrice": 100000,
+      "avgPrice": 216667,
       "maxPrice": 350000,
-      "count": 4,
-      "totalCount": 6,
+      "count": 3,
+      "totalCount": 5,
       "hasBin": true
     },
     "FUNGI_CUTTER_RED": {
@@ -1143,11 +1143,11 @@
       "hasBin": true
     },
     "CANDY_TALISMAN": {
-      "minPrice": 345000,
-      "avgPrice": 349167,
+      "minPrice": 350000,
+      "avgPrice": 350000,
       "maxPrice": 350000,
-      "count": 6,
-      "totalCount": 6,
+      "count": 5,
+      "totalCount": 7,
       "hasBin": true
     },
     "MINECRAFT:WOODEN_SWORD": {
@@ -1159,9 +1159,9 @@
       "hasBin": true
     },
     "SKELETON_HORSE_PET": {
-      "minPrice": 15000000,
-      "avgPrice": 16500000,
-      "maxPrice": 18000000,
+      "minPrice": 14999000,
+      "avgPrice": 14999000,
+      "maxPrice": 14999000,
       "count": 2,
       "totalCount": 3,
       "hasBin": true
@@ -1175,17 +1175,17 @@
       "hasBin": true
     },
     "BAT_PERSON_HELMET": {
-      "minPrice": 4500000,
-      "avgPrice": 4500000,
-      "maxPrice": 4500000,
+      "minPrice": 3000000,
+      "avgPrice": 3000000,
+      "maxPrice": 3000000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
     },
     "BAT_PERSON_LEGGINGS": {
-      "minPrice": 4500000,
-      "avgPrice": 4500000,
-      "maxPrice": 4500000,
+      "minPrice": 2999999,
+      "avgPrice": 2999999,
+      "maxPrice": 2999999,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -1199,11 +1199,11 @@
       "hasBin": true
     },
     "BASKET_OF_SEEDS": {
-      "minPrice": 1739999,
-      "avgPrice": 1749999,
+      "minPrice": 1749999,
+      "avgPrice": 1754999,
       "maxPrice": 1759999,
-      "count": 3,
-      "totalCount": 4,
+      "count": 2,
+      "totalCount": 3,
       "hasBin": true
     },
     "MELON_BOOTS": {
@@ -1215,18 +1215,18 @@
       "hasBin": true
     },
     "PERSONAL_COMPACTOR_5000": {
-      "minPrice": 1700000,
-      "avgPrice": 1766667,
+      "minPrice": 1500000,
+      "avgPrice": 1700000,
       "maxPrice": 1900000,
       "count": 3,
       "totalCount": 3,
       "hasBin": true
     },
     "PET_AUGMENT_SPOOKY_CUPCAKE": {
-      "minPrice": 800000,
-      "avgPrice": 889200,
-      "maxPrice": 949000,
-      "count": 5,
+      "minPrice": 500000,
+      "avgPrice": 749500,
+      "maxPrice": 899000,
+      "count": 6,
       "totalCount": 6,
       "hasBin": true
     },
@@ -1239,11 +1239,11 @@
       "hasBin": true
     },
     "EMERALD_RING": {
-      "minPrice": 192000,
-      "avgPrice": 207800,
-      "maxPrice": 255000,
-      "count": 5,
-      "totalCount": 5,
+      "minPrice": 200000,
+      "avgPrice": 200000,
+      "maxPrice": 200000,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "SPOOKY_DISC": {
@@ -1263,11 +1263,11 @@
       "hasBin": true
     },
     "WISE_DRAGON_BOOTS": {
-      "minPrice": 500000,
-      "avgPrice": 624500,
+      "minPrice": 749000,
+      "avgPrice": 749000,
       "maxPrice": 749000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "BAT_PERSON_RING": {
@@ -1288,10 +1288,10 @@
     },
     "BLACK_CAT_PET": {
       "minPrice": 50000000,
-      "avgPrice": 74999500,
-      "maxPrice": 99999000,
-      "count": 2,
-      "totalCount": 2,
+      "avgPrice": 50000000,
+      "maxPrice": 50000000,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "HOLOGRAM_TEXT": {
@@ -1303,27 +1303,27 @@
       "hasBin": true
     },
     "HARVESTER_BLUEPRINT": {
-      "minPrice": 2100000,
-      "avgPrice": 2457143,
+      "minPrice": 2199999,
+      "avgPrice": 2600000,
       "maxPrice": 3000000,
-      "count": 7,
-      "totalCount": 7,
+      "count": 5,
+      "totalCount": 5,
       "hasBin": true
     },
     "FROZEN_BLAZE_HELMET": {
-      "minPrice": 4500000,
-      "avgPrice": 4750000,
+      "minPrice": 4999999,
+      "avgPrice": 4999999,
       "maxPrice": 4999999,
-      "count": 2,
-      "totalCount": 2,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "FIRE_DEVOURER": {
       "minPrice": 13999999,
-      "avgPrice": 15999749,
+      "avgPrice": 16666333,
       "maxPrice": 17999999,
-      "count": 4,
-      "totalCount": 4,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "WOLF_TALISMAN": {
@@ -1351,11 +1351,11 @@
       "hasBin": true
     },
     "REVENANT_CHESTPLATE": {
-      "minPrice": 1250000,
-      "avgPrice": 1916667,
+      "minPrice": 1500000,
+      "avgPrice": 2250000,
       "maxPrice": 3000000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "MELON_DICER_2": {
@@ -1384,10 +1384,10 @@
     },
     "SUPERIOR_DRAGON_BOOTS": {
       "minPrice": 12999000,
-      "avgPrice": 13999333,
-      "maxPrice": 14999999,
-      "count": 3,
-      "totalCount": 3,
+      "avgPrice": 13499000,
+      "maxPrice": 13999000,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "STRONG_DRAGON_HELMET": {
@@ -1415,11 +1415,11 @@
       "hasBin": true
     },
     "REAPER_MASK": {
-      "minPrice": 15000000,
-      "avgPrice": 16000000,
+      "minPrice": 14000000,
+      "avgPrice": 15500000,
       "maxPrice": 17000000,
       "count": 2,
-      "totalCount": 2,
+      "totalCount": 3,
       "hasBin": true
     },
     "REAPER_CHESTPLATE": {
@@ -1427,7 +1427,7 @@
       "avgPrice": 14500000,
       "maxPrice": 14500000,
       "count": 1,
-      "totalCount": 1,
+      "totalCount": 2,
       "hasBin": true
     },
     "REAPER_BOOTS": {
@@ -1435,13 +1435,13 @@
       "avgPrice": 14375000,
       "maxPrice": 14500000,
       "count": 2,
-      "totalCount": 2,
+      "totalCount": 3,
       "hasBin": true
     },
     "PET_AUGMENT_EXP_SHARE": {
-      "minPrice": 749000,
-      "avgPrice": 749000,
-      "maxPrice": 749000,
+      "minPrice": 700000,
+      "avgPrice": 700000,
+      "maxPrice": 700000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -1472,10 +1472,10 @@
     },
     "PIGGY_BANK": {
       "minPrice": 299999,
-      "avgPrice": 307857,
+      "avgPrice": 312222,
       "maxPrice": 320000,
-      "count": 14,
-      "totalCount": 14,
+      "count": 9,
+      "totalCount": 9,
       "hasBin": true
     },
     "TALISMAN_OF_COINS": {
@@ -1519,19 +1519,19 @@
       "hasBin": true
     },
     "OLD_DRAGON_BOOTS": {
-      "minPrice": 400000,
-      "avgPrice": 590000,
+      "minPrice": 350000,
+      "avgPrice": 510000,
       "maxPrice": 780000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "RANCHER_BOOTS": {
-      "minPrice": 4800000,
-      "avgPrice": 4800000,
+      "minPrice": 4500000,
+      "avgPrice": 4650000,
       "maxPrice": 4800000,
-      "count": 1,
-      "totalCount": 1,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "RED_PANDA_PET_SKIN": {
@@ -1543,11 +1543,11 @@
       "hasBin": true
     },
     "PANDA_PET": {
-      "minPrice": 1,
-      "avgPrice": 275000,
+      "minPrice": 250000,
+      "avgPrice": 312499,
       "maxPrice": 499999,
-      "count": 4,
-      "totalCount": 6,
+      "count": 9,
+      "totalCount": 11,
       "hasBin": true
     },
     "TELEPORT_PAD": {
@@ -1559,11 +1559,11 @@
       "hasBin": true
     },
     "SPIDER_PET": {
-      "minPrice": 899999,
-      "avgPrice": 899999,
+      "minPrice": 850000,
+      "avgPrice": 866666,
       "maxPrice": 899999,
-      "count": 1,
-      "totalCount": 2,
+      "count": 3,
+      "totalCount": 4,
       "hasBin": true
     },
     "SHINY_ORB": {
@@ -1578,16 +1578,16 @@
       "minPrice": 100000,
       "avgPrice": 100000,
       "maxPrice": 100000,
-      "count": 8,
-      "totalCount": 8,
+      "count": 7,
+      "totalCount": 7,
       "hasBin": true
     },
     "LAVA_TALISMAN": {
-      "minPrice": 69000,
-      "avgPrice": 69000,
-      "maxPrice": 69000,
-      "count": 1,
-      "totalCount": 1,
+      "minPrice": 99000,
+      "avgPrice": 99000,
+      "maxPrice": 99000,
+      "count": 8,
+      "totalCount": 8,
       "hasBin": true
     },
     "NIGHT_VISION_CHARM": {
@@ -1615,11 +1615,11 @@
       "hasBin": true
     },
     "WISE_DRAGON_CHESTPLATE": {
-      "minPrice": 700000,
-      "avgPrice": 750000,
+      "minPrice": 800000,
+      "avgPrice": 800000,
       "maxPrice": 800000,
-      "count": 2,
-      "totalCount": 3,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "EASTER_BUNNY_RABBIT_PET_SKIN": {
@@ -1640,26 +1640,26 @@
     },
     "PIGMAN_PET": {
       "minPrice": 1499000,
-      "avgPrice": 2284500,
+      "avgPrice": 2176500,
       "maxPrice": 3800000,
-      "count": 12,
-      "totalCount": 13,
+      "count": 10,
+      "totalCount": 11,
       "hasBin": true
     },
     "OLD_DRAGON_HELMET": {
-      "minPrice": 699000,
-      "avgPrice": 789750,
-      "maxPrice": 1000000,
+      "minPrice": 399000,
+      "avgPrice": 639500,
+      "maxPrice": 760000,
       "count": 4,
       "totalCount": 5,
       "hasBin": true
     },
     "GOLDEN_FEATHER_BOOTS": {
-      "minPrice": 6700000,
-      "avgPrice": 8299200,
+      "minPrice": 6000000,
+      "avgPrice": 7066000,
       "maxPrice": 8998000,
-      "count": 5,
-      "totalCount": 5,
+      "count": 6,
+      "totalCount": 6,
       "hasBin": true
     },
     "TREECAPITATOR": {
@@ -1679,8 +1679,8 @@
       "hasBin": false
     },
     "VOID_SWORD": {
-      "minPrice": 299998,
-      "avgPrice": 349999,
+      "minPrice": 249999,
+      "avgPrice": 337499,
       "maxPrice": 500000,
       "count": 4,
       "totalCount": 5,
@@ -1760,10 +1760,10 @@
     },
     "SHAMAN_SWORD": {
       "minPrice": 596000,
-      "avgPrice": 598000,
-      "maxPrice": 600000,
-      "count": 2,
-      "totalCount": 3,
+      "avgPrice": 711500,
+      "maxPrice": 850000,
+      "count": 4,
+      "totalCount": 5,
       "hasBin": true
     },
     "REAPER_LEGGINGS": {
@@ -1771,15 +1771,15 @@
       "avgPrice": 14250000,
       "maxPrice": 14500000,
       "count": 3,
-      "totalCount": 3,
+      "totalCount": 4,
       "hasBin": true
     },
     "SCYTHE_BLADE": {
-      "minPrice": 36000000,
-      "avgPrice": 37000000,
+      "minPrice": 37000000,
+      "avgPrice": 37500000,
       "maxPrice": 38000000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "GIRAFFE_PET": {
@@ -1791,17 +1791,17 @@
       "hasBin": true
     },
     "INTIMIDATION_ARTIFACT": {
-      "minPrice": 5750000,
-      "avgPrice": 5812250,
+      "minPrice": 5699000,
+      "avgPrice": 5787250,
       "maxPrice": 5850000,
       "count": 4,
       "totalCount": 4,
       "hasBin": true
     },
     "BAT_ARTIFACT": {
-      "minPrice": 6750000,
-      "avgPrice": 7124500,
-      "maxPrice": 7499000,
+      "minPrice": 6699000,
+      "avgPrice": 6724500,
+      "maxPrice": 6750000,
       "count": 2,
       "totalCount": 2,
       "hasBin": true
@@ -1831,11 +1831,11 @@
       "hasBin": false
     },
     "FANCY_TUXEDO_BOOTS": {
-      "minPrice": 4999000,
-      "avgPrice": 5499500,
-      "maxPrice": 5999999,
-      "count": 2,
-      "totalCount": 2,
+      "minPrice": 4199000,
+      "avgPrice": 4199000,
+      "maxPrice": 4199000,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "FARMIONAIRE_ARTIFACT": {
@@ -1863,11 +1863,11 @@
       "hasBin": true
     },
     "OBSIDIAN_CHESTPLATE": {
-      "minPrice": 200000,
-      "avgPrice": 200000,
+      "minPrice": 130000,
+      "avgPrice": 165000,
       "maxPrice": 200000,
-      "count": 1,
-      "totalCount": 1,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "BLOOD_GOD_CREST": {
@@ -1903,19 +1903,19 @@
       "hasBin": true
     },
     "HYDRO_BURST": {
-      "minPrice": 400000,
-      "avgPrice": 416667,
-      "maxPrice": 450000,
+      "minPrice": 330000,
+      "avgPrice": 343333,
+      "maxPrice": 349999,
       "count": 3,
       "totalCount": 3,
       "hasBin": true
     },
     "EMERALD_BLADE": {
-      "minPrice": 1200000,
-      "avgPrice": 1250000,
+      "minPrice": 1299999,
+      "avgPrice": 1299999,
       "maxPrice": 1299999,
-      "count": 2,
-      "totalCount": 3,
+      "count": 1,
+      "totalCount": 2,
       "hasBin": true
     },
     "MELON_CHESTPLATE": {
@@ -1935,11 +1935,11 @@
       "hasBin": true
     },
     "MELON_HELMET": {
-      "minPrice": 749998,
-      "avgPrice": 824499,
+      "minPrice": 899000,
+      "avgPrice": 899000,
       "maxPrice": 899000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "BEETROOT_HARVESTER_3": {
@@ -1960,26 +1960,26 @@
     },
     "CROPIE_TALISMAN": {
       "minPrice": 13900000,
-      "avgPrice": 13950000,
-      "maxPrice": 14000000,
-      "count": 2,
-      "totalCount": 2,
+      "avgPrice": 13900000,
+      "maxPrice": 13900000,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "FROZEN_BLAZE_LEGGINGS": {
       "minPrice": 4999999,
-      "avgPrice": 5300000,
+      "avgPrice": 5250000,
       "maxPrice": 5500000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "FROZEN_BLAZE_CHESTPLATE": {
       "minPrice": 4999999,
-      "avgPrice": 5324875,
+      "avgPrice": 5314142,
       "maxPrice": 5999000,
-      "count": 8,
-      "totalCount": 9,
+      "count": 7,
+      "totalCount": 8,
       "hasBin": true
     },
     "PET_AUGMENT_COMBAT_EXP_BOOST_50": {
@@ -1992,10 +1992,10 @@
     },
     "FROZEN_BLAZE_BOOTS": {
       "minPrice": 4999999,
-      "avgPrice": 5000000,
-      "maxPrice": 5000000,
-      "count": 2,
-      "totalCount": 2,
+      "avgPrice": 4999999,
+      "maxPrice": 4999999,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "SQUASH_CHESTPLATE": {
@@ -2088,24 +2088,24 @@
     },
     "FARMER_BOOTS": {
       "minPrice": 499000,
-      "avgPrice": 699749,
+      "avgPrice": 766333,
       "maxPrice": 1299999,
-      "count": 4,
-      "totalCount": 4,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "PIGMAN_SWORD": {
-      "minPrice": 6500000,
-      "avgPrice": 6749999,
+      "minPrice": 6499000,
+      "avgPrice": 6749749,
       "maxPrice": 6999997,
       "count": 4,
       "totalCount": 4,
       "hasBin": true
     },
     "SUPERIOR_DRAGON_CHESTPLATE": {
-      "minPrice": 19000000,
-      "avgPrice": 19000000,
-      "maxPrice": 19000000,
+      "minPrice": 24000000,
+      "avgPrice": 24000000,
+      "maxPrice": 24000000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -2143,10 +2143,10 @@
       "hasBin": true
     },
     "WOLF_PET": {
-      "minPrice": 499000,
-      "avgPrice": 519600,
-      "maxPrice": 600000,
-      "count": 8,
+      "minPrice": 300000,
+      "avgPrice": 399500,
+      "maxPrice": 499000,
+      "count": 7,
       "totalCount": 8,
       "hasBin": true
     },
@@ -2192,7 +2192,7 @@
     },
     "SKELETON_PET": {
       "minPrice": 450000,
-      "avgPrice": 1379800,
+      "avgPrice": 1340000,
       "maxPrice": 2000000,
       "count": 5,
       "totalCount": 6,
@@ -2256,18 +2256,18 @@
     },
     "STRONG_DRAGON_CHESTPLATE": {
       "minPrice": 810000,
-      "avgPrice": 854500,
-      "maxPrice": 899000,
-      "count": 2,
-      "totalCount": 2,
+      "avgPrice": 810000,
+      "maxPrice": 810000,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "STRONG_DRAGON_BOOTS": {
-      "minPrice": 550000,
-      "avgPrice": 666333,
+      "minPrice": 600000,
+      "avgPrice": 724500,
       "maxPrice": 849000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "MINION_BACKPACK_UPGRADE_KIT": {
@@ -2319,11 +2319,11 @@
       "hasBin": true
     },
     "PROTECTOR_DRAGON_BOOTS": {
-      "minPrice": 600000,
-      "avgPrice": 799500,
+      "minPrice": 550000,
+      "avgPrice": 716333,
       "maxPrice": 999000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "GROWTH_HELMET": {
@@ -2383,19 +2383,19 @@
       "hasBin": true
     },
     "PUMPKIN_DICER": {
-      "minPrice": 2000000,
-      "avgPrice": 2533333,
+      "minPrice": 1999000,
+      "avgPrice": 2319800,
       "maxPrice": 3100000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 5,
+      "totalCount": 5,
       "hasBin": true
     },
     "RED_CLAW_TALISMAN": {
       "minPrice": 499000,
-      "avgPrice": 649833,
-      "maxPrice": 700000,
-      "count": 6,
-      "totalCount": 6,
+      "avgPrice": 549500,
+      "maxPrice": 600000,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "POOCH_SWORD": {
@@ -2504,10 +2504,10 @@
     },
     "PROTECTOR_DRAGON_CHESTPLATE": {
       "minPrice": 698000,
-      "avgPrice": 698500,
-      "maxPrice": 699000,
-      "count": 2,
-      "totalCount": 3,
+      "avgPrice": 698000,
+      "maxPrice": 698000,
+      "count": 1,
+      "totalCount": 2,
       "hasBin": true
     },
     "HOE_OF_GREATER_TILLING": {
@@ -2535,11 +2535,11 @@
       "hasBin": true
     },
     "ENDERMITE_PET": {
-      "minPrice": 2000000,
-      "avgPrice": 2050000,
-      "maxPrice": 2100000,
-      "count": 2,
-      "totalCount": 2,
+      "minPrice": 499999,
+      "avgPrice": 499999,
+      "maxPrice": 500000,
+      "count": 7,
+      "totalCount": 7,
       "hasBin": true
     },
     "WAND_OF_ATONEMENT": {
@@ -2551,11 +2551,11 @@
       "hasBin": true
     },
     "ROCK_PET": {
-      "minPrice": 350000,
-      "avgPrice": 350000,
+      "minPrice": 100000,
+      "avgPrice": 225000,
       "maxPrice": 350000,
-      "count": 1,
-      "totalCount": 2,
+      "count": 2,
+      "totalCount": 3,
       "hasBin": true
     },
     "CROPIE_LEGGINGS": {
@@ -2575,9 +2575,9 @@
       "hasBin": true
     },
     "PERMAFROST_HEART": {
-      "minPrice": 81000000,
-      "avgPrice": 81000000,
-      "maxPrice": 81000000,
+      "minPrice": 79999000,
+      "avgPrice": 79999000,
+      "maxPrice": 79999000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -2672,10 +2672,10 @@
     },
     "INTIMIDATION_TALISMAN": {
       "minPrice": 295000,
-      "avgPrice": 296667,
+      "avgPrice": 297500,
       "maxPrice": 300000,
-      "count": 3,
-      "totalCount": 3,
+      "count": 2,
+      "totalCount": 2,
       "hasBin": true
     },
     "CARROT_HARVESTER_3": {
@@ -2695,11 +2695,11 @@
       "hasBin": true
     },
     "WAND_OF_HEALING": {
-      "minPrice": 10000,
-      "avgPrice": 15000,
+      "minPrice": 20000,
+      "avgPrice": 20000,
       "maxPrice": 20000,
-      "count": 2,
-      "totalCount": 2,
+      "count": 1,
+      "totalCount": 1,
       "hasBin": true
     },
     "HARDENED_DIAMOND_HELMET": {
@@ -2731,7 +2731,7 @@
       "avgPrice": 59000,
       "maxPrice": 100000,
       "count": 6,
-      "totalCount": 7,
+      "totalCount": 9,
       "hasBin": true
     },
     "ELEGANT_TUXEDO_LEGGINGS": {
@@ -2771,7 +2771,7 @@
       "avgPrice": 525000,
       "maxPrice": 650000,
       "count": 2,
-      "totalCount": 3,
+      "totalCount": 2,
       "hasBin": true
     },
     "WEIRD_TUBA": {
@@ -2911,9 +2911,9 @@
       "hasBin": true
     },
     "BAT_PERSON_CHESTPLATE": {
-      "minPrice": 4500000,
-      "avgPrice": 4500000,
-      "maxPrice": 4500000,
+      "minPrice": 2999999,
+      "avgPrice": 2999999,
+      "maxPrice": 2999999,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -2927,19 +2927,19 @@
       "hasBin": true
     },
     "RADIANT_POWER_ORB": {
-      "minPrice": 140000,
-      "avgPrice": 310750,
-      "maxPrice": 500000,
-      "count": 8,
-      "totalCount": 8,
+      "minPrice": 100000,
+      "avgPrice": 239333,
+      "maxPrice": 299000,
+      "count": 6,
+      "totalCount": 6,
       "hasBin": true
     },
     "MAGICAL_WATER_BUCKET": {
       "minPrice": 20000,
       "avgPrice": 20000,
       "maxPrice": 20000,
-      "count": 6,
-      "totalCount": 7,
+      "count": 5,
+      "totalCount": 6,
       "hasBin": true
     },
     "MINERS_OUTFIT_BOOTS": {
@@ -3039,11 +3039,11 @@
       "hasBin": true
     },
     "SHRIMP_THE_FISH": {
-      "minPrice": 2000000,
-      "avgPrice": 2500000,
+      "minPrice": 1999999,
+      "avgPrice": 2333333,
       "maxPrice": 3000000,
-      "count": 2,
-      "totalCount": 3,
+      "count": 3,
+      "totalCount": 4,
       "hasBin": true
     },
     "DOLORES_BOUQUET": {
@@ -3135,11 +3135,11 @@
       "hasBin": true
     },
     "FEATHER_TALISMAN": {
-      "minPrice": 50000,
-      "avgPrice": 50000,
-      "maxPrice": 50000,
-      "count": 1,
-      "totalCount": 1,
+      "minPrice": 70000,
+      "avgPrice": 70000,
+      "maxPrice": 70000,
+      "count": 3,
+      "totalCount": 3,
       "hasBin": true
     },
     "MUSHROOM_CHESTPLATE": {
@@ -3383,9 +3383,9 @@
       "hasBin": true
     },
     "ZOMBIE_SWORD": {
-      "minPrice": 350000,
-      "avgPrice": 350000,
-      "maxPrice": 350000,
+      "minPrice": 280000,
+      "avgPrice": 280000,
+      "maxPrice": 280000,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
@@ -3535,9 +3535,9 @@
       "hasBin": true
     },
     "WHEAT_HARVESTER_3": {
-      "minPrice": 17000000,
-      "avgPrice": 17000000,
-      "maxPrice": 17000000,
+      "minPrice": 14999999,
+      "avgPrice": 14999999,
+      "maxPrice": 14999999,
       "count": 1,
       "totalCount": 1,
       "hasBin": true
