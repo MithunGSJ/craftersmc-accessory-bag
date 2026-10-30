@@ -1,0 +1,8 @@
+[
+  {
+    "id": "feat-fused-remnants-npc-pricing",
+    "description": "Fused Remnants are priced at 6.4m (derived from 32 Remnant of the Eye at 200k NPC price in the End) and excluded from Bazaar syncing and lookups",
+    "status": "passing",
+    "evidence": "test-results/fused-remnants-pricing.txt"
+  }
+]

@@ -146,7 +146,9 @@ export async function runPricingSync(): Promise<{
     chest: 20,
     oak_leaves: 12,
     poisonous_potato: 50,
-    wheat_seeds: 12
+    wheat_seeds: 12,
+    fused_remnants: 6400000,
+    remnant_of_the_eye: 200000
   };
 
   const BAZAAR_ALIASES: Record<string, string> = {

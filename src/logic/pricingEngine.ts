@@ -37,19 +37,27 @@ const liveBazaarCache = new Map<string, number>();
 const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
 const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
 
-const NPC_RAW_MATERIALS: Record<string, number> = { chest: 20, oak_leaves: 12, poisonous_potato: 50, wheat_seeds: 12 };
+const NPC_RAW_MATERIALS: Record<string, number> = {
+  chest: 20,
+  oak_leaves: 12,
+  poisonous_potato: 50,
+  wheat_seeds: 12,
+  fused_remnants: 6400000,
+  remnant_of_the_eye: 200000
+};
 const BAZAAR_ITEM_ALIASES: Record<string, string> = { envoys_horn: 'envoy_horns', envoy_horn: 'envoy_horns' };
 
 export function getBazaarMaterialPrice(itemId: string): number {
   const raw = itemId.toLowerCase().trim();
   const normalized = BAZAAR_ITEM_ALIASES[raw] || raw;
+  if (NPC_RAW_MATERIALS[normalized] !== undefined) return NPC_RAW_MATERIALS[normalized];
+  if (NPC_RAW_MATERIALS[raw] !== undefined) return NPC_RAW_MATERIALS[raw];
   if (liveBazaarCache.has(normalized)) return liveBazaarCache.get(normalized)!;
   if (liveBazaarCache.has(raw)) return liveBazaarCache.get(raw)!;
   const snap = BAZAAR_SNAPSHOT[normalized] || BAZAAR_SNAPSHOT[raw];
   if (snap && snap.avgPrice > 0) return snap.avgPrice;
   const ah = getAccessoryAuctionPrice(itemId);
-  if (ah && ah.avgPrice > 0) return ah.avgPrice;
-  return NPC_RAW_MATERIALS[normalized] || NPC_RAW_MATERIALS[raw] || 0;
+  return ah && ah.avgPrice > 0 ? ah.avgPrice : 0;
 }
 
 export function getAccessoryAuctionPrice(accessoryId: string): AuctionPriceSnapshot | undefined {
@@ -113,44 +121,28 @@ export function calculateCraftCost(
   recipe: AccessoryRecipe,
   visited = new Set<string>()
 ): { totalCost: number; breakdown: IngredientCost[] } {
-  if (visited.has(recipe.targetId)) {
-    return { totalCost: 0, breakdown: [] };
-  }
+  if (visited.has(recipe.targetId)) return { totalCost: 0, breakdown: [] };
   visited.add(recipe.targetId);
 
   let totalCost = 0;
   const breakdown: IngredientCost[] = [];
 
-  // If this item upgrades from a base accessory, calculate its base craft cost
   if (recipe.upgradesFrom) {
     const parentDef = findAccessoryById(recipe.upgradesFrom);
     const parentName = parentDef ? parentDef.name : recipe.upgradesFrom.replace(/_/g, ' ');
     const parentRecipe = ACCESSORY_RECIPES[recipe.upgradesFrom];
-
-    if (parentRecipe) {
-      const parentResult = calculateCraftCost(parentRecipe, visited);
-      totalCost += parentResult.totalCost;
-      breakdown.push({
-        itemId: recipe.upgradesFrom,
-        name: parentName,
-        count: 1,
-        unitPrice: parentResult.totalCost,
-        totalCost: parentResult.totalCost
-      });
-    } else {
-      const parentNpc = parseNpcCost(parentDef?.npcCost);
-      const parentPrice = parentNpc && parentNpc > 0
-        ? parentNpc
-        : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || 10000);
-      totalCost += parentPrice;
-      breakdown.push({
-        itemId: recipe.upgradesFrom,
-        name: parentName,
-        count: 1,
-        unitPrice: parentPrice,
-        totalCost: parentPrice
-      });
-    }
+    const parentNpc = parseNpcCost(parentDef?.npcCost);
+    const parentPrice = parentRecipe
+      ? calculateCraftCost(parentRecipe, visited).totalCost
+      : (parentNpc && parentNpc > 0 ? parentNpc : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || 10000));
+    totalCost += parentPrice;
+    breakdown.push({
+      itemId: recipe.upgradesFrom,
+      name: parentName,
+      count: 1,
+      unitPrice: parentPrice,
+      totalCost: parentPrice
+    });
   }
 
   for (const ing of recipe.ingredients) {
@@ -278,8 +270,9 @@ export function formatCoins(amount: number): string {
 }
 
 export async function refreshLiveBazaarPrice(itemId: string): Promise<number | null> {
+  const raw = itemId.toLowerCase().trim();
+  if (NPC_RAW_MATERIALS[raw] !== undefined) return NPC_RAW_MATERIALS[raw];
   try {
-    const raw = itemId.toLowerCase().trim();
     const queryId = BAZAAR_ITEM_ALIASES[raw] || raw;
     const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(queryId)}/details`);
     if (!res.ok) return null;

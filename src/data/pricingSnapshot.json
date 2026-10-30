@@ -297,10 +297,10 @@
       "sellVolume": 3
     },
     "fused_remnants": {
-      "avgPrice": 6498273,
-      "weeklyAveragePrice": 6498273.251272724,
-      "buyVolume": 13044,
-      "sellVolume": 9
+      "avgPrice": 6400000,
+      "weeklyAveragePrice": 6400000,
+      "buyVolume": 0,
+      "sellVolume": 0
     },
     "mite_gel": {
       "avgPrice": 1891,
@@ -403,6 +403,12 @@
       "weeklyAveragePrice": 142865.2587310345,
       "buyVolume": 154,
       "sellVolume": 203
+    },
+    "remnant_of_the_eye": {
+      "avgPrice": 200000,
+      "weeklyAveragePrice": 200000,
+      "buyVolume": 0,
+      "sellVolume": 0
     }
   },
   "auctions": {

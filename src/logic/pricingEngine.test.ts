@@ -6,7 +6,8 @@ import {
   getAccessoryAuctionPrice,
   formatCoins,
   setLiveAuctionPrice,
-  clearPricingCache
+  clearPricingCache,
+  refreshLiveBazaarPrice
 } from './pricingEngine.ts';
 import { ACCESSORY_RECIPES } from '../data/accessoryRecipes.ts';
 import { findAccessoryById } from '../data/accessoryRegistry.ts';
@@ -27,34 +28,28 @@ describe('pricingEngine', () => {
   });
 
   it('computes craft cost combining previous tier and materials for feather line up to golden feather boots', () => {
-    const talismanDef = findAccessoryById('FEATHER_TALISMAN');
-    const ringDef = findAccessoryById('FEATHER_RING');
-    const artifactDef = findAccessoryById('FEATHER_ARTIFACT');
-    const bootsDef = findAccessoryById('GOLDEN_FEATHER_BOOTS');
+    const [tDef, rDef, aDef, bDef] = [
+      findAccessoryById('FEATHER_TALISMAN'),
+      findAccessoryById('FEATHER_RING'),
+      findAccessoryById('FEATHER_ARTIFACT'),
+      findAccessoryById('GOLDEN_FEATHER_BOOTS')
+    ];
+    expect(tDef && rDef && aDef && bDef).toBeTruthy();
+    const [tPrice, rPrice, aPrice, bPrice] = [
+      evaluateAccessoryPrice(tDef!),
+      evaluateAccessoryPrice(rDef!),
+      evaluateAccessoryPrice(aDef!),
+      evaluateAccessoryPrice(bDef!)
+    ];
+    expect(tPrice.primaryMethod).toBe('BAZAAR_CRAFT');
+    expect(rPrice.primaryMethod).toBe('BAZAAR_CRAFT');
+    expect(aPrice.primaryMethod).toBe('BAZAAR_CRAFT');
+    expect(bPrice.primaryMethod).toBe('BAZAAR_CRAFT');
+    expect(bPrice.effectivePrice).toBeGreaterThan(aPrice.effectivePrice);
+    expect(aPrice.effectivePrice).toBeGreaterThan(rPrice.effectivePrice);
+    expect(rPrice.effectivePrice).toBeGreaterThan(tPrice.effectivePrice);
 
-    expect(talismanDef).toBeDefined();
-    expect(ringDef).toBeDefined();
-    expect(artifactDef).toBeDefined();
-    expect(bootsDef).toBeDefined();
-
-    const talismanPrice = evaluateAccessoryPrice(talismanDef!);
-    const ringPrice = evaluateAccessoryPrice(ringDef!);
-    const artifactPrice = evaluateAccessoryPrice(artifactDef!);
-    const bootsPrice = evaluateAccessoryPrice(bootsDef!);
-
-    expect(talismanPrice.primaryMethod).toBe('BAZAAR_CRAFT');
-    expect(ringPrice.primaryMethod).toBe('BAZAAR_CRAFT');
-    expect(artifactPrice.primaryMethod).toBe('BAZAAR_CRAFT');
-    expect(bootsPrice.primaryMethod).toBe('BAZAAR_CRAFT');
-
-    expect(talismanPrice.effectivePrice).toBeGreaterThan(0);
-    expect(ringPrice.effectivePrice).toBeGreaterThan(talismanPrice.effectivePrice);
-    expect(artifactPrice.effectivePrice).toBeGreaterThan(ringPrice.effectivePrice);
-    expect(bootsPrice.effectivePrice).toBeGreaterThan(artifactPrice.effectivePrice);
-
-    // Verify boots recipe breakdown contains feather artifact
-    const bootsRecipe = ACCESSORY_RECIPES['GOLDEN_FEATHER_BOOTS'];
-    const { breakdown } = calculateCraftCost(bootsRecipe);
+    const { breakdown } = calculateCraftCost(ACCESSORY_RECIPES['GOLDEN_FEATHER_BOOTS']);
     expect(breakdown.some(b => b.itemId === 'FEATHER_ARTIFACT')).toBe(true);
     expect(breakdown.some(b => b.itemId === 'enchanted_feather' && b.count === 160)).toBe(true);
     expect(breakdown.some(b => b.itemId === 'golden_feather' && b.count === 1)).toBe(true);
@@ -197,76 +192,42 @@ describe('pricingEngine', () => {
   });
 
   it('validates verified CraftersMC wiki recipes for Fire Extinguisher, Fire Devourer, Frostclaw Relic, and Reaper Orb', () => {
-    // Fire Extinguisher: 8x envoy_horns
-    const feRecipe = ACCESSORY_RECIPES['FIRE_EXTINGUISHER'];
-    expect(feRecipe).toBeDefined();
-    expect(feRecipe.ingredients).toEqual([
+    expect(ACCESSORY_RECIPES['FIRE_EXTINGUISHER'].ingredients).toEqual([
       { itemId: 'envoy_horns', name: "Envoy's Horn", count: 8 }
     ]);
+    const fd = ACCESSORY_RECIPES['FIRE_DEVOURER'];
+    expect(fd.upgradesFrom).toBe('FIRE_EXTINGUISHER');
+    expect(fd.ingredients).toEqual([{ itemId: 'fire_fragment', name: 'Fire Fragment', count: 4 }]);
 
-    // Fire Devourer: 1x FIRE_EXTINGUISHER + 4x fire_fragment
-    const fdRecipe = ACCESSORY_RECIPES['FIRE_DEVOURER'];
-    expect(fdRecipe).toBeDefined();
-    expect(fdRecipe.upgradesFrom).toBe('FIRE_EXTINGUISHER');
-    expect(fdRecipe.ingredients).toEqual([
-      { itemId: 'fire_fragment', name: 'Fire Fragment', count: 4 }
-    ]);
-
-    // Frostclaw Relic: 1x RED_CLAW_ARTIFACT + 64x glacial_fang + 128x enchanted_packed_ice
-    const fcRecipe = ACCESSORY_RECIPES['FROSTCLAW_RELIC'];
-    expect(fcRecipe).toBeDefined();
-    expect(fcRecipe.upgradesFrom).toBe('RED_CLAW_ARTIFACT');
-    expect(fcRecipe.ingredients).toEqual([
+    const fc = ACCESSORY_RECIPES['FROSTCLAW_RELIC'];
+    expect(fc.upgradesFrom).toBe('RED_CLAW_ARTIFACT');
+    expect(fc.ingredients).toEqual([
       { itemId: 'glacial_fang', name: 'Glacial Fang', count: 64 },
       { itemId: 'enchanted_packed_ice', name: 'Enchanted Packed Ice', count: 128 }
     ]);
 
-    // Reaper Orb: 8x scythe_blade (standalone, no upgradesFrom)
-    const roRecipe = ACCESSORY_RECIPES['REAPER_ORB'];
-    expect(roRecipe).toBeDefined();
-    expect(roRecipe.upgradesFrom).toBeUndefined();
-    expect(roRecipe.ingredients).toEqual([
-      { itemId: 'scythe_blade', name: 'Scythe Blade', count: 8 }
-    ]);
+    const ro = ACCESSORY_RECIPES['REAPER_ORB'];
+    expect(ro.upgradesFrom).toBeUndefined();
+    expect(ro.ingredients).toEqual([{ itemId: 'scythe_blade', name: 'Scythe Blade', count: 8 }]);
   });
 
   it('validates verified recipes for Piggy Bank, Compactors, Deletors, Spooky and Mining lines', () => {
-    // Piggy Bank: 96x enchanted_raw_porkchop + 1x chest
-    const pbRecipe = ACCESSORY_RECIPES['PIGGY_BANK'];
-    expect(pbRecipe).toBeDefined();
-    expect(pbRecipe.ingredients[0].count).toBe(96);
-    expect(pbRecipe.ingredients[1].itemId).toBe('chest');
-
-    // Vaccine Talisman: 9x poisonous_potato
-    const vtRecipe = ACCESSORY_RECIPES['VACCINE_TALISMAN'];
-    expect(vtRecipe.ingredients).toEqual([
-      { itemId: 'poisonous_potato', name: 'Poisonous Potato', count: 9 }
-    ]);
-
-    // Coins Talisman: 20x emerald + 5x gold_ingot
-    const ctRecipe = ACCESSORY_RECIPES['COINS_TALISMAN'];
-    expect(ctRecipe.ingredients).toEqual([
+    const pb = ACCESSORY_RECIPES['PIGGY_BANK'];
+    expect(pb?.ingredients[0].count).toBe(96);
+    expect(pb?.ingredients[1].itemId).toBe('chest');
+    expect(ACCESSORY_RECIPES['VACCINE_TALISMAN'].ingredients).toEqual([{ itemId: 'poisonous_potato', name: 'Poisonous Potato', count: 9 }]);
+    expect(ACCESSORY_RECIPES['COINS_TALISMAN'].ingredients).toEqual([
       { itemId: 'emerald', name: 'Emerald', count: 20 },
       { itemId: 'gold_ingot', name: 'Gold Ingot', count: 5 }
     ]);
-
-    // Personal Compactor 7000: 56x enchanted_redstone_block
     const pc7k = ACCESSORY_RECIPES['PERSONAL_COMPACTOR_7000'];
     expect(pc7k.ingredients[0].count).toBe(56);
     expect(pc7k.upgradesFrom).toBe('PERSONAL_COMPACTOR_6000');
-
-    // Personal Deletor 7000: 7x enchanted_iron_block
     const pd7k = ACCESSORY_RECIPES['PERSONAL_DELETOR_7000'];
     expect(pd7k.ingredients[0].count).toBe(7);
     expect(pd7k.upgradesFrom).toBe('PERSONAL_DELETOR_6000');
-
-    // Candy Relic: 1024x purple_candy
-    const crRecipe = ACCESSORY_RECIPES['CANDY_RELIC'];
-    expect(crRecipe.ingredients[0].count).toBe(1024);
-
-    // Bat Person Artifact: 16x spooky_fragment + 128x ectoplasm
-    const bpaRecipe = ACCESSORY_RECIPES['BAT_PERSON_ARTIFACT'];
-    expect(bpaRecipe.ingredients).toEqual([
+    expect(ACCESSORY_RECIPES['CANDY_RELIC'].ingredients[0].count).toBe(1024);
+    expect(ACCESSORY_RECIPES['BAT_PERSON_ARTIFACT'].ingredients).toEqual([
       { itemId: 'spooky_fragment', name: 'Spooky Fragment', count: 16 },
       { itemId: 'ectoplasm', name: 'Ectoplasm', count: 128 }
     ]);
@@ -296,12 +257,26 @@ describe('pricingEngine', () => {
     expect(priceDetails.effectivePrice).toBeGreaterThan(10000000);
   });
 
-  it('evaluates Draconic Artifact with live Fused Remnants Bazaar valuation', () => {
-    const draconicDef = findAccessoryById('DRACONIC_ARTIFACT');
-    expect(draconicDef).toBeDefined();
-    const priceDetails = evaluateAccessoryPrice(draconicDef!);
-    expect(priceDetails.primaryMethod).toBe('BAZAAR_CRAFT');
-    // Draconic Ring (~10.7M) + 12x Fused Remnants (12 * 5.38M = 64.55M) => ~75.3M
-    expect(priceDetails.effectivePrice).toBeGreaterThan(60000000);
+  it('evaluates Draconic family with fixed 6.4M Fused Remnants and 200K Remnant of the Eye', async () => {
+    expect(getBazaarMaterialPrice('fused_remnants')).toBe(6400000);
+    expect(getBazaarMaterialPrice('remnant_of_the_eye')).toBe(200000);
+
+    const [tDef, rDef, aDef] = [findAccessoryById('DRACONIC_TALISMAN')!, findAccessoryById('DRACONIC_RING')!, findAccessoryById('DRACONIC_ARTIFACT')!];
+    const [talPrice, ringPrice, artPrice] = [evaluateAccessoryPrice(tDef), evaluateAccessoryPrice(rDef), evaluateAccessoryPrice(aDef)];
+    expect(talPrice.primaryMethod === 'BAZAAR_CRAFT' && ringPrice.primaryMethod === 'BAZAAR_CRAFT' && artPrice.primaryMethod === 'BAZAAR_CRAFT').toBe(true);
+
+    const talFused = talPrice.craftBreakdown?.find(b => b.itemId === 'fused_remnants');
+    expect(talFused?.totalCost).toBe(12800000);
+    expect(talFused?.subMaterial?.totalCost).toBe(12800000);
+    expect(talFused?.subMaterial?.count).toBe(64);
+
+    const artFused = artPrice.craftBreakdown?.find(b => b.itemId === 'fused_remnants');
+    expect(artFused?.totalCost).toBe(76800000);
+    expect(artFused?.subMaterial?.count).toBe(384);
+
+    expect(artPrice.effectivePrice).toBeGreaterThan(80000000);
+
+    const livePrice = await refreshLiveBazaarPrice('fused_remnants');
+    expect(livePrice).toBe(6400000);
   });
 });

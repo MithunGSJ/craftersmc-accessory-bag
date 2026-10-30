@@ -105,17 +105,32 @@ const STATIC_RECIPES: Record<string, AccessoryRecipe> = {
 
   // Draconic Family
   DRACONIC_TALISMAN: r('DRACONIC_TALISMAN', [
-    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 2 },
+    {
+      itemId: 'fused_remnants',
+      name: 'Fused Remnants',
+      count: 2,
+      subMaterial: { itemId: 'remnant_of_the_eye', name: 'Remnant of the Eye', count: 64 }
+    },
     { itemId: 'mite_gel', name: 'Mite Gel', count: 96 },
     { itemId: 'absolute_ender_pearl', name: 'Absolute Ender Pearl', count: 32 }
   ]),
   DRACONIC_RING: r('DRACONIC_RING', [
-    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 4 },
+    {
+      itemId: 'fused_remnants',
+      name: 'Fused Remnants',
+      count: 4,
+      subMaterial: { itemId: 'remnant_of_the_eye', name: 'Remnant of the Eye', count: 128 }
+    },
     { itemId: 'mite_gel', name: 'Mite Gel', count: 96 },
     { itemId: 'tessellated_ender_pearl', name: 'Tessellated Ender Pearl', count: 1 }
   ], 'DRACONIC_TALISMAN'),
   DRACONIC_ARTIFACT: r('DRACONIC_ARTIFACT', [
-    { itemId: 'fused_remnants', name: 'Fused Remnants', count: 12 },
+    {
+      itemId: 'fused_remnants',
+      name: 'Fused Remnants',
+      count: 12,
+      subMaterial: { itemId: 'remnant_of_the_eye', name: 'Remnant of the Eye', count: 384 }
+    },
     { itemId: 'mite_gel', name: 'Mite Gel', count: 128 },
     { itemId: 'tessellated_ender_pearl', name: 'Tessellated Ender Pearl', count: 2 }
   ], 'DRACONIC_RING'),

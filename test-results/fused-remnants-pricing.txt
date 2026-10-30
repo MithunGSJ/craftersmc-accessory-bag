@@ -1,0 +1,10 @@
+﻿
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/OM/Documents/Crafters - Copy[39m
+
+ [32mΓ£ô[39m src/logic/pricingEngine.test.ts [2m ([22m[2m17 tests[22m[2m)[22m[90m 124[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m17 passed[39m[22m[90m (17)[39m
+[2m   Start at [22m 00:31:00
+[2m   Duration [22m 3.01s[2m (transform 864ms, setup 0ms, collect 1.29s, tests 124ms, environment 1ms, prepare 931ms)[22m
+

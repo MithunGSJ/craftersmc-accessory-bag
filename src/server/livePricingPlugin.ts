@@ -90,13 +90,15 @@ export function livePricingPlugin(apiKey: string): Plugin {
         };
       }
 
-      const bazaarMap: Record<string, { avgPrice: number; weeklyAveragePrice: number }> = {};
+      const bazaarMap: Record<string, { avgPrice: number; weeklyAveragePrice: number }> = {
+        fused_remnants: { avgPrice: 6400000, weeklyAveragePrice: 6400000 },
+        remnant_of_the_eye: { avgPrice: 200000, weeklyAveragePrice: 200000 }
+      };
       const keyBazaarItems = [
         'condensed_fermento',
         'fermento',
         'squash',
         'cropie',
-        'fused_remnants',
         'fire_fragment',
         'spooky_fragment',
         'golden_feather',

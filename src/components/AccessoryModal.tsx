@@ -184,7 +184,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                         <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
                           {ing.subMaterial.isCheaper
                             ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
-                            : `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!`}
+                            : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)}) crafted from sub-materials`}
                         </div>
                       </div>
                     )}
