@@ -6,6 +6,7 @@ interface AccessoryIconProps {
   readonly fallbackEmoji: string;
   readonly skinUrl?: string;
   readonly size?: number;
+  readonly className?: string;
 }
 
 export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
@@ -13,7 +14,8 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
   name,
   fallbackEmoji,
   skinUrl,
-  size = 32
+  size = 32,
+  className = ''
 }) => {
   const [candidateIndex, setCandidateIndex] = useState(0);
   const [skinFailed, setSkinFailed] = useState(false);
@@ -44,10 +46,13 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
     setSkinFailed(false);
   }, [id, skinUrl]);
 
+  const iconClasses = `accessory-icon ${className}`.trim();
+
   if (candidateIndex >= candidates.length) {
     if (skinUrl && !skinFailed) {
       return (
         <span
+          className="accessory-icon-wrapper"
           style={{
             width: `${size}px`,
             height: `${size}px`,
@@ -62,6 +67,7 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
           <img
             src={skinUrl}
             alt={name}
+            className={iconClasses}
             onError={() => setSkinFailed(true)}
             style={{
               width: `${size * 8}px`,
@@ -79,6 +85,7 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
 
     return (
       <span
+        className={className}
         style={{
           fontSize: `${size * 0.75}px`,
           lineHeight: 1,
@@ -97,6 +104,7 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
     <img
       src={candidates[candidateIndex]}
       alt={name}
+      className={iconClasses}
       width={size}
       height={size}
       onError={() => setCandidateIndex(prev => prev + 1)}

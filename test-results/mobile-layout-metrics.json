@@ -1,0 +1,24 @@
+{
+  "viewport": {
+    "width": 360,
+    "height": 800,
+    "dpr": 3
+  },
+  "occupiedSlotsCount": 43,
+  "containerBox": {
+    "x": 8,
+    "y": 444.15625,
+    "width": 344,
+    "height": 266.296875
+  },
+  "gridBox": {
+    "x": 14,
+    "y": 484.546875,
+    "width": 332,
+    "height": 186.90625
+  },
+  "gridFitsHorizontally": true,
+  "containerFitsInViewport": true,
+  "allIconsContained": true,
+  "timestamp": "2026-10-31T20:02:13.574Z"
+}

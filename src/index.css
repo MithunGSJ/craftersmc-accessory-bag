@@ -481,12 +481,22 @@ a:hover {
 /* ==========================================================================
    Minecraft Double-Chest Inventory GUI
    ========================================================================== */
+.accessory-icon {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .mc-gui-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 12px 0 28px 0;
   width: 100%;
+  max-width: 100%;
 }
 
 .mc-gui-container {
@@ -503,10 +513,10 @@ a:hover {
   position: relative;
   -webkit-user-select: none;
   user-select: none;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  max-width: 472px;
   box-sizing: border-box;
-  overflow-x: auto;
+  overflow: hidden;
 }
 
 .mc-gui-header {
@@ -539,7 +549,7 @@ a:hover {
 
 .mc-gui-grid {
   display: grid;
-  grid-template-columns: repeat(9, 44px);
+  grid-template-columns: repeat(9, 1fr);
   grid-gap: 4px;
   background-color: #8B8B8B;
   padding: 4px;
@@ -547,13 +557,14 @@ a:hover {
   border-left: 2px solid #373737;
   border-right: 2px solid #FFFFFF;
   border-bottom: 2px solid #FFFFFF;
-  width: fit-content;
+  width: 100%;
   box-sizing: border-box;
 }
 
 .mc-slot {
-  width: 44px;
-  height: 44px;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  min-width: 0;
   background-color: #8B8B8B;
   border-top: 2px solid #373737;
   border-left: 2px solid #373737;
@@ -564,7 +575,24 @@ a:hover {
   justify-content: center;
   position: relative;
   cursor: pointer;
+  box-sizing: border-box;
+  overflow: hidden;
   transition: background-color 0.1s ease;
+}
+
+.mc-slot img,
+.mc-slot .accessory-icon {
+  width: 78% !important;
+  height: 78% !important;
+  max-width: 32px;
+  max-height: 32px;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  transform: translateZ(0);
+  pointer-events: none;
 }
 
 .mc-slot:hover {
@@ -734,14 +762,70 @@ a:hover {
 }
 
 @media (max-width: 520px) {
+  .app-container {
+    padding: 12px 8px 36px 8px;
+  }
+
+  .mc-gui-container {
+    padding: 6px 6px 10px 6px;
+    border-width: 3px;
+  }
+
   .mc-gui-grid {
-    grid-template-columns: repeat(9, 34px);
     grid-gap: 2px;
     padding: 2px;
+    border-width: 2px;
   }
 
   .mc-slot {
-    width: 34px;
-    height: 34px;
+    border-width: 1.5px;
+  }
+
+  .mc-gui-title {
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+  }
+
+  .mc-gui-footer {
+    margin-top: 6px;
+    gap: 4px;
+  }
+
+  .mc-gui-page-info {
+    font-size: 0.72rem;
+  }
+
+  .mc-gui-btn {
+    font-size: 0.68rem;
+    padding: 3px 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .mc-gui-container {
+    padding: 4px 4px 8px 4px;
+    border-width: 2px;
+  }
+
+  .mc-gui-grid {
+    grid-gap: 1.5px;
+    padding: 1.5px;
+  }
+
+  .mc-slot {
+    border-width: 1px;
+  }
+
+  .mc-gui-title {
+    font-size: 0.85rem;
+  }
+
+  .mc-gui-page-info {
+    font-size: 0.65rem;
+  }
+
+  .mc-gui-btn {
+    font-size: 0.62rem;
+    padding: 2px 4px;
   }
 }

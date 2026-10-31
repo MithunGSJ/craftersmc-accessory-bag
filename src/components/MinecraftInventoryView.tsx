@@ -131,6 +131,7 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
                   fallbackEmoji={definition.iconEmoji}
                   skinUrl={item.ownedItem?.skinUrl || item.skinUrl}
                   size={32}
+                  className="mc-slot-icon"
                 />
               </div>
             );
