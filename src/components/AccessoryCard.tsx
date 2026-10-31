@@ -1,17 +1,24 @@
 import React from 'react';
 import { EvaluatedAccessory } from '../data/accessoryTypes.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
-import { playEquipSound } from '../utils/soundEffects.ts';
+import { playEquipSound, playClickSound } from '../utils/soundEffects.ts';
 import { AccessoryIcon } from './AccessoryIcon.tsx';
 import { evaluateAccessoryPrice } from '../logic/pricingEngine.ts';
-import { ACCESSORIES_BY_FAMILY } from '../data/accessoryRegistry.ts';
+import { ACCESSORIES_BY_FAMILY, findAccessoryById } from '../data/accessoryRegistry.ts';
 
 interface AccessoryCardProps {
   readonly evaluated: EvaluatedAccessory;
   readonly onClick: () => void;
+  readonly allEvaluated?: readonly EvaluatedAccessory[];
+  readonly onSelectAccessory?: (acc: EvaluatedAccessory) => void;
 }
 
-export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick }) => {
+export const AccessoryCard: React.FC<AccessoryCardProps> = ({
+  evaluated,
+  onClick,
+  allEvaluated,
+  onSelectAccessory
+}) => {
   const { definition, status, ownedItem, effectiveMagicalPower, skinUrl } = evaluated;
   const rarity = ownedItem ? ownedItem.rarity : definition.baseRarity;
   const style = THEME_CONFIG.rarityMap[rarity] || THEME_CONFIG.rarityMap.COMMON;
@@ -183,6 +190,59 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
         )}
       </div>
 
+      {/* Crafting Recipe & Component Redirects */}
+      {Boolean(priceInfo.craftBreakdown && priceInfo.craftBreakdown.length > 0) && (
+        <div
+          className="card-recipe-section"
+          onClick={e => {
+            e.stopPropagation();
+            playEquipSound();
+            onClick();
+          }}
+          title="Click to view full recipe in modal"
+        >
+          <div className="card-recipe-label">
+            <span>🔨 Craft Recipe</span>
+            <span className="card-recipe-hint">Details ↗</span>
+          </div>
+          <div className="card-recipe-chips">
+            {priceInfo.craftBreakdown!.map((ing, idx) => {
+              const ingAcc = findAccessoryById(ing.itemId);
+              if (ingAcc && onSelectAccessory) {
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    className="card-recipe-chip card-recipe-chip-link"
+                    title={`Redirect to ${ing.name} card`}
+                    onClick={e => {
+                      e.stopPropagation();
+                      playClickSound();
+                      const target = allEvaluated?.find(a => a.definition.id === ing.itemId) || {
+                        definition: ingAcc,
+                        status: 'MISSING' as const,
+                        effectiveMagicalPower: 0,
+                        familyMaxTierOwned: 0,
+                        isHighestInFamily: true
+                      };
+                      onSelectAccessory(target);
+                    }}
+                  >
+                    <span>{ing.count}x {ing.name}</span>
+                    <span style={{ fontSize: '0.65rem' }}>↗</span>
+                  </button>
+                );
+              }
+              return (
+                <span key={idx} className="card-recipe-chip">
+                  {ing.count}x {ing.name}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
         <div style={{ display: 'flex', gap: '6px', marginBottom: '8px' }}>
           <span
@@ -204,41 +264,17 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           {isUpgradable ? (
             <>
-              <span
-                style={{
-                  fontWeight: 700,
-                  color: 'var(--status-missing)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
-              >
+              <span style={{ fontWeight: 700, color: 'var(--status-missing)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--status-missing)' }} />
                 Missing
               </span>
-              <span
-                style={{
-                  fontWeight: 700,
-                  color: 'var(--status-upgradable)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}
-              >
+              <span style={{ fontWeight: 700, color: 'var(--status-upgradable)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--status-upgradable)' }} />
                 Upgradable
               </span>
             </>
           ) : (
-            <span
-              style={{
-                fontWeight: 700,
-                color: statusColor,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}
-            >
+            <span style={{ fontWeight: 700, color: statusColor, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: statusColor }} />
               {statusLabel}
             </span>
