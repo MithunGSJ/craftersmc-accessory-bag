@@ -1,7 +1,7 @@
 import React from 'react';
 import { EvaluatedAccessory } from '../data/accessoryTypes.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
-import { ACCESSORIES_BY_FAMILY, findAccessoryById } from '../data/accessoryRegistry.ts';
+import { ACCESSORIES_BY_FAMILY } from '../data/accessoryRegistry.ts';
 import { playClickSound } from '../utils/soundEffects.ts';
 import { AccessoryIcon } from './AccessoryIcon.tsx';
 import { evaluateAccessoryPrice, formatCoins } from '../logic/pricingEngine.ts';
@@ -60,17 +60,15 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
     ? `+${netGain} MP Upgrade (+${baseMp} Base)`
     : `+${baseMp} Potential MP`;
 
-  const handleSelectAccessoryById = (accId: string) => {
-    if (!onSelectAccessory) return;
-    const found = findAccessoryById(accId);
-    if (!found) return;
+  const handleSelectTier = (tierItem: (typeof familyChain)[number]) => {
+    if (tierItem.id === definition.id || !onSelectAccessory) return;
     playClickSound();
-    const target = allEvaluated?.find(e => e.definition.id === found.id) || {
-      definition: found,
+    const target = allEvaluated?.find(e => e.definition.id === tierItem.id) || {
+      definition: tierItem,
       status: 'MISSING' as const,
       effectiveMagicalPower: 0,
       familyMaxTierOwned: 0,
-      isHighestInFamily: true
+      isHighestInFamily: tierItem.tier === familyChain[familyChain.length - 1]?.tier
     };
     onSelectAccessory(target);
   };
@@ -80,66 +78,64 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
       <div
         ref={contentRef}
         className="glass-card modal-content"
-        style={{ border: `1px solid ${style.border}`, boxShadow: `0 10px 40px -5px ${style.glow}`, maxHeight: '90vh', overflowY: 'auto' }}
+        style={{
+          border: `1px solid ${style.border}`,
+          boxShadow: `0 10px 40px -5px ${style.glow}`,
+          maxHeight: '90vh',
+          overflowY: 'auto'
+        }}
         onClick={e => e.stopPropagation()}
       >
-        <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">✕</button>
+        <button
+          className="modal-close-btn"
+          onClick={() => {
+            playClickSound();
+            onClose();
+          }}
+          aria-label="Close details"
+        >
+          ✕
+        </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '18px' }}>
-          <div className="card-icon-box" style={{ width: '64px', height: '64px', borderColor: style.border }}>
-            <AccessoryIcon id={definition.id} name={definition.name} fallbackEmoji={definition.iconEmoji} skinUrl={ownedItem?.skinUrl || skinUrl} size={48} />
+        {/* Header with Pixel Art Icon */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
+          <div className="card-icon-box" style={{ width: '56px', height: '56px', borderColor: style.border, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <AccessoryIcon id={definition.id} name={definition.name} fallbackEmoji={definition.iconEmoji} skinUrl={ownedItem?.skinUrl || skinUrl} size={44} />
           </div>
           <div>
-            <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: style.color, margin: 0 }}>
+            <h2 style={{ color: style.color, fontSize: '1.35rem', fontWeight: 800 }}>
               {ownedItem?.displayName || definition.name}
             </h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-              <span className="card-rarity" style={{ color: style.color }}>{style.label}</span>
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>• {definition.category} Category</span>
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', marginBottom: '18px' }}>
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Status</span>
-            <div style={{ fontWeight: 700, color: statusColor, fontSize: '0.95rem', marginTop: '2px' }}>{isOwned ? 'Owned' : isUpgradable ? 'Upgradable' : status === 'UPGRADED_PREVIOUS' ? 'Replaced' : 'Missing'}</div>
-          </div>
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Magical Power</span>
-            <div style={{ fontWeight: 700, color: 'var(--accent-gold)', fontSize: '0.95rem', marginTop: '2px' }}>{modalMpText}</div>
-          </div>
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px 12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Bag Slot</span>
-            <div style={{ fontWeight: 700, color: '#FFFFFF', fontSize: '0.95rem', marginTop: '2px' }}>{ownedItem?.slot !== undefined ? `Slot #${ownedItem.slot + 1}` : 'Not in Bag'}</div>
-          </div>
-        </div>
-
-        {upgradeRecommendation && (
-          <div style={{ background: 'rgba(255, 184, 0, 0.08)', border: '1px solid rgba(255, 184, 0, 0.25)', borderRadius: '12px', padding: '12px 14px', marginBottom: '18px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-gold)', fontWeight: 700, fontSize: '0.88rem' }}>
-              <span>⚡ Upgrade Recommendation</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
-                Next Tier: <strong style={{ color: '#FFFFFF' }}>{upgradeRecommendation.nextTierName}</strong> (+{upgradeRecommendation.additionalMp} MP) • {upgradeRecommendation.nextSource}
-              </span>
-              {onSelectAccessory && (
-                <button
-                  type="button"
-                  className="recipe-redirect-pill"
-                  onClick={() => handleSelectAccessoryById(upgradeRecommendation.nextTierId)}
-                  title={`Redirect to ${upgradeRecommendation.nextTierName} card`}
-                >
-                  View Card ↗
-                </button>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
+              <span style={{ color: style.color, fontWeight: 700, fontSize: '0.85rem' }}>{style.label}</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>• {definition.category}</span>
+              {status === 'UPGRADABLE_NEXT' ? (
+                <>
+                  <span style={{ color: 'var(--status-missing)', fontWeight: 700, fontSize: '0.85rem' }}>• MISSING</span>
+                  <span style={{ color: 'var(--status-upgradable)', fontWeight: 700, fontSize: '0.85rem' }}>• UPGRADABLE</span>
+                </>
+              ) : (
+                <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
               )}
+              <span className="mp-pill">{modalMpText}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Upgrade alert */}
+        {upgradeRecommendation && (
+          <div style={{ background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '10px', padding: '10px 14px', marginBottom: '16px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <AccessoryIcon id={upgradeRecommendation.nextTierId} name={upgradeRecommendation.nextTierName} fallbackEmoji="⚡" size={24} />
+            <div>
+              <strong style={{ color: 'var(--status-upgradable)' }}>⚡ Direct Upgrade Available:</strong> Upgrades to{' '}
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{upgradeRecommendation.nextTierName}</span> for +{upgradeRecommendation.additionalMp} MP (via {upgradeRecommendation.nextSource}).
             </div>
           </div>
         )}
 
-        <div style={{ background: 'rgba(0,0,0,0.35)', borderRadius: '12px', padding: '12px 14px', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+        {/* Live Economy & Valuation */}
+        <div style={{ background: 'rgba(0,0,0,0.5)', borderRadius: '12px', padding: '14px 16px', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
             <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: 'var(--accent-gold)', letterSpacing: '0.8px', fontWeight: 700 }}>
               CraftersMC Live Economy & Valuation
             </span>
@@ -160,45 +156,40 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                 🌾 Crafting Recipe (Bazaar Material Weekly Averages):
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                {priceInfo.craftBreakdown.map((ing, idx) => {
-                  const ingAcc = findAccessoryById(ing.itemId);
-                  return (
-                    <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', padding: '5px 8px', borderRadius: '6px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem' }}>
-                        <span style={{ color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                          • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
-                          {ingAcc && onSelectAccessory ? (
-                            <button
-                              type="button"
-                              className="recipe-redirect-pill"
-                              onClick={() => handleSelectAccessoryById(ing.itemId)}
-                              title={`Redirect to ${ing.name} card`}
-                            >
-                              Card ↗
-                            </button>
-                          ) : (
-                            <span style={{ color: 'var(--text-muted)' }}>
-                              (@ {formatCoins(ing.unitPrice)}/ea)
-                            </span>
-                          )}
+                {priceInfo.craftBreakdown.map((ing, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: 'rgba(255,255,255,0.03)',
+                      padding: '5px 8px',
+                      borderRadius: '6px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
+                      <span style={{ color: 'var(--text-secondary)' }}>
+                        • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
+                        <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>
+                          (@ {formatCoins(ing.unitPrice)}/ea)
                         </span>
-                        <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>{formatCoins(ing.totalCost)}</span>
-                      </div>
-                      {ing.subMaterial && (
-                        <div style={{ fontSize: '0.72rem', marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
-                          <span style={{ color: '#94a3b8' }}>
-                            ↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})
-                          </span>
-                          <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
-                            {ing.subMaterial.isCheaper
-                              ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
-                              : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)}) crafted from sub-materials`}
-                          </div>
-                        </div>
-                      )}
+                      </span>
+                      <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>
+                        {formatCoins(ing.totalCost)}
+                      </span>
                     </div>
-                  );
-                })}
+                    {ing.subMaterial && (
+                      <div style={{ fontSize: '0.72rem', marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
+                        <span style={{ color: '#94a3b8' }}>
+                          ↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})
+                        </span>
+                        <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
+                          {ing.subMaterial.isCheaper
+                            ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
+                            : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)}) crafted from sub-materials`}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
               <div style={{ textAlign: 'right', marginTop: '6px', fontSize: '0.82rem', fontWeight: 700, color: '#4ade80' }}>
                 Total Craft Cost: ~{formatCoins(priceInfo.craftCost || 0)} ({priceInfo.craftCost?.toLocaleString()} coins)
@@ -210,21 +201,32 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
             <div style={{ background: 'rgba(234, 179, 8, 0.08)', border: '1px solid rgba(234, 179, 8, 0.2)', borderRadius: '8px', padding: '8px 12px', marginTop: '6px' }}>
               <div style={{ fontSize: '0.78rem', color: '#facc15', fontWeight: 700, marginBottom: '4px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>🏛️ CraftersMC Auction House ({priceInfo.auction.hasBin !== false ? 'BIN Market' : 'Bidding'})</span>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>{priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>
+                  {priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings
+                </span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '0.75rem', textAlign: 'center' }}>
-                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Min'}</div><div style={{ fontWeight: 700, color: '#38bdf8' }}>{formatCoins(priceInfo.auction.minPrice)}</div></div>
-                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Market Avg' : 'Avg'}</div><div style={{ fontWeight: 700, color: '#facc15' }}>{formatCoins(priceInfo.auction.avgPrice)}</div></div>
-                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Max'}</div><div style={{ fontWeight: 700, color: '#f87171' }}>{formatCoins(priceInfo.auction.maxPrice)}</div></div>
+                {([
+                  { label: priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)', val: priceInfo.auction.minPrice, color: '#38bdf8' },
+                  { label: priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average', val: priceInfo.auction.avgPrice, color: '#facc15' },
+                  { label: priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)', val: priceInfo.auction.maxPrice, color: '#f87171' }
+                ] as const).map((stat, i) => (
+                  <div key={i}>
+                    <div style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
+                    <div style={{ fontWeight: 700, color: stat.color }}>{formatCoins(stat.val)}</div>
+                  </div>
+                ))}
               </div>
             </div>
           ) : priceInfo.primaryMethod !== 'BAZAAR_CRAFT' && priceInfo.primaryMethod !== 'NPC_SHOP' && priceInfo.primaryMethod !== 'FREE_QUEST' ? (
-            <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '8px', padding: '8px 12px', marginTop: '8px', fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>🏛️</span><span>No offers were made in auction house.</span>
+            <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '8px', padding: '10px 12px', marginTop: '8px', fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>🏛️</span>
+              <span>No offers were made in auction house.</span>
             </div>
           ) : null}
         </div>
 
+        {/* Lore / Description */}
         <div style={{ background: 'rgba(0,0,0,0.4)', borderRadius: '12px', padding: '14px 16px', border: '1px solid rgba(255,255,255,0.06)', marginBottom: '16px' }}>
           <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
             Item Description & Lore (CraftersMC Wiki)
@@ -234,6 +236,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
           </div>
         </div>
 
+        {/* Active Reforge (only displayed if item has a reforge) */}
         {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
           <div style={{ marginBottom: '16px' }}>
             <div style={{ background: 'rgba(255, 184, 0, 0.08)', padding: '10px 14px', borderRadius: '10px', border: '1px solid rgba(255, 184, 0, 0.2)' }}>
@@ -243,6 +246,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
           </div>
         )}
 
+        {/* Obtaining Requirement */}
         <div style={{ marginBottom: '16px' }}>
           <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
             CraftersMC Obtaining Requirement
@@ -257,6 +261,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
           )}
         </div>
 
+        {/* Family Chain with Icons */}
         {familyChain.length > 1 && (
           <div>
             <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
@@ -272,7 +277,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                     type="button"
                     className={`hierarchy-chip ${isThis ? 'active' : ''}`}
                     style={{ color: tierColor }}
-                    onClick={() => handleSelectAccessoryById(tierItem.id)}
+                    onClick={() => handleSelectTier(tierItem)}
                     title={isThis ? 'Currently viewing' : `View ${tierItem.name}`}
                   >
                     <AccessoryIcon id={tierItem.id} name={tierItem.name} fallbackEmoji={tierItem.iconEmoji} size={18} />

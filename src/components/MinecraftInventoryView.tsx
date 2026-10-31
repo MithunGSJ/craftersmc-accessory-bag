@@ -227,9 +227,7 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
               <AccessoryCard
                 key={item.definition.id}
                 evaluated={item}
-                allEvaluated={accessories}
                 onClick={() => onSelectAccessory(item)}
-                onSelectAccessory={onSelectAccessory}
               />
             ))}
           </div>

@@ -16,11 +16,5 @@
     "description": "High-resolution (160x160) official wiki accessory PNG sprites with crisp cross-browser pixelated rendering preventing blurriness on mobile and high-DPI displays",
     "status": "passing",
     "evidence": "test-results/mobile-inventory-populated.png"
-  },
-  {
-    "id": "feat-card-crafting-recipe-redirect",
-    "description": "Display crafting recipe on accessory cards with interactive ingredient redirects to base/component accessory cards and modal recipe navigation",
-    "status": "passing",
-    "evidence": "test-results/card-recipe-redirect.png"
   }
 ]

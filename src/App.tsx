@@ -150,9 +150,7 @@ export const App: React.FC = () => {
               <AccessoryCard
                 key={item.definition.id}
                 evaluated={item}
-                allEvaluated={evaluatedAll}
                 onClick={() => setSelectedAccessory(item)}
-                onSelectAccessory={setSelectedAccessory}
               />
             ))}
           </section>
