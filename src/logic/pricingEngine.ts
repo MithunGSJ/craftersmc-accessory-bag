@@ -45,7 +45,12 @@ const NPC_RAW_MATERIALS: Record<string, number> = {
   fused_remnants: 6400000,
   remnant_of_the_eye: 200000
 };
-const BAZAAR_ITEM_ALIASES: Record<string, string> = { envoys_horn: 'envoy_horns', envoy_horn: 'envoy_horns' };
+const BAZAAR_ITEM_ALIASES: Record<string, string> = {
+  envoys_horn: 'envoy_horns',
+  envoy_horn: 'envoy_horns',
+  envoy_s_horn: 'envoy_horns',
+  redstone_dust: 'redstone'
+};
 
 export function getBazaarMaterialPrice(itemId: string): number {
   const raw = itemId.toLowerCase().trim();
@@ -132,9 +137,10 @@ export function calculateCraftCost(
     const parentName = parentDef ? parentDef.name : recipe.upgradesFrom.replace(/_/g, ' ');
     const parentRecipe = ACCESSORY_RECIPES[recipe.upgradesFrom];
     const parentNpc = parseNpcCost(parentDef?.npcCost);
-    const parentPrice = parentRecipe
-      ? calculateCraftCost(parentRecipe, visited).totalCost
-      : (parentNpc && parentNpc > 0 ? parentNpc : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || 10000));
+    const craftResult = parentRecipe ? calculateCraftCost(parentRecipe, visited).totalCost : 0;
+    const parentPrice = craftResult > 0
+      ? craftResult
+      : (parentNpc && parentNpc > 0 ? parentNpc : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || parentDef?.estimatedCoins || 0));
     totalCost += parentPrice;
     breakdown.push({
       itemId: recipe.upgradesFrom,
@@ -211,7 +217,7 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
 
   // 2. If it is sold by an NPC (e.g. Julia, Zoe, North, Sky, Baker)
   if (acc.npcCost) {
-    if (/gems/i.test(acc.npcCost)) {
+    if (/gems|bits/i.test(acc.npcCost)) {
       result = {
         effectivePrice: 0,
         primaryMethod: 'NPC_SHOP',
@@ -271,9 +277,10 @@ export function formatCoins(amount: number): string {
 
 export async function refreshLiveBazaarPrice(itemId: string): Promise<number | null> {
   const raw = itemId.toLowerCase().trim();
+  const queryId = BAZAAR_ITEM_ALIASES[raw] || raw;
+  if (NPC_RAW_MATERIALS[queryId] !== undefined) return NPC_RAW_MATERIALS[queryId];
   if (NPC_RAW_MATERIALS[raw] !== undefined) return NPC_RAW_MATERIALS[raw];
   try {
-    const queryId = BAZAAR_ITEM_ALIASES[raw] || raw;
     const res = await fetch(`/api/v1/skyblock/bazaar/${encodeURIComponent(queryId)}/details`);
     if (!res.ok) return null;
     const json = await res.json();

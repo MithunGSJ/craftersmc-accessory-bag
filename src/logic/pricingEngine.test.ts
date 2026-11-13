@@ -172,6 +172,25 @@ describe('pricingEngine', () => {
     expect(nightPrice.displayLabel).not.toContain('945.0B');
   });
 
+  it('correctly evaluates NPC items priced in Bits as NPC_SHOP rather than Auction or Unobtainable', () => {
+    const bitsItem = {
+      id: 'COMMUNITY_BITS_TALISMAN',
+      name: 'Community Bits Talisman',
+      baseRarity: 'RARE' as const,
+      category: 'Misc' as const,
+      familyId: 'community_bits',
+      tier: 1,
+      npcCost: '4,000 Bits',
+      description: 'Test talisman purchased with Bits',
+      source: 'Elizabeth (Community Center)',
+      iconEmoji: '🏛️',
+      loreLines: []
+    };
+    const price = evaluateAccessoryPrice(bitsItem);
+    expect(price.primaryMethod).toBe('NPC_SHOP');
+    expect(price.displayLabel).toBe('NPC: 4,000 Bits');
+  });
+
   it('displays exact NPC price without "Est:" or "~" for Sky\'s Badge (21.5M) and Cake Bag', () => {
     const sky = findAccessoryById('SKYS_BADGE');
     expect(sky).toBeDefined();

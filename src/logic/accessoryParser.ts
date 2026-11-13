@@ -21,7 +21,7 @@ export function stripMinecraftCodes(str: string): string {
 export function extractRarityFromColorCode(rawName: string): ItemRarity | undefined {
   if (rawName.includes('§f')) return 'COMMON';
   if (rawName.includes('§a')) return 'UNCOMMON';
-  if (rawName.includes('§9') || rawName.includes('§n')) return 'RARE';
+  if (rawName.includes('§9')) return 'RARE';
   if (rawName.includes('§5')) return 'EPIC';
   if (rawName.includes('§6')) return 'LEGENDARY';
   if (rawName.includes('§d')) return 'MYTHIC';
@@ -169,15 +169,19 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
         const enrichment = extraAttrs?.['accessory_enrichment'] as string | undefined;
         const skinUrl = extractSkullTextureUrl(tag);
 
+        const effectiveInternalId = internalId || cleanName.toUpperCase().replace(/\s+/g, '_') || 'UNKNOWN';
+        const rawSlot = item['Slot'] ?? item['slot'];
+        const trueSlot = typeof rawSlot === 'number' ? rawSlot : (typeof rawSlot === 'string' ? parseInt(rawSlot, 10) : slot);
+
         if (catalogEntry || rawId || cleanName) {
           result.push({
-            id: `${internalId}_${slot}`,
-            internalId: internalId || cleanName.toUpperCase().replace(/\s+/g, '_'),
+            id: `${effectiveInternalId}_${trueSlot}`,
+            internalId: effectiveInternalId,
             displayName,
             rarity,
             reforge: modifier ? modifier.charAt(0).toUpperCase() + modifier.slice(1) : undefined,
             enrichment: enrichment ? enrichment.replace(/_/g, ' ') : undefined,
-            slot,
+            slot: Number.isNaN(trueSlot) ? slot : trueSlot,
             lore: cleanLore,
             skinUrl,
             isUncataloged: !catalogEntry

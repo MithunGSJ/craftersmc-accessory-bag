@@ -79,7 +79,7 @@ export function inferStageFromWiki(source: string): AccessoryDefinition['stage']
   if (s.includes('slayer')) return 'Slayer';
   if (s.includes('quest')) return 'Quest';
   if (s.includes('drop') || s.includes('dropped')) return 'Rare Drop';
-  if (s.includes('julia') || s.includes('sky') || s.includes('zoe') || s.includes('north') || s.includes('shop')) return 'NPC Shop';
+  if (s.includes('julia') || /\bsky\b|\bsky['’]s\b/i.test(s) || s.includes('zoe') || s.includes('north') || s.includes('shop')) return 'NPC Shop';
   if (s.includes('pig shop') || s.includes('event') || s.includes('festival') || s.includes('farm-o-matic')) return 'Event';
   if (s.includes('collection 8') || s.includes('collection 9') || s.includes('collection 10') || s.includes('collection 11') || s.includes('collection 12') || s.includes('collection 13') || s.includes('collection 14')) {
     return 'High Collection';

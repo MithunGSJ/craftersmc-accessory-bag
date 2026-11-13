@@ -4,6 +4,7 @@ import { THEME_CONFIG } from '../config/themeConfig.ts';
 import { playClickSound } from '../utils/soundEffects.ts';
 import { AccessoryIcon } from './AccessoryIcon.tsx';
 import { evaluateAccessoryPrice, formatCoins } from '../logic/pricingEngine.ts';
+import { ACCESSORIES_BY_FAMILY } from '../data/accessoryRegistry.ts';
 
 interface RecommendationsPanelProps {
   readonly evaluated: readonly EvaluatedAccessory[];
@@ -29,10 +30,14 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
     .filter(e => e.status === 'MISSING' || e.status === 'UPGRADABLE_NEXT')
     .map(e => {
       const rarity = e.definition.baseRarity;
-      const mpGain =
-        e.status === 'UPGRADABLE_NEXT' && e.upgradeRecommendation
-          ? e.upgradeRecommendation.additionalMp
-          : THEME_CONFIG.rarityMap[rarity]?.magicalPower || 3;
+      let mpGain = THEME_CONFIG.rarityMap[rarity]?.magicalPower || 3;
+      if (e.status === 'UPGRADABLE_NEXT') {
+        const family = ACCESSORIES_BY_FAMILY[e.definition.familyId] || [];
+        const ownedTierDef = family.find(m => m.tier === e.familyMaxTierOwned);
+        const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
+        const netGain = Math.max(0, mpGain - ownedTierMp);
+        if (netGain > 0) mpGain = netGain;
+      }
 
       const stage = e.definition.stage || 'Mid Collection';
       const stageWeight = STAGE_ORDER[stage] || 5;
@@ -83,6 +88,9 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
           return (
             <div
               key={item.definition.id}
+              tabIndex={0}
+              role="button"
+              aria-label={`${item.definition.name} (+${mpGain} MP, ${stage})`}
               style={{
                 background: 'rgba(0, 0, 0, 0.35)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -94,6 +102,13 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
               onClick={() => {
                 playClickSound();
                 onSelectAccessory(item);
+              }}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  playClickSound();
+                  onSelectAccessory(item);
+                }
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.borderColor = 'var(--accent-cyan)';
@@ -110,6 +125,7 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
                     id={item.definition.id}
                     name={item.definition.name}
                     fallbackEmoji={item.definition.iconEmoji}
+                    skinUrl={item.skinUrl}
                     size={26}
                   />
                   <span style={{ fontWeight: 700, color: style.color, fontSize: '0.88rem' }}>

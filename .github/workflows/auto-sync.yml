@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: auto-sync
+  cancel-in-progress: false
+
 jobs:
   sync-and-test:
     name: Sync CraftersMC Wiki, Validate & Test
@@ -38,7 +42,7 @@ jobs:
           CRAFTERS_API_KEY: ${{ secrets.CRAFTERS_API_KEY }}
 
       - name: Run Vitest Regression Suite
-        run: npm test
+        run: npm test -- --run
 
       - name: Verify Strict TypeScript & Production Build
         run: npm run build
@@ -52,5 +56,6 @@ jobs:
             echo "No changes detected. Catalog, sprites, and prices are up to date."
           else
             git commit -m "chore(sync): automated 30-min wiki, sprites & pricing sync [skip ci]"
+            git pull --rebase origin main || true
             git push
           fi

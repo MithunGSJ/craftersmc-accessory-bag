@@ -12,13 +12,14 @@ export interface ScrapedAccessoryRecipe {
 }
 
 export function extractTemplateBlocks(wikitext: string, templateName: string): string[] {
-  const startTag = `{{${templateName}`;
-  let pos = 0;
+  const startPattern = new RegExp(`\\{\\{${templateName}(?=[|\\r\\n\\s}])`, 'gi');
+  let match: RegExpExecArray | null;
   const templates: string[] = [];
 
-  while ((pos = wikitext.indexOf(startTag, pos)) !== -1) {
+  while ((match = startPattern.exec(wikitext)) !== null) {
+    const pos = match.index;
     let depth = 2;
-    let i = pos + startTag.length;
+    let i = pos + match[0].length;
     while (i < wikitext.length && depth > 0) {
       if (wikitext[i] === '{' && wikitext[i + 1] === '{') {
         depth += 2;
@@ -30,8 +31,10 @@ export function extractTemplateBlocks(wikitext: string, templateName: string): s
         i++;
       }
     }
-    templates.push(wikitext.slice(pos, i));
-    pos = i;
+    if (depth === 0) {
+      templates.push(wikitext.slice(pos, i));
+      startPattern.lastIndex = i;
+    }
   }
 
   return templates;
@@ -57,10 +60,12 @@ export function parseCraftTemplate(craftText: string, expectedName?: string): Sc
     const rawId = rawName.toUpperCase().replace(/[^A-Z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
 
     // Check if slot represents an earlier tier accessory (e.g. Ring upgrades from Talisman)
-    const isAccessory = rawName.toLowerCase().includes('talisman') ||
-                        rawName.toLowerCase().includes('ring') ||
-                        rawName.toLowerCase().includes('artifact') ||
-                        rawName.toLowerCase().includes('orb');
+    const lowerName = rawName.toLowerCase();
+    const isAccessory = lowerName.includes('talisman') ||
+                        /\bring\b/i.test(lowerName) ||
+                        lowerName.includes('artifact') ||
+                        lowerName.includes('relic') ||
+                        /\borb\b/i.test(lowerName);
 
     if (isAccessory && rawId !== targetId) {
       if (!upgradesFrom) {

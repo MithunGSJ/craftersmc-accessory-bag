@@ -63,7 +63,7 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
     const stage = inferStageFromWiki(item.source);
     const tier = inferTier(item.name);
     const isPiggyVariant = upperId === 'CRACKED_PIGGY_BANK' || upperId === 'BROKEN_PIGGY_BANK';
-    const familyId = isPiggyVariant ? 'piggy_bank' : upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '');
+    const familyId = isPiggyVariant ? 'piggy_bank' : upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '').toLowerCase();
 
     dynamicWikiAccessories.push({
       id: upperId,
@@ -109,9 +109,14 @@ export const ACCESSORIES_BY_FAMILY = ALL_ACCESSORIES.reduce<Record<string, Acces
   {}
 );
 
-// Sort each family by tier ascending
+// Sort each family by tier ascending with deterministic tie-breaking (degraded variants first, non-degraded highest)
 Object.values(ACCESSORIES_BY_FAMILY).forEach(familyList => {
-  familyList.sort((a, b) => a.tier - b.tier);
+  familyList.sort((a, b) => {
+    if (a.tier !== b.tier) return a.tier - b.tier;
+    if (a.isDegradedVariant && !b.isDegradedVariant) return -1;
+    if (!a.isDegradedVariant && b.isDegradedVariant) return 1;
+    return a.id.localeCompare(b.id);
+  });
 });
 
 export const CATEGORIES: readonly AccessoryCategory[] = [

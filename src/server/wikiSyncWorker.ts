@@ -18,8 +18,14 @@ let nextSyncTime: number | null = null;
 let isSyncing = false;
 let lastError: string | undefined;
 let intervalTimer: ReturnType<typeof setInterval> | null = null;
+let cachedCounts: { totalAccessories: number; totalRecipes: number; timestamp: number } | null = null;
+const COUNTS_CACHE_TTL = 30 * 1000;
 
 function getCounts(): { totalAccessories: number; totalRecipes: number } {
+  if (cachedCounts && Date.now() - cachedCounts.timestamp < COUNTS_CACHE_TTL) {
+    return { totalAccessories: cachedCounts.totalAccessories, totalRecipes: cachedCounts.totalRecipes };
+  }
+
   let totalAccessories = 0;
   let totalRecipes = 0;
   const accPath = path.resolve(process.cwd(), 'src/data/wikiAccessories.json');
@@ -43,6 +49,7 @@ function getCounts(): { totalAccessories: number; totalRecipes: number } {
     }
   }
 
+  cachedCounts = { totalAccessories, totalRecipes, timestamp: Date.now() };
   return { totalAccessories, totalRecipes };
 }
 
@@ -57,6 +64,7 @@ export async function triggerWikiSync(): Promise<{ success: boolean; error?: str
 
   try {
     await runWikiSync();
+    cachedCounts = null; // Invalidate counts cache to reflect freshly synced data
     lastSyncTime = Date.now();
     nextSyncTime = lastSyncTime + INTERVAL_MS;
     console.log(`[WikiSyncWorker] Wiki sync completed successfully. Next check at ${new Date(nextSyncTime).toISOString()}.`);
@@ -83,6 +91,14 @@ export function getWikiSyncStatus(): WikiSyncStatus {
   };
 }
 
+export function stopWikiSyncWorker(): void {
+  if (intervalTimer) {
+    clearInterval(intervalTimer);
+    intervalTimer = null;
+    console.log('[WikiSyncWorker] Background wiki polling stopped.');
+  }
+}
+
 export function startWikiSyncWorker(): void {
   if (intervalTimer) return; // already started
 
@@ -92,4 +108,7 @@ export function startWikiSyncWorker(): void {
   intervalTimer = setInterval(() => {
     void triggerWikiSync();
   }, INTERVAL_MS);
+  if (typeof intervalTimer.unref === 'function') {
+    intervalTimer.unref();
+  }
 }

@@ -20,15 +20,34 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
   onSelectAccessory
 }) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
+  const previousFocusRef = React.useRef<HTMLElement | null>(null);
 
   React.useEffect(() => {
+    if (!evaluated) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
     if (contentRef.current) contentRef.current.scrollTop = 0;
-  }, [evaluated?.definition.id]);
-  React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'Tab' && contentRef.current) {
+        const focusable = contentRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const [first, last] = [focusable[0], focusable[focusable.length - 1]];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = originalOverflow;
+      previousFocusRef.current?.focus();
+    };
+  }, [evaluated, onClose]);
 
   if (!evaluated) return null;
 
@@ -42,6 +61,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
 
   const isOwned = status === 'OWNED';
   const isUpgradable = status === 'UPGRADABLE_NEXT';
+  const isPrevious = status === 'UPGRADED_PREVIOUS';
   const baseMp = style.magicalPower || 0;
   const ownedTierDef = familyChain.find(m => m.tier === evaluated.familyMaxTierOwned);
   const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
@@ -56,6 +76,8 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
       : definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'
     : isFamilyFreezerOwned
     ? '0 Potential MP (Shared MP Owned)'
+    : isPrevious
+    ? '0 MP (Replaced by higher tier)'
     : isUpgradable && netGain > 0 && netGain < baseMp
     ? `+${netGain} MP Upgrade (+${baseMp} Base)`
     : `+${baseMp} Potential MP`;
@@ -64,26 +86,18 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
     if (tierItem.id === definition.id || !onSelectAccessory) return;
     playClickSound();
     const target = allEvaluated?.find(e => e.definition.id === tierItem.id) || {
-      definition: tierItem,
-      status: 'MISSING' as const,
-      effectiveMagicalPower: 0,
-      familyMaxTierOwned: 0,
+      definition: tierItem, status: 'MISSING' as const, effectiveMagicalPower: 0, familyMaxTierOwned: 0,
       isHighestInFamily: tierItem.tier === familyChain[familyChain.length - 1]?.tier
     };
     onSelectAccessory(target);
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
+    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-acc-title">
       <div
         ref={contentRef}
         className="glass-card modal-content"
-        style={{
-          border: `1px solid ${style.border}`,
-          boxShadow: `0 10px 40px -5px ${style.glow}`,
-          maxHeight: '90vh',
-          overflowY: 'auto'
-        }}
+        style={{ border: `1px solid ${style.border}`, boxShadow: `0 10px 40px -5px ${style.glow}`, maxHeight: '90vh', overflowY: 'auto' }}
         onClick={e => e.stopPropagation()}
       >
         <button
@@ -103,7 +117,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
             <AccessoryIcon id={definition.id} name={definition.name} fallbackEmoji={definition.iconEmoji} skinUrl={ownedItem?.skinUrl || skinUrl} size={44} />
           </div>
           <div>
-            <h2 style={{ color: style.color, fontSize: '1.35rem', fontWeight: 800 }}>
+            <h2 id="modal-acc-title" style={{ color: style.color, fontSize: '1.35rem', fontWeight: 800 }}>
               {ownedItem?.displayName || definition.name}
             </h2>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
@@ -114,6 +128,8 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                   <span style={{ color: 'var(--status-missing)', fontWeight: 700, fontSize: '0.85rem' }}>• MISSING</span>
                   <span style={{ color: 'var(--status-upgradable)', fontWeight: 700, fontSize: '0.85rem' }}>• UPGRADABLE</span>
                 </>
+              ) : status === 'UPGRADED_PREVIOUS' ? (
+                <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.85rem' }}>• REPLACED</span>
               ) : (
                 <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
               )}
@@ -157,34 +173,21 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {priceInfo.craftBreakdown.map((ing, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: 'rgba(255,255,255,0.03)',
-                      padding: '5px 8px',
-                      borderRadius: '6px'
-                    }}
-                  >
+                  <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', padding: '5px 8px', borderRadius: '6px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
                       <span style={{ color: 'var(--text-secondary)' }}>
                         • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
-                        <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>
-                          (@ {formatCoins(ing.unitPrice)}/ea)
-                        </span>
+                        <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>(@ {formatCoins(ing.unitPrice)}/ea)</span>
                       </span>
-                      <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>
-                        {formatCoins(ing.totalCost)}
-                      </span>
+                      <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>{formatCoins(ing.totalCost)}</span>
                     </div>
                     {ing.subMaterial && (
                       <div style={{ fontSize: '0.72rem', marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
-                        <span style={{ color: '#94a3b8' }}>
-                          ↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})
-                        </span>
+                        <span style={{ color: '#94a3b8' }}>↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})</span>
                         <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
                           {ing.subMaterial.isCheaper
                             ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
-                            : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)}) crafted from sub-materials`}
+                            : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)})`}
                         </div>
                       </div>
                     )}
@@ -201,9 +204,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
             <div style={{ background: 'rgba(234, 179, 8, 0.08)', border: '1px solid rgba(234, 179, 8, 0.2)', borderRadius: '8px', padding: '8px 12px', marginTop: '6px' }}>
               <div style={{ fontSize: '0.78rem', color: '#facc15', fontWeight: 700, marginBottom: '4px', display: 'flex', justifyContent: 'space-between' }}>
                 <span>🏛️ CraftersMC Auction House ({priceInfo.auction.hasBin !== false ? 'BIN Market' : 'Bidding'})</span>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>
-                  {priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings
-                </span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>{priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '0.75rem', textAlign: 'center' }}>
                 {([
@@ -211,10 +212,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                   { label: priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average', val: priceInfo.auction.avgPrice, color: '#facc15' },
                   { label: priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)', val: priceInfo.auction.maxPrice, color: '#f87171' }
                 ] as const).map((stat, i) => (
-                  <div key={i}>
-                    <div style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
-                    <div style={{ fontWeight: 700, color: stat.color }}>{formatCoins(stat.val)}</div>
-                  </div>
+                  <div key={i}><div style={{ color: 'var(--text-muted)' }}>{stat.label}</div><div style={{ fontWeight: 700, color: stat.color }}>{formatCoins(stat.val)}</div></div>
                 ))}
               </div>
             </div>
@@ -232,11 +230,13 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
             Item Description & Lore (CraftersMC Wiki)
           </span>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#D1D5DB', marginTop: '6px', lineHeight: 1.5 }}>
-            {definition.loreLines.map((line, idx) => (<div key={idx}>{line}</div>))}
+            {definition.loreLines.map((line, idx) => (
+              <div key={idx} style={{ minHeight: '1.2em' }}>{line || '\u00A0'}</div>
+            ))}
           </div>
         </div>
 
-        {/* Active Reforge (only displayed if item has a reforge) */}
+        {/* Active Reforge */}
         {Boolean(ownedItem?.reforge && ownedItem.reforge.trim().toLowerCase() !== 'none') && (
           <div style={{ marginBottom: '16px' }}>
             <div style={{ background: 'rgba(255, 184, 0, 0.08)', padding: '10px 14px', borderRadius: '10px', border: '1px solid rgba(255, 184, 0, 0.2)' }}>
@@ -251,13 +251,9 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
           <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
             CraftersMC Obtaining Requirement
           </span>
-          <div style={{ fontSize: '0.92rem', color: 'var(--text-primary)', marginTop: '4px', fontWeight: 600 }}>
-            📍 {definition.source}
-          </div>
+          <div style={{ fontSize: '0.92rem', color: 'var(--text-primary)', marginTop: '4px', fontWeight: 600 }}>📍 {definition.source}</div>
           {definition.stage && (
-            <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>
-              🏷️ Progression Milestone: {definition.stage}
-            </div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>🏷️ Progression Milestone: {definition.stage}</div>
           )}
         </div>
 

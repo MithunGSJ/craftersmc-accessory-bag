@@ -17,7 +17,12 @@ interface ApiCacheEntry {
 }
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes caching per CraftersMC API Usage Policy
+const MAX_CACHE_ENTRIES = 50;
 const apiCache = new Map<string, ApiCacheEntry>();
+
+export function clearProfileCache(): void {
+  apiCache.clear();
+}
 
 export function getSampleProfileById(id: string): SampleProfile | undefined {
   return SAMPLE_PROFILES.find(p => p.id === id);
@@ -185,10 +190,15 @@ export async function fetchPlayerFromApi(
           player?.stats?.skyBlock?.profiles?.[profileId]?.cuteName ||
           'SkyBlock';
         const members = prof?.members || {};
-        const memberData = members[uuidClean] || members[rawUuid] || Object.values(members)[0];
-        if (memberData && typeof memberData === 'object' && 'accessoryBag' in memberData) {
-          const rawBag = String((memberData as { accessoryBag?: string }).accessoryBag || '');
-          items = parseAccessoryBagBase64(rawBag);
+        const memberData = (members[uuidClean] || members[rawUuid] || Object.values(members)[0]) as Record<string, unknown> | undefined;
+        if (memberData && typeof memberData === 'object') {
+          const inv = memberData['inventory'] as Record<string, unknown> | undefined;
+          const bagContents = inv?.['bag_contents'] as Record<string, unknown> | undefined;
+          const talismanBag = (memberData['talisman_bag'] || bagContents?.['talisman_bag'] || (memberData['accessory_bag_storage'] as Record<string, unknown> | undefined)?.['talisman_bag']) as { data?: string } | undefined;
+          const rawBag = String(memberData['accessoryBag'] || talismanBag?.data || '');
+          if (rawBag) {
+            items = parseAccessoryBagBase64(rawBag);
+          }
         }
       }
     } catch (e) {
@@ -204,6 +214,10 @@ export async function fetchPlayerFromApi(
     lastFetched: Date.now()
   };
 
+  if (apiCache.size >= MAX_CACHE_ENTRIES) {
+    const oldestKey = apiCache.keys().next().value;
+    if (oldestKey) apiCache.delete(oldestKey);
+  }
   apiCache.set(cacheKey, { timestamp: Date.now(), data: result });
   return result;
 }

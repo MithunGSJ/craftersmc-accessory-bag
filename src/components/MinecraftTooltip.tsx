@@ -1,7 +1,7 @@
 import React from 'react';
 import { EvaluatedAccessory } from '../data/accessoryTypes.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
-import { evaluateAccessoryPrice } from '../logic/pricingEngine.ts';
+import { evaluateAccessoryPrice, formatCoins } from '../logic/pricingEngine.ts';
 
 interface MinecraftTooltipProps {
   readonly item: EvaluatedAccessory;
@@ -59,7 +59,12 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
 
       {/* Magical Power */}
       <div style={{ color: '#55FFFF', margin: '4px 0', fontWeight: 'bold', fontSize: '18px' }}>
-        Magical Power: +{effectiveMagicalPower > 0 ? effectiveMagicalPower : style.magicalPower} MP
+        Magical Power:{' '}
+        {isOwned
+          ? effectiveMagicalPower > 0
+            ? `+${effectiveMagicalPower} MP`
+            : '0 MP (Non-Stacking / Superseded)'
+          : `+${style.magicalPower} MP`}
       </div>
 
       {/* Pricing / Obtaining Info */}
@@ -70,14 +75,16 @@ export const MinecraftTooltip: React.FC<MinecraftTooltipProps> = ({ item, pos })
           </div>
         )}
         {priceInfo.primaryMethod === 'AUCTION' && (
-          <div style={{ color: '#FFFF55' }}>🏛️ AH: ~{priceInfo.displayLabel}</div>
+          <div style={{ color: '#FFFF55' }}>
+            🏛️ {priceInfo.displayLabel.startsWith('AH:') ? priceInfo.displayLabel : `AH: ~${priceInfo.displayLabel}`}
+          </div>
         )}
         {priceInfo.primaryMethod === 'NPC_SHOP' && (
           <div style={{ color: '#FFAA00' }}>🪙 {priceInfo.displayLabel}</div>
         )}
         {priceInfo.auction && priceInfo.primaryMethod !== 'AUCTION' && (
           <div style={{ color: '#AAAAAA', fontSize: '15px' }}>
-            AH Range: Min {priceInfo.auction.minPrice >= 1000000 ? `${(priceInfo.auction.minPrice / 1000000).toFixed(1)}M` : `${Math.round(priceInfo.auction.minPrice / 1000)}K`} - Avg {priceInfo.auction.avgPrice >= 1000000 ? `${(priceInfo.auction.avgPrice / 1000000).toFixed(1)}M` : `${Math.round(priceInfo.auction.avgPrice / 1000)}K`}
+            AH Range: Min {formatCoins(priceInfo.auction.minPrice)} - Avg {formatCoins(priceInfo.auction.avgPrice)}
           </div>
         )}
       </div>

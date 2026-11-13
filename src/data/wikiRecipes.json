@@ -262,16 +262,12 @@
   "FIRE_DEVOURER": {
     "targetId": "FIRE_DEVOURER",
     "targetName": "Fire Devourer",
+    "upgradesFrom": "FIRE_EXTINGUISHER",
     "ingredients": [
       {
         "itemId": "fire_fragment",
         "name": "Fire Fragment",
         "count": 4
-      },
-      {
-        "itemId": "fire_extinguisher",
-        "name": "Fire Extinguisher",
-        "count": 1
       }
     ]
   },
@@ -280,7 +276,7 @@
     "targetName": "Fire Extinguisher",
     "ingredients": [
       {
-        "itemId": "envoy_s_horn",
+        "itemId": "envoy_horns",
         "name": "Envoy's Horn",
         "count": 8
       }
@@ -379,8 +375,8 @@
         "count": 128
       },
       {
-        "itemId": "redstone_dust",
-        "name": "Redstone Dust",
+        "itemId": "redstone",
+        "name": "Redstone",
         "count": 32
       }
     ]
@@ -408,11 +404,11 @@
       {
         "itemId": "enchanted_raw_porkchop",
         "name": "Enchanted Raw Porkchop",
-        "count": 24
+        "count": 96
       },
       {
-        "itemId": "broken_piggy_bank",
-        "name": "Broken Piggy Bank",
+        "itemId": "chest",
+        "name": "Chest",
         "count": 1
       }
     ]

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { loadSampleProfile, loadFromBase64Nbt, getSampleProfileById } from './profileLoader.ts';
+import { loadSampleProfile, loadFromBase64Nbt, getSampleProfileById, clearProfileCache } from './profileLoader.ts';
 import { SAMPLE_PROFILES } from '../data/sampleProfiles.ts';
 
 describe('profileLoader', () => {
@@ -28,5 +28,9 @@ describe('profileLoader', () => {
     expect(custom.playerName).toBe('TestPlayer');
     expect(custom.items).toEqual([]);
     expect(custom.source).toBe('custom_nbt');
+  });
+
+  it('supports cache clearing via clearProfileCache', () => {
+    expect(() => clearProfileCache()).not.toThrow();
   });
 });

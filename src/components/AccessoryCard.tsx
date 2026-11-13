@@ -3,7 +3,7 @@ import { EvaluatedAccessory } from '../data/accessoryTypes.ts';
 import { THEME_CONFIG } from '../config/themeConfig.ts';
 import { playEquipSound } from '../utils/soundEffects.ts';
 import { AccessoryIcon } from './AccessoryIcon.tsx';
-import { evaluateAccessoryPrice } from '../logic/pricingEngine.ts';
+import { evaluateAccessoryPrice, formatCoins } from '../logic/pricingEngine.ts';
 import { ACCESSORIES_BY_FAMILY } from '../data/accessoryRegistry.ts';
 
 interface AccessoryCardProps {
@@ -34,6 +34,9 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
       mpLabel = '0 MP';
       mpTitle = '0 Active MP (Superseded or Non-Stacking)';
     }
+  } else if (isPrevious) {
+    mpLabel = '0 MP';
+    mpTitle = '0 MP (Replaced by higher tier in family)';
   } else {
     if (isUpgradable) {
       const family = ACCESSORIES_BY_FAMILY[definition.familyId] || [];
@@ -86,6 +89,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
       aria-label={`${definition.name} (${statusLabel})`}
       onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
           playEquipSound();
           onClick();
         }
@@ -178,7 +182,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
             }}
             title={`Active Auctions: Min ${priceInfo.auction.minPrice.toLocaleString()} | Max ${priceInfo.auction.maxPrice.toLocaleString()} | Avg ${priceInfo.auction.avgPrice.toLocaleString()}`}
           >
-            AH: {priceInfo.auction.avgPrice >= 1000000 ? `${(priceInfo.auction.avgPrice / 1000000).toFixed(1)}M` : `${Math.round(priceInfo.auction.avgPrice / 1000)}K`}
+            AH: {formatCoins(priceInfo.auction.avgPrice)}
           </span>
         )}
       </div>

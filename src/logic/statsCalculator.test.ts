@@ -50,4 +50,18 @@ describe('statsCalculator', () => {
     expect(stats.enrichmentCount).toBe(1);
     expect(stats.completionPercentage).toBeGreaterThan(0);
   });
+
+  it('correctly tracks unique ownedFamiliesCount and bounds completion percentage based on families', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'D0', internalId: 'DAYFREEZER', displayName: 'Dayfreezer', rarity: 'LEGENDARY', slot: 0, lore: [] },
+      { id: 'N0', internalId: 'NIGHTFREEZER', displayName: 'Nightfreezer', rarity: 'LEGENDARY', slot: 1, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const stats = calculateBagStatistics(evaluated);
+
+    // Both owned, but belong to 1 unique family (day_night_freezer)
+    expect(stats.ownedCount).toBe(2);
+    expect(stats.ownedFamiliesCount).toBe(1);
+    expect(stats.completionPercentage).toBe(Math.round((1 / stats.totalFamilies) * 100));
+  });
 });

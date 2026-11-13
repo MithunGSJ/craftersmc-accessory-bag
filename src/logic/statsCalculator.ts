@@ -6,6 +6,7 @@ export interface BagStatistics {
   readonly totalMagicalPower: number;
   readonly maxPossibleMagicalPower: number;
   readonly ownedCount: number;
+  readonly ownedFamiliesCount: number;
   readonly missingCount: number;
   readonly upgradableCount: number;
   readonly totalFamilies: number;
@@ -43,10 +44,12 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
   };
 
   const countedMissingFamilies = new Set<string>();
+  const ownedFamilies = new Set<string>();
 
   for (const item of evaluated) {
     if (item.status === 'OWNED') {
       ownedCount++;
+      ownedFamilies.add(item.definition.familyId);
       totalMagicalPower += item.effectiveMagicalPower;
       const rarity = item.ownedItem ? item.ownedItem.rarity : item.definition.baseRarity;
       rarityCounts[rarity] = (rarityCounts[rarity] || 0) + 1;
@@ -57,7 +60,7 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
       upgradableCount++;
     } else if (item.status === 'MISSING') {
       // Only count missing once per unowned family
-      if (item.familyMaxTierOwned === 0 && item.definition.tier === 1) {
+      if (item.familyMaxTierOwned === 0) {
         if (!countedMissingFamilies.has(item.definition.familyId)) {
           countedMissingFamilies.add(item.definition.familyId);
           missingCount++;
@@ -66,13 +69,15 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     }
   }
 
+  const ownedFamiliesCount = ownedFamilies.size;
   const completionPercentage =
-    TOTAL_FAMILIES > 0 ? Math.min(100, Math.round((ownedCount / TOTAL_FAMILIES) * 100)) : 0;
+    TOTAL_FAMILIES > 0 ? Math.min(100, Math.round((ownedFamiliesCount / TOTAL_FAMILIES) * 100)) : 0;
 
   return {
     totalMagicalPower,
     maxPossibleMagicalPower: MAX_POSSIBLE_MAGICAL_POWER,
     ownedCount,
+    ownedFamiliesCount,
     missingCount,
     upgradableCount,
     totalFamilies: TOTAL_FAMILIES,

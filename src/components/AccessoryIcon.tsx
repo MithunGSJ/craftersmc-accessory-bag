@@ -40,49 +40,50 @@ export const AccessoryIcon: React.FC<AccessoryIconProps> = ({
     return Array.from(new Set(list));
   }, [id, name]);
 
-  // Reset candidate index when id or skinUrl changes
+  // Reset candidate index when id, name, or skinUrl changes
   React.useEffect(() => {
     setCandidateIndex(0);
     setSkinFailed(false);
-  }, [id, skinUrl]);
+  }, [id, skinUrl, name]);
 
   const iconClasses = `accessory-icon ${className}`.trim();
 
-  if (candidateIndex >= candidates.length) {
-    if (skinUrl && !skinFailed) {
-      return (
-        <span
-          className="accessory-icon-wrapper"
+  // Prioritize player skull skinUrl if available, falling back to local files if it fails
+  if (skinUrl && !skinFailed) {
+    return (
+      <span
+        className="accessory-icon-wrapper"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          overflow: 'hidden',
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0
+        }}
+      >
+        <img
+          src={skinUrl}
+          alt={name}
+          className={`${iconClasses} accessory-skin-img`}
+          onError={() => setSkinFailed(true)}
           style={{
-            width: `${size}px`,
-            height: `${size}px`,
-            overflow: 'hidden',
-            position: 'relative',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0
+            width: `${size * 8}px`,
+            height: `${size * 8}px`,
+            position: 'absolute',
+            left: `-${size}px`,
+            top: `-${size}px`,
+            imageRendering: 'pixelated',
+            maxWidth: 'none'
           }}
-        >
-          <img
-            src={skinUrl}
-            alt={name}
-            className={iconClasses}
-            onError={() => setSkinFailed(true)}
-            style={{
-              width: `${size * 8}px`,
-              height: `${size * 8}px`,
-              position: 'absolute',
-              left: `-${size}px`,
-              top: `-${size}px`,
-              imageRendering: 'pixelated',
-              maxWidth: 'none'
-            }}
-          />
-        </span>
-      );
-    }
+        />
+      </span>
+    );
+  }
 
+  if (candidateIndex >= candidates.length) {
     return (
       <span
         className={className}

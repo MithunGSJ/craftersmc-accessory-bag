@@ -48,14 +48,13 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     category: 'Farming',
     familyId: 'potato',
     tier: 1,
-    description: 'Speed: +1 Your potato minions farm 5% faster while wearing on your island. Drop from Shiny Pig during Shiny Pig event.',
+    description: 'Speed: +1 Your potato minions farm 5% faster while wearing on your island.',
     source: 'Shiny Pig drop (Shiny Pig Event / Season of the Pig)',
     stage: 'Event',
     iconEmoji: '🥔',
     loreLines: [
       'Speed: +1',
-      'Your potato minions farm 5% faster while wearing on your island.',
-      'Drop from Shiny Pig during Shiny Pig event.'
+      'Your potato minions farm 5% faster while wearing on your island.'
     ]
   },
   // Bamboo Family

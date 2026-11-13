@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { spawn } from 'child_process';
+import { spawn, execSync } from 'child_process';
 import fs from 'fs';
 
 async function verifyResponsive() {
@@ -55,7 +55,17 @@ async function verifyResponsive() {
     fs.writeFileSync('evidence/FEAT-011-audio-responsive.txt', resultText);
   } finally {
     await browser.close();
-    server.kill();
+    if (server.pid) {
+      if (process.platform === 'win32') {
+        try {
+          execSync(`taskkill /pid ${server.pid} /T /F`, { stdio: 'ignore' });
+        } catch {
+          server.kill();
+        }
+      } else {
+        server.kill();
+      }
+    }
   }
 }
 

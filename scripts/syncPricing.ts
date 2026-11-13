@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { ACCESSORY_RECIPES } from '../src/data/accessoryRecipes.ts';
 
-const API_KEY = process.env.CRAFTERS_API_KEY || '44858bff-1259-457f-905d-514867e3780d';
+const API_KEY = process.env.CRAFTERS_API_KEY || '';
 const SNAPSHOT_PATH = path.resolve(process.cwd(), 'src/data/pricingSnapshot.json');
 
 interface BazaarDetailResponse {
@@ -217,7 +217,9 @@ export async function runPricingSync(): Promise<{
     }
   }
 
-  fs.writeFileSync(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2));
+  const tempPath = `${SNAPSHOT_PATH}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempPath, JSON.stringify(snapshot, null, 2));
+  fs.renameSync(tempPath, SNAPSHOT_PATH);
   console.log(`🎉 Automated pricing sync complete! Saved to ${SNAPSHOT_PATH}`);
 
   return {

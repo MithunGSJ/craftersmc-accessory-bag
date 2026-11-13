@@ -1,5 +1,5 @@
 import type { Plugin, Connect } from 'vite';
-import { startWikiSyncWorker, getWikiSyncStatus, triggerWikiSync } from './wikiSyncWorker.ts';
+import { startWikiSyncWorker, stopWikiSyncWorker, getWikiSyncStatus, triggerWikiSync } from './wikiSyncWorker.ts';
 
 interface AuctionItem {
   readonly itemId: string;
@@ -26,16 +26,16 @@ export interface LivePricingPayload {
 export function livePricingPlugin(apiKey: string): Plugin {
   let cachedPayload: LivePricingPayload | null = null;
   let lastFetchTime = 0;
+  let inFlightFetch: Promise<LivePricingPayload | null> | null = null;
   const CACHE_DURATION_MS = 5 * 60 * 1000;
 
-  async function fetchLiveAuctions(): Promise<LivePricingPayload | null> {
-    if (cachedPayload && Date.now() - lastFetchTime < CACHE_DURATION_MS) {
-      return cachedPayload;
-    }
-
+  async function executeFetch(): Promise<LivePricingPayload | null> {
     try {
       const headers: Record<string, string> = apiKey ? { 'X-API-Key': apiKey } : {};
-      const firstRes = await fetch('https://api.craftersmc.net/v1/skyblock/auctions?page=0', { headers });
+      const firstRes = await fetch('https://api.craftersmc.net/v1/skyblock/auctions?page=0', {
+        headers,
+        signal: AbortSignal.timeout(10000)
+      });
       if (!firstRes.ok) return cachedPayload;
 
       const firstData = await firstRes.json();
@@ -44,7 +44,11 @@ export function livePricingPlugin(apiKey: string): Plugin {
 
       if (totalPages > 1) {
         for (let p = 1; p < Math.min(totalPages, 5); p++) {
-          const res = await fetch(`https://api.craftersmc.net/v1/skyblock/auctions?page=${p}`, { headers });
+          await new Promise(r => setTimeout(r, 200)); // Pace auction page requests
+          const res = await fetch(`https://api.craftersmc.net/v1/skyblock/auctions?page=${p}`, {
+            headers,
+            signal: AbortSignal.timeout(10000)
+          });
           if (res.ok) {
             const pageData = await res.json();
             if (Array.isArray(pageData.auctions)) {
@@ -78,8 +82,8 @@ export function livePricingPlugin(apiKey: string): Plugin {
       for (const [id, prices] of Object.entries(byItem)) {
         const sorted = prices.slice().sort((a, b) => a - b);
         const effective = sorted.length >= 4 ? sorted.slice(1, -1) : sorted;
-        const minPrice = Math.min(...effective);
-        const maxPrice = Math.max(...effective);
+        const minPrice = effective[0];
+        const maxPrice = effective[effective.length - 1];
         const avgPrice = Math.round(effective.reduce((sum, p) => sum + p, 0) / effective.length);
 
         summaryMap[id] = {
@@ -111,7 +115,11 @@ export function livePricingPlugin(apiKey: string): Plugin {
       ];
       for (const item of keyBazaarItems) {
         try {
-          const bRes = await fetch(`https://api.craftersmc.net/v1/skyblock/bazaar/${item}/details`, { headers });
+          await new Promise(r => setTimeout(r, 150)); // Pace bazaar requests
+          const bRes = await fetch(`https://api.craftersmc.net/v1/skyblock/bazaar/${item}/details`, {
+            headers,
+            signal: AbortSignal.timeout(10000)
+          });
           if (bRes.ok) {
             const bData = await bRes.json();
             const avg = Number(bData.weeklyAveragePrice) || Number(bData.buyTopEntries?.[0]?.price) || 0;
@@ -137,36 +145,101 @@ export function livePricingPlugin(apiKey: string): Plugin {
     }
   }
 
+  async function fetchLiveAuctions(): Promise<LivePricingPayload | null> {
+    if (cachedPayload && Date.now() - lastFetchTime < CACHE_DURATION_MS) {
+      return cachedPayload;
+    }
+    if (inFlightFetch) {
+      return inFlightFetch;
+    }
+    inFlightFetch = executeFetch().finally(() => {
+      inFlightFetch = null;
+    });
+    return inFlightFetch;
+  }
+
   const handler: Connect.NextHandleFunction = (req, res, next) => {
     const url = req.url?.split('?')[0];
+
+    // Handle CORS preflight cleanly
+    if (req.method === 'OPTIONS') {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
+      res.statusCode = 204;
+      res.end();
+      return;
+    }
+
     if (url === '/api/pricing/live' || url === '/api/v1/pricing/live') {
       void (async () => {
-        const data = await fetchLiveAuctions();
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        if (data) {
-          res.end(JSON.stringify({ success: true, ...data }));
-        } else {
-          res.end(JSON.stringify({ success: false, fallback: true }));
+        try {
+          const data = await fetchLiveAuctions();
+          if (!res.writableEnded && !res.destroyed) {
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            if (data) {
+              res.end(JSON.stringify({ success: true, ...data }));
+            } else {
+              res.end(JSON.stringify({ success: false, fallback: true }));
+            }
+          }
+        } catch (err) {
+          if (!res.writableEnded && !res.destroyed) {
+            try {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ success: false, error: String(err) }));
+            } catch {
+              // ignore
+            }
+          }
         }
       })();
       return;
     }
+
     if (url === '/api/wiki/status') {
-      res.setHeader('Content-Type', 'application/json');
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.end(JSON.stringify(getWikiSyncStatus()));
-      return;
-    }
-    if (url === '/api/wiki/sync') {
-      void (async () => {
-        const result = await triggerWikiSync();
+      if (!res.writableEnded && !res.destroyed) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.end(JSON.stringify(result));
+        res.end(JSON.stringify(getWikiSyncStatus()));
+      }
+      return;
+    }
+
+    if (url === '/api/wiki/sync') {
+      if (req.method !== 'POST') {
+        res.statusCode = 405;
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Allow', 'POST');
+        res.end(JSON.stringify({ success: false, error: 'Method Not Allowed. Use POST.' }));
+        return;
+      }
+
+      void (async () => {
+        try {
+          const result = await triggerWikiSync();
+          if (!res.writableEnded && !res.destroyed) {
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.end(JSON.stringify(result));
+          }
+        } catch (err) {
+          if (!res.writableEnded && !res.destroyed) {
+            try {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ success: false, error: String(err) }));
+            } catch {
+              // ignore
+            }
+          }
+        }
       })();
       return;
     }
+
     next();
   };
 
@@ -174,10 +247,15 @@ export function livePricingPlugin(apiKey: string): Plugin {
     name: 'craftersmc-live-pricing',
     configureServer(server) {
       startWikiSyncWorker();
+      server.httpServer?.on('close', () => {
+        stopWikiSyncWorker();
+      });
       server.middlewares.use(handler);
     },
     configurePreviewServer(server) {
-      startWikiSyncWorker();
+      server.httpServer?.on('close', () => {
+        stopWikiSyncWorker();
+      });
       server.middlewares.use(handler);
     }
   };

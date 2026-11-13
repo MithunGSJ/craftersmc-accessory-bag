@@ -212,8 +212,10 @@ export async function runWikiSync(): Promise<{
     }
   }
 
-  // Save parsed accessories to wikiAccessories.json
-  fs.writeFileSync(wikiAccessoriesPath, JSON.stringify(items, null, 2));
+  // Save parsed accessories to wikiAccessories.json with atomic write
+  const tempAccPath = `${wikiAccessoriesPath}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempAccPath, JSON.stringify(items, null, 2));
+  fs.renameSync(tempAccPath, wikiAccessoriesPath);
 
   // Scrape crafting recipes from wiki pages
   const wikiRecipesPath = path.resolve(process.cwd(), 'src/data/wikiRecipes.json');
@@ -231,6 +233,7 @@ export async function runWikiSync(): Promise<{
     if (!isObtainableAccessory(item)) continue;
     const isCrafted = item.source.toLowerCase().includes('craft') || item.source.toLowerCase().includes('collection');
     if (isCrafted && !recipesMap[item.id]) {
+      await new Promise(r => setTimeout(r, 200)); // Pace requests to avoid 429
       const pageTitle = item.name.replace(/ /g, '_');
       const extracted = await extractRecipesForAccessory(pageTitle);
       for (const r of extracted) {
@@ -239,7 +242,9 @@ export async function runWikiSync(): Promise<{
       }
     }
   }
-  fs.writeFileSync(wikiRecipesPath, JSON.stringify(recipesMap, null, 2));
+  const tempRecPath = `${wikiRecipesPath}.tmp.${Date.now()}`;
+  fs.writeFileSync(tempRecPath, JSON.stringify(recipesMap, null, 2));
+  fs.renameSync(tempRecPath, wikiRecipesPath);
   console.log(`📜 Wiki recipes synced: ${Object.keys(recipesMap).length} total recipes (${scrapedRecipes} newly scraped).`);
 
   console.log(`📊 Wiki Sync Complete: ${items.length} items parsed, ${existingSprites} sprites existing, ${downloadedSprites} downloaded, ${failedSprites} failed.`);

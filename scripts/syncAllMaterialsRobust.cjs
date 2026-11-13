@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = '44858bff-1259-457f-905d-514867e3780d';
+const API_KEY = process.env.CRAFTERS_API_KEY || '';
 const SNAPSHOT_PATH = path.resolve(__dirname, '../src/data/pricingSnapshot.json');
 const RECIPES_PATH = path.resolve(__dirname, '../src/data/accessoryRecipes.ts');
 

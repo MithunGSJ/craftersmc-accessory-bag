@@ -18,6 +18,7 @@ import { calculateBagStatistics } from './logic/statsCalculator.ts';
 import { hydrateLivePricing } from './logic/pricingEngine.ts';
 import { EvaluatedAccessory, AccessoryCategory } from './data/accessoryTypes.ts';
 import { ItemRarity, THEME_CONFIG } from './config/themeConfig.ts';
+import { playClickSound } from './utils/soundEffects.ts';
 
 export const App: React.FC = () => {
   const [currentProfileId, setCurrentProfileId] = React.useState('fresh');
@@ -38,9 +39,15 @@ export const App: React.FC = () => {
   const [, setPricingHydrated] = React.useState(false);
 
   React.useEffect(() => {
-    void hydrateLivePricing().then(ok => {
-      if (ok) setPricingHydrated(true);
-    });
+    let isMounted = true;
+    void hydrateLivePricing()
+      .then(ok => {
+        if (isMounted && ok) setPricingHydrated(true);
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   // Evaluate accessories
@@ -66,6 +73,7 @@ export const App: React.FC = () => {
 
   const handleSelectSample = (id: string) => {
     setCurrentProfileId(id);
+    setSelectedAccessory(null);
     setProfileData(loadSampleProfile(id));
   };
 
@@ -76,6 +84,7 @@ export const App: React.FC = () => {
       const data = await fetchPlayerFromApi(username);
       setProfileData(data);
       setCurrentProfileId('custom');
+      setSelectedAccessory(null);
       setIsLookupOpen(false);
     } catch (err) {
       setApiError(err instanceof Error ? err.message : 'Unknown error during API lookup');
@@ -87,15 +96,37 @@ export const App: React.FC = () => {
   const handleLoadSimulated = (name: string) => {
     setProfileData(createSimulatedProfileForPlayer(name));
     setCurrentProfileId('custom');
+    setSelectedAccessory(null);
     setIsLookupOpen(false);
   };
+
+  const handleOpenCustomModal = () => {
+    setApiError(null);
+    setIsLookupOpen(true);
+  };
+
+  const handleCloseCustomModal = () => {
+    setApiError(null);
+    setIsLookupOpen(false);
+  };
+
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setStatusFilter('ALL');
+    setCategoryFilter('ALL');
+    setRarityFilter('ALL');
+  };
+
+  const handleCloseAccessoryModal = React.useCallback(() => {
+    setSelectedAccessory(null);
+  }, []);
 
   return (
     <div className="app-container">
       <HeroHeader
         currentProfileId={currentProfileId}
         onSelectSample={handleSelectSample}
-        onOpenCustomModal={() => setIsLookupOpen(true)}
+        onOpenCustomModal={handleOpenCustomModal}
       />
 
       <StatsOverview
@@ -118,20 +149,31 @@ export const App: React.FC = () => {
         onCategoryFilterChange={setCategoryFilter}
         rarityFilter={rarityFilter}
         onRarityFilterChange={setRarityFilter}
+        onResetFilters={handleResetFilters}
       />
 
       <div className="view-mode-tabs" role="tablist" aria-label="View Mode">
         <button
           type="button"
+          role="tab"
+          aria-selected={viewMode === 'CHEST'}
           className={`view-tab-btn ${viewMode === 'CHEST' ? 'active' : ''}`}
-          onClick={() => setViewMode('CHEST')}
+          onClick={() => {
+            playClickSound();
+            setViewMode('CHEST');
+          }}
         >
           🎒 Minecraft Inventory View
         </button>
         <button
           type="button"
+          role="tab"
+          aria-selected={viewMode === 'CARDS'}
           className={`view-tab-btn ${viewMode === 'CARDS' ? 'active' : ''}`}
-          onClick={() => setViewMode('CARDS')}
+          onClick={() => {
+            playClickSound();
+            setViewMode('CARDS');
+          }}
         >
           📋 Card Grid View
         </button>
@@ -143,6 +185,7 @@ export const App: React.FC = () => {
             accessories={visibleAccessories}
             onSelectAccessory={acc => setSelectedAccessory(acc)}
             defaultBagNumber={1}
+            onClose={() => setViewMode('CARDS')}
           />
         ) : (
           <section className="accessory-grid" aria-label="Accessories catalog">
@@ -159,6 +202,14 @@ export const App: React.FC = () => {
         <div className="glass-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--text-muted)' }}>
           <p style={{ fontSize: '1.2rem', marginBottom: '8px' }}>🔍 No accessories found</p>
           <p style={{ fontSize: '0.88rem' }}>Try broadening your search term or clearing filters.</p>
+          <button
+            type="button"
+            className="pill-btn"
+            style={{ margin: '14px auto 0 auto', borderColor: 'var(--status-missing)' }}
+            onClick={handleResetFilters}
+          >
+            ✕ Reset All Filters
+          </button>
         </div>
       )}
 
@@ -184,13 +235,13 @@ export const App: React.FC = () => {
       <AccessoryModal
         evaluated={selectedAccessory}
         allEvaluated={evaluatedAll}
-        onClose={() => setSelectedAccessory(null)}
+        onClose={handleCloseAccessoryModal}
         onSelectAccessory={setSelectedAccessory}
       />
 
       <CustomLookupModal
         isOpen={isLookupOpen}
-        onClose={() => setIsLookupOpen(false)}
+        onClose={handleCloseCustomModal}
         onLookupApi={handleApiLookup}
         onLoadSimulated={handleLoadSimulated}
         isLoading={isFetchingApi}

@@ -88,4 +88,17 @@ Some other text {{AnotherTemplate|val=1}}
     expect(status.totalAccessories).toBeGreaterThanOrEqual(70);
     expect(status.totalRecipes).toBeGreaterThanOrEqual(30);
   });
+
+  it('does not treat String or Enchanted String as accessory upgrade parent', () => {
+    const craftBlock = `{{Craft
+|A1={{Slot|Enchanted String|32}}|A2={{Slot|Enchanted String|32}}|A3={{Slot|Enchanted String|32}}
+|B1={{Slot|Enchanted String|32}}|B2={{Slot|Air}}|B3={{Slot|Enchanted String|32}}
+|C1={{Slot|Enchanted String|32}}|C2={{Slot|Enchanted String|32}}|C3={{Slot|Enchanted String|32}}
+|Result={{Slot|Tarantula Talisman}}
+}}`;
+    const parsed = parseCraftTemplate(craftBlock);
+    expect(parsed).not.toBeNull();
+    expect(parsed?.upgradesFrom).toBeUndefined();
+    expect(parsed?.ingredients.some(i => i.itemId === 'enchanted_string')).toBe(true);
+  });
 });

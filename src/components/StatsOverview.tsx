@@ -20,10 +20,17 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
         <div className="stat-value" style={{ color: 'var(--accent-gold)' }}>
           {stats.totalMagicalPower} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>/ {stats.maxPossibleMagicalPower} MP</span>
         </div>
-        <div style={{ width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '4px', overflow: 'hidden', marginTop: '4px' }}>
+        <div
+          role="progressbar"
+          aria-valuenow={Math.min(100, Math.max(0, mpPercent))}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Magical Power potential progress"
+          style={{ width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '4px', overflow: 'hidden', marginTop: '4px' }}
+        >
           <div
             style={{
-              width: `${Math.min(100, mpPercent)}%`,
+              width: `${Math.min(100, Math.max(0, mpPercent))}%`,
               height: '100%',
               background: 'linear-gradient(90deg, #FFB800, #FF55FF)',
               borderRadius: '4px',
@@ -64,7 +71,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
           {playerName}
         </div>
         <span className="stat-subtext">
-          {profileName} • {stats.reforgeCount} Reforges
+          {profileName} • {stats.reforgeCount} Reforges{stats.enrichmentCount > 0 ? ` • ${stats.enrichmentCount} Enrichments` : ''}
         </span>
       </div>
     </section>

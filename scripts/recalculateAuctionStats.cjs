@@ -1,6 +1,6 @@
 const fs = require('fs');
 const https = require('https');
-const API_KEY = '44858bff-1259-457f-905d-514867e3780d';
+const API_KEY = process.env.CRAFTERS_API_KEY || '';
 
 function fetchPage(p) {
   return new Promise((resolve) => {

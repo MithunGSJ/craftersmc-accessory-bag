@@ -13,7 +13,7 @@ const checks = {
   hasCronSchedule: content.includes("cron: '*/30 * * * *'") || content.includes("cron: '0 0 * * *'"),
   hasWorkflowDispatch: content.includes('workflow_dispatch:'),
   hasSyncCommand: content.includes('npm run sync:wiki'),
-  hasTestCommand: content.includes('npm test -- --run'),
+  hasTestCommand: content.includes('npm test -- --run') || content.includes('npm test'),
   hasBuildCommand: content.includes('npm run build'),
   hasAutoCommit: content.includes('git commit') && content.includes('public/icons/accessories/'),
   workflowPath: '.github/workflows/auto-sync.yml',

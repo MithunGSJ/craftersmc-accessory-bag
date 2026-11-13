@@ -50,7 +50,7 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'red_claw',
     tier: 2,
     description: 'Critical Damage: +3% Requires Wolf Slayer 3.',
-    source: 'Crafting (Wolf Slayer 5)',
+    source: 'Crafting (Wolf Slayer 3)',
     stage: 'Slayer',
     iconEmoji: '🐾',
     loreLines: ['Critical Damage: +3%', 'Requires Wolf Slayer 3.']
@@ -77,7 +77,7 @@ export const SLAYER_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'red_claw',
     tier: 4,
     description: 'Critical Damage: +7% Requires Wolf Slayer 7.',
-    source: 'Crafting (Wolf Slayer 8)',
+    source: 'Crafting (Wolf Slayer 7)',
     stage: 'Slayer',
     iconEmoji: '❄️',
     loreLines: ['Critical Damage: +7%', 'Requires Wolf Slayer 7.']

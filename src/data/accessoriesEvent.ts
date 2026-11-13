@@ -129,7 +129,7 @@ export const EVENT_ACCESSORIES: readonly AccessoryDefinition[] = [
     familyId: 'candy',
     tier: 4,
     description: 'Increases the drop chance of Green Candy and Purple Candy by +20% during Spooky Festival.',
-    source: 'Terrik (Candy Artifact + 64 Purple Candy)',
+    source: 'Terrik (Candy Artifact + 1,024 Purple Candy)',
     stage: 'Event',
     iconEmoji: '🍬',
     loreLines: ['+20% Green & Purple Candy drop chance during Spooky Festival.']

@@ -473,8 +473,22 @@ a:hover {
     grid-template-columns: 1fr 1fr;
   }
 
+  .stats-grid > :last-child {
+    grid-column: span 2;
+  }
+
   .accessory-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid > :last-child {
+    grid-column: auto;
   }
 }
 
@@ -580,8 +594,8 @@ a:hover {
   transition: background-color 0.1s ease;
 }
 
-.mc-slot img,
-.mc-slot .accessory-icon {
+.mc-slot img:not(.accessory-skin-img),
+.mc-slot .accessory-icon:not(.accessory-skin-img) {
   width: 78% !important;
   height: 78% !important;
   max-width: 32px;
@@ -592,6 +606,17 @@ a:hover {
   image-rendering: pixelated;
   -ms-interpolation-mode: nearest-neighbor;
   transform: translateZ(0);
+  pointer-events: none;
+}
+
+.mc-slot .accessory-icon-wrapper {
+  pointer-events: none;
+}
+
+.mc-slot .accessory-skin-img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
   pointer-events: none;
 }
 

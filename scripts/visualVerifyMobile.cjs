@@ -18,12 +18,19 @@ const server = http.createServer((req, res) => {
   let reqPath = req.url.split('?')[0];
   if (reqPath === '/') reqPath = '/index.html';
   
-  let filePath = path.join(distDir, reqPath);
-  if (!fs.existsSync(filePath)) {
-    filePath = path.join(process.cwd(), 'public', reqPath);
+  // Normalize and prevent directory traversal
+  const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');
+  const publicDir = path.resolve(process.cwd(), 'public');
+
+  let filePath = path.resolve(distDir, '.' + safePath);
+  if (!filePath.startsWith(distDir) || !fs.existsSync(filePath)) {
+    filePath = path.resolve(publicDir, '.' + safePath);
   }
 
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+  // Ensure filePath stays within distDir or publicDir
+  const isSafe = filePath.startsWith(distDir) || filePath.startsWith(publicDir);
+
+  if (isSafe && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const ext = path.extname(filePath).toLowerCase();
     res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
     fs.createReadStream(filePath).pipe(res);

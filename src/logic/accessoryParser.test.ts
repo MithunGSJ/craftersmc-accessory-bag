@@ -3,6 +3,7 @@ import pako from 'pako';
 import {
   stripMinecraftCodes,
   extractRarityFromLore,
+  extractRarityFromColorCode,
   parseAccessoryBagBase64,
   extractSkullTextureUrl
 } from './accessoryParser.ts';
@@ -134,6 +135,44 @@ describe('accessoryParser', () => {
     expect(extractSkullTextureUrl({ SkullOwner: {} })).toBeUndefined();
     expect(extractSkullTextureUrl({ SkullOwner: { Properties: { textures: [] } } })).toBeUndefined();
     expect(extractSkullTextureUrl({ SkullOwner: { Properties: { textures: [{ Value: 'invalid-b64-json' }] } } })).toBeUndefined();
+  });
+
+  it('does not misclassify underline formatting §n as RARE', () => {
+    const rawLegendaryWithUnderline = '§6§n§lGolden Feather Boots';
+    expect(extractRarityFromColorCode(rawLegendaryWithUnderline)).toBe('LEGENDARY');
+    const rawEpicWithUnderline = '§5§nBat Artifact';
+    expect(extractRarityFromColorCode(rawEpicWithUnderline)).toBe('EPIC');
+  });
+
+  it('preserves NBT Slot tag in Format 2 rather than overwriting with array index', () => {
+    const buf: number[] = [];
+    buf.push(10, 0, 0); // root compound ""
+    buf.push(9, 0, 1, 'i'.charCodeAt(0)); // list "i"
+    buf.push(10, 0, 0, 0, 1); // 1 compound
+    // item 0: TAG_Byte "Slot" = 15
+    buf.push(1, 0, 4, ...'Slot'.split('').map(c => c.charCodeAt(0)), 15);
+    // inside item 0: TAG_Compound "tag"
+    buf.push(10, 0, 3, ...'tag'.split('').map(c => c.charCodeAt(0)));
+    // inside tag: TAG_Compound "display"
+    buf.push(10, 0, 7, ...'display'.split('').map(c => c.charCodeAt(0)));
+    // inside display: TAG_String "Name" = "Zombie Ring"
+    const nameBytes = new TextEncoder().encode('Zombie Ring');
+    buf.push(8, 0, 4, ...'Name'.split('').map(c => c.charCodeAt(0)), 0, nameBytes.length, ...nameBytes);
+    buf.push(0); // end display
+    buf.push(0); // end tag
+    buf.push(0); // end item 0
+    buf.push(0); // end root
+
+    const compressed = pako.gzip(new Uint8Array(buf));
+    let binary = '';
+    for (let i = 0; i < compressed.length; i++) binary += String.fromCharCode(compressed[i]);
+    const b64 = btoa(binary);
+
+    const parsed = parseAccessoryBagBase64(b64);
+    expect(parsed.length).toBe(1);
+    expect(parsed[0].slot).toBe(15);
+    expect(parsed[0].id).toBe('ZOMBIE_RING_15');
+    expect(parsed[0].id.startsWith('_')).toBe(false);
   });
 });
 

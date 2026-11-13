@@ -52,7 +52,7 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
         })}
 
         <button
-          className="pill-btn"
+          className={`pill-btn ${currentProfileId === 'custom' ? 'active' : ''}`}
           style={{ borderColor: 'var(--accent-cyan)' }}
           onClick={() => {
             playClickSound();
@@ -60,13 +60,14 @@ export const HeroHeader: React.FC<HeroHeaderProps> = ({
           }}
         >
           <span>🔍</span>
-          <span>Lookup Player</span>
+          <span>{currentProfileId === 'custom' ? 'Custom Player' : 'Lookup Player'}</span>
         </button>
 
         <button
           className="pill-btn"
           onClick={handleToggleSound}
           title="Toggle UI Sound Effects"
+          aria-pressed={soundOn}
         >
           <span>{soundOn ? '🔊 Audio ON' : '🔇 Audio OFF'}</span>
         </button>

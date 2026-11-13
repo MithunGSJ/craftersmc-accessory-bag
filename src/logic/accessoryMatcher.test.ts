@@ -289,6 +289,30 @@ describe('accessoryMatcher', () => {
     expect(p2.find(e => e.definition.id === 'CRACKED_PIGGY_BANK')?.effectiveMagicalPower).toBe(5);
     expect(p2.find(e => e.definition.id === 'PIGGY_BANK')?.status).toBe('UPGRADED_PREVIOUS');
   });
+
+  it('deduplicates uncataloged accessories so duplicates do not stack MP', () => {
+    const item1: PlayerAccessoryItem = {
+      id: 'CUSTOM_PENDANT_0',
+      internalId: 'CUSTOM_PENDANT',
+      displayName: 'Custom Pendant',
+      rarity: 'MYTHIC',
+      slot: 0,
+      lore: []
+    };
+    const item2: PlayerAccessoryItem = {
+      id: 'CUSTOM_PENDANT_1',
+      internalId: 'CUSTOM_PENDANT',
+      displayName: 'Custom Pendant',
+      rarity: 'MYTHIC',
+      slot: 1,
+      lore: []
+    };
+    const evaluated = evaluatePlayerAccessories([item1, item2]);
+    const customItems = evaluated.filter(e => e.definition.id === 'CUSTOM_PENDANT');
+    expect(customItems.length).toBe(2);
+    const totalCustomMp = customItems.reduce((sum, i) => sum + i.effectiveMagicalPower, 0);
+    expect(totalCustomMp).toBe(22); // Exactly 1 active copy of 22 MP, duplicate grants 0 MP
+  });
 });
 
 

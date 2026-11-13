@@ -15,6 +15,7 @@ interface FilterBarProps {
   readonly onCategoryFilterChange: (cat: 'ALL' | AccessoryCategory) => void;
   readonly rarityFilter: 'ALL' | ItemRarity;
   readonly onRarityFilterChange: (rarity: 'ALL' | ItemRarity) => void;
+  readonly onResetFilters?: () => void;
 }
 
 export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
@@ -25,8 +26,10 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
   categoryFilter,
   onCategoryFilterChange,
   rarityFilter,
-  onRarityFilterChange
+  onRarityFilterChange,
+  onResetFilters
 }) => {
+  const isFiltered = searchQuery !== '' || statusFilter !== 'ALL' || categoryFilter !== 'ALL' || rarityFilter !== 'ALL';
   return (
     <div className="controls-bar">
       <div className="search-and-presets">
@@ -45,6 +48,8 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
           {(['ALL', 'OWNED', 'MISSING', 'UPGRADABLE'] as const).map(status => (
             <button
               key={status}
+              role="tab"
+              aria-selected={statusFilter === status}
               className={`pill-btn ${statusFilter === status ? 'active' : ''}`}
               onClick={() => {
                 playClickSound();
@@ -111,6 +116,20 @@ export const AccessoryFilterBar: React.FC<FilterBarProps> = ({
             ))}
           </select>
         </div>
+
+        {isFiltered && onResetFilters && (
+          <button
+            type="button"
+            className="pill-btn"
+            style={{ padding: '8px 14px', fontSize: '0.82rem', borderColor: 'var(--status-missing)' }}
+            onClick={() => {
+              playClickSound();
+              onResetFilters();
+            }}
+          >
+            ✕ Reset Filters
+          </button>
+        )}
       </div>
     </div>
   );

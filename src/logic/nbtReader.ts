@@ -84,12 +84,15 @@ export class NbtReader {
   }
 
   private readCompoundPayload(): NbtCompound {
-    const result: NbtCompound = {};
+    const result: NbtCompound = Object.create(null);
     while (this.offset < this.buffer.length) {
       const tagType = this.readByte();
       if (tagType === 0) break; // TAG_End
       const tagName = this.readString();
-      result[tagName] = this.readTagValue(tagType);
+      const val = this.readTagValue(tagType);
+      if (tagName !== '__proto__' && tagName !== 'constructor' && tagName !== 'prototype') {
+        result[tagName] = val;
+      }
     }
     return result;
   }

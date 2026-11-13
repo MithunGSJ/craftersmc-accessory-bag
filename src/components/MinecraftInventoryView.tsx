@@ -9,6 +9,7 @@ interface MinecraftInventoryViewProps {
   readonly accessories: readonly EvaluatedAccessory[];
   readonly onSelectAccessory: (acc: EvaluatedAccessory) => void;
   readonly defaultBagNumber?: number;
+  readonly onClose?: () => void;
 }
 
 const SLOTS_PER_PAGE = 45; // 9 columns x 5 rows
@@ -16,7 +17,8 @@ const SLOTS_PER_PAGE = 45; // 9 columns x 5 rows
 export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
   accessories,
   onSelectAccessory,
-  defaultBagNumber = 1
+  defaultBagNumber = 1,
+  onClose
 }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [hoveredItem, setHoveredItem] = React.useState<EvaluatedAccessory | null>(null);
@@ -60,9 +62,18 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
   }, [pageItems]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const x = Math.min(e.clientX + 14, window.innerWidth - 320);
-    const y = Math.min(e.clientY + 14, window.innerHeight - 340);
-    setTooltipPos({ x, y });
+    const tooltipWidth = 340;
+    const tooltipHeight = 420;
+    const padding = 12;
+    let x = e.clientX + 16;
+    let y = e.clientY + 16;
+    if (x + tooltipWidth > window.innerWidth - padding) {
+      x = Math.max(padding, e.clientX - tooltipWidth - 16);
+    }
+    if (y + tooltipHeight > window.innerHeight - padding) {
+      y = Math.max(padding, window.innerHeight - tooltipHeight - padding);
+    }
+    setTooltipPos({ x: Math.max(padding, x), y: Math.max(padding, y) });
   };
 
   const handlePrevPage = () => {
@@ -79,7 +90,7 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
     }
   };
 
-  const bagNumber = defaultBagNumber > 1 ? defaultBagNumber : currentPage;
+  const bagNumber = defaultBagNumber > 1 ? (defaultBagNumber + currentPage - 1) : currentPage;
 
   return (
     <div className="mc-gui-wrapper">
@@ -93,7 +104,25 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
         {/* Container Header */}
         <div className="mc-gui-header">
           <span className="mc-gui-title">Accessory Bag [{bagNumber}]</span>
-          <span className="mc-gui-close" title="Minecraft Chest Window">✕</span>
+          <span
+            className="mc-gui-close"
+            title="Minecraft Chest Window"
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              playClickSound();
+              if (onClose) onClose();
+            }}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                playClickSound();
+                if (onClose) onClose();
+              }
+            }}
+          >
+            ✕
+          </span>
         </div>
 
         {/* 9x5 Slot Grid (Owned items in line-up order + empty slot padding) */}
@@ -113,17 +142,32 @@ export const MinecraftInventoryView: React.FC<MinecraftInventoryViewProps> = ({
                 role="gridcell"
                 aria-label={`${item.ownedItem?.displayName || definition.name} (Owned, Slot ${item.ownedItem?.slot ?? idx})`}
                 onClick={() => {
+                  setHoveredItem(null);
                   playEquipSound();
                   onSelectAccessory(item);
                 }}
                 onKeyDown={e => {
                   if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setHoveredItem(null);
                     playEquipSound();
                     onSelectAccessory(item);
                   }
                 }}
-                onMouseEnter={() => setHoveredItem(item)}
+                onMouseEnter={e => {
+                  handleMouseMove(e);
+                  setHoveredItem(item);
+                }}
                 onMouseLeave={() => setHoveredItem(null)}
+                onFocus={e => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setTooltipPos({
+                    x: Math.min(rect.right + 10, Math.max(12, window.innerWidth - 350)),
+                    y: Math.min(rect.top, Math.max(12, window.innerHeight - 380))
+                  });
+                  setHoveredItem(item);
+                }}
+                onBlur={() => setHoveredItem(null)}
               >
                 <AccessoryIcon
                   id={definition.id}

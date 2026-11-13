@@ -6,6 +6,7 @@ import {
   AccessoryCategory
 } from '../data/accessoryTypes.ts';
 import { THEME_CONFIG, ItemRarity } from '../config/themeConfig.ts';
+import { evaluateAccessoryPrice } from './pricingEngine.ts';
 
 export interface MatcherOptions {
   readonly hideSupersededTiers?: boolean;
@@ -18,6 +19,7 @@ export interface AccessoryFilterOptions {
   readonly categoryFilter: 'ALL' | AccessoryCategory;
   readonly rarityFilter: 'ALL' | ItemRarity;
   readonly searchQuery?: string;
+  readonly hideSupersededTiers?: boolean;
 }
 
 export function filterAccessories(
@@ -29,7 +31,7 @@ export function filterAccessories(
 
   return evaluatedAll.filter(item => {
     // Status filter: MISSING includes pure MISSING and UPGRADABLE_NEXT (unowned higher tier)
-    if (statusFilter === 'OWNED' && item.status !== 'OWNED') return false;
+    if (statusFilter === 'OWNED' && item.status !== 'OWNED' && !item.ownedItem) return false;
     if (statusFilter === 'MISSING' && item.status !== 'MISSING' && item.status !== 'UPGRADABLE_NEXT') {
       return false;
     }
@@ -54,9 +56,11 @@ export function filterAccessories(
       }
     }
 
-    // If player owns a higher tier in this family, never show the lower tier ones
-    if (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned) {
-      return false;
+    // If player owns a higher tier in this family, never show unowned lower tier ones
+    if (statusFilter !== 'OWNED' && (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned)) {
+      if (statusFilter !== 'ALL' || !item.ownedItem || filters.hideSupersededTiers) {
+        return false;
+      }
     }
 
     return true;
@@ -72,7 +76,10 @@ export function sortAccessoriesByBagOrder(
     if (aSlot !== bSlot) {
       return aSlot - bSlot;
     }
-    return 0;
+    if (a.definition.tier !== b.definition.tier) {
+      return b.definition.tier - a.definition.tier;
+    }
+    return a.definition.name.localeCompare(b.definition.name);
   });
 }
 
@@ -160,12 +167,13 @@ export function evaluatePlayerAccessories(
     if (nextMember && (status === 'OWNED' || status === 'UPGRADABLE_NEXT')) {
       const nextRarityMp = THEME_CONFIG.rarityMap[nextMember.baseRarity]?.magicalPower || 0;
       const mpGain = Math.max(0, nextRarityMp - baseMp);
+      const estPrice = nextMember.estimatedCoins ?? evaluateAccessoryPrice(nextMember)?.effectivePrice;
       upgradeRecommendation = {
         nextTierId: nextMember.id,
         nextTierName: nextMember.name,
         nextSource: nextMember.source,
         additionalMp: mpGain,
-        costCoins: nextMember.estimatedCoins
+        costCoins: estPrice
       };
     }
 
@@ -183,16 +191,21 @@ export function evaluatePlayerAccessories(
   }
 
   // Support zero-day uncataloged player accessories dynamically
+  const seenUncataloged = new Set<string>();
   for (const item of playerItems) {
     const internalId = item.internalId.toUpperCase();
     const matchedDef = findAccessoryById(internalId) || findAccessoryByName(item.displayName);
     if (!matchedDef) {
+      const familyKey = (item.internalId || item.displayName).toLowerCase();
+      const isDuplicate = seenUncataloged.has(familyKey);
+      seenUncataloged.add(familyKey);
+
       const synthDef = {
         id: item.internalId,
         name: item.displayName,
         baseRarity: item.rarity,
         category: 'Misc' as const,
-        familyId: item.internalId.toLowerCase(),
+        familyId: familyKey,
         tier: 1,
         description: item.lore.length > 0 ? item.lore[0] : 'In-game accessory',
         source: 'In-Game / Uncataloged',
@@ -201,14 +214,19 @@ export function evaluatePlayerAccessories(
       };
 
       const baseMp = THEME_CONFIG.rarityMap[item.rarity]?.magicalPower || 0;
+      let effectiveMagicalPower = 0;
+      if (!isDuplicate && !awardedFamilyMp.has(familyKey)) {
+        effectiveMagicalPower = baseMp;
+        awardedFamilyMp.add(familyKey);
+      }
 
       result.push({
         definition: synthDef,
-        status: 'OWNED',
+        status: isDuplicate ? 'UPGRADED_PREVIOUS' : 'OWNED',
         ownedItem: item,
         skinUrl: item.skinUrl,
         isUncataloged: true,
-        effectiveMagicalPower: baseMp,
+        effectiveMagicalPower,
         familyMaxTierOwned: 1,
         isHighestInFamily: true
       });
