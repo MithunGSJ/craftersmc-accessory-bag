@@ -32,7 +32,6 @@ export interface AccessoryPriceDetails {
   readonly displayLabel: string;
 }
 
-// In-memory live cache
 const liveBazaarCache = new Map<string, number>();
 const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
 const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
@@ -138,11 +137,7 @@ export function calculateCraftCost(
     const parentPrice = Math.max(0, Number.isFinite(rawParentPrice) ? rawParentPrice : 0);
     totalCost += parentPrice;
     breakdown.push({
-      itemId: recipe.upgradesFrom,
-      name: parentName,
-      count: 1,
-      unitPrice: parentPrice,
-      totalCost: parentPrice
+      itemId: recipe.upgradesFrom, name: parentName, count: 1, unitPrice: parentPrice, totalCost: parentPrice
     });
   }
 
@@ -159,13 +154,8 @@ export function calculateCraftCost(
       const isCheaper = subTotal > 0 && (subtotal === 0 || subTotal < subtotal);
       const priceDifference = Math.abs(subtotal - subTotal);
       subComp = {
-        itemId: ing.subMaterial.itemId,
-        name: ing.subMaterial.name,
-        count: ing.subMaterial.count,
-        unitPrice: subUnitPrice,
-        totalCost: subTotal,
-        isCheaper,
-        priceDifference
+        itemId: ing.subMaterial.itemId, name: ing.subMaterial.name, count: ing.subMaterial.count,
+        unitPrice: subUnitPrice, totalCost: subTotal, isCheaper, priceDifference
       };
     }
 
@@ -173,12 +163,7 @@ export function calculateCraftCost(
     totalCost += effectiveItemCost;
 
     breakdown.push({
-      itemId: ing.itemId,
-      name: ing.name,
-      count: ing.count,
-      unitPrice,
-      totalCost: effectiveItemCost,
-      subMaterial: subComp
+      itemId: ing.itemId, name: ing.name, count: ing.count, unitPrice, totalCost: effectiveItemCost, subMaterial: subComp
     });
   }
 
@@ -267,9 +252,10 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
 
 export function formatCoins(amount: number): string {
   if (typeof amount !== 'number' || !Number.isFinite(amount) || Number.isNaN(amount)) return '0';
-  const isNegative = amount < 0;
   const abs = Math.abs(amount);
-  const sign = isNegative ? '-' : '';
+  if (abs < 0.5 || Math.round(abs) === 0) return '0';
+  const sign = amount < 0 ? '-' : '';
+  if (abs >= 999_950_000_000) return `${sign}${(abs / 1e12).toFixed(1)}T`;
   if (abs >= 999_950_000) return `${sign}${(abs / 1e9).toFixed(1)}B`;
   if (abs >= 999_950) return `${sign}${(abs / 1e6).toFixed(1)}M`;
   if (abs >= 999.5) return `${sign}${(abs / 1e3).toFixed(1)}K`;

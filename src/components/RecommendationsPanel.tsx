@@ -27,7 +27,7 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
   onSelectAccessory
 }) => {
   const candidates = evaluated
-    .filter(e => e.status === 'MISSING' || e.status === 'UPGRADABLE_NEXT')
+    .filter(e => (e.status === 'MISSING' && e.definition.tier === 1) || e.status === 'UPGRADABLE_NEXT')
     .map(e => {
       const rarity = e.definition.baseRarity;
       let mpGain = THEME_CONFIG.rarityMap[rarity]?.magicalPower || 3;
@@ -35,8 +35,7 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
         const family = ACCESSORIES_BY_FAMILY[e.definition.familyId] || [];
         const ownedTierDef = family.find(m => m.tier === e.familyMaxTierOwned);
         const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
-        const netGain = Math.max(0, mpGain - ownedTierMp);
-        if (netGain > 0) mpGain = netGain;
+        mpGain = Math.max(0, mpGain - ownedTierMp);
       }
 
       const stage = e.definition.stage || 'Mid Collection';

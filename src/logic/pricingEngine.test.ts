@@ -28,19 +28,9 @@ describe('pricingEngine', () => {
   });
 
   it('computes craft cost combining previous tier and materials for feather line up to golden feather boots', () => {
-    const [tDef, rDef, aDef, bDef] = [
-      findAccessoryById('FEATHER_TALISMAN'),
-      findAccessoryById('FEATHER_RING'),
-      findAccessoryById('FEATHER_ARTIFACT'),
-      findAccessoryById('GOLDEN_FEATHER_BOOTS')
-    ];
+    const [tDef, rDef, aDef, bDef] = [findAccessoryById('FEATHER_TALISMAN'), findAccessoryById('FEATHER_RING'), findAccessoryById('FEATHER_ARTIFACT'), findAccessoryById('GOLDEN_FEATHER_BOOTS')];
     expect(tDef && rDef && aDef && bDef).toBeTruthy();
-    const [tPrice, rPrice, aPrice, bPrice] = [
-      evaluateAccessoryPrice(tDef!),
-      evaluateAccessoryPrice(rDef!),
-      evaluateAccessoryPrice(aDef!),
-      evaluateAccessoryPrice(bDef!)
-    ];
+    const [tPrice, rPrice, aPrice, bPrice] = [evaluateAccessoryPrice(tDef!), evaluateAccessoryPrice(rDef!), evaluateAccessoryPrice(aDef!), evaluateAccessoryPrice(bDef!)];
     expect(tPrice.primaryMethod).toBe('BAZAAR_CRAFT');
     expect(rPrice.primaryMethod).toBe('BAZAAR_CRAFT');
     expect(aPrice.primaryMethod).toBe('BAZAAR_CRAFT');
@@ -151,6 +141,11 @@ describe('pricingEngine', () => {
     expect(formatCoins(2500)).toBe('2.5K');
     expect(formatCoins(1500000)).toBe('1.5M');
     expect(formatCoins(2000000000)).toBe('2.0B');
+    expect(formatCoins(1500000000000)).toBe('1.5T');
+    expect(formatCoins(0)).toBe('0');
+    expect(formatCoins(-0.01)).toBe('0');
+    expect(formatCoins(-1500)).toBe('-1.5K');
+    expect(formatCoins(NaN)).toBe('0');
   });
 
   it('correctly evaluates Dayfreezer and Nightfreezer as 945 Gems without parsing Bits/Gems as billions', () => {

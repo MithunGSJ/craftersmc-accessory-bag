@@ -96,7 +96,9 @@ export function inferStageFromWiki(source: string): AccessoryDefinition['stage']
   }
   if (s.includes('pig shop') || s.includes('event') || s.includes('festival') || s.includes('farm-o-matic')) return 'Event';
 
-  const colMatch = s.match(/collection\s+([0-9]+|[ivx]+)\b/i) || s.match(/\b([ivx]+)\s+collection\b/i);
+  const colMatch =
+    s.match(/collection(?:\s+(?:tier|level))?\s+([0-9]+|[ivx]+)\b/i) ||
+    s.match(/\b([ivx]+|[0-9]+)\s+collection\b/i);
   if (colMatch) {
     const rawVal = colMatch[1].toLowerCase();
     const level = ROMAN_MAP[rawVal] || parseInt(rawVal, 10) || 0;

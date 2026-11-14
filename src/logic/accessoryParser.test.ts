@@ -256,5 +256,34 @@ describe('accessoryParser', () => {
     // Base rarity of Zombie Ring is UNCOMMON; upgraded once with recombobulator is RARE
     expect(parsed[0].rarity).toBe('RARE');
   });
+
+  it('correctly resolves rarity when color code §f precedes higher rarity code', () => {
+    expect(extractRarityFromColorCode('§fPersonal §6Compactor 7000')).toBe('LEGENDARY');
+    expect(extractRarityFromColorCode('§fShiny §aTalisman')).toBe('UNCOMMON');
+  });
+
+  it('does not extract rarity from descriptive sentences containing COMMON ACCESSORY', () => {
+    const lore = [
+      '§7Deals 10% more damage to common zombies.',
+      '§6§lLEGENDARY ACCESSORY',
+      '§7Can be combined with any COMMON ACCESSORY to boost stats'
+    ];
+    expect(extractRarityFromLore(lore)).toBe('LEGENDARY');
+  });
+
+  it('rejects weapons or armor containing relic or artifact keywords in name', () => {
+    const buf: number[] = [
+      10, 0, 0, 9, 0, 1, 'i'.charCodeAt(0), 10, 0, 0, 0, 1,
+      10, 0, 3, ...'tag'.split('').map(c => c.charCodeAt(0)),
+      10, 0, 15, ...'ExtraAttributes'.split('').map(c => c.charCodeAt(0)),
+      8, 0, 2, 'i'.charCodeAt(0), 'd'.charCodeAt(0), 0, 11, ...'RELIC_BLADE'.split('').map(c => c.charCodeAt(0)), 0,
+      10, 0, 7, ...'display'.split('').map(c => c.charCodeAt(0)),
+      8, 0, 4, ...'Name'.split('').map(c => c.charCodeAt(0)), 0, 11, ...'Relic Blade'.split('').map(c => c.charCodeAt(0)), 0, 0, 0
+    ];
+    const compressed = pako.gzip(new Uint8Array(buf));
+    let binary = '';
+    for (let i = 0; i < compressed.length; i++) binary += String.fromCharCode(compressed[i]);
+    expect(parseAccessoryBagBase64(btoa(binary)).length).toBe(0);
+  });
 });
 

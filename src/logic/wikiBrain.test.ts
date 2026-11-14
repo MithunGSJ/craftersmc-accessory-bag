@@ -93,6 +93,9 @@ Crafted using 108 Sugar Cane.
     expect(inferStageFromWiki('Unlocked at Iron Ingot Collection X')).toBe('High Collection');
     expect(inferStageFromWiki('Requires Cobblestone Collection V')).toBe('Mid Collection');
     expect(inferStageFromWiki('Requires Wheat Collection II')).toBe('Early Collection');
+    expect(inferStageFromWiki('Unlocked in the Redstone Collection Tier VIII')).toBe('High Collection');
+    expect(inferStageFromWiki('Unlocked in the Gold Collection Level 9')).toBe('High Collection');
+    expect(inferStageFromWiki('Requires Diamond Collection Tier V')).toBe('Mid Collection');
   });
 
   it('does not false-positive NPC Shop from geographic cardinal directions', () => {

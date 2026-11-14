@@ -5,13 +5,12 @@ import { ItemRarity } from '../config/themeConfig.ts';
 import { findAccessoryById, findAccessoryByName, ACCESSORY_BY_NAME } from '../data/accessoryRegistry.ts';
 
 const REFORGES: readonly string[] = [
-  'Pleasant', 'Shaded', 'Silky', 'Sweet', 'Bloody', 'Bountiful', 'Gentle',
-  'Odd', 'Fast', 'Fair', 'Epic', 'Sharp', 'Heroic', 'Spicy', 'Legendary',
-  'Deadly', 'Fine', 'Grand', 'Hasty', 'Neat', 'Rapid', 'Unreal', 'Awkward',
-  'Rich', 'Clean', 'Fierce', 'Heavy', 'Light', 'Mythic', 'Pure', 'Smart',
-  'Titanic', 'Wise', 'Bizarre', 'Itchy', 'Ominous', 'Pretty', 'Shiny',
-  'Simple', 'Strange', 'Vivid', 'Godly', 'Demonic', 'Forceful', 'Hurtful',
-  'Keen', 'Strong', 'Superior', 'Unpleasant', 'Zealous'
+  'Pleasant', 'Shaded', 'Silky', 'Sweet', 'Bloody', 'Bountiful', 'Gentle', 'Odd', 'Fast', 'Fair',
+  'Epic', 'Sharp', 'Heroic', 'Spicy', 'Legendary', 'Deadly', 'Fine', 'Grand', 'Hasty', 'Neat',
+  'Rapid', 'Unreal', 'Awkward', 'Rich', 'Clean', 'Fierce', 'Heavy', 'Light', 'Mythic', 'Pure',
+  'Smart', 'Titanic', 'Wise', 'Bizarre', 'Itchy', 'Ominous', 'Pretty', 'Shiny', 'Simple',
+  'Strange', 'Vivid', 'Godly', 'Demonic', 'Forceful', 'Hurtful', 'Keen', 'Strong', 'Superior',
+  'Unpleasant', 'Zealous'
 ];
 
 export function stripMinecraftCodes(str: unknown): string {
@@ -20,14 +19,7 @@ export function stripMinecraftCodes(str: unknown): string {
 }
 
 const COLOR_TO_RARITY: Record<string, ItemRarity> = {
-  f: 'COMMON',
-  a: 'UNCOMMON',
-  9: 'RARE',
-  5: 'EPIC',
-  6: 'LEGENDARY',
-  d: 'MYTHIC',
-  c: 'SPECIAL',
-  b: 'VERY_SPECIAL'
+  f: 'COMMON', a: 'UNCOMMON', 9: 'RARE', 5: 'EPIC', 6: 'LEGENDARY', d: 'MYTHIC', c: 'SPECIAL', b: 'VERY_SPECIAL'
 };
 
 const RARITY_TIERS: readonly ItemRarity[] = [
@@ -44,43 +36,36 @@ function upgradeRarity(rarity: ItemRarity, upgrades: number): ItemRarity {
 export function extractRarityFromColorCode(rawName: string): ItemRarity | undefined {
   if (typeof rawName !== 'string') return undefined;
   const matches = rawName.matchAll(/§([0-9a-f])/gi);
+  let highestRarity: ItemRarity | undefined;
+  let highestRank = -1;
   for (const m of matches) {
     const code = m[1].toLowerCase();
-    if (COLOR_TO_RARITY[code]) {
-      return COLOR_TO_RARITY[code];
+    const rar = COLOR_TO_RARITY[code];
+    if (rar) {
+      const rank = RARITY_TIERS.indexOf(rar);
+      if (rank > highestRank) {
+        highestRank = rank;
+        highestRarity = rar;
+      }
     }
   }
-  return undefined;
+  return highestRarity;
 }
 
-const BADGE_REGEX = /\b(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)\s+(?:DUNGEON\s+)?(?:ACCESSORY|TALISMAN|RING|ARTIFACT|RELIC|HAT|ITEM)\b/i;
-const STANDALONE_RARITY_REGEX = /^\s*(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)\s*$/i;
+const BADGE_REGEX = /^\s*(?:[a-z0-9]\s+)?(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)\s+(?:DUNGEON\s+)?(?:ACCESSORY|TALISMAN|RING|ARTIFACT|RELIC|BELT|CLOAK|BRACELET|NECKLACE|GLOVES|HAT|ITEM)(?:\s+[a-z0-9])?\s*$/i;
+const STANDALONE_RARITY_REGEX = /^\s*(?:[a-z0-9]\s+)?(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)(?:\s+[a-z0-9])?\s*$/i;
+const NON_ACCESSORY_REGEX = /\b(SWORD|BOW|LONGSWORD|BLADE|HELMET|CHESTPLATE|LEGGINGS|BOOTS|PICKAXE|AXE|SHOVEL|HOE|DRILL|WAND|FISHING\s+ROD|FISHING\s+WEAPON|ARROW|PET\s+ITEM|REFORGE\s+STONE|DEPLOYABLE|TRAVEL\s+SCROLL|COSMETIC|MATERIAL|CONSUMABLE)\b/i;
 
 function toRarity(str: string): ItemRarity | undefined {
   const norm = str.toUpperCase().replace(/\s+/g, '_');
-  if (
-    norm === 'VERY_SPECIAL' || norm === 'SPECIAL' || norm === 'MYTHIC' ||
-    norm === 'LEGENDARY' || norm === 'EPIC' || norm === 'RARE' ||
-    norm === 'UNCOMMON' || norm === 'COMMON'
-  ) {
-    return norm as ItemRarity;
-  }
-  return undefined;
+  return (RARITY_TIERS as readonly string[]).includes(norm) ? (norm as ItemRarity) : undefined;
 }
 
 export function extractRarityFromLore(lore: readonly string[]): ItemRarity | undefined {
   if (!Array.isArray(lore)) return undefined;
   for (let i = lore.length - 1; i >= 0; i--) {
     const clean = stripMinecraftCodes(lore[i]);
-    const match = clean.match(BADGE_REGEX);
-    if (match) {
-      const rar = toRarity(match[1]);
-      if (rar) return rar;
-    }
-  }
-  for (let i = lore.length - 1; i >= 0; i--) {
-    const clean = stripMinecraftCodes(lore[i]);
-    const match = clean.match(STANDALONE_RARITY_REGEX);
+    const match = clean.match(BADGE_REGEX) || clean.match(STANDALONE_RARITY_REGEX);
     if (match) {
       const rar = toRarity(match[1]);
       if (rar) return rar;
@@ -166,6 +151,12 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
         }
 
         const catalogEntry = exactCatalogItem || findAccessoryByName(cleanBaseName) || findAccessoryByName(cleanAll);
+        if (!catalogEntry) {
+          if (NON_ACCESSORY_REGEX.test(cleanAll) || !/\b(TALISMAN|RING|ARTIFACT|RELIC|ACCESSORY)\b/i.test(cleanAll)) {
+            return;
+          }
+        }
+
         const internalId = catalogEntry?.id || cleanBaseName.toUpperCase().replace(/[^A-Z0-9]/g, '_');
         const displayName = catalogEntry?.name || cleanBaseName;
         const rawSlot = item['slot'];
@@ -173,9 +164,17 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
           typeof rawSlot === 'number' && Number.isFinite(rawSlot)
             ? rawSlot
             : typeof rawSlot === 'string' && Number.isFinite(parseInt(rawSlot, 10))
-            ? parseInt(rawSlot, 10)
-            : index;
-        const rarity = extractRarityFromColorCode(rawName) || catalogEntry?.baseRarity || 'COMMON';
+              ? parseInt(rawSlot, 10)
+              : index;
+
+        const rawUpgrades = item['rarity_upgrades'];
+        const upgrades = typeof rawUpgrades === 'number' && Number.isFinite(rawUpgrades)
+          ? rawUpgrades
+          : item['recombobulated'] === true ? 1 : 0;
+        let rarity = extractRarityFromColorCode(rawName) || catalogEntry?.baseRarity || 'COMMON';
+        if (upgrades > 0 && (!catalogEntry || rarity === catalogEntry.baseRarity)) {
+          rarity = upgradeRarity(rarity, upgrades);
+        }
 
         const skinUrl =
           (typeof item['skinUrl'] === 'string' ? item['skinUrl'] : undefined) ||
@@ -236,19 +235,29 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
           if (Number.isFinite(parsed)) trueSlot = parsed;
         }
 
-        const isAccessory = Boolean(
+        const isNonAccessory =
+          cleanLore.some(line => NON_ACCESSORY_REGEX.test(line)) ||
+          NON_ACCESSORY_REGEX.test(cleanName) ||
+          NON_ACCESSORY_REGEX.test(effectiveInternalId);
+
+        const hasAccessoryMarker = Boolean(
           catalogEntry ||
           cleanLore.some(line => BADGE_REGEX.test(line)) ||
           /\b(TALISMAN|RING|ARTIFACT|RELIC|ACCESSORY)\b/i.test(cleanName) ||
           /(?:_|\b)(TALISMAN|RING|ARTIFACT|RELIC|ACCESSORY)(?:_|\b)/i.test(effectiveInternalId)
         );
 
+        const isAccessory = Boolean(catalogEntry || (!isNonAccessory && hasAccessoryMarker));
+
         if (isAccessory && (catalogEntry || rawId || cleanName)) {
           const rarityUpgrades = typeof extraAttrs?.['rarity_upgrades'] === 'number'
             ? extraAttrs['rarity_upgrades']
             : 0;
           const base = loreRarity || catalogEntry?.baseRarity || extractRarityFromColorCode(rawName) || 'COMMON';
-          const rarity: ItemRarity = !loreRarity && rarityUpgrades > 0 ? upgradeRarity(base, rarityUpgrades) : base;
+          const rarity: ItemRarity =
+            rarityUpgrades > 0 && (!loreRarity || loreRarity === catalogEntry?.baseRarity)
+              ? upgradeRarity(base, rarityUpgrades)
+              : base;
 
           result.push({
             id: `${effectiveInternalId}_${trueSlot}`,
