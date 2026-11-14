@@ -245,13 +245,13 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     iconEmoji: '🟢',
     loreLines: ['Gives +1 coin every minute.']
   },
-  // Fishing (Seal of the Seas Family)
+  // Fishing (Mutually Exclusive Lost Treasures Quest Rewards)
   {
     id: 'SEAL_OF_THE_SEAS',
     name: 'Seal of the Seas',
     baseRarity: 'UNCOMMON',
     category: 'Fishing',
-    familyId: 'sea_seal',
+    familyId: 'seal_of_the_seas',
     tier: 1,
     description: 'Magic Find: +1% Grants +1 coin for every 25 coins you gain from mobs.',
     source: '"Lost Treasures" quest (Steal coins option)',
@@ -264,8 +264,8 @@ export const GATHERING_ACCESSORIES: readonly AccessoryDefinition[] = [
     name: 'Seal of the Oceans',
     baseRarity: 'RARE',
     category: 'Fishing',
-    familyId: 'sea_seal',
-    tier: 2,
+    familyId: 'seal_of_the_oceans',
+    tier: 1,
     description: 'Magic Find: +1% Grants +1 coin for every 25 coins you gain from mobs.',
     source: '"Lost Treasures" quest (Honest option)',
     stage: 'Quest',

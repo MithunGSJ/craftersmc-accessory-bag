@@ -21,6 +21,10 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   const [username, setUsername] = React.useState('');
   const contentRef = React.useRef<HTMLDivElement>(null);
   const previousFocusRef = React.useRef<HTMLElement | null>(null);
+  const backdropMouseDownRef = React.useRef(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const isLoadingRef = React.useRef(isLoading);
+  isLoadingRef.current = isLoading;
 
   React.useEffect(() => {
     if (isOpen) {
@@ -29,8 +33,12 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
 
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
+
       const onKey = (e: KeyboardEvent) => {
-        if (e.key === 'Escape' && !isLoading) {
+        if (e.key === 'Escape' && !isLoadingRef.current) {
           playClickSound();
           onClose();
         }
@@ -38,10 +46,18 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
           const focusable = contentRef.current.querySelectorAll<HTMLElement>(
             'button:not([disabled]), [href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
           );
-          if (focusable.length === 0) return;
+          if (focusable.length === 0) {
+            e.preventDefault();
+            return;
+          }
           const [first, last] = [focusable[0], focusable[focusable.length - 1]];
-          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
         }
       };
       window.addEventListener('keydown', onKey);
@@ -51,7 +67,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
         previousFocusRef.current?.focus();
       };
     }
-  }, [isOpen, isLoading, onClose]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -78,7 +94,15 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
   return (
     <div
       className="modal-backdrop"
-      onClick={handleClose}
+      onMouseDown={e => {
+        backdropMouseDownRef.current = e.target === e.currentTarget;
+      }}
+      onClick={e => {
+        if (backdropMouseDownRef.current && e.target === e.currentTarget) {
+          handleClose();
+        }
+        backdropMouseDownRef.current = false;
+      }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="lookup-dialog-title"
@@ -148,6 +172,7 @@ export const CustomLookupModal: React.FC<CustomLookupModalProps> = ({
               GAMERTAG / USERNAME *
             </label>
             <input
+              ref={inputRef}
               id="lookup-username-input"
               type="text"
               className="search-input"

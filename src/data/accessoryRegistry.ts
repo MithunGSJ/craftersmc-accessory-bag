@@ -23,13 +23,14 @@ const existingNames = new Set(BASE_ACCESSORIES.map(a => a.name.toLowerCase().rep
 
 function inferCategory(name: string, source: string, desc: string): AccessoryCategory {
   const text = `${name} ${source} ${desc}`.toLowerCase();
-  if (text.includes('slayer') || text.includes('revenant') || text.includes('tarantula') || text.includes('sven')) return 'Slayer';
-  if (text.includes('farm') || text.includes('crop') || text.includes('seed') || text.includes('wheat') || text.includes('pumpkin')) return 'Farming';
-  if (text.includes('mine') || text.includes('ore') || text.includes('ingot') || text.includes('pickaxe') || text.includes('drill')) return 'Mining';
-  if (text.includes('forag') || text.includes('wood') || text.includes('log') || text.includes('tree') || text.includes('axe')) return 'Foraging';
-  if (text.includes('fish') || text.includes('rod') || text.includes('sea') || text.includes('ocean')) return 'Fishing';
-  if (text.includes('spooky') || text.includes('jerry') || text.includes('festival') || text.includes('event') || text.includes('candy')) return 'Event';
-  if (text.includes('combat') || text.includes('damage') || text.includes('strength') || text.includes('crit') || text.includes('sword') || text.includes('mob')) return 'Combat';
+  if (text.includes('piggy')) return 'Misc';
+  if (/\b(slayer|revenant|tarantula|sven)\b/i.test(text)) return 'Slayer';
+  if (/\b(farm\w*|crops?|seeds?|wheat|pumpkins?)\b/i.test(text)) return 'Farming';
+  if (/\b(mine|mining|ore|ingot|pickaxe|drill)\b/i.test(text)) return 'Mining';
+  if (/\b(forag\w*|wood|logs?|trees?|axes?)\b/i.test(text)) return 'Foraging';
+  if (/\b(fish\w*|rods?|sea|ocean)\b/i.test(text)) return 'Fishing';
+  if (/\b(spooky|jerry|festivals?|events?|candy|candies)\b/i.test(text)) return 'Event';
+  if (/\b(combat|strength|crits?|swords?|mobs?)\b/i.test(text) || (/\bdamage\b/i.test(text) && !text.includes('piggy'))) return 'Combat';
   return 'Misc';
 }
 
@@ -63,7 +64,9 @@ for (const item of (wikiAccessoriesData as readonly ScrapedWikiItem[])) {
     const stage = inferStageFromWiki(item.source);
     const tier = inferTier(item.name);
     const isPiggyVariant = upperId === 'CRACKED_PIGGY_BANK' || upperId === 'BROKEN_PIGGY_BANK';
-    const familyId = isPiggyVariant ? 'piggy_bank' : upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC)$/, '').toLowerCase();
+    const familyId = isPiggyVariant
+      ? 'piggy_bank'
+      : upperId.replace(/_(TALISMAN|RING|ARTIFACT|RELIC|BADGE|CREST|HEART|HAT|CLOAK|BELT|BRACELET)$/, '').toLowerCase();
 
     dynamicWikiAccessories.push({
       id: upperId,
@@ -175,15 +178,30 @@ const COMMON_REFORGES: readonly string[] = [
 ];
 
 export function findAccessoryByName(name: string): AccessoryDefinition | undefined {
+  if (typeof name !== 'string') return undefined;
   const normalized = name.toLowerCase().replace(/[^a-z0-9]/g, '');
   const direct = ACCESSORY_BY_NAME.get(normalized);
   if (direct) return direct;
+
+  const alphaNoS = normalized.replace(/s/g, '');
+  if (alphaNoS.length >= 4) {
+    for (const [key, def] of ACCESSORY_BY_NAME.entries()) {
+      if (key.replace(/s/g, '') === alphaNoS) return def;
+    }
+  }
 
   for (const ref of COMMON_REFORGES) {
     if (normalized.startsWith(ref)) {
       const stripped = normalized.slice(ref.length);
       const match = ACCESSORY_BY_NAME.get(stripped);
       if (match) return match;
+
+      const strippedNoS = stripped.replace(/s/g, '');
+      if (strippedNoS.length >= 4) {
+        for (const [key, def] of ACCESSORY_BY_NAME.entries()) {
+          if (key.replace(/s/g, '') === strippedNoS) return def;
+        }
+      }
     }
   }
   return undefined;

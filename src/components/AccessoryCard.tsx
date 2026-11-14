@@ -161,7 +161,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
           }}
           title={
             priceInfo.auction
-              ? `Auction: Min ${priceInfo.auction.minPrice.toLocaleString()} | Max ${priceInfo.auction.maxPrice.toLocaleString()} | Avg ${priceInfo.auction.avgPrice.toLocaleString()}`
+              ? `Auction: Min ${typeof priceInfo.auction.minPrice === 'number' && Number.isFinite(priceInfo.auction.minPrice) ? priceInfo.auction.minPrice.toLocaleString() : 'N/A'} | Max ${typeof priceInfo.auction.maxPrice === 'number' && Number.isFinite(priceInfo.auction.maxPrice) ? priceInfo.auction.maxPrice.toLocaleString() : 'N/A'} | Avg ${typeof priceInfo.auction.avgPrice === 'number' && Number.isFinite(priceInfo.auction.avgPrice) ? priceInfo.auction.avgPrice.toLocaleString() : 'N/A'}`
               : priceInfo.displayLabel
           }
         >
@@ -180,7 +180,7 @@ export const AccessoryCard: React.FC<AccessoryCardProps> = ({ evaluated, onClick
               borderRadius: '4px',
               background: 'rgba(255, 255, 255, 0.05)'
             }}
-            title={`Active Auctions: Min ${priceInfo.auction.minPrice.toLocaleString()} | Max ${priceInfo.auction.maxPrice.toLocaleString()} | Avg ${priceInfo.auction.avgPrice.toLocaleString()}`}
+            title={`Active Auctions: Min ${typeof priceInfo.auction.minPrice === 'number' && Number.isFinite(priceInfo.auction.minPrice) ? priceInfo.auction.minPrice.toLocaleString() : 'N/A'} | Max ${typeof priceInfo.auction.maxPrice === 'number' && Number.isFinite(priceInfo.auction.maxPrice) ? priceInfo.auction.maxPrice.toLocaleString() : 'N/A'} | Avg ${typeof priceInfo.auction.avgPrice === 'number' && Number.isFinite(priceInfo.auction.avgPrice) ? priceInfo.auction.avgPrice.toLocaleString() : 'N/A'}`}
           >
             AH: {formatCoins(priceInfo.auction.avgPrice)}
           </span>

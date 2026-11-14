@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { evaluateObtainability, isObtainableAccessory, parseWikiPageIntelligence } from './wikiBrain.ts';
+import { evaluateObtainability, isObtainableAccessory, parseWikiPageIntelligence, inferStageFromWiki } from './wikiBrain.ts';
 
 describe('WikiBrain Intelligence Engine', () => {
   it('correctly identifies Acacia Stop as admin-only and unobtainable', () => {
@@ -86,5 +86,32 @@ Crafted using 108 Sugar Cane.
     expect(intel.isObtainable).toBe(true);
     expect(intel.status).toBe('OBTAINABLE');
     expect(intel.category).toBe('Farming');
+  });
+
+  it('correctly maps Roman numeral collections to appropriate stages without downgrading', () => {
+    expect(inferStageFromWiki('Unlocked at Spider Eye Collection VIII')).toBe('High Collection');
+    expect(inferStageFromWiki('Unlocked at Iron Ingot Collection X')).toBe('High Collection');
+    expect(inferStageFromWiki('Requires Cobblestone Collection V')).toBe('Mid Collection');
+    expect(inferStageFromWiki('Requires Wheat Collection II')).toBe('Early Collection');
+  });
+
+  it('does not false-positive NPC Shop from geographic cardinal directions', () => {
+    const stage = inferStageFromWiki('Located in the spiders den north of the main hub.');
+    expect(stage).not.toBe('NPC Shop');
+  });
+
+  it('retains obtaining content that contains level 3 subheadings', () => {
+    const wikitext = `
+{{Infobox item
+| Name = Test Talisman
+}}
+== Obtaining ==
+=== Crafting ===
+Unlocked at Emerald Collection IX.
+== Usage ==
+Grants stats.
+`;
+    const intel = parseWikiPageIntelligence(wikitext, 'Test Talisman');
+    expect(intel.stage).toBe('High Collection');
   });
 });

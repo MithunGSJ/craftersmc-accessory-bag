@@ -288,13 +288,10 @@ describe('pricingEngine', () => {
     expect(talFused?.totalCost).toBe(12800000);
     expect(talFused?.subMaterial?.totalCost).toBe(12800000);
     expect(talFused?.subMaterial?.count).toBe(64);
-
     const artFused = artPrice.craftBreakdown?.find(b => b.itemId === 'fused_remnants');
     expect(artFused?.totalCost).toBe(76800000);
     expect(artFused?.subMaterial?.count).toBe(384);
-
     expect(artPrice.effectivePrice).toBeGreaterThan(80000000);
-
     const livePrice = await refreshLiveBazaarPrice('fused_remnants');
     expect(livePrice).toBe(6400000);
   });

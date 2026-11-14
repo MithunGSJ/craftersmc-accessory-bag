@@ -21,8 +21,14 @@ for (const f of files) {
 console.log('Total accessories to find icons for:', allItems.length);
 
 // Read wiki HTML from step 1041 & 1088 to extract exact icon paths
-const html1041 = fs.readFileSync('C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1041/content.md', 'utf8');
-const html1088 = fs.readFileSync('C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1088/content.md', 'utf8');
+const path1041 = process.env.WIKI_STEP_1041 || 'C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1041/content.md';
+const path1088 = process.env.WIKI_STEP_1088 || 'C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1088/content.md';
+if (!fs.existsSync(path1041) || !fs.existsSync(path1088)) {
+  console.log('[Script skipped] Cached files not found for 1041 or 1088');
+  process.exit(0);
+}
+const html1041 = fs.readFileSync(path1041, 'utf8');
+const html1088 = fs.readFileSync(path1088, 'utf8');
 const fullHtml = html1041 + '\n' + html1088;
 
 function findWikiImgUrl(itemName) {

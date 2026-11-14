@@ -2,7 +2,7 @@ import pako from 'pako';
 import { NbtReader, NbtCompound } from './nbtReader.ts';
 import { PlayerAccessoryItem } from '../data/accessoryTypes.ts';
 import { ItemRarity } from '../config/themeConfig.ts';
-import { findAccessoryById, findAccessoryByName } from '../data/accessoryRegistry.ts';
+import { findAccessoryById, findAccessoryByName, ACCESSORY_BY_NAME } from '../data/accessoryRegistry.ts';
 
 const REFORGES: readonly string[] = [
   'Pleasant', 'Shaded', 'Silky', 'Sweet', 'Bloody', 'Bountiful', 'Gentle',
@@ -14,33 +14,77 @@ const REFORGES: readonly string[] = [
   'Keen', 'Strong', 'Superior', 'Unpleasant', 'Zealous'
 ];
 
-export function stripMinecraftCodes(str: string): string {
+export function stripMinecraftCodes(str: unknown): string {
+  if (typeof str !== 'string') return '';
   return str.replace(/§[0-9a-fk-or]/gi, '').trim();
 }
 
+const COLOR_TO_RARITY: Record<string, ItemRarity> = {
+  f: 'COMMON',
+  a: 'UNCOMMON',
+  9: 'RARE',
+  5: 'EPIC',
+  6: 'LEGENDARY',
+  d: 'MYTHIC',
+  c: 'SPECIAL',
+  b: 'VERY_SPECIAL'
+};
+
+const RARITY_TIERS: readonly ItemRarity[] = [
+  'COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'SPECIAL', 'VERY_SPECIAL'
+];
+
+function upgradeRarity(rarity: ItemRarity, upgrades: number): ItemRarity {
+  const currentIndex = RARITY_TIERS.indexOf(rarity);
+  if (currentIndex === -1) return rarity;
+  const newIndex = Math.min(currentIndex + upgrades, RARITY_TIERS.length - 1);
+  return RARITY_TIERS[newIndex];
+}
+
 export function extractRarityFromColorCode(rawName: string): ItemRarity | undefined {
-  if (rawName.includes('§f')) return 'COMMON';
-  if (rawName.includes('§a')) return 'UNCOMMON';
-  if (rawName.includes('§9')) return 'RARE';
-  if (rawName.includes('§5')) return 'EPIC';
-  if (rawName.includes('§6')) return 'LEGENDARY';
-  if (rawName.includes('§d')) return 'MYTHIC';
-  if (rawName.includes('§c')) return 'SPECIAL';
-  if (rawName.includes('§b')) return 'VERY_SPECIAL';
+  if (typeof rawName !== 'string') return undefined;
+  const matches = rawName.matchAll(/§([0-9a-f])/gi);
+  for (const m of matches) {
+    const code = m[1].toLowerCase();
+    if (COLOR_TO_RARITY[code]) {
+      return COLOR_TO_RARITY[code];
+    }
+  }
+  return undefined;
+}
+
+const BADGE_REGEX = /\b(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)\s+(?:DUNGEON\s+)?(?:ACCESSORY|TALISMAN|RING|ARTIFACT|RELIC|HAT|ITEM)\b/i;
+const STANDALONE_RARITY_REGEX = /^\s*(VERY\s+SPECIAL|SPECIAL|MYTHIC|LEGENDARY|EPIC|RARE|UNCOMMON|COMMON)\s*$/i;
+
+function toRarity(str: string): ItemRarity | undefined {
+  const norm = str.toUpperCase().replace(/\s+/g, '_');
+  if (
+    norm === 'VERY_SPECIAL' || norm === 'SPECIAL' || norm === 'MYTHIC' ||
+    norm === 'LEGENDARY' || norm === 'EPIC' || norm === 'RARE' ||
+    norm === 'UNCOMMON' || norm === 'COMMON'
+  ) {
+    return norm as ItemRarity;
+  }
   return undefined;
 }
 
 export function extractRarityFromLore(lore: readonly string[]): ItemRarity | undefined {
+  if (!Array.isArray(lore)) return undefined;
   for (let i = lore.length - 1; i >= 0; i--) {
-    const clean = stripMinecraftCodes(lore[i]).toUpperCase();
-    if (clean.includes('VERY SPECIAL')) return 'VERY_SPECIAL';
-    if (clean.includes('SPECIAL')) return 'SPECIAL';
-    if (clean.includes('MYTHIC')) return 'MYTHIC';
-    if (clean.includes('LEGENDARY')) return 'LEGENDARY';
-    if (clean.includes('EPIC')) return 'EPIC';
-    if (clean.includes('RARE')) return 'RARE';
-    if (clean.includes('UNCOMMON')) return 'UNCOMMON';
-    if (clean.includes('COMMON')) return 'COMMON';
+    const clean = stripMinecraftCodes(lore[i]);
+    const match = clean.match(BADGE_REGEX);
+    if (match) {
+      const rar = toRarity(match[1]);
+      if (rar) return rar;
+    }
+  }
+  for (let i = lore.length - 1; i >= 0; i--) {
+    const clean = stripMinecraftCodes(lore[i]);
+    const match = clean.match(STANDALONE_RARITY_REGEX);
+    if (match) {
+      const rar = toRarity(match[1]);
+      if (rar) return rar;
+    }
   }
   return undefined;
 }
@@ -105,18 +149,32 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
         let reforge: string | undefined;
         let cleanBaseName = cleanAll;
 
-        for (const ref of REFORGES) {
-          if (cleanAll.startsWith(`${ref} `)) {
-            reforge = ref;
-            cleanBaseName = cleanAll.slice(ref.length + 1).trim();
-            break;
+        const exactNorm = cleanAll.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const exactCatalogItem = ACCESSORY_BY_NAME.get(exactNorm);
+
+        if (!exactCatalogItem) {
+          for (const ref of REFORGES) {
+            if (cleanAll.startsWith(`${ref} `)) {
+              const candidate = cleanAll.slice(ref.length + 1).trim();
+              if (findAccessoryByName(candidate)) {
+                reforge = ref;
+                cleanBaseName = candidate;
+                break;
+              }
+            }
           }
         }
 
-        const catalogEntry = findAccessoryByName(cleanBaseName) || findAccessoryByName(cleanAll);
+        const catalogEntry = exactCatalogItem || findAccessoryByName(cleanBaseName) || findAccessoryByName(cleanAll);
         const internalId = catalogEntry?.id || cleanBaseName.toUpperCase().replace(/[^A-Z0-9]/g, '_');
         const displayName = catalogEntry?.name || cleanBaseName;
-        const slot = typeof item['slot'] === 'number' ? item['slot'] : index;
+        const rawSlot = item['slot'];
+        const slot =
+          typeof rawSlot === 'number' && Number.isFinite(rawSlot)
+            ? rawSlot
+            : typeof rawSlot === 'string' && Number.isFinite(parseInt(rawSlot, 10))
+            ? parseInt(rawSlot, 10)
+            : index;
         const rarity = extractRarityFromColorCode(rawName) || catalogEntry?.baseRarity || 'COMMON';
 
         const skinUrl =
@@ -163,7 +221,6 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
         const catalogEntry = findAccessoryById(internalId) || findAccessoryByName(cleanName);
         const displayName = catalogEntry?.name || cleanName || rawId || 'Unknown Accessory';
         const loreRarity = extractRarityFromLore(cleanLore);
-        const rarity: ItemRarity = loreRarity || catalogEntry?.baseRarity || 'COMMON';
 
         const modifier = extraAttrs?.['modifier'] as string | undefined;
         const enrichment = extraAttrs?.['accessory_enrichment'] as string | undefined;
@@ -171,9 +228,28 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
 
         const effectiveInternalId = internalId || cleanName.toUpperCase().replace(/\s+/g, '_') || 'UNKNOWN';
         const rawSlot = item['Slot'] ?? item['slot'];
-        const trueSlot = typeof rawSlot === 'number' ? rawSlot : (typeof rawSlot === 'string' ? parseInt(rawSlot, 10) : slot);
+        let trueSlot = slot;
+        if (typeof rawSlot === 'number' && Number.isFinite(rawSlot)) {
+          trueSlot = rawSlot;
+        } else if (typeof rawSlot === 'string') {
+          const parsed = parseInt(rawSlot, 10);
+          if (Number.isFinite(parsed)) trueSlot = parsed;
+        }
 
-        if (catalogEntry || rawId || cleanName) {
+        const isAccessory = Boolean(
+          catalogEntry ||
+          cleanLore.some(line => BADGE_REGEX.test(line)) ||
+          /\b(TALISMAN|RING|ARTIFACT|RELIC|ACCESSORY)\b/i.test(cleanName) ||
+          /(?:_|\b)(TALISMAN|RING|ARTIFACT|RELIC|ACCESSORY)(?:_|\b)/i.test(effectiveInternalId)
+        );
+
+        if (isAccessory && (catalogEntry || rawId || cleanName)) {
+          const rarityUpgrades = typeof extraAttrs?.['rarity_upgrades'] === 'number'
+            ? extraAttrs['rarity_upgrades']
+            : 0;
+          const base = loreRarity || catalogEntry?.baseRarity || extractRarityFromColorCode(rawName) || 'COMMON';
+          const rarity: ItemRarity = !loreRarity && rarityUpgrades > 0 ? upgradeRarity(base, rarityUpgrades) : base;
+
           result.push({
             id: `${effectiveInternalId}_${trueSlot}`,
             internalId: effectiveInternalId,
@@ -181,7 +257,7 @@ export function parseAccessoryBagBase64(base64Data: string): PlayerAccessoryItem
             rarity,
             reforge: modifier ? modifier.charAt(0).toUpperCase() + modifier.slice(1) : undefined,
             enrichment: enrichment ? enrichment.replace(/_/g, ' ') : undefined,
-            slot: Number.isNaN(trueSlot) ? slot : trueSlot,
+            slot: trueSlot,
             lore: cleanLore,
             skinUrl,
             isUncataloged: !catalogEntry

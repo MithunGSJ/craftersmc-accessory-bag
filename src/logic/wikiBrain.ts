@@ -62,15 +62,21 @@ export function isObtainableAccessory(item: {
   return evaluateObtainability(item).isObtainable;
 }
 
+const ROMAN_MAP: Record<string, number> = {
+  i: 1, ii: 2, iii: 3, iv: 4, v: 5, vi: 6, vii: 7, viii: 8, ix: 9, x: 10,
+  xi: 11, xii: 12, xiii: 13, xiv: 14, xv: 15
+};
+
 export function inferCategoryFromWiki(name: string, source: string, desc: string): AccessoryCategory {
   const text = `${name} ${source} ${desc}`.toLowerCase();
-  if (text.includes('slayer') || text.includes('revenant') || text.includes('tarantula') || text.includes('sven')) return 'Slayer';
-  if (text.includes('farm') || text.includes('crop') || text.includes('seed') || text.includes('wheat') || text.includes('pumpkin') || text.includes('sugar cane') || text.includes('potato') || text.includes('carrot') || text.includes('melon') || text.includes('cocoa') || text.includes('cactus')) return 'Farming';
-  if (text.includes('mine') || text.includes('ore') || text.includes('ingot') || text.includes('pickaxe') || text.includes('drill')) return 'Mining';
-  if (text.includes('forag') || text.includes('wood') || text.includes('log') || text.includes('tree') || text.includes('axe')) return 'Foraging';
-  if (text.includes('fish') || text.includes('rod') || text.includes('sea') || text.includes('ocean')) return 'Fishing';
-  if (text.includes('spooky') || text.includes('jerry') || text.includes('festival') || text.includes('event') || text.includes('candy') || text.includes('pig shop')) return 'Event';
-  if (text.includes('combat') || text.includes('damage') || text.includes('strength') || text.includes('crit') || text.includes('sword') || text.includes('mob')) return 'Combat';
+  if (text.includes('piggy')) return 'Misc';
+  if (/\b(slayer|revenant|tarantula|sven)\b/i.test(text)) return 'Slayer';
+  if (/\b(farm\w*|crops?|seeds?|wheat|pumpkins?|sugar\s+cane|potatoes?|carrots?|melons?|cocoa|cactus)\b/i.test(text)) return 'Farming';
+  if (/\b(mine|mines|mining|miners?|ores?|ingots?|pickaxes?|drills?)\b/i.test(text)) return 'Mining';
+  if (/\b(forag\w*|wood|logs?|logging|trees?|axes?)\b/i.test(text)) return 'Foraging';
+  if (/\b(fish\w*|rods?|sea|ocean)\b/i.test(text)) return 'Fishing';
+  if (/\b(spooky|jerry|festivals?|events?|candies|candy|pig\s+shop)\b/i.test(text)) return 'Event';
+  if (/\b(combat|damage|strength|crits?|swords?|mobs?)\b/i.test(text) && !text.includes('piggy')) return 'Combat';
   return 'Misc';
 }
 
@@ -79,14 +85,26 @@ export function inferStageFromWiki(source: string): AccessoryDefinition['stage']
   if (s.includes('slayer')) return 'Slayer';
   if (s.includes('quest')) return 'Quest';
   if (s.includes('drop') || s.includes('dropped')) return 'Rare Drop';
-  if (s.includes('julia') || /\bsky\b|\bsky['’]s\b/i.test(s) || s.includes('zoe') || s.includes('north') || s.includes('shop')) return 'NPC Shop';
+  if (
+    s.includes('julia') ||
+    /\bsky\b|\bsky['’]s\b/i.test(s) ||
+    s.includes('zoe') ||
+    /\b(npc\s+north|adventurer\s+north|north['’]s\s+shop|from\s+north)\b/i.test(s) ||
+    s.includes('shop')
+  ) {
+    return 'NPC Shop';
+  }
   if (s.includes('pig shop') || s.includes('event') || s.includes('festival') || s.includes('farm-o-matic')) return 'Event';
-  if (s.includes('collection 8') || s.includes('collection 9') || s.includes('collection 10') || s.includes('collection 11') || s.includes('collection 12') || s.includes('collection 13') || s.includes('collection 14')) {
-    return 'High Collection';
+
+  const colMatch = s.match(/collection\s+([0-9]+|[ivx]+)\b/i) || s.match(/\b([ivx]+)\s+collection\b/i);
+  if (colMatch) {
+    const rawVal = colMatch[1].toLowerCase();
+    const level = ROMAN_MAP[rawVal] || parseInt(rawVal, 10) || 0;
+    if (level >= 8) return 'High Collection';
+    if (level >= 5) return 'Mid Collection';
+    if (level >= 1) return 'Early Collection';
   }
-  if (s.includes('collection 5') || s.includes('collection 6') || s.includes('collection 7')) {
-    return 'Mid Collection';
-  }
+
   if (s.includes('collection') || s.includes('crafting')) {
     return 'Early Collection';
   }
@@ -99,7 +117,7 @@ export function parseWikiPageIntelligence(wikitext: string, pageTitle: string): 
   const categoryMatch = wikitext.match(/\|\s*Category\s*=\s*([^|\n}]+)/i);
   const rawCat = categoryMatch ? categoryMatch[1].trim() : '';
 
-  const sourceMatch = wikitext.match(/==\s*Obtaining\s*==\s*([\s\S]*?)(?:==|$)/i);
+  const sourceMatch = wikitext.match(/(?:^|\n)==\s*Obtaining\s*==\s*([\s\S]*?)(?=(?:\n==[^=])|$)/i);
   const obtainingText = sourceMatch ? sourceMatch[1] : '';
 
   const category = inferCategoryFromWiki(pageTitle, rawCat, obtainingText);

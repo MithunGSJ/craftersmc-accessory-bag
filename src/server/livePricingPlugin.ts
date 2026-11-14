@@ -71,7 +71,7 @@ export function livePricingPlugin(apiKey: string): Plugin {
       for (const a of accessoryAuctions) {
         if (!a.itemId) continue;
         const normalized = a.itemId.toUpperCase().replace(/^TRPIXEL:/, '').trim();
-        const price = a.startingPrice || a.highestBidAmount;
+        const price = (a.highestBidAmount && a.highestBidAmount > 0) ? a.highestBidAmount : (a.startingPrice || 0);
         if (price > 0) {
           if (!byItem[normalized]) byItem[normalized] = [];
           byItem[normalized].push(price);
@@ -253,6 +253,7 @@ export function livePricingPlugin(apiKey: string): Plugin {
       server.middlewares.use(handler);
     },
     configurePreviewServer(server) {
+      startWikiSyncWorker();
       server.httpServer?.on('close', () => {
         stopWikiSyncWorker();
       });

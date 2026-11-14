@@ -19,8 +19,14 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   const url = new URL(request.url);
-  // Support both direct route and rewritten route headers safely
+  const pathParam = url.searchParams.get('path');
+  if (pathParam) {
+    url.searchParams.delete('path');
+  }
+
+  // Support both direct route, path param, and rewritten route headers safely
   let rawPath =
+    pathParam ||
     request.headers.get('x-forwarded-uri') ||
     request.headers.get('x-matched-path') ||
     url.pathname;
@@ -58,7 +64,15 @@ export default async function handler(request: Request): Promise<Response> {
   const headers = new Headers();
   headers.set('Accept', 'application/json');
   headers.set('User-Agent', 'CraftersMC-Accessory-Bag/1.0.0');
-  if (apiKey) {
+
+  const clientAuth = request.headers.get('authorization');
+  const clientApiKey = request.headers.get('x-api-key');
+  if (clientAuth) {
+    headers.set('Authorization', clientAuth);
+  }
+  if (clientApiKey) {
+    headers.set('X-API-Key', clientApiKey);
+  } else if (apiKey) {
     headers.set('X-API-Key', apiKey);
   }
 

@@ -21,33 +21,53 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
 }) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
   const previousFocusRef = React.useRef<HTMLElement | null>(null);
+  const closeBtnRef = React.useRef<HTMLButtonElement>(null);
+  const backdropMouseDownRef = React.useRef(false);
+  const wasOpenRef = React.useRef(false);
+  const isOpen = Boolean(evaluated);
 
   React.useEffect(() => {
-    if (!evaluated) return;
-    previousFocusRef.current = document.activeElement as HTMLElement | null;
-    if (contentRef.current) contentRef.current.scrollTop = 0;
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    if (isOpen) {
+      if (!wasOpenRef.current) {
+        wasOpenRef.current = true;
+        previousFocusRef.current = document.activeElement as HTMLElement | null;
+        setTimeout(() => closeBtnRef.current?.focus(), 0);
+      }
+      if (contentRef.current) contentRef.current.scrollTop = 0;
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'Tab' && contentRef.current) {
-        const focusable = contentRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        if (focusable.length === 0) return;
-        const [first, last] = [focusable[0], focusable[focusable.length - 1]];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+        if (e.key === 'Tab' && contentRef.current) {
+          const focusable = contentRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          if (focusable.length === 0) { e.preventDefault(); return; }
+          const [first, last] = [focusable[0], focusable[focusable.length - 1]];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      };
+      window.addEventListener('keydown', onKey);
+      return () => {
+        window.removeEventListener('keydown', onKey);
+        document.body.style.overflow = originalOverflow;
+      };
+    } else if (wasOpenRef.current) {
+      wasOpenRef.current = false;
+      previousFocusRef.current?.focus();
+    }
+  }, [isOpen, onClose]);
+
+  React.useEffect(() => {
+    return () => {
+      if (wasOpenRef.current) {
+        wasOpenRef.current = false;
+        previousFocusRef.current?.focus();
       }
     };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = originalOverflow;
-      previousFocusRef.current?.focus();
-    };
-  }, [evaluated, onClose]);
+  }, []);
 
   if (!evaluated) return null;
 
@@ -58,27 +78,22 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
   const priceInfo = evaluateAccessoryPrice(definition);
 
   const statusColor = status === 'OWNED' ? 'var(--status-owned)' : status === 'UPGRADABLE_NEXT' ? 'var(--status-upgradable)' : status === 'UPGRADED_PREVIOUS' ? 'var(--text-muted)' : 'var(--status-missing)';
-
-  const isOwned = status === 'OWNED';
-  const isUpgradable = status === 'UPGRADABLE_NEXT';
-  const isPrevious = status === 'UPGRADED_PREVIOUS';
   const baseMp = style.magicalPower || 0;
   const ownedTierDef = familyChain.find(m => m.tier === evaluated.familyMaxTierOwned);
   const ownedTierMp = ownedTierDef ? (THEME_CONFIG.rarityMap[ownedTierDef.baseRarity]?.magicalPower || 0) : 0;
   const netGain = Math.max(0, baseMp - ownedTierMp);
-
   const isFamilyFreezerOwned = definition.familyId === 'day_night_freezer' &&
     Boolean(allEvaluated?.some(e => e.definition.familyId === 'day_night_freezer' && e.status === 'OWNED'));
 
-  const modalMpText = isOwned
+  const modalMpText = status === 'OWNED'
     ? effectiveMagicalPower > 0
       ? `+${effectiveMagicalPower} Active MP`
       : definition.familyId === 'day_night_freezer' ? '0 Active MP (Shared)' : '0 Active MP'
     : isFamilyFreezerOwned
     ? '0 Potential MP (Shared MP Owned)'
-    : isPrevious
+    : status === 'UPGRADED_PREVIOUS'
     ? '0 MP (Replaced by higher tier)'
-    : isUpgradable && netGain > 0 && netGain < baseMp
+    : status === 'UPGRADABLE_NEXT' && netGain > 0 && netGain < baseMp
     ? `+${netGain} MP Upgrade (+${baseMp} Base)`
     : `+${baseMp} Potential MP`;
 
@@ -93,7 +108,17 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="modal-acc-title">
+    <div
+      className="modal-backdrop"
+      onMouseDown={e => { backdropMouseDownRef.current = e.target === e.currentTarget; }}
+      onClick={e => {
+        if (backdropMouseDownRef.current && e.target === e.currentTarget) onClose();
+        backdropMouseDownRef.current = false;
+      }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-acc-title"
+    >
       <div
         ref={contentRef}
         className="glass-card modal-content"
@@ -101,6 +126,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
         onClick={e => e.stopPropagation()}
       >
         <button
+          ref={closeBtnRef}
           className="modal-close-btn"
           onClick={() => {
             playClickSound();
@@ -128,10 +154,10 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                   <span style={{ color: 'var(--status-missing)', fontWeight: 700, fontSize: '0.85rem' }}>• MISSING</span>
                   <span style={{ color: 'var(--status-upgradable)', fontWeight: 700, fontSize: '0.85rem' }}>• UPGRADABLE</span>
                 </>
-              ) : status === 'UPGRADED_PREVIOUS' ? (
-                <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.85rem' }}>• REPLACED</span>
               ) : (
-                <span style={{ color: statusColor, fontWeight: 700, fontSize: '0.85rem' }}>• {status}</span>
+                <span style={{ color: status === 'UPGRADED_PREVIOUS' ? 'var(--text-muted)' : statusColor, fontWeight: 700, fontSize: '0.85rem' }}>
+                  • {status === 'UPGRADED_PREVIOUS' ? 'REPLACED' : status}
+                </span>
               )}
               <span className="mp-pill">{modalMpText}</span>
             </div>
@@ -156,13 +182,7 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
               CraftersMC Live Economy & Valuation
             </span>
             <span style={{ fontSize: '0.85rem', fontWeight: 800, color: priceInfo.primaryMethod === 'NPC_SHOP' ? '#38bdf8' : '#4ade80' }}>
-              {priceInfo.primaryMethod === 'NPC_SHOP'
-                ? (definition.npcCost ? `NPC: ${definition.npcCost}` : `NPC: ${formatCoins(priceInfo.effectivePrice)}`)
-                : priceInfo.primaryMethod === 'BAZAAR_CRAFT'
-                ? `Craft: ~${formatCoins(priceInfo.effectivePrice)}`
-                : priceInfo.primaryMethod === 'AUCTION'
-                ? `AH: ~${formatCoins(priceInfo.effectivePrice)}`
-                : priceInfo.displayLabel}
+              {priceInfo.primaryMethod === 'NPC_SHOP' ? (definition.npcCost ? `NPC: ${definition.npcCost}` : `NPC: ${formatCoins(priceInfo.effectivePrice)}`) : priceInfo.primaryMethod === 'BAZAAR_CRAFT' ? `Craft: ~${formatCoins(priceInfo.effectivePrice)}` : priceInfo.primaryMethod === 'AUCTION' ? `AH: ~${formatCoins(priceInfo.effectivePrice)}` : priceInfo.displayLabel}
             </span>
           </div>
 
@@ -175,19 +195,14 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                 {priceInfo.craftBreakdown.map((ing, idx) => (
                   <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', padding: '5px 8px', borderRadius: '6px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem' }}>
-                      <span style={{ color: 'var(--text-secondary)' }}>
-                        • {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong>
-                        <span style={{ color: 'var(--text-muted)', marginLeft: '6px' }}>(@ {formatCoins(ing.unitPrice)}/ea)</span>
-                      </span>
+                      <span style={{ color: 'var(--text-secondary)' }}>• {ing.count}x <strong style={{ color: '#FFFFFF' }}>{ing.name}</strong> <span style={{ color: 'var(--text-muted)' }}>(@ {formatCoins(ing.unitPrice)}/ea)</span></span>
                       <span style={{ color: 'var(--accent-gold)', fontWeight: 600 }}>{formatCoins(ing.totalCost)}</span>
                     </div>
                     {ing.subMaterial && (
                       <div style={{ fontSize: '0.72rem', marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid rgba(56, 189, 248, 0.4)' }}>
                         <span style={{ color: '#94a3b8' }}>↳ = {ing.subMaterial.count.toLocaleString()}x {ing.subMaterial.name} (@ {formatCoins(ing.subMaterial.unitPrice)}/ea = {formatCoins(ing.subMaterial.totalCost)})</span>
                         <div style={{ color: ing.subMaterial.isCheaper ? '#4ade80' : '#38bdf8', fontWeight: 600, marginTop: '1px' }}>
-                          {ing.subMaterial.isCheaper
-                            ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!`
-                            : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)})`}
+                          {ing.subMaterial.isCheaper ? `💡 Crafting from raw sub-materials saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : ing.subMaterial.priceDifference > 0 ? `✨ Buying ${ing.count}x ${ing.name} directly saves ~${formatCoins(ing.subMaterial.priceDifference)}!` : `⚖️ Equal cost (${formatCoins(ing.subMaterial.totalCost)})`}
                         </div>
                       </div>
                     )}
@@ -207,19 +222,14 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
                 <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem', fontWeight: 500 }}>{priceInfo.auction.count} {priceInfo.auction.hasBin !== false ? 'BIN' : ''} listings</span>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', fontSize: '0.75rem', textAlign: 'center' }}>
-                {([
-                  { label: priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)', val: priceInfo.auction.minPrice, color: '#38bdf8' },
-                  { label: priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average', val: priceInfo.auction.avgPrice, color: '#facc15' },
-                  { label: priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)', val: priceInfo.auction.maxPrice, color: '#f87171' }
-                ] as const).map((stat, i) => (
-                  <div key={i}><div style={{ color: 'var(--text-muted)' }}>{stat.label}</div><div style={{ fontWeight: 700, color: stat.color }}>{formatCoins(stat.val)}</div></div>
-                ))}
+                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Lowest BIN' : 'Least (Min)'}</div><div style={{ fontWeight: 700, color: '#38bdf8' }}>{formatCoins(priceInfo.auction.minPrice)}</div></div>
+                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Market Avg (BIN)' : 'Average'}</div><div style={{ fontWeight: 700, color: '#facc15' }}>{formatCoins(priceInfo.auction.avgPrice)}</div></div>
+                <div><div style={{ color: 'var(--text-muted)' }}>{priceInfo.auction.hasBin !== false ? 'Highest BIN' : 'Highest (Max)'}</div><div style={{ fontWeight: 700, color: '#f87171' }}>{formatCoins(priceInfo.auction.maxPrice)}</div></div>
               </div>
             </div>
           ) : priceInfo.primaryMethod !== 'BAZAAR_CRAFT' && priceInfo.primaryMethod !== 'NPC_SHOP' && priceInfo.primaryMethod !== 'FREE_QUEST' ? (
-            <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '8px', padding: '10px 12px', marginTop: '8px', fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>🏛️</span>
-              <span>No offers were made in auction house.</span>
+            <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '8px', padding: '10px 12px', marginTop: '8px', fontSize: '0.78rem', color: '#94a3b8' }}>
+              🏛️ No offers were made in auction house.
             </div>
           ) : null}
         </div>
@@ -248,13 +258,9 @@ export const AccessoryModal: React.FC<AccessoryModalProps> = ({
 
         {/* Obtaining Requirement */}
         <div style={{ marginBottom: '16px' }}>
-          <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>
-            CraftersMC Obtaining Requirement
-          </span>
+          <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.8px', fontWeight: 700 }}>CraftersMC Obtaining Requirement</span>
           <div style={{ fontSize: '0.92rem', color: 'var(--text-primary)', marginTop: '4px', fontWeight: 600 }}>📍 {definition.source}</div>
-          {definition.stage && (
-            <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>🏷️ Progression Milestone: {definition.stage}</div>
-          )}
+          {definition.stage && <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', marginTop: '2px' }}>🏷️ Progression Milestone: {definition.stage}</div>}
         </div>
 
         {/* Family Chain with Icons */}

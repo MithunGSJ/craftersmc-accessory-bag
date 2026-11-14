@@ -36,7 +36,8 @@ export const App: React.FC = () => {
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
   const [isFetchingApi, setIsFetchingApi] = React.useState(false);
   const [apiError, setApiError] = React.useState<string | null>(null);
-  const [, setPricingHydrated] = React.useState(false);
+  const [pricingHydrated, setPricingHydrated] = React.useState(false);
+  const lookupRequestIdRef = React.useRef(0);
 
   React.useEffect(() => {
     let isMounted = true;
@@ -53,7 +54,7 @@ export const App: React.FC = () => {
   // Evaluate accessories
   const evaluatedAll = React.useMemo(() => {
     return evaluatePlayerAccessories(profileData.items, { hideSupersededTiers: false });
-  }, [profileData.items]);
+  }, [profileData.items, pricingHydrated]);
 
   // Compute statistics
   const bagStats = React.useMemo(() => {
@@ -78,18 +79,23 @@ export const App: React.FC = () => {
   };
 
   const handleApiLookup = async (username: string) => {
+    const reqId = ++lookupRequestIdRef.current;
     setIsFetchingApi(true);
     setApiError(null);
     try {
       const data = await fetchPlayerFromApi(username);
+      if (lookupRequestIdRef.current !== reqId) return;
       setProfileData(data);
       setCurrentProfileId('custom');
       setSelectedAccessory(null);
       setIsLookupOpen(false);
     } catch (err) {
+      if (lookupRequestIdRef.current !== reqId) return;
       setApiError(err instanceof Error ? err.message : 'Unknown error during API lookup');
     } finally {
-      setIsFetchingApi(false);
+      if (lookupRequestIdRef.current === reqId) {
+        setIsFetchingApi(false);
+      }
     }
   };
 

@@ -9,7 +9,12 @@ if (!fs.existsSync(dir)) {
 }
 
 // Read the wiki HTML content where all image URLs were saved in step 1041 or 1088
-const html = fs.readFileSync('C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1088/content.md', 'utf8');
+const filePath = process.env.WIKI_STEP_1088 || 'C:/Users/OM/.gemini/antigravity-ide/brain/f369ad55-8d3b-463f-86ec-15feb605d54a/.system_generated/steps/1088/content.md';
+if (!fs.existsSync(filePath)) {
+  console.log(`[Script skipped] Cached file not found: ${filePath}`);
+  process.exit(0);
+}
+const html = fs.readFileSync(filePath, 'utf8');
 
 // Find all <img alt="XYZ.png" src="..." in the HTML
 const imgMatches = [...html.matchAll(/<img[^>]+alt="([^"]+\.png)"[^>]+src="([^"]+)"/g)];

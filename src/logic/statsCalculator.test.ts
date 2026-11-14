@@ -64,4 +64,18 @@ describe('statsCalculator', () => {
     expect(stats.ownedFamiliesCount).toBe(1);
     expect(stats.completionPercentage).toBe(Math.round((1 / stats.totalFamilies) * 100));
   });
+
+  it('counts all owned accessories in rarityCounts and dynamically scales maxPossibleMagicalPower', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'ZR', internalId: 'ZOMBIE_RING', displayName: 'Zombie Ring', rarity: 'UNCOMMON', slot: 0, lore: [] },
+      { id: 'ZT', internalId: 'ZOMBIE_TALISMAN', displayName: 'Zombie Talisman', rarity: 'COMMON', slot: 1, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const stats = calculateBagStatistics(evaluated);
+
+    expect(stats.ownedCount).toBe(2);
+    expect(stats.rarityCounts.UNCOMMON).toBe(1);
+    expect(stats.rarityCounts.COMMON).toBe(1);
+    expect(stats.maxPossibleMagicalPower).toBeGreaterThanOrEqual(stats.totalMagicalPower);
+  });
 });

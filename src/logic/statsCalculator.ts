@@ -43,11 +43,10 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     VERY_SPECIAL: 0
   };
 
-  const countedMissingFamilies = new Set<string>();
   const ownedFamilies = new Set<string>();
 
   for (const item of evaluated) {
-    if (item.status === 'OWNED') {
+    if (item.status === 'OWNED' || item.ownedItem) {
       ownedCount++;
       ownedFamilies.add(item.definition.familyId);
       totalMagicalPower += item.effectiveMagicalPower;
@@ -59,23 +58,18 @@ export function calculateBagStatistics(evaluated: readonly EvaluatedAccessory[])
     } else if (item.status === 'UPGRADABLE_NEXT') {
       upgradableCount++;
     } else if (item.status === 'MISSING') {
-      // Only count missing once per unowned family
-      if (item.familyMaxTierOwned === 0) {
-        if (!countedMissingFamilies.has(item.definition.familyId)) {
-          countedMissingFamilies.add(item.definition.familyId);
-          missingCount++;
-        }
-      }
+      missingCount++;
     }
   }
 
   const ownedFamiliesCount = ownedFamilies.size;
   const completionPercentage =
     TOTAL_FAMILIES > 0 ? Math.min(100, Math.round((ownedFamiliesCount / TOTAL_FAMILIES) * 100)) : 0;
+  const dynamicMaxMp = Math.max(MAX_POSSIBLE_MAGICAL_POWER, totalMagicalPower);
 
   return {
     totalMagicalPower,
-    maxPossibleMagicalPower: MAX_POSSIBLE_MAGICAL_POWER,
+    maxPossibleMagicalPower: dynamicMaxMp,
     ownedCount,
     ownedFamiliesCount,
     missingCount,

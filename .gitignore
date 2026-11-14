@@ -17,3 +17,5 @@ tmp/
 *.pdf
 openapi.json
 .agents/
+Crafters/
+

@@ -38,46 +38,62 @@ export class NbtReader {
     return this.readCompoundPayload();
   }
 
+  private ensureBytes(count: number): void {
+    if (this.offset + count > this.buffer.length) {
+      throw new Error(
+        `NBT buffer underflow: requested ${count} bytes at offset ${this.offset}, but buffer length is ${this.buffer.length}`
+      );
+    }
+  }
+
   private readByte(): number {
+    this.ensureBytes(1);
     const val = this.view.getInt8(this.offset);
     this.offset += 1;
     return val;
   }
 
   private readShort(): number {
+    this.ensureBytes(2);
     const val = this.view.getInt16(this.offset, false);
     this.offset += 2;
     return val;
   }
 
   private readInt(): number {
+    this.ensureBytes(4);
     const val = this.view.getInt32(this.offset, false);
     this.offset += 4;
     return val;
   }
 
   private readLong(): bigint {
+    this.ensureBytes(8);
     const val = this.view.getBigInt64(this.offset, false);
     this.offset += 8;
     return val;
   }
 
   private readFloat(): number {
+    this.ensureBytes(4);
     const val = this.view.getFloat32(this.offset, false);
     this.offset += 4;
     return val;
   }
 
   private readDouble(): number {
+    this.ensureBytes(8);
     const val = this.view.getFloat64(this.offset, false);
     this.offset += 8;
     return val;
   }
 
   private readString(): string {
+    this.ensureBytes(2);
     const len = this.view.getUint16(this.offset, false);
     this.offset += 2;
     if (len === 0) return '';
+    this.ensureBytes(len);
     const slice = this.buffer.subarray(this.offset, this.offset + len);
     this.offset += len;
     return this.decoder.decode(slice);
@@ -101,6 +117,9 @@ export class NbtReader {
     const elemType = this.readByte();
     const length = this.readInt();
     if (length <= 0) return [];
+    if (length > this.buffer.length - this.offset) {
+      throw new Error(`NBT list length ${length} exceeds remaining buffer size`);
+    }
     const list: NbtValue[] = [];
     for (let i = 0; i < length; i++) {
       list.push(this.readTagValue(elemType));
@@ -124,6 +143,9 @@ export class NbtReader {
         return this.readDouble();
       case 7: {
         const len = this.readInt();
+        if (len < 0 || len > this.buffer.length - this.offset) {
+          throw new Error(`Invalid byte array length: ${len}`);
+        }
         const arr: number[] = [];
         for (let i = 0; i < len; i++) arr.push(this.readByte());
         return arr;
@@ -136,12 +158,18 @@ export class NbtReader {
         return this.readCompoundPayload();
       case 11: {
         const len = this.readInt();
+        if (len < 0 || len > (this.buffer.length - this.offset) / 4) {
+          throw new Error(`Invalid int array length: ${len}`);
+        }
         const arr: number[] = [];
         for (let i = 0; i < len; i++) arr.push(this.readInt());
         return arr;
       }
       case 12: {
         const len = this.readInt();
+        if (len < 0 || len > (this.buffer.length - this.offset) / 8) {
+          throw new Error(`Invalid long array length: ${len}`);
+        }
         const arr: bigint[] = [];
         for (let i = 0; i < len; i++) arr.push(this.readLong());
         return arr;

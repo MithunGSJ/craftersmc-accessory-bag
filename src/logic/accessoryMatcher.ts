@@ -58,7 +58,7 @@ export function filterAccessories(
 
     // If player owns a higher tier in this family, never show unowned lower tier ones
     if (statusFilter !== 'OWNED' && (item.status === 'UPGRADED_PREVIOUS' || item.definition.tier < item.familyMaxTierOwned)) {
-      if (statusFilter !== 'ALL' || !item.ownedItem || filters.hideSupersededTiers) {
+      if (statusFilter !== 'ALL' || filters.hideSupersededTiers) {
         return false;
       }
     }
@@ -131,11 +131,17 @@ export function evaluatePlayerAccessories(
     } else if (def.familyId === 'day_night_freezer' && !isOwned && (ownedMap.has('DAYFREEZER') || ownedMap.has('NIGHTFREEZER'))) {
       // Dayfreezer and Nightfreezer are considered one: owning either one is enough, so the other is not missing
       status = 'UPGRADED_PREVIOUS';
-    } else if (familyMaxTier > def.tier) {
-      // Player already owns a strictly higher tier in this family; lower tier is superseded
+    } else if (
+      (def.id === 'SEAL_OF_THE_SEAS' && !isOwned && ownedMap.has('SEAL_OF_THE_OCEANS')) ||
+      (def.id === 'SEAL_OF_THE_OCEANS' && !isOwned && ownedMap.has('SEAL_OF_THE_SEAS'))
+    ) {
+      // Mutually exclusive quest rewards: owning either one resolves the quest line
       status = 'UPGRADED_PREVIOUS';
     } else if (isOwned) {
       status = 'OWNED';
+    } else if (familyMaxTier > def.tier) {
+      // Player already owns a strictly higher tier in this family; lower tier is superseded
+      status = 'UPGRADED_PREVIOUS';
     } else if (familyMaxTier > 0 && def.tier === familyMaxTier + 1) {
       // Next tier upgrade directly available
       status = 'UPGRADABLE_NEXT';
@@ -159,12 +165,12 @@ export function evaluatePlayerAccessories(
       }
     }
 
-    // Upgrade recommendation
+    // Upgrade recommendation: only recommend upgrade for the highest tier the player actually OWNS
     let upgradeRecommendation: EvaluatedAccessory['upgradeRecommendation'];
     const familyMembers = ACCESSORIES_BY_FAMILY[def.familyId] || [];
     const nextMember = familyMembers.find(m => m.tier === def.tier + 1);
 
-    if (nextMember && (status === 'OWNED' || status === 'UPGRADABLE_NEXT')) {
+    if (nextMember && status === 'OWNED' && def.tier === familyMaxTier) {
       const nextRarityMp = THEME_CONFIG.rarityMap[nextMember.baseRarity]?.magicalPower || 0;
       const mpGain = Math.max(0, nextRarityMp - baseMp);
       const estPrice = nextMember.estimatedCoins ?? evaluateAccessoryPrice(nextMember)?.effectivePrice;

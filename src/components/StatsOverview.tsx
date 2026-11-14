@@ -8,10 +8,11 @@ interface StatsOverviewProps {
 }
 
 export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName, profileName }) => {
-  const mpPercent =
+  const rawPercent =
     stats.maxPossibleMagicalPower > 0
       ? Math.round((stats.totalMagicalPower / stats.maxPossibleMagicalPower) * 100)
       : 0;
+  const mpPercent = Number.isFinite(rawPercent) ? Math.min(100, Math.max(0, rawPercent)) : 0;
 
   return (
     <section className="stats-grid" aria-label="Accessory Bag Statistics">
@@ -22,7 +23,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
         </div>
         <div
           role="progressbar"
-          aria-valuenow={Math.min(100, Math.max(0, mpPercent))}
+          aria-valuenow={mpPercent}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label="Magical Power potential progress"
@@ -30,7 +31,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
         >
           <div
             style={{
-              width: `${Math.min(100, Math.max(0, mpPercent))}%`,
+              width: `${mpPercent}%`,
               height: '100%',
               background: 'linear-gradient(90deg, #FFB800, #FF55FF)',
               borderRadius: '4px',
@@ -44,7 +45,7 @@ export const StatsOverview: React.FC<StatsOverviewProps> = ({ stats, playerName,
       <div className="glass-card stat-card" style={{ borderLeft: '4px solid var(--status-owned)' }}>
         <span className="stat-label">Owned Families</span>
         <div className="stat-value" style={{ color: 'var(--status-owned)' }}>
-          {stats.ownedCount} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>/ {stats.totalFamilies}</span>
+          {stats.ownedFamiliesCount} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>/ {stats.totalFamilies}</span>
         </div>
         <span className="stat-subtext">Bag completion: {stats.completionPercentage}%</span>
       </div>

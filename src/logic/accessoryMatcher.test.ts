@@ -14,18 +14,10 @@ describe('accessoryMatcher', () => {
 
   it('should mark owned accessories correctly and identify superseded previous tiers', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'ZOMBIE_ARTIFACT_0',
-        internalId: 'ZOMBIE_ARTIFACT',
-        displayName: 'Zombie Artifact',
-        rarity: 'RARE',
-        slot: 0,
-        lore: []
-      }
+      { id: 'ZOMBIE_ARTIFACT_0', internalId: 'ZOMBIE_ARTIFACT', displayName: 'Zombie Artifact', rarity: 'RARE', slot: 0, lore: [] }
     ];
 
     const evaluated = evaluatePlayerAccessories(playerItems);
-
     const artifact = evaluated.find(e => e.definition.id === 'ZOMBIE_ARTIFACT');
     const ring = evaluated.find(e => e.definition.id === 'ZOMBIE_RING');
     const talisman = evaluated.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
@@ -38,18 +30,10 @@ describe('accessoryMatcher', () => {
 
   it('should mark next tier as UPGRADABLE_NEXT when an intermediate tier is owned', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'ZOMBIE_RING_0',
-        internalId: 'ZOMBIE_RING',
-        displayName: 'Zombie Ring',
-        rarity: 'UNCOMMON',
-        slot: 0,
-        lore: []
-      }
+      { id: 'ZOMBIE_RING_0', internalId: 'ZOMBIE_RING', displayName: 'Zombie Ring', rarity: 'UNCOMMON', slot: 0, lore: [] }
     ];
 
     const evaluated = evaluatePlayerAccessories(playerItems);
-
     const ring = evaluated.find(e => e.definition.id === 'ZOMBIE_RING');
     const talisman = evaluated.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
     const artifact = evaluated.find(e => e.definition.id === 'ZOMBIE_ARTIFACT');
@@ -63,14 +47,7 @@ describe('accessoryMatcher', () => {
 
   it('should respect hideSupersededTiers option', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'ZOMBIE_ARTIFACT_0',
-        internalId: 'ZOMBIE_ARTIFACT',
-        displayName: 'Zombie Artifact',
-        rarity: 'RARE',
-        slot: 0,
-        lore: []
-      }
+      { id: 'ZOMBIE_ARTIFACT_0', internalId: 'ZOMBIE_ARTIFACT', displayName: 'Zombie Artifact', rarity: 'RARE', slot: 0, lore: [] }
     ];
 
     const allEvaluated = evaluatePlayerAccessories(playerItems);
@@ -147,14 +124,7 @@ describe('accessoryMatcher', () => {
 
   it('includes UPGRADABLE_NEXT accessories in MISSING tab alongside pure MISSING accessories', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'ZOMBIE_RING_0',
-        internalId: 'ZOMBIE_RING',
-        displayName: 'Zombie Ring',
-        rarity: 'UNCOMMON',
-        slot: 0,
-        lore: []
-      }
+      { id: 'ZOMBIE_RING_0', internalId: 'ZOMBIE_RING', displayName: 'Zombie Ring', rarity: 'UNCOMMON', slot: 0, lore: [] }
     ];
 
     const evaluated = evaluatePlayerAccessories(playerItems);
@@ -184,14 +154,7 @@ describe('accessoryMatcher', () => {
 
   it('validates hierarchy separation: Fire Talisman is standalone, Fire Devourer upgrades Fire Extinguisher', () => {
     const playerItems: PlayerAccessoryItem[] = [
-      {
-        id: 'FE_0',
-        internalId: 'FIRE_EXTINGUISHER',
-        displayName: 'Fire Extinguisher',
-        rarity: 'RARE',
-        slot: 0,
-        lore: []
-      }
+      { id: 'FE_0', internalId: 'FIRE_EXTINGUISHER', displayName: 'Fire Extinguisher', rarity: 'RARE', slot: 0, lore: [] }
     ];
 
     const evaluated = evaluatePlayerAccessories(playerItems);
@@ -242,10 +205,8 @@ describe('accessoryMatcher', () => {
       { id: 'ITEM_B', internalId: 'FIRE_TALISMAN', displayName: 'Fire Talisman', rarity: 'COMMON', slot: 5, lore: [] },
       { id: 'ITEM_A', internalId: 'CAMPFIRE_GOD_BADGE', displayName: 'Campfire God Badge', rarity: 'LEGENDARY', slot: 1, lore: [] }
     ];
-
     const evaluated = evaluatePlayerAccessories(playerItems);
     const sorted = sortAccessoriesByBagOrder(evaluated);
-
     expect(sorted[0].ownedItem?.slot).toBe(1);
     expect(sorted[0].definition.id).toBe('CAMPFIRE_GOD_BADGE');
     expect(sorted[1].ownedItem?.slot).toBe(5);
@@ -255,14 +216,9 @@ describe('accessoryMatcher', () => {
 
   it('dynamically supports uncataloged accessories with skinUrl and rarity MP', () => {
     const item: PlayerAccessoryItem = {
-      id: 'CUSTOM_PENDANT_0',
-      internalId: 'CUSTOM_PENDANT',
-      displayName: 'Custom Pendant',
-      rarity: 'MYTHIC',
-      slot: 7,
-      lore: ['A mysterious zero-day talisman'],
-      skinUrl: 'https://textures.minecraft.net/texture/12345',
-      isUncataloged: true
+      id: 'CUSTOM_PENDANT_0', internalId: 'CUSTOM_PENDANT', displayName: 'Custom Pendant',
+      rarity: 'MYTHIC', slot: 7, lore: ['A mysterious zero-day talisman'],
+      skinUrl: 'https://textures.minecraft.net/texture/12345', isUncataloged: true
     };
     const evaluated = evaluatePlayerAccessories([item]);
     const found = evaluated.find(e => e.definition.id === 'CUSTOM_PENDANT');
@@ -291,27 +247,50 @@ describe('accessoryMatcher', () => {
   });
 
   it('deduplicates uncataloged accessories so duplicates do not stack MP', () => {
-    const item1: PlayerAccessoryItem = {
-      id: 'CUSTOM_PENDANT_0',
-      internalId: 'CUSTOM_PENDANT',
-      displayName: 'Custom Pendant',
-      rarity: 'MYTHIC',
-      slot: 0,
-      lore: []
-    };
-    const item2: PlayerAccessoryItem = {
-      id: 'CUSTOM_PENDANT_1',
-      internalId: 'CUSTOM_PENDANT',
-      displayName: 'Custom Pendant',
-      rarity: 'MYTHIC',
-      slot: 1,
-      lore: []
-    };
+    const item1: PlayerAccessoryItem = { id: 'CUSTOM_PENDANT_0', internalId: 'CUSTOM_PENDANT', displayName: 'Custom Pendant', rarity: 'MYTHIC', slot: 0, lore: [] };
+    const item2: PlayerAccessoryItem = { id: 'CUSTOM_PENDANT_1', internalId: 'CUSTOM_PENDANT', displayName: 'Custom Pendant', rarity: 'MYTHIC', slot: 1, lore: [] };
     const evaluated = evaluatePlayerAccessories([item1, item2]);
     const customItems = evaluated.filter(e => e.definition.id === 'CUSTOM_PENDANT');
     expect(customItems.length).toBe(2);
-    const totalCustomMp = customItems.reduce((sum, i) => sum + i.effectiveMagicalPower, 0);
-    expect(totalCustomMp).toBe(22); // Exactly 1 active copy of 22 MP, duplicate grants 0 MP
+    expect(customItems.reduce((sum, i) => sum + i.effectiveMagicalPower, 0)).toBe(22);
+  });
+
+  it('does not mask ownership of lower tiers when both lower and higher tiers are owned', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'ZR', internalId: 'ZOMBIE_RING', displayName: 'Zombie Ring', rarity: 'UNCOMMON', slot: 0, lore: [] },
+      { id: 'ZT', internalId: 'ZOMBIE_TALISMAN', displayName: 'Zombie Talisman', rarity: 'COMMON', slot: 1, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const ring = evaluated.find(e => e.definition.id === 'ZOMBIE_RING');
+    const talisman = evaluated.find(e => e.definition.id === 'ZOMBIE_TALISMAN');
+    expect(ring?.status).toBe('OWNED');
+    expect(talisman?.status).toBe('OWNED');
+    expect(talisman?.effectiveMagicalPower).toBe(0);
+    expect(ring?.effectiveMagicalPower).toBe(5);
+  });
+
+  it('does not provide upgrade recommendations for unowned accessories in multi-tier families', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'ZT', internalId: 'ZOMBIE_TALISMAN', displayName: 'Zombie Talisman', rarity: 'COMMON', slot: 0, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const ring = evaluated.find(e => e.definition.id === 'ZOMBIE_RING');
+    const artifact = evaluated.find(e => e.definition.id === 'ZOMBIE_ARTIFACT');
+    expect(ring?.status).toBe('UPGRADABLE_NEXT');
+    expect(ring?.upgradeRecommendation).toBeUndefined();
+    expect(artifact?.status).toBe('MISSING');
+    expect(artifact?.upgradeRecommendation).toBeUndefined();
+  });
+
+  it('shows unowned superseded accessories in ALL filter when hideSupersededTiers is false', () => {
+    const playerItems: PlayerAccessoryItem[] = [
+      { id: 'ZR', internalId: 'ZOMBIE_RING', displayName: 'Zombie Ring', rarity: 'UNCOMMON', slot: 0, lore: [] }
+    ];
+    const evaluated = evaluatePlayerAccessories(playerItems);
+    const filtered = filterAccessories(evaluated, {
+      statusFilter: 'ALL', categoryFilter: 'ALL', rarityFilter: 'ALL', hideSupersededTiers: false
+    });
+    expect(filtered.find(e => e.definition.id === 'ZOMBIE_TALISMAN')).toBeDefined();
   });
 });
 

@@ -38,18 +38,12 @@ const liveAuctionCache = new Map<string, AuctionPriceSnapshot>();
 const priceDetailsCache = new Map<string, AccessoryPriceDetails>();
 
 const NPC_RAW_MATERIALS: Record<string, number> = {
-  chest: 20,
-  oak_leaves: 12,
-  poisonous_potato: 50,
-  wheat_seeds: 12,
-  fused_remnants: 6400000,
-  remnant_of_the_eye: 200000
+  chest: 20, oak_leaves: 12, poisonous_potato: 50,
+  wheat_seeds: 12, fused_remnants: 6400000, remnant_of_the_eye: 200000
 };
 const BAZAAR_ITEM_ALIASES: Record<string, string> = {
-  envoys_horn: 'envoy_horns',
-  envoy_horn: 'envoy_horns',
-  envoy_s_horn: 'envoy_horns',
-  redstone_dust: 'redstone'
+  envoys_horn: 'envoy_horns', envoy_horn: 'envoy_horns',
+  envoy_s_horn: 'envoy_horns', redstone_dust: 'redstone'
 };
 
 export function getBazaarMaterialPrice(itemId: string): number {
@@ -138,9 +132,10 @@ export function calculateCraftCost(
     const parentRecipe = ACCESSORY_RECIPES[recipe.upgradesFrom];
     const parentNpc = parseNpcCost(parentDef?.npcCost);
     const craftResult = parentRecipe ? calculateCraftCost(parentRecipe, visited).totalCost : 0;
-    const parentPrice = craftResult > 0
+    const rawParentPrice = craftResult > 0
       ? craftResult
       : (parentNpc && parentNpc > 0 ? parentNpc : (getAccessoryAuctionPrice(recipe.upgradesFrom)?.avgPrice || parentDef?.estimatedCoins || 0));
+    const parentPrice = Math.max(0, Number.isFinite(rawParentPrice) ? rawParentPrice : 0);
     totalCost += parentPrice;
     breakdown.push({
       itemId: recipe.upgradesFrom,
@@ -152,13 +147,15 @@ export function calculateCraftCost(
   }
 
   for (const ing of recipe.ingredients) {
-    const unitPrice = getBazaarMaterialPrice(ing.itemId);
-    const subtotal = Math.round(unitPrice * ing.count);
+    const rawUnitPrice = getBazaarMaterialPrice(ing.itemId);
+    const unitPrice = Math.max(0, Number.isFinite(rawUnitPrice) ? rawUnitPrice : 0);
+    const subtotal = Math.round(unitPrice * Math.max(0, ing.count));
 
     let subComp: SubMaterialComparison | undefined;
     if (ing.subMaterial) {
-      const subUnitPrice = getBazaarMaterialPrice(ing.subMaterial.itemId);
-      const subTotal = Math.round(subUnitPrice * ing.subMaterial.count);
+      const rawSub = getBazaarMaterialPrice(ing.subMaterial.itemId);
+      const subUnitPrice = Math.max(0, Number.isFinite(rawSub) ? rawSub : 0);
+      const subTotal = Math.round(subUnitPrice * Math.max(0, ing.subMaterial.count));
       const isCheaper = subTotal > 0 && (subtotal === 0 || subTotal < subtotal);
       const priceDifference = Math.abs(subtotal - subTotal);
       subComp = {
@@ -269,10 +266,14 @@ export function evaluateAccessoryPrice(acc: AccessoryDefinition): AccessoryPrice
 }
 
 export function formatCoins(amount: number): string {
-  if (amount >= 1e9) return `${(amount / 1e9).toFixed(1)}B`;
-  if (amount >= 1e6) return `${(amount / 1e6).toFixed(1)}M`;
-  if (amount >= 1e3) return `${(amount / 1e3).toFixed(1)}K`;
-  return Math.round(amount).toLocaleString();
+  if (typeof amount !== 'number' || !Number.isFinite(amount) || Number.isNaN(amount)) return '0';
+  const isNegative = amount < 0;
+  const abs = Math.abs(amount);
+  const sign = isNegative ? '-' : '';
+  if (abs >= 999_950_000) return `${sign}${(abs / 1e9).toFixed(1)}B`;
+  if (abs >= 999_950) return `${sign}${(abs / 1e6).toFixed(1)}M`;
+  if (abs >= 999.5) return `${sign}${(abs / 1e3).toFixed(1)}K`;
+  return `${sign}${Math.round(abs).toLocaleString()}`;
 }
 
 export async function refreshLiveBazaarPrice(itemId: string): Promise<number | null> {

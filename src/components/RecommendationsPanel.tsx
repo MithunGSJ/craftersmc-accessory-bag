@@ -42,7 +42,10 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
       const stage = e.definition.stage || 'Mid Collection';
       const stageWeight = STAGE_ORDER[stage] || 5;
       const priceInfo = evaluateAccessoryPrice(e.definition);
-      const costPerMp = priceInfo.effectivePrice > 0 ? Math.round(priceInfo.effectivePrice / mpGain) : 0;
+      const costPerMp =
+        priceInfo.effectivePrice > 0 && mpGain > 0 && Number.isFinite(priceInfo.effectivePrice / mpGain)
+          ? Math.round(priceInfo.effectivePrice / mpGain)
+          : 0;
 
       return {
         evaluated: e,
@@ -64,7 +67,14 @@ export const RecommendationsPanel: React.FC<RecommendationsPanelProps> = ({
       }
       return b.mpGain - a.mpGain;
     })
-    .filter((c, idx, arr) => arr.findIndex(item => item.evaluated.definition.familyId === c.evaluated.definition.familyId) === idx)
+    .filter((c, idx, arr) => {
+      const cFamily = c.evaluated.definition.familyId || c.evaluated.definition.id;
+      return (
+        arr.findIndex(
+          item => (item.evaluated.definition.familyId || item.evaluated.definition.id) === cFamily
+        ) === idx
+      );
+    })
     .slice(0, 4);
 
   if (candidates.length === 0) return null;

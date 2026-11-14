@@ -174,5 +174,87 @@ describe('accessoryParser', () => {
     expect(parsed[0].id).toBe('ZOMBIE_RING_15');
     expect(parsed[0].id.startsWith('_')).toBe(false);
   });
+
+  it('correctly resolves rarity without priority inversion when rawName contains §f after higher rarity code', () => {
+    const raw = '§6Personal Compactor §f7000';
+    expect(extractRarityFromColorCode(raw)).toBe('LEGENDARY');
+  });
+
+  it('avoids false positive rarity matches on description lore containing words like COMMON', () => {
+    const lore = [
+      '§7Deals 10% more damage to common zombies.',
+      '§6§lLEGENDARY ACCESSORY',
+      '§7Found commonly in graveyard crypts.'
+    ];
+    expect(extractRarityFromLore(lore)).toBe('LEGENDARY');
+  });
+
+  it('safely handles non-string inputs in stripMinecraftCodes without throwing', () => {
+    expect(stripMinecraftCodes(null as unknown as string)).toBe('');
+    expect(stripMinecraftCodes(undefined as unknown as string)).toBe('');
+    expect(stripMinecraftCodes(12345 as unknown as string)).toBe('');
+    expect(stripMinecraftCodes({} as unknown as string)).toBe('');
+  });
+
+  it('ignores non-accessory items like swords or blocks when parsing Format 2 inventory NBT', () => {
+    const buf: number[] = [];
+    buf.push(10, 0, 0); // root compound ""
+    buf.push(9, 0, 1, 'i'.charCodeAt(0)); // list "i"
+    buf.push(10, 0, 0, 0, 1); // 1 compound
+    // item 0: TAG_Compound "tag"
+    buf.push(10, 0, 3, ...'tag'.split('').map(c => c.charCodeAt(0)));
+    // inside tag: TAG_Compound "ExtraAttributes" with id = "DIAMOND_SWORD"
+    buf.push(10, 0, 15, ...'ExtraAttributes'.split('').map(c => c.charCodeAt(0)));
+    buf.push(8, 0, 2, 'i'.charCodeAt(0), 'd'.charCodeAt(0));
+    const swordId = 'DIAMOND_SWORD';
+    buf.push(0, swordId.length, ...swordId.split('').map(c => c.charCodeAt(0)));
+    buf.push(0); // end ExtraAttributes
+    // inside tag: TAG_Compound "display" with Name = "Diamond Sword"
+    buf.push(10, 0, 7, ...'display'.split('').map(c => c.charCodeAt(0)));
+    const swordName = 'Diamond Sword';
+    buf.push(8, 0, 4, ...'Name'.split('').map(c => c.charCodeAt(0)), 0, swordName.length, ...swordName.split('').map(c => c.charCodeAt(0)));
+    buf.push(0); // end display
+    buf.push(0); // end tag
+    buf.push(0); // end item 0
+    buf.push(0); // end root
+
+    const compressed = pako.gzip(new Uint8Array(buf));
+    let binary = '';
+    for (let i = 0; i < compressed.length; i++) binary += String.fromCharCode(compressed[i]);
+    const b64 = btoa(binary);
+
+    const parsed = parseAccessoryBagBase64(b64);
+    expect(parsed.length).toBe(0);
+  });
+
+  it('upgrades rarity when recombobulator rarity_upgrades is present but lore is missing', () => {
+    const buf: number[] = [];
+    buf.push(10, 0, 0); // root compound ""
+    buf.push(9, 0, 1, 'i'.charCodeAt(0)); // list "i"
+    buf.push(10, 0, 0, 0, 1); // 1 compound
+    // item 0: TAG_Compound "tag"
+    buf.push(10, 0, 3, ...'tag'.split('').map(c => c.charCodeAt(0)));
+    // inside tag: TAG_Compound "ExtraAttributes" with id = "ZOMBIE_RING", rarity_upgrades = 1
+    buf.push(10, 0, 15, ...'ExtraAttributes'.split('').map(c => c.charCodeAt(0)));
+    buf.push(8, 0, 2, 'i'.charCodeAt(0), 'd'.charCodeAt(0));
+    const itemId = 'ZOMBIE_RING';
+    buf.push(0, itemId.length, ...itemId.split('').map(c => c.charCodeAt(0)));
+    // TAG_Int rarity_upgrades = 1
+    buf.push(3, 0, 15, ...'rarity_upgrades'.split('').map(c => c.charCodeAt(0)), 0, 0, 0, 1);
+    buf.push(0); // end ExtraAttributes
+    buf.push(0); // end tag
+    buf.push(0); // end item 0
+    buf.push(0); // end root
+
+    const compressed = pako.gzip(new Uint8Array(buf));
+    let binary = '';
+    for (let i = 0; i < compressed.length; i++) binary += String.fromCharCode(compressed[i]);
+    const b64 = btoa(binary);
+
+    const parsed = parseAccessoryBagBase64(b64);
+    expect(parsed.length).toBe(1);
+    // Base rarity of Zombie Ring is UNCOMMON; upgraded once with recombobulator is RARE
+    expect(parsed[0].rarity).toBe('RARE');
+  });
 });
 

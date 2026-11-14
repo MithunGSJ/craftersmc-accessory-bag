@@ -174,9 +174,18 @@ export async function fetchPlayerFromApi(
   let items: PlayerAccessoryItem[] = [];
   let profileName = 'SkyBlock';
 
-  const profileId = player?.stats?.skyBlock?.profileId;
+  const stats = (player?.stats?.skyBlock || player?.stats?.SkyBlock || player?.stats?.skyblock) as
+    | Record<string, unknown>
+    | undefined;
+  let profileId = (stats?.['profileId'] || stats?.['activeProfileId']) as string | undefined;
+  const profilesMap = (stats?.['profiles'] || {}) as Record<string, Record<string, unknown>>;
+  if (!profileId && typeof profilesMap === 'object' && Object.keys(profilesMap).length > 0) {
+    const selectedKey = Object.keys(profilesMap).find(k => profilesMap[k]?.['selected'] || profilesMap[k]?.['current']);
+    profileId = selectedKey || Object.keys(profilesMap)[0];
+  }
+
   const rawUuid = String(player?.uuid || '');
-  const uuidClean = rawUuid.replace(/-/g, '');
+  const uuidClean = rawUuid.replace(/-/g, '').toLowerCase();
 
   if (profileId) {
     try {
@@ -184,19 +193,50 @@ export async function fetchPlayerFromApi(
       const sbRes = await fetch(sbUrl, { headers });
       if (sbRes.ok) {
         const sbData = await sbRes.json();
-        const prof = sbData?.profile || sbData;
+        const prof = (sbData?.profile || sbData) as Record<string, unknown>;
         profileName =
-          prof?.cuteName ||
-          player?.stats?.skyBlock?.profiles?.[profileId]?.cuteName ||
+          (prof?.cuteName as string) ||
+          (prof?.cute_name as string) ||
+          (profilesMap[profileId]?.['cuteName'] as string) ||
+          (profilesMap[profileId]?.['cute_name'] as string) ||
           'SkyBlock';
-        const members = prof?.members || {};
-        const memberData = (members[uuidClean] || members[rawUuid] || Object.values(members)[0]) as Record<string, unknown> | undefined;
+        const members = (prof?.members || {}) as Record<string, Record<string, unknown>>;
+        const targetUuids = [uuidClean, rawUuid.toLowerCase(), rawUuid];
+        let memberData: Record<string, unknown> | undefined;
+        for (const k of Object.keys(members)) {
+          const kClean = k.replace(/-/g, '').toLowerCase();
+          if (targetUuids.includes(k.toLowerCase()) || targetUuids.includes(kClean)) {
+            memberData = members[k];
+            break;
+          }
+        }
+        if (!memberData && Object.values(members).length > 0) {
+          memberData = Object.values(members)[0];
+        }
+
         if (memberData && typeof memberData === 'object') {
           const inv = memberData['inventory'] as Record<string, unknown> | undefined;
           const bagContents = inv?.['bag_contents'] as Record<string, unknown> | undefined;
-          const talismanBag = (memberData['talisman_bag'] || bagContents?.['talisman_bag'] || (memberData['accessory_bag_storage'] as Record<string, unknown> | undefined)?.['talisman_bag']) as { data?: string } | undefined;
-          const rawBag = String(memberData['accessoryBag'] || talismanBag?.data || '');
-          if (rawBag) {
+          const talismanBag = (memberData['talisman_bag'] ||
+            bagContents?.['talisman_bag'] ||
+            (memberData['accessory_bag_storage'] as Record<string, unknown> | undefined)?.['talisman_bag']) as
+            | { data?: string }
+            | string
+            | undefined;
+
+          let rawBag = '';
+          const accBag = memberData['accessoryBag'];
+          if (typeof accBag === 'string') {
+            rawBag = accBag;
+          } else if (accBag && typeof accBag === 'object' && 'data' in accBag && typeof (accBag as { data: unknown }).data === 'string') {
+            rawBag = (accBag as { data: string }).data;
+          } else if (talismanBag && typeof talismanBag === 'object' && typeof talismanBag.data === 'string') {
+            rawBag = talismanBag.data;
+          } else if (typeof talismanBag === 'string') {
+            rawBag = talismanBag;
+          }
+
+          if (rawBag && rawBag.trim() !== '') {
             items = parseAccessoryBagBase64(rawBag);
           }
         }
@@ -214,10 +254,13 @@ export async function fetchPlayerFromApi(
     lastFetched: Date.now()
   };
 
-  if (apiCache.size >= MAX_CACHE_ENTRIES) {
-    const oldestKey = apiCache.keys().next().value;
-    if (oldestKey) apiCache.delete(oldestKey);
+  // Only cache non-empty profiles for 5 minutes; avoid negative caching empty results
+  if (items.length > 0) {
+    if (apiCache.size >= MAX_CACHE_ENTRIES) {
+      const oldestKey = apiCache.keys().next().value;
+      if (oldestKey) apiCache.delete(oldestKey);
+    }
+    apiCache.set(cacheKey, { timestamp: Date.now(), data: result });
   }
-  apiCache.set(cacheKey, { timestamp: Date.now(), data: result });
   return result;
 }
