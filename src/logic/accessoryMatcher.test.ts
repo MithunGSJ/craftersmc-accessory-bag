@@ -292,6 +292,38 @@ describe('accessoryMatcher', () => {
     });
     expect(filtered.find(e => e.definition.id === 'ZOMBIE_TALISMAN')).toBeDefined();
   });
+
+  it('preserves and displays duplicate catalog accessories (e.g. multiple Personal Compactors) without stacking MP', () => {
+    const compactor1: PlayerAccessoryItem = {
+      id: 'PC7000_0',
+      internalId: 'PERSONAL_COMPACTOR_7000',
+      displayName: 'Personal Compactor 7000',
+      rarity: 'LEGENDARY',
+      slot: 0,
+      lore: []
+    };
+    const compactor2: PlayerAccessoryItem = {
+      id: 'PC7000_1',
+      internalId: 'PERSONAL_COMPACTOR_7000',
+      displayName: 'Personal Compactor 7000',
+      rarity: 'LEGENDARY',
+      slot: 1,
+      lore: []
+    };
+    const evaluated = evaluatePlayerAccessories([compactor1, compactor2]);
+    const compactors = evaluated.filter(e => e.definition.id === 'PERSONAL_COMPACTOR_7000');
+    expect(compactors.length).toBe(2);
+    expect(compactors[0].status).toBe('OWNED');
+    expect(compactors[1].status).toBe('OWNED');
+    expect(compactors[0].ownedItem?.slot).toBe(0);
+    expect(compactors[1].ownedItem?.slot).toBe(1);
+    expect(compactors[0].effectiveMagicalPower).toBe(16);
+    expect(compactors[1].effectiveMagicalPower).toBe(0);
+
+    const sorted = sortAccessoriesByBagOrder(evaluated.filter(e => e.status === 'OWNED'));
+    expect(sorted[0].ownedItem?.slot).toBe(0);
+    expect(sorted[1].ownedItem?.slot).toBe(1);
+  });
 });
 
 

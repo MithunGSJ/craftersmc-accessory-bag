@@ -197,7 +197,7 @@ export const App: React.FC = () => {
           <section className="accessory-grid" aria-label="Accessories catalog">
             {visibleAccessories.map(item => (
               <AccessoryCard
-                key={item.definition.id}
+                key={item.ownedItem ? `${item.definition.id}_${item.ownedItem.id}` : item.definition.id}
                 evaluated={item}
                 onClick={() => setSelectedAccessory(item)}
               />
